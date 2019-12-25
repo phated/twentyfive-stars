@@ -20,8 +20,8 @@ pub struct Card {
   Context = Context
 )]
 impl Card {
-  pub fn id(&self) -> String {
-    String::from(&self.id)
+  pub fn id(&self) -> &str {
+    self.id.as_str()
   }
 
   pub fn wave(&self, context: &Context) -> Wave {
@@ -32,7 +32,7 @@ impl Card {
       .expect("Error loading posts")
   }
 
-  pub fn title(&self) -> String {
-    String::from(&self.title)
+  pub fn title(&self) -> &str {
+    self.title.as_str()
   }
 }
