@@ -1,25 +1,20 @@
 #[macro_use]
 extern crate diesel;
-extern crate iron;
-extern crate juniper;
-extern crate juniper_iron;
-extern crate mount;
-extern crate logger;
 
 use iron::prelude::*;
-use mount::Mount;
-use logger::Logger;
 use juniper_iron::{GraphQLHandler, GraphiQLHandler};
+use logger::Logger;
+use mount::Mount;
 
-mod graphql_schema;
 mod database;
+mod graphql_schema;
 
-use database::{establish_connection};
-use graphql_schema::{Query, Mutation, Context};
+use database::establish_connection;
+use graphql_schema::{Context, Mutation, Query};
 
 fn context_factory(_: &mut Request) -> IronResult<Context> {
     Ok(Context {
-        connection: establish_connection()
+        connection: establish_connection(),
     })
 }
 
@@ -28,8 +23,7 @@ fn main() {
 
     let mut mount = Mount::new();
 
-    let graphql_endpoint =
-        GraphQLHandler::new(context_factory, Query, Mutation);
+    let graphql_endpoint = GraphQLHandler::new(context_factory, Query, Mutation);
     let graphiql_endpoint = GraphiQLHandler::new("/graphql");
 
     mount.mount("/", graphiql_endpoint);
