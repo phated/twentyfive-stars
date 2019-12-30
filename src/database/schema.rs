@@ -1,8 +1,12 @@
 table! {
     cards (id) {
-        id -> Varchar,
-        wave_id -> Varchar,
+        id -> Uuid,
+        card_number -> Varchar,
+        // card_type -> Card_type,
         title -> Varchar,
+        subtitle -> Nullable<Varchar>,
+        // rarity -> Card_rarity,
+        wave_id -> Varchar,
     }
 }
 
@@ -16,7 +20,4 @@ table! {
 
 joinable!(cards -> waves (wave_id));
 
-allow_tables_to_appear_in_same_query!(
-    cards,
-    waves,
-);
+allow_tables_to_appear_in_same_query!(cards, waves,);
