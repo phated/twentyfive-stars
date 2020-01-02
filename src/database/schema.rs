@@ -1,18 +1,21 @@
 table! {
+    use diesel::sql_types::*;
+    use crate::database::types::{CardRarity, CardCategory};
+
     cards (id) {
         id -> Uuid,
-        card_number -> Varchar,
-        // card_type -> Card_type,
-        title -> Varchar,
-        subtitle -> Nullable<Varchar>,
-        // rarity -> Card_rarity,
-        wave_id -> Varchar,
+        tcg_id -> Varchar,
+        rarity -> CardRarity,
+        number -> Varchar,
+        category -> CardCategory,
+        wave_id -> Uuid,
     }
 }
 
 table! {
     waves (id) {
-        id -> Varchar,
+        id -> Uuid,
+        tcg_id -> Varchar,
         name -> Varchar,
         released -> Date,
     }

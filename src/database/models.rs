@@ -1,11 +1,13 @@
 use crate::database::schema::{cards, waves};
+use crate::database::types::{CardCategory, CardRarity};
 use crate::graphql_schema::Context;
 use diesel::{QueryDsl, RunQueryDsl};
 use uuid::Uuid;
 
 #[derive(Identifiable, Queryable, Debug, juniper::GraphQLObject)]
 pub struct Wave {
-  pub id: String,
+  pub id: Uuid,
+  pub tcg_id: String,
   pub name: String,
   pub released: chrono::NaiveDate,
 }
@@ -13,10 +15,11 @@ pub struct Wave {
 #[derive(Identifiable, Queryable, PartialEq, Eq, Debug)]
 pub struct Card {
   pub id: Uuid,
-  pub card_number: String,
-  pub title: String,
-  pub subtitle: Option<String>,
-  pub wave_id: String,
+  pub tcg_id: String,
+  pub rarity: CardRarity,
+  pub number: String,
+  pub category: CardCategory,
+  pub wave_id: Uuid,
 }
 
 #[juniper::object(
@@ -27,22 +30,26 @@ impl Card {
     self.id
   }
 
-  pub fn card_number(&self) -> &str {
-    self.card_number.as_str()
+  pub fn tcg_id(&self) -> &str {
+    self.tcg_id.as_str()
   }
 
-  pub fn title(&self) -> &str {
-    self.title.as_str()
+  pub fn rarity(&self) -> &CardRarity {
+    &self.rarity
   }
 
-  pub fn subtitle(&self) -> Option<&str> {
-    self.subtitle.as_ref().map(|subtitle| subtitle.as_str())
+  pub fn number(&self) -> &str {
+    self.number.as_str()
+  }
+
+  pub fn category(&self) -> &CardCategory {
+    &self.category
   }
 
   pub fn wave(&self, context: &Context) -> Wave {
     waves::table
       .inner_join(cards::table)
-      .select((waves::id, waves::name, waves::released))
+      .select((waves::id, waves::tcg_id, waves::name, waves::released))
       .first::<Wave>(&context.connection)
       .expect("Error loading posts")
   }

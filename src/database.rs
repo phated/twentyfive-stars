@@ -1,5 +1,6 @@
 pub mod models;
 pub mod schema;
+pub mod types;
 
 use crate::database::models::Card;
 use diesel::pg::PgConnection;
@@ -17,7 +18,6 @@ pub fn establish_connection() -> PgConnection {
 
 pub fn get_cards(connection: &PgConnection) -> Vec<Card> {
         schema::cards::table
-                // .select()
                 .load::<Card>(connection)
                 .expect("Error loading posts")
 }
