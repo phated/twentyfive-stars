@@ -1,5 +1,6 @@
 CREATE TABLE waves (
-  id VARCHAR PRIMARY KEY,
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  tcg_id VARCHAR UNIQUE NOT NULL,
   name VARCHAR UNIQUE NOT NULL,
   released DATE NOT NULL
 );
