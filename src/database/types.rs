@@ -51,11 +51,11 @@ pub enum CardCategory {
   Battle,
 }
 
-impl ToSql<CardRarity, Pg> for CardCategory {
+impl ToSql<CardCategory, Pg> for CardCategory {
   fn to_sql<W: Write>(&self, out: &mut Output<W, Pg>) -> serialize::Result {
     match *self {
       CardCategory::Character => out.write_all(b"CHARACTER")?,
-      CardCategory::Battle => out.write_all(b"Battle")?,
+      CardCategory::Battle => out.write_all(b"BATTLE")?,
     }
     Ok(IsNull::No)
   }
