@@ -1,5 +1,22 @@
 table! {
     use diesel::sql_types::*;
+    use crate::database::types::{BattleType, BattleIcon};
+
+    battle_cards (id) {
+        id -> Uuid,
+        card_id -> Uuid,
+        title -> Varchar,
+        #[sql_name = "type"]
+        type_ -> BattleType,
+        stars -> Nullable<Int2>,
+        icons -> Nullable<Array<BattleIcon>>,
+        attack_modifier -> Nullable<Int2>,
+        defense_modifier -> Nullable<Int2>,
+    }
+}
+
+table! {
+    use diesel::sql_types::*;
     use crate::database::types::{CardRarity, CardCategory};
 
     cards (id) {
@@ -21,6 +38,7 @@ table! {
     }
 }
 
+joinable!(battle_cards -> cards (card_id));
 joinable!(cards -> waves (wave_id));
 
-allow_tables_to_appear_in_same_query!(cards, waves,);
+allow_tables_to_appear_in_same_query!(battle_cards, cards, waves,);

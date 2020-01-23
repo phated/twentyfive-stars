@@ -8,6 +8,7 @@ use mount::Mount;
 
 mod database;
 mod graphql_schema;
+mod models;
 
 use database::establish_connection;
 use graphql_schema::{Context, Mutation, Query};

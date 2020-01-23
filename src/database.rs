@@ -1,11 +1,11 @@
-pub mod models;
 pub mod schema;
 pub mod types;
 
-use crate::database::models::Card;
+use crate::models::{BattleCard, Card};
 use diesel::pg::PgConnection;
 use diesel::prelude::*;
 use dotenv::dotenv;
+use schema::{battle_cards, cards};
 use std::env;
 
 pub fn establish_connection() -> PgConnection {
@@ -17,7 +17,22 @@ pub fn establish_connection() -> PgConnection {
 }
 
 pub fn get_cards(connection: &PgConnection) -> Vec<Card> {
-        schema::cards::table
-                .load::<Card>(connection)
-                .expect("Error loading posts")
+        // schema::cards::table
+        //         .load::<Card>(connection)
+        //         .expect("Error loading posts")
+        battle_cards::table
+                .inner_join(cards::table)
+                .select((
+                        battle_cards::id,
+                        battle_cards::card_id,
+                        cards::tcg_id,
+                        cards::rarity,
+                        cards::number,
+                        cards::category,
+                        cards::wave_id,
+                ))
+                .first::<BattleCard>(connection)
+                .into_iter()
+                .map(Card::from)
+                .collect()
 }

@@ -1,20 +1,15 @@
-use crate::database::schema::{cards, waves};
+use crate::database::schema::{battle_cards, cards, waves};
 use crate::database::types::{CardCategory, CardRarity};
 use crate::graphql_schema::Context;
+use crate::models::card::Card;
+use crate::models::wave::Wave;
 use diesel::{QueryDsl, RunQueryDsl};
 use uuid::Uuid;
 
-#[derive(Identifiable, Queryable, Debug, juniper::GraphQLObject)]
-pub struct Wave {
-  pub id: Uuid,
-  pub tcg_id: String,
-  pub name: String,
-  pub released: chrono::NaiveDate,
-}
-
 #[derive(Identifiable, Queryable, PartialEq, Eq, Debug)]
-pub struct Card {
+pub struct BattleCard {
   pub id: Uuid,
+  pub card_id: Uuid,
   pub tcg_id: String,
   pub rarity: CardRarity,
   pub number: String,
@@ -22,12 +17,13 @@ pub struct Card {
   pub wave_id: Uuid,
 }
 
-#[juniper::object(
-  Context = Context
-)]
-impl Card {
+impl BattleCard {
   pub fn id(&self) -> Uuid {
     self.id
+  }
+
+  pub fn card_id(&self) -> Uuid {
+    self.card_id
   }
 
   pub fn tcg_id(&self) -> &str {
@@ -51,6 +47,38 @@ impl Card {
       .inner_join(cards::table)
       .select((waves::id, waves::tcg_id, waves::name, waves::released))
       .first::<Wave>(&context.connection)
-      .expect("Error loading posts")
+      .expect("Error loading wave")
   }
 }
+
+juniper::graphql_object!(BattleCard: Context |&self| {
+  interfaces: [&Card]
+
+  field id() -> Uuid {
+    self.id()
+  }
+
+  field card_id() -> Uuid {
+    self.card_id()
+  }
+
+  field tcg_id() -> &str {
+    self.tcg_id()
+  }
+
+  field rarity() -> &CardRarity {
+    self.rarity()
+  }
+
+  field number() -> &str {
+    self.number()
+  }
+
+  field category() -> &CardCategory {
+    self.category()
+  }
+
+  field wave(&executor) -> Wave {
+    self.wave(executor.context())
+  }
+});
