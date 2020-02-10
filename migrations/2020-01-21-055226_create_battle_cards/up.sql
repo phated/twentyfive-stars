@@ -4,7 +4,7 @@ CREATE TABLE battle_cards (
   title VARCHAR NOT NULL,
   type BATTLE_TYPE NOT NULL,
   stars SMALLINT CHECK (stars >= 0),
-  icons BATTLE_ICON[],
+  icons BATTLE_ICON[] NOT NULL,
   attack_modifier SMALLINT,
   defense_modifier SMALLINT
 );

@@ -9,7 +9,7 @@ table! {
         #[sql_name = "type"]
         type_ -> BattleType,
         stars -> Nullable<Int2>,
-        icons -> Nullable<Array<BattleIcon>>,
+        icons -> Array<BattleIcon>,
         attack_modifier -> Nullable<Int2>,
         defense_modifier -> Nullable<Int2>,
     }
