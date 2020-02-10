@@ -20,7 +20,10 @@ impl Query {
   fn cards(context: &Context) -> FieldResult<Vec<Card>> {
     let results = get_cards(&context.connection);
 
-    Ok(results)
+    match results {
+      Ok(cards) => Ok(cards),
+      Err(_) => Ok(vec![]),
+    }
   }
 }
 

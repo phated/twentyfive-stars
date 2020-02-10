@@ -16,11 +16,8 @@ pub fn establish_connection() -> PgConnection {
                 .expect(&format!("Error connecting to {}", database_url))
 }
 
-pub fn get_cards(connection: &PgConnection) -> Vec<Card> {
-        // schema::cards::table
-        //         .load::<Card>(connection)
-        //         .expect("Error loading posts")
-        battle_cards::table
+pub fn get_cards(connection: &PgConnection) -> QueryResult<Vec<Card>> {
+        let cards = battle_cards::table
                 .inner_join(cards::table)
                 .select((
                         battle_cards::id,
@@ -30,9 +27,18 @@ pub fn get_cards(connection: &PgConnection) -> Vec<Card> {
                         cards::number,
                         cards::category,
                         cards::wave_id,
+                        // Specific to BattleCard
+                        battle_cards::title,
+                        battle_cards::stars,
+                        battle_cards::icons,
+                        battle_cards::type_,
+                        battle_cards::attack_modifier,
+                        battle_cards::defense_modifier,
                 ))
-                .first::<BattleCard>(connection)
+                .load::<BattleCard>(connection)?
                 .into_iter()
                 .map(Card::from)
-                .collect()
+                .collect();
+
+        Ok(cards)
 }

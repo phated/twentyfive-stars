@@ -1,5 +1,5 @@
 use crate::database::schema::{battle_cards, cards, waves};
-use crate::database::types::{CardCategory, CardRarity};
+use crate::database::types::{BattleIcon, BattleType, CardCategory, CardRarity};
 use crate::graphql_schema::Context;
 use crate::models::card::Card;
 use crate::models::wave::Wave;
@@ -15,6 +15,13 @@ pub struct BattleCard {
   pub number: String,
   pub category: CardCategory,
   pub wave_id: Uuid,
+  // Specific to BattleCard
+  pub title: String,
+  pub stars: Option<i16>,
+  pub icons: Vec<BattleIcon>,
+  pub type_: BattleType,
+  pub attack_modifier: Option<i16>,
+  pub defense_modifier: Option<i16>,
 }
 
 impl BattleCard {
@@ -49,6 +56,30 @@ impl BattleCard {
       .first::<Wave>(&context.connection)
       .expect("Error loading wave")
   }
+
+  pub fn title(&self) -> &str {
+    self.title.as_str()
+  }
+
+  pub fn stars(&self) -> Option<i32> {
+    self.stars.map(|stars| stars as i32)
+  }
+
+  pub fn icons(&self) -> &Vec<BattleIcon> {
+    &self.icons
+  }
+
+  pub fn type_(&self) -> &BattleType {
+    &self.type_
+  }
+
+  pub fn attack_modifier(&self) -> Option<i32> {
+    self.attack_modifier.map(|modifier| modifier as i32)
+  }
+
+  pub fn defense_modifier(&self) -> Option<i32> {
+    self.defense_modifier.map(|modifier| modifier as i32)
+  }
 }
 
 juniper::graphql_object!(BattleCard: Context |&self| {
@@ -80,5 +111,29 @@ juniper::graphql_object!(BattleCard: Context |&self| {
 
   field wave(&executor) -> Wave {
     self.wave(executor.context())
+  }
+
+  field title() -> &str {
+    self.title()
+  }
+
+  field stars() -> Option<i32> {
+    self.stars()
+  }
+
+  field icons() -> &Vec<BattleIcon> {
+    self.icons()
+  }
+
+  field type() -> &BattleType {
+    self.type_()
+  }
+
+  field attack_modifier() -> Option<i32> {
+    self.attack_modifier()
+  }
+
+  field defense_modifier() -> Option<i32> {
+    self.defense_modifier()
   }
 });
