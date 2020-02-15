@@ -6,9 +6,10 @@ use juniper_iron::{GraphQLHandler, GraphiQLHandler};
 use logger::Logger;
 use mount::Mount;
 
+mod data;
 mod database;
+mod database_schema;
 mod graphql_schema;
-mod models;
 
 use database::establish_connection;
 use graphql_schema::{Context, Mutation, Query};

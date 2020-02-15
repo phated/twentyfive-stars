@@ -1,6 +1,6 @@
 table! {
     use diesel::sql_types::*;
-    use crate::database::types::{BattleType, BattleIcon};
+    use crate::data::{BattleType, BattleIcon};
 
     battle_cards (id) {
         id -> Uuid,
@@ -17,7 +17,7 @@ table! {
 
 table! {
     use diesel::sql_types::*;
-    use crate::database::types::{CardRarity, CardCategory};
+    use crate::data::{CardRarity, CardCategory};
 
     cards (id) {
         id -> Uuid,
@@ -31,7 +31,7 @@ table! {
 
 table! {
     use diesel::sql_types::*;
-    use crate::database::types::{CharacterTrait, ModeType};
+    use crate::data::{CharacterTrait, ModeType};
 
     character_modes (id) {
         id -> Uuid,

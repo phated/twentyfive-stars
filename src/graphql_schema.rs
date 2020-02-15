@@ -1,5 +1,5 @@
+use crate::data::Card;
 use crate::database::get_cards;
-use crate::models::Card;
 use diesel::prelude::PgConnection;
 use juniper::FieldResult;
 

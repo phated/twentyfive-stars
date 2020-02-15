@@ -1,6 +1,5 @@
-use crate::database::types::{CharacterTrait, ModeType};
+use crate::data::{CharacterMode, CharacterTrait, ModeType};
 use crate::graphql_schema::Context;
-use crate::models::CharacterMode;
 use uuid::Uuid;
 
 pub struct BotMode {

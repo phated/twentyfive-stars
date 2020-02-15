@@ -1,4 +1,4 @@
-use crate::database::schema::waves;
+use crate::database_schema::waves;
 use chrono::NaiveDate;
 use uuid::Uuid;
 
