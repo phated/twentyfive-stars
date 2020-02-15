@@ -8,10 +8,10 @@ table! {
         title -> Varchar,
         #[sql_name = "type"]
         type_ -> BattleType,
-        stars -> Nullable<Int2>,
+        stars -> Nullable<Int4>,
         icons -> Array<BattleIcon>,
-        attack_modifier -> Nullable<Int2>,
-        defense_modifier -> Nullable<Int2>,
+        attack_modifier -> Nullable<Int4>,
+        defense_modifier -> Nullable<Int4>,
     }
 }
 
