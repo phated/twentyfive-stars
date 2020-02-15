@@ -46,7 +46,7 @@ impl Queryable<character_modes::SqlType, DB> for CharacterMode {
   fn build(row: Self::Row) -> Self {
     let (
       id,
-      card_id,
+      _card_id,
       title,
       subtitle,
       traits,
@@ -55,8 +55,8 @@ impl Queryable<character_modes::SqlType, DB> for CharacterMode {
       health,
       attack,
       defense,
-      attack_modifier,
-      defense_modifier,
+      _attack_modifier,
+      _defense_modifier,
     ) = row;
 
     match type_ {
