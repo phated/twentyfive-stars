@@ -1,9 +1,12 @@
 // From https://github.com/diesel-rs/diesel/blob/1.4.x/diesel_tests/tests/custom_types.rs
 
+use crate::database::schema::*;
 use diesel::deserialize::{self, FromSql};
 use diesel::pg::Pg;
+// use diesel::prelude::*;
 use diesel::serialize::{self, IsNull, Output, ToSql};
 use std::io::Write;
+use uuid::Uuid;
 
 #[derive(Debug, PartialEq, Eq, FromSqlRow, AsExpression, juniper::GraphQLEnum, SqlType)]
 #[postgres(type_name = "CARD_RARITY")]
@@ -44,8 +47,9 @@ impl FromSql<CardRarity, Pg> for CardRarity {
   }
 }
 
-#[derive(Debug, PartialEq, Eq, FromSqlRow, AsExpression, juniper::GraphQLEnum, SqlType)]
+#[derive(Debug, PartialEq, Eq, FromSqlRow, AsExpression, QueryId, juniper::GraphQLEnum, SqlType)]
 #[postgres(type_name = "CARD_CATEGORY")]
+#[sql_type = "CardCategory"]
 pub enum CardCategory {
   Character,
   Battle,
@@ -107,6 +111,57 @@ impl FromSql<BattleType, Pg> for BattleType {
   }
 }
 
+#[derive(Debug, Clone, PartialEq, Eq, FromSqlRow, AsExpression, juniper::GraphQLEnum, SqlType)]
+#[postgres(type_name = "MODE_TYPE")]
+pub enum ModeType {
+  Alt,
+  Alt1,
+  Alt2,
+  Bot,
+  Combiner,
+  Body,
+  Head,
+  UpgradeWeapon,
+  UpgradeArmor,
+  UpgradeUtility,
+}
+
+impl ToSql<ModeType, Pg> for ModeType {
+  fn to_sql<W: Write>(&self, out: &mut Output<W, Pg>) -> serialize::Result {
+    match *self {
+      ModeType::Alt => out.write_all(b"ALT")?,
+      ModeType::Alt1 => out.write_all(b"ALT_1")?,
+      ModeType::Alt2 => out.write_all(b"ALT_2")?,
+      ModeType::Bot => out.write_all(b"BOT")?,
+      ModeType::Combiner => out.write_all(b"COMBINER")?,
+      ModeType::Body => out.write_all(b"BODY")?,
+      ModeType::Head => out.write_all(b"HEAD")?,
+      ModeType::UpgradeWeapon => out.write_all(b"UPGRADE_WEAPON")?,
+      ModeType::UpgradeArmor => out.write_all(b"UPGRADE_ARMOR")?,
+      ModeType::UpgradeUtility => out.write_all(b"UPGRADE_UTILITY")?,
+    }
+    Ok(IsNull::No)
+  }
+}
+
+impl FromSql<ModeType, Pg> for ModeType {
+  fn from_sql(bytes: Option<&[u8]>) -> deserialize::Result<Self> {
+    match not_none!(bytes) {
+      b"ALT" => Ok(ModeType::Alt),
+      b"ALT_1" => Ok(ModeType::Alt1),
+      b"ALT_2" => Ok(ModeType::Alt2),
+      b"BOT" => Ok(ModeType::Bot),
+      b"COMBINER" => Ok(ModeType::Combiner),
+      b"BODY" => Ok(ModeType::Body),
+      b"HEAD" => Ok(ModeType::Head),
+      b"UPGRADE_WEAPON" => Ok(ModeType::UpgradeWeapon),
+      b"UPGRADE_ARMOR" => Ok(ModeType::UpgradeArmor),
+      b"UPGRADE_UTILITY" => Ok(ModeType::UpgradeUtility),
+      _ => Err("Unrecognized enum variant".into()),
+    }
+  }
+}
+
 #[derive(Debug, PartialEq, Eq, FromSqlRow, AsExpression, juniper::GraphQLEnum, SqlType)]
 #[postgres(type_name = "BATTLE_ICON")]
 pub enum BattleIcon {
@@ -141,4 +196,61 @@ impl FromSql<BattleIcon, Pg> for BattleIcon {
       _ => Err("Unrecognized enum variant".into()),
     }
   }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, FromSqlRow, AsExpression, juniper::GraphQLEnum, SqlType)]
+#[postgres(type_name = "CHARACTER_TRAIT")]
+pub enum CharacterTrait {
+  Melee,
+  Ranged,
+  Specialist,
+}
+
+impl ToSql<CharacterTrait, Pg> for CharacterTrait {
+  fn to_sql<W: Write>(&self, out: &mut Output<W, Pg>) -> serialize::Result {
+    match *self {
+      CharacterTrait::Melee => out.write_all(b"MELEE")?,
+      CharacterTrait::Ranged => out.write_all(b"RANGED")?,
+      CharacterTrait::Specialist => out.write_all(b"SPECIALIST")?,
+    }
+    Ok(IsNull::No)
+  }
+}
+
+impl FromSql<CharacterTrait, Pg> for CharacterTrait {
+  fn from_sql(bytes: Option<&[u8]>) -> deserialize::Result<Self> {
+    match not_none!(bytes) {
+      b"MELEE" => Ok(CharacterTrait::Melee),
+      b"RANGED" => Ok(CharacterTrait::Ranged),
+      b"SPECIALIST" => Ok(CharacterTrait::Specialist),
+      _ => Err("Unrecognized enum variant".into()),
+    }
+  }
+}
+
+#[derive(Identifiable, Queryable, Associations, PartialEq, Eq, Debug)]
+pub struct Card {
+  pub id: Uuid,
+  pub tcg_id: String,
+  pub rarity: CardRarity,
+  pub number: String,
+  pub category: CardCategory,
+  pub wave_id: Uuid,
+}
+
+#[derive(Identifiable, Queryable, Associations, PartialEq, Eq, Debug)]
+#[belongs_to(Card)]
+pub struct CharacterMode {
+  pub id: Uuid,
+  pub card_id: Uuid,
+  pub title: String,
+  pub subtitle: Option<String>,
+  pub traits: Vec<CharacterTrait>,
+  pub type_: ModeType,
+  pub stars: i32,
+  pub health: Option<i32>,
+  pub attack: Option<i32>,
+  pub defense: Option<i32>,
+  pub attack_modifier: Option<i32>,
+  pub defense_modifier: Option<i32>,
 }

@@ -30,6 +30,27 @@ table! {
 }
 
 table! {
+    use diesel::sql_types::*;
+    use crate::database::types::{CharacterTrait, ModeType};
+
+    character_modes (id) {
+        id -> Uuid,
+        card_id -> Uuid,
+        title -> Varchar,
+        subtitle -> Nullable<Varchar>,
+        traits -> Array<CharacterTrait>,
+        #[sql_name = "type"]
+        type_ -> ModeType,
+        stars -> Int4,
+        health -> Nullable<Int4>,
+        attack -> Nullable<Int4>,
+        defense -> Nullable<Int4>,
+        attack_modifier -> Nullable<Int4>,
+        defense_modifier -> Nullable<Int4>,
+    }
+}
+
+table! {
     waves (id) {
         id -> Uuid,
         tcg_id -> Varchar,
@@ -40,5 +61,6 @@ table! {
 
 joinable!(battle_cards -> cards (card_id));
 joinable!(cards -> waves (wave_id));
+joinable!(character_modes -> cards (card_id));
 
-allow_tables_to_appear_in_same_query!(battle_cards, cards, waves,);
+allow_tables_to_appear_in_same_query!(battle_cards, cards, character_modes, waves,);
