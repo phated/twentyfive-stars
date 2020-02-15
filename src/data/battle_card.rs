@@ -9,10 +9,10 @@ pub struct BattleCard {
   pub card_id: Uuid,
   pub title: String,
   pub type_: BattleType,
-  pub stars: Option<i16>,
+  pub stars: Option<i32>,
   pub icons: Vec<BattleIcon>,
-  pub attack_modifier: Option<i16>,
-  pub defense_modifier: Option<i16>,
+  pub attack_modifier: Option<i32>,
+  pub defense_modifier: Option<i32>,
 }
 
 juniper::graphql_object!(BattleCard: Context |&self| {
@@ -23,7 +23,7 @@ juniper::graphql_object!(BattleCard: Context |&self| {
   }
 
   field stars() -> Option<i32> {
-    self.stars.map(|stars| stars as i32)
+    self.stars
   }
 
   field icons() -> &Vec<BattleIcon> {
@@ -35,11 +35,11 @@ juniper::graphql_object!(BattleCard: Context |&self| {
   }
 
   field attack_modifier() -> Option<i32> {
-    self.attack_modifier.map(|modifier| modifier as i32)
+    self.attack_modifier
   }
 
   field defense_modifier() -> Option<i32> {
-    self.defense_modifier.map(|modifier| modifier as i32)
+    self.defense_modifier
   }
 
   // Implemented by the interface

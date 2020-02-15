@@ -3,8 +3,8 @@ CREATE TABLE battle_cards (
   card_id UUID NOT NULL REFERENCES cards (id),
   title VARCHAR NOT NULL,
   type BATTLE_TYPE NOT NULL,
-  stars SMALLINT CHECK (stars >= 0),
+  stars INT CHECK (stars >= 0),
   icons BATTLE_ICON[] NOT NULL,
-  attack_modifier SMALLINT,
-  defense_modifier SMALLINT
+  attack_modifier INT,
+  defense_modifier INT
 );
