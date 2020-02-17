@@ -9,6 +9,7 @@ pub mod card_rarity;
 pub mod character_card;
 pub mod character_mode;
 pub mod character_trait;
+pub mod faction;
 pub mod mode_type;
 pub mod wave;
 
@@ -23,5 +24,6 @@ pub use card_rarity::CardRarity;
 pub use character_card::CharacterCard;
 pub use character_mode::CharacterMode;
 pub use character_trait::CharacterTrait;
+pub use faction::Faction;
 pub use mode_type::ModeType;
 pub use wave::Wave;

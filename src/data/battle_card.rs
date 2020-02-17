@@ -1,4 +1,4 @@
-use crate::data::{BattleIcon, BattleType, Card, CardCategory, CardRarity, Wave};
+use crate::data::{BattleIcon, BattleType, Card, CardCategory, CardRarity, Faction, Wave};
 use crate::database_schema::battle_cards;
 use crate::graphql_schema::Context;
 use uuid::Uuid;
@@ -9,6 +9,7 @@ pub struct BattleCard {
   pub card_id: Uuid,
   pub title: String,
   pub type_: BattleType,
+  pub faction: Option<Faction>,
   pub stars: Option<i32>,
   pub icons: Vec<BattleIcon>,
   pub attack_modifier: Option<i32>,
@@ -32,6 +33,10 @@ juniper::graphql_object!(BattleCard: Context |&self| {
 
   field type() -> &BattleType {
     &self.type_
+  }
+
+  field faction() -> &Option<Faction> {
+    &self.faction
   }
 
   field attack_modifier() -> Option<i32> {

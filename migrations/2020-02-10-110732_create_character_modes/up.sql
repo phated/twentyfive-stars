@@ -3,6 +3,7 @@ CREATE TABLE character_modes (
   card_id UUID NOT NULL REFERENCES cards (id),
   title VARCHAR NOT NULL,
   subtitle VARCHAR,
+  faction FACTION NOT NULL,
   traits CHARACTER_TRAIT[] NOT NULL DEFAULT '{}',
   type MODE_TYPE NOT NULL,
   stars INT NOT NULL CHECK (stars >= 0),

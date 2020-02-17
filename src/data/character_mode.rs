@@ -1,4 +1,4 @@
-use crate::data::{AltMode, BotMode, CharacterTrait, ModeType};
+use crate::data::{AltMode, BotMode, CharacterTrait, Faction, ModeType};
 use crate::database_schema::character_modes;
 use crate::graphql_schema::Context;
 use diesel::deserialize::Queryable;
@@ -25,6 +25,8 @@ impl Queryable<character_modes::SqlType, DB> for CharacterMode {
     String,
     // subtitle
     Option<String>,
+    // faction,
+    Faction,
     // traits
     Vec<CharacterTrait>,
     // type
@@ -49,6 +51,7 @@ impl Queryable<character_modes::SqlType, DB> for CharacterMode {
       _card_id,
       title,
       subtitle,
+      faction,
       traits,
       type_,
       stars,
@@ -66,6 +69,7 @@ impl Queryable<character_modes::SqlType, DB> for CharacterMode {
         subtitle: subtitle.expect("AltMode must have a subtitle"),
         stars,
         type_,
+        faction,
         traits,
         health: health.expect("AltMode must have health"),
         attack: attack.expect("AltMode must have attack"),
@@ -77,6 +81,7 @@ impl Queryable<character_modes::SqlType, DB> for CharacterMode {
         subtitle: subtitle.expect("BotMode must have a subtitle"),
         stars,
         type_,
+        faction,
         traits,
         health: health.expect("BotMode must have health"),
         attack: attack.expect("BotMode must have attack"),
@@ -104,11 +109,19 @@ juniper::graphql_interface!(CharacterMode: Context |&self| {
       CharacterMode::AltMode(AltMode { stars, .. }) | CharacterMode::BotMode(BotMode { stars, .. }) => stars,
     }
   }
+
   field type_() -> &ModeType {
     match *self {
       CharacterMode::AltMode(AltMode { ref type_, .. }) | CharacterMode::BotMode(BotMode { ref type_, .. }) => type_,
     }
   }
+
+  field faction() -> &Faction {
+    match *self {
+      CharacterMode::AltMode(AltMode { ref faction, .. }) | CharacterMode::BotMode(BotMode { ref faction, .. }) => faction,
+    }
+  }
+
   field traits() -> &Vec<CharacterTrait> {
     match *self {
       CharacterMode::AltMode(AltMode { ref traits, .. }) | CharacterMode::BotMode(BotMode { ref traits, .. }) => traits,

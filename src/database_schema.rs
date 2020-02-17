@@ -1,6 +1,6 @@
 table! {
     use diesel::sql_types::*;
-    use crate::data::{BattleType, BattleIcon};
+    use crate::data::{BattleType, BattleIcon, Faction};
 
     battle_cards (id) {
         id -> Uuid,
@@ -8,6 +8,7 @@ table! {
         title -> Varchar,
         #[sql_name = "type"]
         type_ -> BattleType,
+        faction -> Nullable<Faction>,
         stars -> Nullable<Int4>,
         icons -> Array<BattleIcon>,
         attack_modifier -> Nullable<Int4>,
@@ -31,13 +32,14 @@ table! {
 
 table! {
     use diesel::sql_types::*;
-    use crate::data::{CharacterTrait, ModeType};
+    use crate::data::{CharacterTrait, ModeType, Faction};
 
     character_modes (id) {
         id -> Uuid,
         card_id -> Uuid,
         title -> Varchar,
         subtitle -> Nullable<Varchar>,
+        faction -> Faction,
         traits -> Array<CharacterTrait>,
         #[sql_name = "type"]
         type_ -> ModeType,
