@@ -11,6 +11,7 @@ pub enum CharacterTrait {
   Melee,
   Ranged,
   Specialist,
+  Motorcycle,
 }
 
 impl ToSql<CharacterTrait, Pg> for CharacterTrait {
@@ -19,6 +20,7 @@ impl ToSql<CharacterTrait, Pg> for CharacterTrait {
       CharacterTrait::Melee => out.write_all(b"MELEE")?,
       CharacterTrait::Ranged => out.write_all(b"RANGED")?,
       CharacterTrait::Specialist => out.write_all(b"SPECIALIST")?,
+      CharacterTrait::Motorcycle => out.write_all(b"MOTORCYCLE")?,
     }
     Ok(IsNull::No)
   }
@@ -30,6 +32,7 @@ impl FromSql<CharacterTrait, Pg> for CharacterTrait {
       b"MELEE" => Ok(CharacterTrait::Melee),
       b"RANGED" => Ok(CharacterTrait::Ranged),
       b"SPECIALIST" => Ok(CharacterTrait::Specialist),
+      b"MOTORCYCLE" => Ok(CharacterTrait::Motorcycle),
       _ => Err("Unrecognized enum variant".into()),
     }
   }
