@@ -63,69 +63,101 @@ impl Queryable<character_modes::SqlType, DB> for CharacterMode {
     ) = row;
 
     match type_ {
-      ModeType::Alt | ModeType::Alt1 | ModeType::Alt2 => CharacterMode::AltMode(AltMode {
+      ModeType::Alt | ModeType::Alt1 | ModeType::Alt2 => CharacterMode::AltMode(AltMode::new(
         id,
         title,
-        subtitle: subtitle.expect("AltMode must have a subtitle"),
+        subtitle.expect("AltMode must have a subtitle"),
         stars,
         type_,
         faction,
         traits,
-        health: health.expect("AltMode must have health"),
-        attack: attack.expect("AltMode must have attack"),
-        defense: defense.expect("AltMode must have defense"),
-      }),
-      ModeType::Bot => CharacterMode::BotMode(BotMode {
+        health.expect("AltMode must have health"),
+        attack.expect("AltMode must have attack"),
+        defense.expect("AltMode must have defense"),
+      )),
+      ModeType::Bot => CharacterMode::BotMode(BotMode::new(
         id,
         title,
-        subtitle: subtitle.expect("BotMode must have a subtitle"),
+        subtitle.expect("BotMode must have a subtitle"),
         stars,
         type_,
         faction,
         traits,
-        health: health.expect("BotMode must have health"),
-        attack: attack.expect("BotMode must have attack"),
-        defense: defense.expect("BotMode must have defense"),
-      }),
+        health.expect("BotMode must have health"),
+        attack.expect("BotMode must have attack"),
+        defense.expect("BotMode must have defense"),
+      )),
+    }
+  }
+}
+
+impl CharacterMode {
+  pub fn id(&self) -> Uuid {
+    match self {
+      CharacterMode::AltMode(mode) => mode.id(),
+      CharacterMode::BotMode(mode) => mode.id(),
+    }
+  }
+
+  pub fn title(&self) -> &str {
+    match self {
+      CharacterMode::AltMode(mode) => mode.title(),
+      CharacterMode::BotMode(mode) => mode.title(),
+    }
+  }
+
+  pub fn stars(&self) -> i32 {
+    match self {
+      CharacterMode::AltMode(mode) => mode.stars(),
+      CharacterMode::BotMode(mode) => mode.stars(),
+    }
+  }
+
+  pub fn type_(&self) -> &ModeType {
+    match self {
+      CharacterMode::AltMode(mode) => mode.type_(),
+      CharacterMode::BotMode(mode) => mode.type_(),
+    }
+  }
+
+  pub fn faction(&self) -> &Faction {
+    match self {
+      CharacterMode::AltMode(mode) => mode.faction(),
+      CharacterMode::BotMode(mode) => mode.faction(),
+    }
+  }
+
+  pub fn traits(&self) -> &Vec<CharacterTrait> {
+    match self {
+      CharacterMode::AltMode(mode) => mode.traits(),
+      CharacterMode::BotMode(mode) => mode.traits(),
     }
   }
 }
 
 juniper::graphql_interface!(CharacterMode: Context |&self| {
   field id() -> Uuid {
-    match *self {
-      CharacterMode::AltMode(AltMode { id, .. }) | CharacterMode::BotMode(BotMode { id, .. }) => id,
-    }
+    self.id()
   }
 
   field title() -> &str {
-    match *self {
-      CharacterMode::AltMode(AltMode { ref title, .. }) | CharacterMode::BotMode(BotMode { ref title, .. }) => title,
-    }
+    self.title()
   }
 
   field stars() -> i32 {
-    match *self {
-      CharacterMode::AltMode(AltMode { stars, .. }) | CharacterMode::BotMode(BotMode { stars, .. }) => stars,
-    }
+    self.stars()
   }
 
   field type_() -> &ModeType {
-    match *self {
-      CharacterMode::AltMode(AltMode { ref type_, .. }) | CharacterMode::BotMode(BotMode { ref type_, .. }) => type_,
-    }
+    self.type_()
   }
 
   field faction() -> &Faction {
-    match *self {
-      CharacterMode::AltMode(AltMode { ref faction, .. }) | CharacterMode::BotMode(BotMode { ref faction, .. }) => faction,
-    }
+    self.faction()
   }
 
   field traits() -> &Vec<CharacterTrait> {
-    match *self {
-      CharacterMode::AltMode(AltMode { ref traits, .. }) | CharacterMode::BotMode(BotMode { ref traits, .. }) => traits,
-    }
+    self.traits()
   }
 
   instance_resolvers: |_| {

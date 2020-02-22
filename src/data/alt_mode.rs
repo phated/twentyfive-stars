@@ -3,60 +3,129 @@ use crate::graphql_schema::Context;
 use uuid::Uuid;
 
 pub struct AltMode {
-  pub id: Uuid,
-  pub title: String,
-  pub subtitle: String,
-  pub stars: i32,
-  pub type_: ModeType,
-  pub faction: Faction,
-  pub traits: Vec<CharacterTrait>,
+  id: Uuid,
+  title: String,
+  subtitle: String,
+  stars: i32,
+  type_: ModeType,
+  faction: Faction,
+  traits: Vec<CharacterTrait>,
   // Not available on Head or Upgrade modes
-  pub health: i32,
-  pub attack: i32,
-  pub defense: i32,
+  health: i32,
+  attack: i32,
+  defense: i32,
+}
+
+impl AltMode {
+  pub fn new(
+    id: Uuid,
+    title: String,
+    subtitle: String,
+    stars: i32,
+    type_: ModeType,
+    faction: Faction,
+    traits: Vec<CharacterTrait>,
+    health: i32,
+    attack: i32,
+    defense: i32,
+  ) -> Self {
+    AltMode {
+      id,
+      title,
+      subtitle,
+      stars,
+      type_,
+      faction,
+      traits,
+      health,
+      attack,
+      defense,
+    }
+  }
+}
+
+impl AltMode {
+  pub fn id(&self) -> Uuid {
+    self.id
+  }
+
+  pub fn title(&self) -> &str {
+    &self.title
+  }
+
+  pub fn subtitle(&self) -> &str {
+    &self.subtitle
+  }
+
+  pub fn stars(&self) -> i32 {
+    self.stars
+  }
+
+  pub fn type_(&self) -> &ModeType {
+    &self.type_
+  }
+
+  pub fn faction(&self) -> &Faction {
+    &self.faction
+  }
+
+  pub fn traits(&self) -> &Vec<CharacterTrait> {
+    &self.traits
+  }
+
+  pub fn health(&self) -> i32 {
+    self.health
+  }
+
+  pub fn attack(&self) -> i32 {
+    self.attack
+  }
+
+  pub fn defense(&self) -> i32 {
+    self.defense
+  }
 }
 
 juniper::graphql_object!(AltMode: Context | &self | {
   interfaces: [&CharacterMode]
 
-  field subtitle() -> &str {
-    &self.subtitle
-  }
-
-  field health() -> i32 {
-    self.health
-  }
-
-  field attack() -> i32 {
-    self.attack
-  }
-
-  field defense() -> i32 {
-    self.defense
-  }
-
-  // Implemented by the interface
   field id() -> Uuid {
-    unimplemented!("`id` field should be implemented by interface")
+    self.id()
   }
 
   field title() -> &str {
-    unimplemented!("`title` field should be implemented by interface")
+    self.title()
+  }
+
+  field subtitle() -> &str {
+    self.subtitle()
   }
 
   field stars() -> i32 {
-    unimplemented!("`stars` field should be implemented by interface")
+    self.stars()
   }
 
   field type_() -> &ModeType {
-    unimplemented!("`type_` field should be implemented by interface")
+    self.type_()
   }
 
   field faction() -> &Faction {
-    unimplemented!("`faction` field should be implemented by interface")
+    self.faction()
   }
 
   field traits() -> &Vec<CharacterTrait> {
-    unimplemented!("`type_` field should be implemented by interface")
+    self.traits()
+  }
+
+  field health() -> i32 {
+    self.health()
+  }
+
+  field attack() -> i32 {
+    self.attack()
+  }
+
+  field defense() -> i32 {
+    self.defense()
   }
 });
