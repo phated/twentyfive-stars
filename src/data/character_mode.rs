@@ -1,4 +1,7 @@
-use crate::data::{AltMode, BotMode, CharacterTrait, Faction, ModeType};
+use crate::data::{
+  AltMode, BodyMode, BotMode, CharacterTrait, CombinerBodyMode, CombinerMode, Faction, HeadMode,
+  ModeType, UpgradeMode,
+};
 use crate::database_schema::character_modes;
 use crate::graphql_schema::Context;
 use diesel::deserialize::Queryable;
@@ -9,10 +12,11 @@ type DB = diesel::pg::Pg;
 pub enum CharacterMode {
   AltMode(AltMode),
   BotMode(BotMode),
-  // CombinerMode(CombinerMode),
-  // BodyMode(BodyMode),
-  // HeadMode(HeadMode),
-  // UpgradeMode(UpgradeMode),
+  CombinerMode(CombinerMode),
+  UpgradeMode(UpgradeMode),
+  BodyMode(BodyMode),
+  HeadMode(HeadMode),
+  CombinerBodyMode(CombinerBodyMode),
 }
 
 impl Queryable<character_modes::SqlType, DB> for CharacterMode {
@@ -58,8 +62,8 @@ impl Queryable<character_modes::SqlType, DB> for CharacterMode {
       health,
       attack,
       defense,
-      _attack_modifier,
-      _defense_modifier,
+      attack_modifier,
+      defense_modifier,
     ) = row;
 
     match type_ {
@@ -87,6 +91,55 @@ impl Queryable<character_modes::SqlType, DB> for CharacterMode {
         attack.expect("BotMode must have attack"),
         defense.expect("BotMode must have defense"),
       )),
+      ModeType::Combiner => CharacterMode::CombinerMode(CombinerMode::new(
+        id,
+        title,
+        subtitle.expect("CombinerMode must have a subtitle"),
+        stars,
+        type_,
+        faction,
+        traits,
+        health.expect("CombinerMode must have health"),
+        attack.expect("CombinerMode must have attack"),
+        defense.expect("CombinerMode must have defense"),
+      )),
+      ModeType::UpgradeWeapon | ModeType::UpgradeArmor | ModeType::UpgradeUtility => {
+        CharacterMode::UpgradeMode(UpgradeMode::new(
+          id,
+          title,
+          stars,
+          type_,
+          faction,
+          traits,
+          attack_modifier,
+          defense_modifier,
+        ))
+      }
+      ModeType::Body => CharacterMode::BodyMode(BodyMode::new(
+        id,
+        title,
+        subtitle.expect("BodyMode must have a subtitle"),
+        stars,
+        type_,
+        faction,
+        traits,
+        health.expect("BodyMode must have health"),
+        attack.expect("BodyMode must have attack"),
+        defense.expect("BodyMode must have defense"),
+      )),
+      ModeType::Head => CharacterMode::HeadMode(HeadMode::new(id, title, stars, type_, faction)),
+      ModeType::CombinerBody => CharacterMode::CombinerBodyMode(CombinerBodyMode::new(
+        id,
+        title,
+        subtitle.expect("CombinerBodyMode must have a subtitle"),
+        stars,
+        type_,
+        faction,
+        traits,
+        health.expect("CombinerBodyMode must have health"),
+        attack.expect("CombinerBodyMode must have attack"),
+        defense.expect("CombinerBodyMode must have defense"),
+      )),
     }
   }
 }
@@ -96,6 +149,11 @@ impl CharacterMode {
     match self {
       CharacterMode::AltMode(mode) => mode.id(),
       CharacterMode::BotMode(mode) => mode.id(),
+      CharacterMode::CombinerMode(mode) => mode.id(),
+      CharacterMode::UpgradeMode(mode) => mode.id(),
+      CharacterMode::BodyMode(mode) => mode.id(),
+      CharacterMode::HeadMode(mode) => mode.id(),
+      CharacterMode::CombinerBodyMode(mode) => mode.id(),
     }
   }
 
@@ -103,6 +161,11 @@ impl CharacterMode {
     match self {
       CharacterMode::AltMode(mode) => mode.title(),
       CharacterMode::BotMode(mode) => mode.title(),
+      CharacterMode::CombinerMode(mode) => mode.title(),
+      CharacterMode::UpgradeMode(mode) => mode.title(),
+      CharacterMode::BodyMode(mode) => mode.title(),
+      CharacterMode::HeadMode(mode) => mode.title(),
+      CharacterMode::CombinerBodyMode(mode) => mode.title(),
     }
   }
 
@@ -110,6 +173,11 @@ impl CharacterMode {
     match self {
       CharacterMode::AltMode(mode) => mode.stars(),
       CharacterMode::BotMode(mode) => mode.stars(),
+      CharacterMode::CombinerMode(mode) => mode.stars(),
+      CharacterMode::UpgradeMode(mode) => mode.stars(),
+      CharacterMode::BodyMode(mode) => mode.stars(),
+      CharacterMode::HeadMode(mode) => mode.stars(),
+      CharacterMode::CombinerBodyMode(mode) => mode.stars(),
     }
   }
 
@@ -117,6 +185,11 @@ impl CharacterMode {
     match self {
       CharacterMode::AltMode(mode) => mode.type_(),
       CharacterMode::BotMode(mode) => mode.type_(),
+      CharacterMode::CombinerMode(mode) => mode.type_(),
+      CharacterMode::UpgradeMode(mode) => mode.type_(),
+      CharacterMode::BodyMode(mode) => mode.type_(),
+      CharacterMode::HeadMode(mode) => mode.type_(),
+      CharacterMode::CombinerBodyMode(mode) => mode.type_(),
     }
   }
 
@@ -124,13 +197,11 @@ impl CharacterMode {
     match self {
       CharacterMode::AltMode(mode) => mode.faction(),
       CharacterMode::BotMode(mode) => mode.faction(),
-    }
-  }
-
-  pub fn traits(&self) -> &Vec<CharacterTrait> {
-    match self {
-      CharacterMode::AltMode(mode) => mode.traits(),
-      CharacterMode::BotMode(mode) => mode.traits(),
+      CharacterMode::CombinerMode(mode) => mode.faction(),
+      CharacterMode::UpgradeMode(mode) => mode.faction(),
+      CharacterMode::BodyMode(mode) => mode.faction(),
+      CharacterMode::HeadMode(mode) => mode.faction(),
+      CharacterMode::CombinerBodyMode(mode) => mode.faction(),
     }
   }
 }
@@ -156,12 +227,13 @@ juniper::graphql_interface!(CharacterMode: Context |&self| {
     self.faction()
   }
 
-  field traits() -> &Vec<CharacterTrait> {
-    self.traits()
-  }
-
   instance_resolvers: |_| {
     &AltMode => match *self { CharacterMode::AltMode(ref mode) => Some(mode), _ => None },
     &BotMode => match *self { CharacterMode::BotMode(ref mode) => Some(mode), _ => None },
+    &CombinerMode => match *self { CharacterMode::CombinerMode(ref mode) => Some(mode), _ => None },
+    &UpgradeMode => match *self { CharacterMode::UpgradeMode(ref mode) => Some(mode), _ => None },
+    &BodyMode => match *self { CharacterMode::BodyMode(ref mode) => Some(mode), _ => None },
+    &HeadMode => match *self { CharacterMode::HeadMode(ref mode) => Some(mode), _ => None },
+    &CombinerBodyMode => match *self { CharacterMode::CombinerBodyMode(ref mode) => Some(mode), _ => None },
   }
 });
