@@ -28,7 +28,7 @@ impl BattleCard {
 
   pub fn load_from_card(card: &Card, context: &Context) -> Option<Self> {
     battle_cards::table
-      .filter(battle_cards::card_id.eq(card.id))
+      .filter(battle_cards::card_id.eq(card.id()))
       .first::<ExtraProps>(&context.connection)
       .ok()
       // TODO: performance of cloning this?

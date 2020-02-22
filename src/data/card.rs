@@ -7,12 +7,12 @@ use uuid::Uuid;
 
 #[derive(Identifiable, Queryable, Clone, PartialEq, Eq, Debug)]
 pub struct Card {
-  pub id: Uuid,
-  pub tcg_id: String,
-  pub rarity: CardRarity,
-  pub number: String,
-  pub category: CardCategory,
-  pub wave_id: Uuid,
+  id: Uuid,
+  tcg_id: String,
+  rarity: CardRarity,
+  number: String,
+  category: CardCategory,
+  wave_id: Uuid,
 }
 
 impl Card {

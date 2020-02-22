@@ -1,5 +1,5 @@
-use crate::data::Card;
-use crate::database::get_cards;
+use crate::data::{BattleCard, Card, CharacterCard};
+use crate::database;
 use diesel::prelude::PgConnection;
 use juniper::FieldResult;
 
@@ -14,16 +14,32 @@ pub struct Query;
 )]
 impl Query {
   fn apiVersion() -> &str {
+    // TODO: parse cargo,toml and expose that?
     "1.0"
   }
 
-  fn cards(context: &Context) -> FieldResult<Vec<Card>> {
-    let results = get_cards(&context.connection);
+  fn all_cards(context: &Context) -> FieldResult<Vec<Card>> {
+    let cards = database::get_cards(&context.connection)?;
+    // TODO: weird conversion between result types
+    Ok(cards)
+  }
 
-    match results {
-      Ok(cards) => Ok(cards),
-      Err(_) => Ok(vec![]),
-    }
+  fn all_character_cards(context: &Context) -> FieldResult<Vec<CharacterCard>> {
+    let cards = database::get_character_cards(&context.connection)?
+      .iter()
+      .filter_map(|card| CharacterCard::load_from_card(card, context))
+      .collect();
+    // TODO: weird conversion between result types
+    Ok(cards)
+  }
+
+  fn all_battle_cards(context: &Context) -> FieldResult<Vec<BattleCard>> {
+    let cards = database::get_battle_cards(&context.connection)?
+      .iter()
+      .filter_map(|card| BattleCard::load_from_card(card, context))
+      .collect();
+    // TODO: weird conversion between result types
+    Ok(cards)
   }
 }
 
