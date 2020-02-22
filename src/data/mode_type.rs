@@ -51,7 +51,12 @@ impl FromSql<ModeType, Pg> for ModeType {
       // b"UPGRADE_WEAPON" => Ok(ModeType::UpgradeWeapon),
       // b"UPGRADE_ARMOR" => Ok(ModeType::UpgradeArmor),
       // b"UPGRADE_UTILITY" => Ok(ModeType::UpgradeUtility),
-      _ => Err("Unrecognized enum variant".into()),
+      // unimplemented!() is used here to give immediate feedback that
+      // I forgot to deserialize the type from a Postgres type.
+      not_implemented => unimplemented!(
+        "Unrecognized ModeType variant: {}",
+        String::from_utf8_lossy(not_implemented)
+      ),
     }
   }
 }

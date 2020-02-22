@@ -30,7 +30,12 @@ impl FromSql<CardCategory, Pg> for CardCategory {
     match not_none!(bytes) {
       b"CHARACTER" => Ok(CardCategory::Character),
       b"BATTLE" => Ok(CardCategory::Battle),
-      _ => Err("Unrecognized enum variant".into()),
+      // unimplemented!() is used here to give immediate feedback that
+      // I forgot to deserialize the type from a Postgres type.
+      not_implemented => unimplemented!(
+        "Unrecognized CardCategory variant: {}",
+        String::from_utf8_lossy(not_implemented)
+      ),
     }
   }
 }

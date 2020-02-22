@@ -39,7 +39,12 @@ impl FromSql<CardRarity, Pg> for CardRarity {
       b"SUPER_RARE" => Ok(CardRarity::SuperRare),
       b"THEME" => Ok(CardRarity::Theme),
       b"PROMO" => Ok(CardRarity::Promo),
-      _ => Err("Unrecognized enum variant".into()),
+      // unimplemented!() is used here to give immediate feedback that
+      // I forgot to deserialize the type from a Postgres type.
+      not_implemented => unimplemented!(
+        "Unrecognized CardRarity variant: {}",
+        String::from_utf8_lossy(not_implemented)
+      ),
     }
   }
 }

@@ -36,7 +36,12 @@ impl FromSql<BattleIcon, Pg> for BattleIcon {
       b"WHITE" => Ok(BattleIcon::White),
       b"GREEN" => Ok(BattleIcon::Green),
       b"BLACK" => Ok(BattleIcon::Black),
-      _ => Err("Unrecognized enum variant".into()),
+      // unimplemented!() is used here to give immediate feedback that
+      // I forgot to deserialize the type from a Postgres type.
+      not_implemented => unimplemented!(
+        "Unrecognized BattleIcon variant: {}",
+        String::from_utf8_lossy(not_implemented)
+      ),
     }
   }
 }

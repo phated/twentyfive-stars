@@ -30,7 +30,12 @@ impl FromSql<Faction, Pg> for Faction {
       b"AUTOBOT" => Ok(Faction::Autobot),
       b"DECEPTICON" => Ok(Faction::Decepticon),
       b"MERCENARY" => Ok(Faction::Mercenary),
-      _ => Err("Unrecognized enum variant".into()),
+      // unimplemented!() is used here to give immediate feedback that
+      // I forgot to deserialize the type from a Postgres type.
+      not_implemented => unimplemented!(
+        "Unrecognized Faction variant: {}",
+        String::from_utf8_lossy(not_implemented)
+      ),
     }
   }
 }

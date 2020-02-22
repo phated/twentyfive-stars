@@ -36,7 +36,12 @@ impl FromSql<BattleType, Pg> for BattleType {
       b"UPGRADE_WEAPON" => Ok(BattleType::UpgradeWeapon),
       b"UPGRADE_ARMOR" => Ok(BattleType::UpgradeArmor),
       b"UPGRADE_UTILITY" => Ok(BattleType::UpgradeUtility),
-      _ => Err("Unrecognized enum variant".into()),
+      // unimplemented!() is used here to give immediate feedback that
+      // I forgot to deserialize the type from a Postgres type.
+      not_implemented => unimplemented!(
+        "Unrecognized BattleType variant: {}",
+        String::from_utf8_lossy(not_implemented)
+      ),
     }
   }
 }
