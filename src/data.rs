@@ -15,6 +15,7 @@ pub mod combiner_mode;
 pub mod faction;
 pub mod head_mode;
 pub mod mode_type;
+pub mod stratagem_card;
 pub mod upgrade_mode;
 pub mod wave;
 
@@ -35,5 +36,6 @@ pub use combiner_mode::CombinerMode;
 pub use faction::Faction;
 pub use head_mode::HeadMode;
 pub use mode_type::ModeType;
+pub use stratagem_card::StratagemCard;
 pub use upgrade_mode::UpgradeMode;
 pub use wave::Wave;

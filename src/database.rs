@@ -34,3 +34,11 @@ pub fn get_battle_cards(connection: &PgConnection) -> QueryResult<Vec<Card>> {
 
         Ok(cards)
 }
+
+pub fn get_stratagem_cards(connection: &PgConnection) -> QueryResult<Vec<Card>> {
+        let cards = cards::table
+                .filter(cards::category.eq(CardCategory::Stratagem))
+                .load::<Card>(connection)?;
+
+        Ok(cards)
+}

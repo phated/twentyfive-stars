@@ -1,4 +1,4 @@
-use crate::data::{BattleCard, Card, CharacterCard};
+use crate::data::{BattleCard, Card, CharacterCard, StratagemCard};
 use crate::database;
 use diesel::prelude::PgConnection;
 use juniper::FieldResult;
@@ -37,6 +37,15 @@ impl Query {
     let cards = database::get_battle_cards(&context.connection)?
       .iter()
       .filter_map(|card| BattleCard::load_from_card(card, context))
+      .collect();
+    // TODO: weird conversion between result types
+    Ok(cards)
+  }
+
+  fn all_stratagem_cards(context: &Context) -> FieldResult<Vec<StratagemCard>> {
+    let cards = database::get_stratagem_cards(&context.connection)?
+      .iter()
+      .filter_map(|card| StratagemCard::load_from_card(card, context))
       .collect();
     // TODO: weird conversion between result types
     Ok(cards)

@@ -1,4 +1,4 @@
-use crate::data::{BattleCard, CardCategory, CardRarity, CharacterCard, Wave};
+use crate::data::{BattleCard, CardCategory, CardRarity, CharacterCard, StratagemCard, Wave};
 use crate::database_schema::{cards, waves};
 use crate::graphql_schema::Context;
 use diesel::prelude::*;
@@ -87,6 +87,15 @@ juniper::graphql_interface!(Card: Context |&self| {
           let card = self;
           CharacterCard::load_from_card(card, context)
         },
+        _ => None
+      }
+    },
+    StratagemCard => {
+      match self.category {
+        CardCategory::Stratagem => {
+          let card = self;
+          StratagemCard::load_from_card(card, context)
+        }
         _ => None
       }
     }
