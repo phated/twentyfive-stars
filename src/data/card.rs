@@ -1,4 +1,4 @@
-use crate::data::{BattleCard, CardCategory, CardRarity, CharacterCard, StratagemCard, Wave};
+use crate::data::{BattleCard, CardCategory, CardRarity, CharacterCard, StratagemCard, Wave, ID};
 use crate::database_schema::{cards, waves};
 use crate::graphql_schema::Context;
 use diesel::prelude::*;
@@ -16,8 +16,8 @@ pub struct Card {
 }
 
 impl Card {
-  pub fn id(&self) -> Uuid {
-    self.id
+  pub fn id(&self) -> ID {
+    ID::CardID(self.id)
   }
 
   pub fn tcg_id(&self) -> &str {
@@ -44,10 +44,6 @@ impl Card {
 }
 
 juniper::graphql_interface!(Card: Context |&self| {
-  field id() -> Uuid {
-    self.id()
-  }
-
   field tcg_id() -> &str {
     self.tcg_id()
   }

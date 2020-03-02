@@ -1,6 +1,6 @@
 use crate::data::{
   AltMode, BodyMode, BotMode, CharacterTrait, CombinerBodyMode, CombinerMode, Faction, HeadMode,
-  ModeType, UpgradeMode,
+  ModeType, UpgradeMode, ID,
 };
 use crate::database_schema::character_modes;
 use crate::graphql_schema::Context;
@@ -145,7 +145,7 @@ impl Queryable<character_modes::SqlType, DB> for CharacterMode {
 }
 
 impl CharacterMode {
-  pub fn id(&self) -> Uuid {
+  pub fn id(&self) -> ID {
     match self {
       CharacterMode::AltMode(mode) => mode.id(),
       CharacterMode::BotMode(mode) => mode.id(),
@@ -207,10 +207,6 @@ impl CharacterMode {
 }
 
 juniper::graphql_interface!(CharacterMode: Context |&self| {
-  field id() -> Uuid {
-    self.id()
-  }
-
   field title() -> &str {
     self.title()
   }

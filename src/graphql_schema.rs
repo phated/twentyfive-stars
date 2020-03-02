@@ -1,4 +1,4 @@
-use crate::data::{BattleCard, Card, CharacterCard, StratagemCard};
+use crate::data::{BattleCard, Card, CharacterCard, Node, StratagemCard, ID};
 use crate::database;
 use diesel::prelude::PgConnection;
 use juniper::FieldResult;
@@ -16,6 +16,10 @@ impl Query {
   fn apiVersion() -> &str {
     // TODO: parse cargo,toml and expose that?
     "1.0"
+  }
+
+  fn node(context: &Context, id: ID) -> FieldResult<Option<Node>> {
+    Ok(None)
   }
 
   fn all_cards(context: &Context) -> FieldResult<Vec<Card>> {

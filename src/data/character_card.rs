@@ -1,9 +1,8 @@
-use crate::data::{Card, CardCategory, CardRarity, CharacterMode, Wave};
+use crate::data::{Card, CardCategory, CardRarity, CharacterMode, Node, Wave, ID};
 use crate::database_schema::character_modes;
 use crate::graphql_schema::Context;
 use diesel::prelude::*;
 use juniper::FieldResult;
-use uuid::Uuid;
 
 pub struct ExtraProps {
   modes: Vec<CharacterMode>,
@@ -17,8 +16,9 @@ impl CharacterCard {
   }
 
   pub fn load_from_card(card: &Card, context: &Context) -> Option<Self> {
+    let card_id = ID::raw(card.id());
     character_modes::table
-      .filter(character_modes::card_id.eq(card.id()))
+      .filter(character_modes::card_id.eq(card_id))
       .load::<CharacterMode>(&context.connection)
       .ok()
       // TODO: performance of cloning this?
@@ -27,7 +27,7 @@ impl CharacterCard {
 }
 
 impl CharacterCard {
-  pub fn id(&self) -> Uuid {
+  pub fn id(&self) -> ID {
     match self {
       CharacterCard(card, _extra) => card.id(),
     }
@@ -71,9 +71,9 @@ impl CharacterCard {
 }
 
 juniper::graphql_object!(CharacterCard: Context | &self | {
-  interfaces: [&Card]
+  interfaces: [&Node, &Card]
 
-  field id() -> Uuid {
+  field id() -> ID {
     self.id()
   }
 

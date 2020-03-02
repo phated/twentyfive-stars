@@ -1,4 +1,6 @@
-use crate::data::{BattleIcon, BattleType, Card, CardCategory, CardRarity, Faction, Wave};
+use crate::data::{
+  BattleIcon, BattleType, Card, CardCategory, CardRarity, Faction, Node, Wave, ID,
+};
 use crate::database_schema::battle_cards;
 use crate::graphql_schema::Context;
 use diesel::prelude::*;
@@ -27,8 +29,9 @@ impl BattleCard {
   }
 
   pub fn load_from_card(card: &Card, context: &Context) -> Option<Self> {
+    let card_id = ID::raw(card.id());
     battle_cards::table
-      .filter(battle_cards::card_id.eq(card.id()))
+      .filter(battle_cards::card_id.eq(card_id))
       .first::<ExtraProps>(&context.connection)
       .ok()
       // TODO: performance of cloning this?
@@ -37,7 +40,7 @@ impl BattleCard {
 }
 
 impl BattleCard {
-  pub fn id(&self) -> Uuid {
+  pub fn id(&self) -> ID {
     match self {
       BattleCard(card, _extra) => card.id(),
     }
@@ -117,9 +120,9 @@ impl BattleCard {
 }
 
 juniper::graphql_object!(BattleCard: Context |&self| {
-  interfaces: [&Card]
+  interfaces: [&Node, &Card]
 
-  field id() -> Uuid {
+  field id() -> ID {
     self.id()
   }
 

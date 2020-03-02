@@ -1,4 +1,4 @@
-use crate::data::{CharacterMode, CharacterTrait, Faction, ModeType};
+use crate::data::{CharacterMode, CharacterTrait, Faction, ModeType, Node, ID};
 use crate::graphql_schema::Context;
 use uuid::Uuid;
 
@@ -45,8 +45,8 @@ impl AltMode {
 }
 
 impl AltMode {
-  pub fn id(&self) -> Uuid {
-    self.id
+  pub fn id(&self) -> ID {
+    ID::CharacterModeID(self.id)
   }
 
   pub fn title(&self) -> &str {
@@ -87,9 +87,9 @@ impl AltMode {
 }
 
 juniper::graphql_object!(AltMode: Context | &self | {
-  interfaces: [&CharacterMode]
+  interfaces: [&Node, &CharacterMode]
 
-  field id() -> Uuid {
+  field id() -> ID {
     self.id()
   }
 

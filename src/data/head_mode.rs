@@ -1,4 +1,4 @@
-use crate::data::{CharacterMode, Faction, ModeType};
+use crate::data::{CharacterMode, Faction, ModeType, Node, ID};
 use crate::graphql_schema::Context;
 use uuid::Uuid;
 
@@ -23,8 +23,8 @@ impl HeadMode {
 }
 
 impl HeadMode {
-  pub fn id(&self) -> Uuid {
-    self.id
+  pub fn id(&self) -> ID {
+    ID::CharacterModeID(self.id)
   }
 
   pub fn title(&self) -> &str {
@@ -45,9 +45,9 @@ impl HeadMode {
 }
 
 juniper::graphql_object!(HeadMode: Context | &self | {
-  interfaces: [&CharacterMode]
+  interfaces: [&Node, &CharacterMode]
 
-  field id() -> Uuid {
+  field id() -> ID {
     self.id()
   }
 
