@@ -14,13 +14,17 @@ pub fn establish_connection() -> PgConnection {
 }
 
 pub fn get_cards(connection: &PgConnection, pagination: Pagination) -> QueryResult<Vec<Card>> {
+  let subselect = |external_id| {
+    cards::table
+      .select(cards::id)
+      .filter(cards::external_id.eq(external_id))
+      .single_value()
+  };
+
   let cards = match pagination {
     Pagination::None => cards_with_pageinfo::table.load::<Card>(connection)?,
     Pagination::Before(before_external_id) => {
-      let before_subselect = cards::table
-        .select(cards::id)
-        .filter(cards::external_id.eq(before_external_id))
-        .single_value();
+      let before_subselect = subselect(before_external_id);
 
       cards_with_pageinfo::table
         .filter(cards_with_pageinfo::id.nullable().lt(before_subselect))
@@ -28,10 +32,7 @@ pub fn get_cards(connection: &PgConnection, pagination: Pagination) -> QueryResu
         .load::<Card>(connection)?
     }
     Pagination::After(after_external_id) => {
-      let after_subselect = cards::table
-        .select(cards::id)
-        .filter(cards::external_id.eq(after_external_id))
-        .single_value();
+      let after_subselect = subselect(after_external_id);
 
       cards_with_pageinfo::table
         .filter(cards_with_pageinfo::id.nullable().gt(after_subselect))
@@ -39,15 +40,8 @@ pub fn get_cards(connection: &PgConnection, pagination: Pagination) -> QueryResu
         .load::<Card>(connection)?
     }
     Pagination::Betwixt(before_external_id, after_external_id) => {
-      let before_subselect = cards::table
-        .select(cards::id)
-        .filter(cards::external_id.eq(before_external_id))
-        .single_value();
-
-      let after_subselect = cards::table
-        .select(cards::id)
-        .filter(cards::external_id.eq(after_external_id))
-        .single_value();
+      let before_subselect = subselect(before_external_id);
+      let after_subselect = subselect(after_external_id);
 
       cards_with_pageinfo::table
         .filter(cards_with_pageinfo::id.nullable().gt(after_subselect))
@@ -57,68 +51,52 @@ pub fn get_cards(connection: &PgConnection, pagination: Pagination) -> QueryResu
     }
     Pagination::First(limit) => cards_with_pageinfo::table
       .order(cards_with_pageinfo::id.asc())
-      .limit(limit as i64)
+      .limit(limit)
       .load::<Card>(connection)?,
     Pagination::FirstAfter(limit, after_external_id) => {
-      let after_subselect = cards::table
-        .select(cards::id)
-        .filter(cards::external_id.eq(after_external_id))
-        .single_value();
+      let after_subselect = subselect(after_external_id);
 
       cards_with_pageinfo::table
         .filter(cards_with_pageinfo::id.nullable().gt(after_subselect))
         .order(cards_with_pageinfo::id.asc())
-        .limit(limit as i64)
+        .limit(limit)
         .load::<Card>(connection)?
     }
     Pagination::FirstBefore(limit, before_external_id) => {
-      let before_subselect = cards::table
-        .select(cards::id)
-        .filter(cards::external_id.eq(before_external_id))
-        .single_value();
+      let before_subselect = subselect(before_external_id);
 
       cards_with_pageinfo::table
         .filter(cards_with_pageinfo::id.nullable().lt(before_subselect))
         .order(cards_with_pageinfo::id.asc())
-        .limit(limit as i64)
+        .limit(limit)
         .load::<Card>(connection)?
     }
     Pagination::FirstBetwixt(limit, before_external_id, after_external_id) => {
-      let before_subselect = cards::table
-        .select(cards::id)
-        .filter(cards::external_id.eq(before_external_id))
-        .single_value();
-
-      let after_subselect = cards::table
-        .select(cards::id)
-        .filter(cards::external_id.eq(after_external_id))
-        .single_value();
+      let before_subselect = subselect(before_external_id);
+      let after_subselect = subselect(after_external_id);
 
       cards_with_pageinfo::table
         .filter(cards_with_pageinfo::id.nullable().gt(after_subselect))
         .filter(cards_with_pageinfo::id.nullable().lt(before_subselect))
         .order(cards_with_pageinfo::id.asc())
-        .limit(limit as i64)
+        .limit(limit)
         .load::<Card>(connection)?
     }
     Pagination::Last(limit) => cards_with_pageinfo::table
       .order(cards_with_pageinfo::id.desc())
-      .limit(limit as i64)
+      .limit(limit)
       .load::<Card>(connection)?
       .iter()
       .cloned()
       .rev()
       .collect::<Vec<Card>>(),
     Pagination::LastAfter(limit, after_external_id) => {
-      let after_subselect = cards::table
-        .select(cards::id)
-        .filter(cards::external_id.eq(after_external_id))
-        .single_value();
+      let after_subselect = subselect(after_external_id);
 
       cards_with_pageinfo::table
         .filter(cards_with_pageinfo::id.nullable().gt(after_subselect))
         .order(cards_with_pageinfo::id.desc())
-        .limit(limit as i64)
+        .limit(limit)
         .load::<Card>(connection)?
         .iter()
         .cloned()
@@ -126,15 +104,12 @@ pub fn get_cards(connection: &PgConnection, pagination: Pagination) -> QueryResu
         .collect::<Vec<Card>>()
     }
     Pagination::LastBefore(limit, before_external_id) => {
-      let before_subselect = cards::table
-        .select(cards::id)
-        .filter(cards::external_id.eq(before_external_id))
-        .single_value();
+      let before_subselect = subselect(before_external_id);
 
       cards_with_pageinfo::table
         .filter(cards_with_pageinfo::id.nullable().lt(before_subselect))
         .order(cards_with_pageinfo::id.desc())
-        .limit(limit as i64)
+        .limit(limit)
         .load::<Card>(connection)?
         .iter()
         .cloned()
@@ -142,21 +117,14 @@ pub fn get_cards(connection: &PgConnection, pagination: Pagination) -> QueryResu
         .collect::<Vec<Card>>()
     }
     Pagination::LastBetwixt(limit, before_external_id, after_external_id) => {
-      let before_subselect = cards::table
-        .select(cards::id)
-        .filter(cards::external_id.eq(before_external_id))
-        .single_value();
-
-      let after_subselect = cards::table
-        .select(cards::id)
-        .filter(cards::external_id.eq(after_external_id))
-        .single_value();
+      let before_subselect = subselect(before_external_id);
+      let after_subselect = subselect(after_external_id);
 
       cards_with_pageinfo::table
         .filter(cards_with_pageinfo::id.nullable().gt(after_subselect))
         .filter(cards_with_pageinfo::id.nullable().lt(before_subselect))
         .order(cards_with_pageinfo::id.desc())
-        .limit(limit as i64)
+        .limit(limit)
         .load::<Card>(connection)?
         .iter()
         .cloned()
