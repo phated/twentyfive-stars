@@ -112,11 +112,6 @@ table! {
     }
 }
 
-joinable!(cards_with_pageinfo -> waves (wave_id));
-joinable!(battle_cards -> cards_with_pageinfo (card_id));
-joinable!(character_modes -> cards_with_pageinfo (card_id));
-joinable!(stratagem_cards -> cards_with_pageinfo (card_id));
-
 table! {
     use diesel::sql_types::*;
     use crate::data::{CardRarity, CardCategory};
@@ -133,11 +128,6 @@ table! {
         has_next -> Bool,
     }
 }
-
-joinable!(battle_cards_with_pageinfo -> waves (wave_id));
-joinable!(battle_cards -> battle_cards_with_pageinfo (card_id));
-joinable!(character_modes -> battle_cards_with_pageinfo (card_id));
-joinable!(stratagem_cards -> battle_cards_with_pageinfo (card_id));
 
 table! {
     use diesel::sql_types::*;
@@ -156,11 +146,6 @@ table! {
     }
 }
 
-joinable!(character_cards_with_pageinfo -> waves (wave_id));
-joinable!(battle_cards -> character_cards_with_pageinfo (card_id));
-joinable!(character_modes -> character_cards_with_pageinfo (card_id));
-joinable!(stratagem_cards -> character_cards_with_pageinfo (card_id));
-
 table! {
     use diesel::sql_types::*;
     use crate::data::{CardRarity, CardCategory};
@@ -178,7 +163,4 @@ table! {
     }
 }
 
-joinable!(stratagem_cards_with_pageinfo -> waves (wave_id));
-joinable!(battle_cards -> stratagem_cards_with_pageinfo (card_id));
-joinable!(character_modes -> stratagem_cards_with_pageinfo (card_id));
-joinable!(stratagem_cards -> stratagem_cards_with_pageinfo (card_id));
+joinable!(cards_with_pageinfo -> waves (wave_id));
