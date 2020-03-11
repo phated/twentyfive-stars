@@ -16,9 +16,8 @@ impl CharacterCard {
   }
 
   pub fn load_from_card(card: &Card, context: &Context) -> Option<Self> {
-    let card_id = ID::raw(card.id());
     character_modes::table
-      .filter(character_modes::card_id.eq(card_id))
+      .filter(character_modes::card_id.eq(card.internal_id()))
       .load::<CharacterMode>(&context.connection)
       .ok()
       // TODO: performance of cloning this?

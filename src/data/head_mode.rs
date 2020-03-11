@@ -3,7 +3,8 @@ use crate::graphql_schema::Context;
 use uuid::Uuid;
 
 pub struct HeadMode {
-  id: Uuid,
+  id: i32,
+  external_id: Uuid,
   title: String,
   stars: i32,
   type_: ModeType,
@@ -11,9 +12,17 @@ pub struct HeadMode {
 }
 
 impl HeadMode {
-  pub fn new(id: Uuid, title: String, stars: i32, type_: ModeType, faction: Faction) -> Self {
+  pub fn new(
+    id: i32,
+    external_id: Uuid,
+    title: String,
+    stars: i32,
+    type_: ModeType,
+    faction: Faction,
+  ) -> Self {
     HeadMode {
       id,
+      external_id,
       title,
       stars,
       type_,
@@ -24,7 +33,7 @@ impl HeadMode {
 
 impl HeadMode {
   pub fn id(&self) -> ID {
-    ID::CharacterModeID(self.id)
+    ID::CharacterModeID(self.external_id)
   }
 
   pub fn title(&self) -> &str {

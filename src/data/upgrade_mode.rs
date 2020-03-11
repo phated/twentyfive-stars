@@ -3,7 +3,8 @@ use crate::graphql_schema::Context;
 use uuid::Uuid;
 
 pub struct UpgradeMode {
-  id: Uuid,
+  id: i32,
+  external_id: Uuid,
   title: String,
   stars: i32,
   type_: ModeType,
@@ -16,7 +17,8 @@ pub struct UpgradeMode {
 
 impl UpgradeMode {
   pub fn new(
-    id: Uuid,
+    id: i32,
+    external_id: Uuid,
     title: String,
     stars: i32,
     type_: ModeType,
@@ -27,6 +29,7 @@ impl UpgradeMode {
   ) -> Self {
     UpgradeMode {
       id,
+      external_id,
       title,
       stars,
       type_,
@@ -40,7 +43,7 @@ impl UpgradeMode {
 
 impl UpgradeMode {
   pub fn id(&self) -> ID {
-    ID::CharacterModeID(self.id)
+    ID::CharacterModeID(self.external_id)
   }
 
   pub fn title(&self) -> &str {

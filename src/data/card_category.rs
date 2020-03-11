@@ -6,7 +6,16 @@ use diesel::serialize::{self, IsNull, Output, ToSql};
 use std::io::Write;
 
 #[derive(
-  Debug, PartialEq, Eq, Clone, FromSqlRow, AsExpression, QueryId, juniper::GraphQLEnum, SqlType,
+  Debug,
+  PartialEq,
+  Eq,
+  Copy,
+  Clone,
+  FromSqlRow,
+  AsExpression,
+  QueryId,
+  juniper::GraphQLEnum,
+  SqlType,
 )]
 #[postgres(type_name = "CARD_CATEGORY")]
 #[sql_type = "CardCategory"]

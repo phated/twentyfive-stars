@@ -6,15 +6,20 @@ use uuid::Uuid;
 
 #[derive(Identifiable, Queryable, Debug)]
 pub struct Wave {
-  id: Uuid,
+  id: i32,
+  external_id: Uuid,
   tcg_id: String,
   name: String,
   released: NaiveDate,
 }
 
 impl Wave {
+  pub fn internal_id(&self) -> i32 {
+    self.id
+  }
+
   pub fn id(&self) -> ID {
-    ID::WaveID(self.id)
+    ID::WaveID(self.external_id)
   }
 
   pub fn tcg_id(&self) -> &str {

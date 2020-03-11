@@ -10,8 +10,9 @@ use uuid::Uuid;
 #[derive(Identifiable, Queryable, PartialEq, Eq, Debug)]
 #[table_name = "battle_cards"]
 pub struct ExtraProps {
-  id: Uuid,
-  card_id: Uuid,
+  id: i32,
+  external_id: Uuid,
+  card_id: i32,
   title: String,
   type_: BattleType,
   faction: Option<Faction>,
@@ -29,9 +30,8 @@ impl BattleCard {
   }
 
   pub fn load_from_card(card: &Card, context: &Context) -> Option<Self> {
-    let card_id = ID::raw(card.id());
     battle_cards::table
-      .filter(battle_cards::card_id.eq(card_id))
+      .filter(battle_cards::card_id.eq(card.internal_id()))
       .first::<ExtraProps>(&context.connection)
       .ok()
       // TODO: performance of cloning this?

@@ -1,5 +1,7 @@
-use crate::data::{BattleCard, Card, CharacterCard, Node, StratagemCard, ID};
+use crate::data::{BattleCard, CharacterCard, Node, StratagemCard, ID};
 use crate::database;
+use crate::pagination::Pagination;
+use crate::schema::{CardConnection, Cursor};
 use diesel::prelude::PgConnection;
 use juniper::FieldResult;
 
@@ -22,10 +24,17 @@ impl Query {
     Ok(None)
   }
 
-  fn all_cards(context: &Context) -> FieldResult<Vec<Card>> {
-    let cards = database::get_cards(&context.connection)?;
-    // TODO: weird conversion between result types
-    Ok(cards)
+  fn all_cards(
+    context: &Context,
+    first: Option<i32>,
+    after: Option<Cursor>,
+    last: Option<i32>,
+    before: Option<Cursor>,
+  ) -> FieldResult<CardConnection> {
+    let pagination = Pagination::new(first, last, before, after);
+    let cards = database::get_cards(&context.connection, pagination)?;
+    let connection = CardConnection::new(cards);
+    Ok(connection)
   }
 
   fn all_character_cards(context: &Context) -> FieldResult<Vec<CharacterCard>> {

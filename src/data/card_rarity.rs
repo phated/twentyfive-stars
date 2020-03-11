@@ -5,7 +5,9 @@ use diesel::pg::Pg;
 use diesel::serialize::{self, IsNull, Output, ToSql};
 use std::io::Write;
 
-#[derive(Debug, PartialEq, Eq, Clone, FromSqlRow, AsExpression, juniper::GraphQLEnum, SqlType)]
+#[derive(
+  Debug, PartialEq, Eq, Copy, Clone, FromSqlRow, AsExpression, juniper::GraphQLEnum, SqlType,
+)]
 #[postgres(type_name = "CARD_RARITY")]
 pub enum CardRarity {
   Common,

@@ -22,9 +22,11 @@ pub enum CharacterMode {
 impl Queryable<character_modes::SqlType, DB> for CharacterMode {
   type Row = (
     // id
+    i32,
+    // external_id
     Uuid,
     // card_id
-    Uuid,
+    i32,
     // title
     String,
     // subtitle
@@ -52,6 +54,7 @@ impl Queryable<character_modes::SqlType, DB> for CharacterMode {
   fn build(row: Self::Row) -> Self {
     let (
       id,
+      external_id,
       _card_id,
       title,
       subtitle,
@@ -69,6 +72,7 @@ impl Queryable<character_modes::SqlType, DB> for CharacterMode {
     match type_ {
       ModeType::Alt | ModeType::Alt1 | ModeType::Alt2 => CharacterMode::AltMode(AltMode::new(
         id,
+        external_id,
         title,
         subtitle.expect("AltMode must have a subtitle"),
         stars,
@@ -81,6 +85,7 @@ impl Queryable<character_modes::SqlType, DB> for CharacterMode {
       )),
       ModeType::Bot => CharacterMode::BotMode(BotMode::new(
         id,
+        external_id,
         title,
         subtitle.expect("BotMode must have a subtitle"),
         stars,
@@ -93,6 +98,7 @@ impl Queryable<character_modes::SqlType, DB> for CharacterMode {
       )),
       ModeType::Combiner => CharacterMode::CombinerMode(CombinerMode::new(
         id,
+        external_id,
         title,
         subtitle.expect("CombinerMode must have a subtitle"),
         stars,
@@ -106,6 +112,7 @@ impl Queryable<character_modes::SqlType, DB> for CharacterMode {
       ModeType::UpgradeWeapon | ModeType::UpgradeArmor | ModeType::UpgradeUtility => {
         CharacterMode::UpgradeMode(UpgradeMode::new(
           id,
+          external_id,
           title,
           stars,
           type_,
@@ -117,6 +124,7 @@ impl Queryable<character_modes::SqlType, DB> for CharacterMode {
       }
       ModeType::Body => CharacterMode::BodyMode(BodyMode::new(
         id,
+        external_id,
         title,
         subtitle.expect("BodyMode must have a subtitle"),
         stars,
@@ -127,9 +135,12 @@ impl Queryable<character_modes::SqlType, DB> for CharacterMode {
         attack.expect("BodyMode must have attack"),
         defense.expect("BodyMode must have defense"),
       )),
-      ModeType::Head => CharacterMode::HeadMode(HeadMode::new(id, title, stars, type_, faction)),
+      ModeType::Head => {
+        CharacterMode::HeadMode(HeadMode::new(id, external_id, title, stars, type_, faction))
+      }
       ModeType::CombinerBody => CharacterMode::CombinerBodyMode(CombinerBodyMode::new(
         id,
+        external_id,
         title,
         subtitle.expect("CombinerBodyMode must have a subtitle"),
         stars,

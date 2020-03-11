@@ -10,6 +10,8 @@ mod data;
 mod database;
 mod database_schema;
 mod graphql_schema;
+mod pagination;
+mod schema;
 
 use database::establish_connection;
 use graphql_schema::{Context, Mutation, Query};

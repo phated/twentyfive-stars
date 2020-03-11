@@ -3,7 +3,8 @@ use crate::graphql_schema::Context;
 use uuid::Uuid;
 
 pub struct CombinerMode {
-  id: Uuid,
+  id: i32,
+  external_id: Uuid,
   title: String,
   subtitle: String,
   stars: i32,
@@ -18,7 +19,8 @@ pub struct CombinerMode {
 
 impl CombinerMode {
   pub fn new(
-    id: Uuid,
+    id: i32,
+    external_id: Uuid,
     title: String,
     subtitle: String,
     stars: i32,
@@ -31,6 +33,7 @@ impl CombinerMode {
   ) -> Self {
     CombinerMode {
       id,
+      external_id,
       title,
       subtitle,
       stars,
@@ -46,7 +49,7 @@ impl CombinerMode {
 
 impl CombinerMode {
   pub fn id(&self) -> ID {
-    ID::CharacterModeID(self.id)
+    ID::CharacterModeID(self.external_id)
   }
 
   pub fn title(&self) -> &str {

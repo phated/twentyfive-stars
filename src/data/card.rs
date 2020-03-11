@@ -1,23 +1,31 @@
 use crate::data::{BattleCard, CardCategory, CardRarity, CharacterCard, StratagemCard, Wave, ID};
-use crate::database_schema::{cards, waves};
+use crate::database_schema::{cards_with_pageinfo, waves};
 use crate::graphql_schema::Context;
 use diesel::prelude::*;
 use juniper::FieldResult;
 use uuid::Uuid;
 
 #[derive(Identifiable, Queryable, Clone, PartialEq, Eq, Debug)]
+#[table_name = "cards_with_pageinfo"]
 pub struct Card {
-  id: Uuid,
+  id: i32,
+  external_id: Uuid,
   tcg_id: String,
   rarity: CardRarity,
   number: String,
   category: CardCategory,
-  wave_id: Uuid,
+  wave_id: i32,
+  pub has_previous: bool,
+  pub has_next: bool,
 }
 
 impl Card {
+  pub fn internal_id(&self) -> i32 {
+    self.id
+  }
+
   pub fn id(&self) -> ID {
-    ID::CardID(self.id)
+    ID::CardID(self.external_id)
   }
 
   pub fn tcg_id(&self) -> &str {
