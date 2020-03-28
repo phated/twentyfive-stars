@@ -1,7 +1,6 @@
 CREATE TABLE character_modes (
-  id SERIAL PRIMARY KEY,
-  external_id UUID UNIQUE NOT NULL DEFAULT gen_random_uuid(),
-  card_id INTEGER NOT NULL REFERENCES cards (id),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  card_id UUID NOT NULL REFERENCES cards (id),
   title VARCHAR NOT NULL,
   subtitle VARCHAR,
   faction FACTION NOT NULL,
@@ -12,5 +11,6 @@ CREATE TABLE character_modes (
   attack INT,
   defense INT,
   attack_modifier INT,
-  defense_modifier INT
+  defense_modifier INT,
+  sort_order SERIAL
 );

@@ -1,19 +1,18 @@
 use crate::schema::Cursor;
-use uuid::Uuid;
 
 pub enum Pagination {
   None,
-  After(Uuid),
-  Before(Uuid),
-  Betwixt(Uuid, Uuid),
+  After(Cursor),
+  Before(Cursor),
+  Betwixt(Cursor, Cursor),
   First(i64),
-  FirstAfter(i64, Uuid),
-  FirstBefore(i64, Uuid),
-  FirstBetwixt(i64, Uuid, Uuid),
+  FirstAfter(i64, Cursor),
+  FirstBefore(i64, Cursor),
+  FirstBetwixt(i64, Cursor, Cursor),
   Last(i64),
-  LastAfter(i64, Uuid),
-  LastBefore(i64, Uuid),
-  LastBetwixt(i64, Uuid, Uuid),
+  LastAfter(i64, Cursor),
+  LastBefore(i64, Cursor),
+  LastBetwixt(i64, Cursor, Cursor),
   Invalid,
 }
 
@@ -55,20 +54,20 @@ impl Pagination {
       Pag {
         first: None,
         last: None,
-        before: Some(Cursor(before)),
+        before: Some(before),
         after: None,
       } => Pagination::Before(before),
       Pag {
         first: None,
         last: None,
         before: None,
-        after: Some(Cursor(after)),
+        after: Some(after),
       } => Pagination::After(after),
       Pag {
         first: None,
         last: None,
-        before: Some(Cursor(before)),
-        after: Some(Cursor(after)),
+        before: Some(before),
+        after: Some(after),
       } => Pagination::Betwixt(before, after),
       Pag {
         first: Some(first),
@@ -79,20 +78,20 @@ impl Pagination {
       Pag {
         first: Some(first),
         last: None,
-        before: Some(Cursor(before)),
+        before: Some(before),
         after: None,
       } => Pagination::FirstBefore(first.into(), before),
       Pag {
         first: Some(first),
         last: None,
         before: None,
-        after: Some(Cursor(after)),
+        after: Some(after),
       } => Pagination::FirstAfter(first.into(), after),
       Pag {
         first: Some(first),
         last: None,
-        before: Some(Cursor(before)),
-        after: Some(Cursor(after)),
+        before: Some(before),
+        after: Some(after),
       } => Pagination::FirstBetwixt(first.into(), before, after),
       Pag {
         first: None,
@@ -103,20 +102,20 @@ impl Pagination {
       Pag {
         first: None,
         last: Some(last),
-        before: Some(Cursor(before)),
+        before: Some(before),
         after: None,
       } => Pagination::LastBefore(last.into(), before),
       Pag {
         first: None,
         last: Some(last),
         before: None,
-        after: Some(Cursor(after)),
+        after: Some(after),
       } => Pagination::LastAfter(last.into(), after),
       Pag {
         first: None,
         last: Some(last),
-        before: Some(Cursor(before)),
-        after: Some(Cursor(after)),
+        before: Some(before),
+        after: Some(after),
       } => Pagination::LastBetwixt(last.into(), before, after),
     }
   }

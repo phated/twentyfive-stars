@@ -14,88 +14,126 @@ pub fn establish_connection() -> PgConnection {
 }
 
 pub fn get_cards(connection: &PgConnection, pagination: Pagination) -> QueryResult<Vec<Card>> {
-  let subselect = |external_id| {
+  // ID and Cursor are interchangable
+  let subselect = |cursor| {
+    // This is using the cards table instead of the view because Diesel sucks
     cards::table
-      .select(cards::id)
-      .filter(cards::external_id.eq(external_id))
+      .select(cards::sort_order)
+      .filter(cards::id.eq(cursor))
       .single_value()
   };
 
   let cards = match pagination {
     Pagination::None => cards_with_pageinfo::table.load::<Card>(connection)?,
-    Pagination::Before(before_external_id) => {
-      let before_subselect = subselect(before_external_id);
+    Pagination::Before(before_cursor) => {
+      let before_subselect = subselect(before_cursor);
 
       cards_with_pageinfo::table
-        .filter(cards_with_pageinfo::id.nullable().lt(before_subselect))
-        .order(cards_with_pageinfo::id.asc())
+        .filter(
+          cards_with_pageinfo::sort_order
+            .nullable()
+            .lt(before_subselect),
+        )
+        .order(cards_with_pageinfo::sort_order.asc())
         .load::<Card>(connection)?
     }
-    Pagination::After(after_external_id) => {
-      let after_subselect = subselect(after_external_id);
+    Pagination::After(after_cursor) => {
+      let after_subselect = subselect(after_cursor);
 
       cards_with_pageinfo::table
-        .filter(cards_with_pageinfo::id.nullable().gt(after_subselect))
-        .order(cards_with_pageinfo::id.asc())
+        .filter(
+          cards_with_pageinfo::sort_order
+            .nullable()
+            .gt(after_subselect),
+        )
+        .order(cards_with_pageinfo::sort_order.asc())
         .load::<Card>(connection)?
     }
-    Pagination::Betwixt(before_external_id, after_external_id) => {
-      let before_subselect = subselect(before_external_id);
-      let after_subselect = subselect(after_external_id);
+    Pagination::Betwixt(before_cursor, after_cursor) => {
+      let before_subselect = subselect(before_cursor);
+      let after_subselect = subselect(after_cursor);
 
       cards_with_pageinfo::table
-        .filter(cards_with_pageinfo::id.nullable().gt(after_subselect))
-        .filter(cards_with_pageinfo::id.nullable().lt(before_subselect))
-        .order(cards_with_pageinfo::id.asc())
+        .filter(
+          cards_with_pageinfo::sort_order
+            .nullable()
+            .gt(after_subselect),
+        )
+        .filter(
+          cards_with_pageinfo::sort_order
+            .nullable()
+            .lt(before_subselect),
+        )
+        .order(cards_with_pageinfo::sort_order.asc())
         .load::<Card>(connection)?
     }
     Pagination::First(limit) => cards_with_pageinfo::table
-      .order(cards_with_pageinfo::id.asc())
+      .order(cards_with_pageinfo::sort_order.asc())
       .limit(limit)
       .load::<Card>(connection)?,
-    Pagination::FirstAfter(limit, after_external_id) => {
-      let after_subselect = subselect(after_external_id);
+    Pagination::FirstAfter(limit, after_cursor) => {
+      let after_subselect = subselect(after_cursor);
 
       cards_with_pageinfo::table
-        .filter(cards_with_pageinfo::id.nullable().gt(after_subselect))
-        .order(cards_with_pageinfo::id.asc())
+        .filter(
+          cards_with_pageinfo::sort_order
+            .nullable()
+            .gt(after_subselect),
+        )
+        .order(cards_with_pageinfo::sort_order.asc())
         .limit(limit)
         .load::<Card>(connection)?
     }
-    Pagination::FirstBefore(limit, before_external_id) => {
-      let before_subselect = subselect(before_external_id);
+    Pagination::FirstBefore(limit, before_cursor) => {
+      let before_subselect = subselect(before_cursor);
 
       cards_with_pageinfo::table
-        .filter(cards_with_pageinfo::id.nullable().lt(before_subselect))
-        .order(cards_with_pageinfo::id.asc())
+        .filter(
+          cards_with_pageinfo::sort_order
+            .nullable()
+            .lt(before_subselect),
+        )
+        .order(cards_with_pageinfo::sort_order.asc())
         .limit(limit)
         .load::<Card>(connection)?
     }
-    Pagination::FirstBetwixt(limit, before_external_id, after_external_id) => {
-      let before_subselect = subselect(before_external_id);
-      let after_subselect = subselect(after_external_id);
+    Pagination::FirstBetwixt(limit, before_cursor, after_cursor) => {
+      let before_subselect = subselect(before_cursor);
+      let after_subselect = subselect(after_cursor);
 
       cards_with_pageinfo::table
-        .filter(cards_with_pageinfo::id.nullable().gt(after_subselect))
-        .filter(cards_with_pageinfo::id.nullable().lt(before_subselect))
-        .order(cards_with_pageinfo::id.asc())
+        .filter(
+          cards_with_pageinfo::sort_order
+            .nullable()
+            .gt(after_subselect),
+        )
+        .filter(
+          cards_with_pageinfo::sort_order
+            .nullable()
+            .lt(before_subselect),
+        )
+        .order(cards_with_pageinfo::sort_order.asc())
         .limit(limit)
         .load::<Card>(connection)?
     }
     Pagination::Last(limit) => cards_with_pageinfo::table
-      .order(cards_with_pageinfo::id.desc())
+      .order(cards_with_pageinfo::sort_order.desc())
       .limit(limit)
       .load::<Card>(connection)?
       .iter()
       .cloned()
       .rev()
       .collect::<Vec<Card>>(),
-    Pagination::LastAfter(limit, after_external_id) => {
-      let after_subselect = subselect(after_external_id);
+    Pagination::LastAfter(limit, after_cursor) => {
+      let after_subselect = subselect(after_cursor);
 
       cards_with_pageinfo::table
-        .filter(cards_with_pageinfo::id.nullable().gt(after_subselect))
-        .order(cards_with_pageinfo::id.desc())
+        .filter(
+          cards_with_pageinfo::sort_order
+            .nullable()
+            .gt(after_subselect),
+        )
+        .order(cards_with_pageinfo::sort_order.desc())
         .limit(limit)
         .load::<Card>(connection)?
         .iter()
@@ -103,12 +141,16 @@ pub fn get_cards(connection: &PgConnection, pagination: Pagination) -> QueryResu
         .rev()
         .collect::<Vec<Card>>()
     }
-    Pagination::LastBefore(limit, before_external_id) => {
-      let before_subselect = subselect(before_external_id);
+    Pagination::LastBefore(limit, before_cursor) => {
+      let before_subselect = subselect(before_cursor);
 
       cards_with_pageinfo::table
-        .filter(cards_with_pageinfo::id.nullable().lt(before_subselect))
-        .order(cards_with_pageinfo::id.desc())
+        .filter(
+          cards_with_pageinfo::sort_order
+            .nullable()
+            .lt(before_subselect),
+        )
+        .order(cards_with_pageinfo::sort_order.desc())
         .limit(limit)
         .load::<Card>(connection)?
         .iter()
@@ -116,14 +158,22 @@ pub fn get_cards(connection: &PgConnection, pagination: Pagination) -> QueryResu
         .rev()
         .collect::<Vec<Card>>()
     }
-    Pagination::LastBetwixt(limit, before_external_id, after_external_id) => {
-      let before_subselect = subselect(before_external_id);
-      let after_subselect = subselect(after_external_id);
+    Pagination::LastBetwixt(limit, before_cursor, after_cursor) => {
+      let before_subselect = subselect(before_cursor);
+      let after_subselect = subselect(after_cursor);
 
       cards_with_pageinfo::table
-        .filter(cards_with_pageinfo::id.nullable().gt(after_subselect))
-        .filter(cards_with_pageinfo::id.nullable().lt(before_subselect))
-        .order(cards_with_pageinfo::id.desc())
+        .filter(
+          cards_with_pageinfo::sort_order
+            .nullable()
+            .gt(after_subselect),
+        )
+        .filter(
+          cards_with_pageinfo::sort_order
+            .nullable()
+            .lt(before_subselect),
+        )
+        .order(cards_with_pageinfo::sort_order.desc())
         .limit(limit)
         .load::<Card>(connection)?
         .iter()

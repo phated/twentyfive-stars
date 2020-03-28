@@ -30,8 +30,10 @@ impl Edge for CardEdge {
 
 impl CardEdge {
   pub fn new(card: Card) -> Self {
-    let cursor = card.id().to_string().parse().expect("");
-    CardEdge { cursor, node: card }
+    CardEdge {
+      cursor: Cursor::new(card.id()),
+      node: card,
+    }
   }
 }
 

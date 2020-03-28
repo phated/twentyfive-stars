@@ -2,24 +2,19 @@ use crate::data::{Node, ID};
 use crate::database_schema::waves;
 use crate::graphql_schema::Context;
 use chrono::NaiveDate;
-use uuid::Uuid;
 
 #[derive(Identifiable, Queryable, Debug)]
 pub struct Wave {
-  id: i32,
-  external_id: Uuid,
+  id: ID,
   tcg_id: String,
   name: String,
   released: NaiveDate,
+  sort_order: i32,
 }
 
 impl Wave {
-  pub fn internal_id(&self) -> i32 {
-    self.id
-  }
-
   pub fn id(&self) -> ID {
-    ID::WaveID(self.external_id)
+    self.id
   }
 
   pub fn tcg_id(&self) -> &str {

@@ -5,14 +5,12 @@ use crate::database_schema::battle_cards;
 use crate::graphql_schema::Context;
 use diesel::prelude::*;
 use juniper::FieldResult;
-use uuid::Uuid;
 
 #[derive(Identifiable, Queryable, PartialEq, Eq, Debug)]
 #[table_name = "battle_cards"]
 pub struct ExtraProps {
-  id: i32,
-  external_id: Uuid,
-  card_id: i32,
+  id: ID,
+  card_id: ID,
   title: String,
   type_: BattleType,
   faction: Option<Faction>,
@@ -20,6 +18,7 @@ pub struct ExtraProps {
   icons: Vec<BattleIcon>,
   attack_modifier: Option<i32>,
   defense_modifier: Option<i32>,
+  sort_order: i32,
 }
 
 pub struct BattleCard(Card, ExtraProps);
@@ -31,7 +30,7 @@ impl BattleCard {
 
   pub fn load_from_card(card: &Card, context: &Context) -> Option<Self> {
     battle_cards::table
-      .filter(battle_cards::card_id.eq(card.internal_id()))
+      .filter(battle_cards::card_id.eq(card.id()))
       .first::<ExtraProps>(&context.connection)
       .ok()
       // TODO: performance of cloning this?

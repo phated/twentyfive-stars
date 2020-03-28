@@ -1,10 +1,8 @@
 use crate::data::{CharacterMode, CharacterTrait, Faction, ModeType, Node, ID};
 use crate::graphql_schema::Context;
-use uuid::Uuid;
 
 pub struct CombinerMode {
-  id: i32,
-  external_id: Uuid,
+  id: ID,
   title: String,
   subtitle: String,
   stars: i32,
@@ -19,8 +17,7 @@ pub struct CombinerMode {
 
 impl CombinerMode {
   pub fn new(
-    id: i32,
-    external_id: Uuid,
+    id: ID,
     title: String,
     subtitle: String,
     stars: i32,
@@ -33,7 +30,6 @@ impl CombinerMode {
   ) -> Self {
     CombinerMode {
       id,
-      external_id,
       title,
       subtitle,
       stars,
@@ -49,7 +45,7 @@ impl CombinerMode {
 
 impl CombinerMode {
   pub fn id(&self) -> ID {
-    ID::CharacterModeID(self.external_id)
+    self.id
   }
 
   pub fn title(&self) -> &str {

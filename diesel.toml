@@ -3,3 +3,9 @@
 
 [print_schema]
 file = "src/database_schema.rs"
+patch_file = "migrations/.schema.patch"
+import_types = [
+  "diesel::sql_types::*",
+  "crate::data::{BattleType as Battle_type, BattleIcon as Battle_icon, Faction, CardRarity as Card_rarity, CardCategory as Card_category, CharacterTrait as Character_trait, ModeType as Mode_type}",
+]
+
