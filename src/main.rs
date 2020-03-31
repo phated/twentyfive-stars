@@ -42,6 +42,6 @@ fn main() {
     // let host = env::var("LISTEN").unwrap_or_else(|_| "0.0.0.0:8080".to_owned());
     // println!("GraphQL server started on {}", host);
 
-    let _server = Iron::new(chain).http("localhost:3000").unwrap();
+    let _server = Iron::new(chain).http("0.0.0.0:3000").unwrap();
     println!("On 3000");
 }
