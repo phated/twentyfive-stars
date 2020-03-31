@@ -1,5 +1,5 @@
-use crate::data::{Card, CardCategory};
-use crate::database_schema::{cards, cards_with_pageinfo};
+use crate::data::{Card, CardCategory, Node, UuidTable, Wave, ID};
+use crate::database_schema::{cards, cards_with_pageinfo, global_uuids, waves};
 use crate::pagination::Pagination;
 use diesel::pg::PgConnection;
 use diesel::prelude::*;
@@ -11,6 +11,32 @@ pub fn establish_connection() -> PgConnection {
 
   let database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
   PgConnection::establish(&database_url).expect(&format!("Error connecting to {}", database_url))
+}
+
+pub fn get_wave(connection: &PgConnection, id: ID) -> QueryResult<Wave> {
+  waves::table
+    .filter(waves::id.eq(id))
+    .first::<Wave>(connection)
+}
+
+pub fn get_card(connection: &PgConnection, id: ID) -> QueryResult<Card> {
+  cards_with_pageinfo::table
+    .filter(cards_with_pageinfo::id.eq(id))
+    .first::<Card>(connection)
+}
+
+pub fn get_node(connection: &PgConnection, id: ID) -> QueryResult<Node> {
+  let which_table = global_uuids::table
+    .select(global_uuids::in_table)
+    .filter(global_uuids::id.eq(id))
+    .first::<UuidTable>(connection)?;
+
+  let node = match which_table {
+    UuidTable::Waves => Node::from(get_wave(connection, id)?),
+    UuidTable::Cards => Node::from(get_card(connection, id)?),
+  };
+
+  Ok(node)
 }
 
 pub fn get_cards(connection: &PgConnection, pagination: Pagination) -> QueryResult<Vec<Card>> {

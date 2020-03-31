@@ -20,8 +20,9 @@ impl Query {
     "1.0"
   }
 
-  fn node(context: &Context, id: ID) -> FieldResult<Option<Node>> {
-    Ok(None)
+  fn node(context: &Context, id: ID) -> FieldResult<Node> {
+    let node = database::get_node(&context.connection, id)?;
+    Ok(node)
   }
 
   fn all_cards(

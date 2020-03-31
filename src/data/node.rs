@@ -7,6 +7,17 @@ pub enum Node {
   CharacterMode(CharacterMode),
 }
 
+impl From<Card> for Node {
+  fn from(card: Card) -> Node {
+    Node::Card(card)
+  }
+}
+impl From<Wave> for Node {
+  fn from(wave: Wave) -> Node {
+    Node::Wave(wave)
+  }
+}
+
 juniper::graphql_interface!(Node: Context |&self| {
   field id() -> ID {
     match self {

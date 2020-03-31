@@ -19,6 +19,7 @@ pub mod mode_type;
 pub mod node;
 pub mod stratagem_card;
 pub mod upgrade_mode;
+pub mod uuid_table;
 pub mod wave;
 
 pub use alt_mode::AltMode;
@@ -42,4 +43,5 @@ pub use mode_type::ModeType;
 pub use node::Node;
 pub use stratagem_card::StratagemCard;
 pub use upgrade_mode::UpgradeMode;
+pub use uuid_table::UuidTable;
 pub use wave::Wave;

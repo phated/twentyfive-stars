@@ -175,4 +175,15 @@ table! {
     }
 }
 
+table! {
+    #[allow(unused_imports)]
+    use diesel::sql_types::*;
+    use crate::data::{UuidTable as Uuid_table};
+
+    global_uuids (id) {
+        id -> Uuid,
+        in_table -> Uuid_table,
+    }
+}
+
 joinable!(cards_with_pageinfo -> waves (wave_id));
