@@ -5,18 +5,8 @@ use diesel::pg::Pg;
 use diesel::serialize::{self, IsNull, Output, ToSql};
 use std::io::Write;
 
-#[derive(
-  Debug,
-  PartialEq,
-  Eq,
-  Copy,
-  Clone,
-  FromSqlRow,
-  AsExpression,
-  QueryId,
-  juniper::GraphQLEnum,
-  SqlType,
-)]
+#[async_graphql::Enum]
+#[derive(Debug, PartialEq, Eq, Copy, Clone, FromSqlRow, AsExpression, QueryId, SqlType)]
 #[postgres(type_name = "CARD_CATEGORY")]
 #[sql_type = "CardCategory"]
 pub enum CardCategory {

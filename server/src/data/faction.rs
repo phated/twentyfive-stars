@@ -5,7 +5,8 @@ use diesel::pg::Pg;
 use diesel::serialize::{self, IsNull, Output, ToSql};
 use std::io::Write;
 
-#[derive(Debug, Clone, PartialEq, Eq, FromSqlRow, AsExpression, juniper::GraphQLEnum, SqlType)]
+#[async_graphql::Enum]
+#[derive(Debug, Clone, PartialEq, Eq, FromSqlRow, AsExpression, SqlType)]
 #[postgres(type_name = "FACTION")]
 pub enum Faction {
   Autobot,

@@ -1,12 +1,12 @@
-use crate::data::{
-  BattleIcon, BattleType, Card, CardCategory, CardRarity, Faction, Node, Wave, ID,
-};
+use crate::data::{BattleIcon, BattleType, Card, CardCategory, CardRarity, Faction, Wave, ID};
+use crate::database::{get_wave, ConnPool};
 use crate::database_schema::battle_cards;
-use crate::graphql_schema::Context;
+use crate::schema::Cursor;
+use async_graphql::{Context, FieldResult};
 use diesel::prelude::*;
-use juniper::FieldResult;
+use tokio_diesel::*;
 
-#[derive(Identifiable, Queryable, PartialEq, Eq, Debug)]
+#[derive(Identifiable, Queryable, Clone, PartialEq, Eq, Debug)]
 #[table_name = "battle_cards"]
 pub struct ExtraProps {
   id: ID,
@@ -21,6 +21,7 @@ pub struct ExtraProps {
   sort_order: i32,
 }
 
+#[derive(Clone, Debug)]
 pub struct BattleCard(Card, ExtraProps);
 
 impl BattleCard {
@@ -28,151 +29,86 @@ impl BattleCard {
     BattleCard(card, extra)
   }
 
-  pub fn load_from_card(card: &Card, context: &Context) -> Option<Self> {
+  pub async fn load_from_card(card: Card, pool: &ConnPool) -> AsyncResult<BattleCard> {
     battle_cards::table
-      .filter(battle_cards::card_id.eq(card.id()))
-      .first::<ExtraProps>(&context.connection)
-      .ok()
+      .filter(battle_cards::card_id.eq(card.id))
+      .first_async::<ExtraProps>(&pool)
+      .await
       // TODO: performance of cloning this?
       .map(|extra| BattleCard::new(card.clone(), extra))
   }
 }
 
+#[async_graphql::Object]
 impl BattleCard {
-  pub fn id(&self) -> ID {
-    match self {
-      BattleCard(card, _extra) => card.id(),
-    }
+  pub fn cursor(&self) -> Cursor {
+    Cursor::new(self.0.id)
   }
 
-  pub fn tcg_id(&self) -> &str {
-    match self {
-      BattleCard(card, _extra) => card.tcg_id(),
-    }
+  #[field]
+  pub async fn id(&self) -> ID {
+    self.0.id
   }
 
-  pub fn rarity(&self) -> &CardRarity {
-    match self {
-      BattleCard(card, _extra) => card.rarity(),
-    }
+  #[field]
+  pub async fn tcg_id(&self) -> &str {
+    &self.0.tcg_id
   }
 
-  pub fn number(&self) -> &str {
-    match self {
-      BattleCard(card, _extra) => card.number(),
-    }
+  #[field]
+  pub async fn rarity(&self) -> CardRarity {
+    self.0.rarity
   }
 
-  pub fn category(&self) -> &CardCategory {
-    match self {
-      BattleCard(card, _extra) => card.category(),
-    }
+  #[field]
+  pub async fn number(&self) -> &str {
+    &self.0.number
   }
 
-  pub fn wave(&self, context: &Context) -> QueryResult<Wave> {
-    match self {
-      BattleCard(card, _extra) => card.wave(context),
-    }
+  #[field]
+  pub async fn category(&self) -> CardCategory {
+    self.0.category
   }
 
-  pub fn title(&self) -> &str {
-    match self {
-      BattleCard(_card, extra) => &extra.title,
-    }
-  }
-
-  pub fn stars(&self) -> Option<i32> {
-    match self {
-      BattleCard(_card, extra) => extra.stars,
-    }
-  }
-
-  pub fn icons(&self) -> &Vec<BattleIcon> {
-    match self {
-      BattleCard(_card, extra) => &extra.icons,
-    }
-  }
-
-  pub fn type_(&self) -> &BattleType {
-    match self {
-      BattleCard(_card, extra) => &extra.type_,
-    }
-  }
-
-  pub fn faction(&self) -> &Option<Faction> {
-    match self {
-      BattleCard(_card, extra) => &extra.faction,
-    }
-  }
-
-  pub fn attack_modifier(&self) -> Option<i32> {
-    match self {
-      BattleCard(_card, extra) => extra.attack_modifier,
-    }
-  }
-
-  pub fn defense_modifier(&self) -> Option<i32> {
-    match self {
-      BattleCard(_card, extra) => extra.defense_modifier,
-    }
-  }
-}
-
-juniper::graphql_object!(BattleCard: Context |&self| {
-  interfaces: [&Node, &Card]
-
-  field id() -> ID {
-    self.id()
-  }
-
-  field tcg_id() -> &str {
-    self.tcg_id()
-  }
-
-  field rarity() -> &CardRarity {
-    self.rarity()
-  }
-
-  field number() -> &str {
-    self.number()
-  }
-
-  field category() -> &CardCategory {
-    self.category()
-  }
-
-  field wave(&executor) -> FieldResult<Wave> {
-    let context = executor.context();
-    // TODO: weird conversion between result types
-    let wave = self.wave(context)?;
+  #[field]
+  pub async fn wave(&self, ctx: &Context<'_>) -> FieldResult<Wave> {
+    let pool = ctx.data::<ConnPool>();
+    let wave = get_wave(pool, self.0.wave_id).await?;
     Ok(wave)
   }
 
-  field title() -> &str {
-    self.title()
+  #[field]
+  pub async fn title(&self) -> &str {
+    &self.1.title
   }
 
-  field stars() -> Option<i32> {
-    self.stars()
+  #[field]
+  pub async fn stars(&self) -> Option<i32> {
+    self.1.stars
   }
 
-  field icons() -> &Vec<BattleIcon> {
-    self.icons()
+  #[field]
+  pub async fn icons(&self) -> &Vec<BattleIcon> {
+    &self.1.icons
   }
 
-  field type() -> &BattleType {
-    self.type_()
+  #[field]
+  pub async fn type_(&self) -> BattleType {
+    self.1.type_
   }
 
-  field faction() -> &Option<Faction> {
-    self.faction()
+  #[field]
+  pub async fn faction(&self) -> Option<Faction> {
+    self.1.faction
   }
 
-  field attack_modifier() -> Option<i32> {
-    self.attack_modifier()
+  #[field]
+  pub async fn attack_modifier(&self) -> Option<i32> {
+    self.1.attack_modifier
   }
 
-  field defense_modifier() -> Option<i32> {
-    self.defense_modifier()
+  #[field]
+  pub async fn defense_modifier(&self) -> Option<i32> {
+    self.1.defense_modifier
   }
-});
+}

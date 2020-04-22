@@ -1,13 +1,17 @@
-use crate::data::{Card, CardCategory, CardRarity, CharacterMode, Node, Wave, ID};
+use crate::data::{Card, CardCategory, CardRarity, CharacterMode, Wave, ID};
+use crate::database::{get_wave, ConnPool};
 use crate::database_schema::character_modes;
-use crate::graphql_schema::Context;
+use crate::schema::Cursor;
+use async_graphql::{Context, FieldResult};
 use diesel::prelude::*;
-use juniper::FieldResult;
+use tokio_diesel::*;
 
+#[derive(Clone, Debug)]
 pub struct ExtraProps {
   modes: Vec<CharacterMode>,
 }
 
+#[derive(Clone, Debug)]
 pub struct CharacterCard(Card, ExtraProps);
 
 impl CharacterCard {
@@ -15,91 +19,56 @@ impl CharacterCard {
     CharacterCard(card, modes)
   }
 
-  pub fn load_from_card(card: &Card, context: &Context) -> Option<Self> {
+  pub async fn load_from_card(card: Card, pool: &ConnPool) -> AsyncResult<CharacterCard> {
     character_modes::table
-      .filter(character_modes::card_id.eq(card.id()))
-      .load::<CharacterMode>(&context.connection)
-      .ok()
+      .filter(character_modes::card_id.eq(card.id))
+      .load_async::<CharacterMode>(&pool)
+      .await
       // TODO: performance of cloning this?
       .map(|modes| CharacterCard::new(card.clone(), ExtraProps { modes }))
   }
 }
 
+#[async_graphql::Object]
 impl CharacterCard {
-  pub fn id(&self) -> ID {
-    match self {
-      CharacterCard(card, _extra) => card.id(),
-    }
+  pub fn cursor(&self) -> Cursor {
+    Cursor::new(self.0.id)
   }
 
-  pub fn tcg_id(&self) -> &str {
-    match self {
-      CharacterCard(card, _extra) => card.tcg_id(),
-    }
+  #[field]
+  pub async fn id(&self) -> ID {
+    self.0.id
   }
 
-  pub fn rarity(&self) -> &CardRarity {
-    match self {
-      CharacterCard(card, _extra) => card.rarity(),
-    }
+  #[field]
+  pub async fn tcg_id(&self) -> &str {
+    &self.0.tcg_id
   }
 
-  pub fn number(&self) -> &str {
-    match self {
-      CharacterCard(card, _extra) => card.number(),
-    }
+  #[field]
+  pub async fn rarity(&self) -> CardRarity {
+    self.0.rarity
   }
 
-  pub fn category(&self) -> &CardCategory {
-    match self {
-      CharacterCard(card, _extra) => card.category(),
-    }
+  #[field]
+  pub async fn number(&self) -> &str {
+    &self.0.number
   }
 
-  pub fn wave(&self, context: &Context) -> QueryResult<Wave> {
-    match self {
-      CharacterCard(card, _extra) => card.wave(context),
-    }
+  #[field]
+  pub async fn category(&self) -> CardCategory {
+    self.0.category
   }
 
-  pub fn modes(&self) -> &Vec<CharacterMode> {
-    match self {
-      CharacterCard(_card, extra) => &extra.modes,
-    }
-  }
-}
-
-juniper::graphql_object!(CharacterCard: Context | &self | {
-  interfaces: [&Node, &Card]
-
-  field id() -> ID {
-    self.id()
-  }
-
-  field tcg_id() -> &str {
-    self.tcg_id()
-  }
-
-  field rarity() -> &CardRarity {
-    self.rarity()
-  }
-
-  field number() -> &str {
-    self.number()
-  }
-
-  field category() -> &CardCategory {
-    self.category()
-  }
-
-  field wave(&executor) -> FieldResult<Wave> {
-    let context = executor.context();
-    // TODO: weird conversion between result types
-    let wave = self.wave(context)?;
+  #[field]
+  pub async fn wave(&self, ctx: &Context<'_>) -> FieldResult<Wave> {
+    let pool = ctx.data::<ConnPool>();
+    let wave = get_wave(pool, self.0.wave_id).await?;
     Ok(wave)
   }
 
-  field modes() -> &Vec<CharacterMode> {
-    self.modes()
+  #[field]
+  pub async fn modes(&self) -> &Vec<CharacterMode> {
+    &self.1.modes
   }
-});
+}

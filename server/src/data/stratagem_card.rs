@@ -1,10 +1,12 @@
-use crate::data::{Card, CardCategory, CardRarity, Faction, Node, Wave, ID};
+use crate::data::{Card, CardCategory, CardRarity, Faction, Wave, ID};
+use crate::database::{get_wave, ConnPool};
 use crate::database_schema::stratagem_cards;
-use crate::graphql_schema::Context;
+use crate::schema::Cursor;
+use async_graphql::{Context, FieldResult};
 use diesel::prelude::*;
-use juniper::FieldResult;
+use tokio_diesel::*;
 
-#[derive(Identifiable, Queryable, PartialEq, Eq, Debug)]
+#[derive(Identifiable, Queryable, PartialEq, Eq, Clone, Debug)]
 #[table_name = "stratagem_cards"]
 pub struct ExtraProps {
   id: ID,
@@ -16,6 +18,7 @@ pub struct ExtraProps {
   sort_order: i32,
 }
 
+#[derive(Clone, Debug)]
 pub struct StratagemCard(Card, ExtraProps);
 
 impl StratagemCard {
@@ -23,121 +26,71 @@ impl StratagemCard {
     StratagemCard(card, extra)
   }
 
-  pub fn load_from_card(card: &Card, context: &Context) -> Option<Self> {
+  pub async fn load_from_card(card: Card, pool: &ConnPool) -> AsyncResult<StratagemCard> {
     stratagem_cards::table
-      .filter(stratagem_cards::card_id.eq(card.id()))
-      .first::<ExtraProps>(&context.connection)
-      .ok()
+      .filter(stratagem_cards::card_id.eq(card.id))
+      .first_async::<ExtraProps>(&pool)
+      .await
       // TODO: performance of cloning this?
       .map(|extra| StratagemCard::new(card.clone(), extra))
   }
 }
 
+#[async_graphql::Object]
 impl StratagemCard {
-  pub fn id(&self) -> ID {
-    match self {
-      StratagemCard(card, _extra) => card.id(),
-    }
+  pub fn cursor(&self) -> Cursor {
+    Cursor::new(self.0.id)
   }
 
-  pub fn tcg_id(&self) -> &str {
-    match self {
-      StratagemCard(card, _extra) => card.tcg_id(),
-    }
+  #[field]
+  pub async fn id(&self) -> ID {
+    self.0.id
   }
 
-  pub fn rarity(&self) -> &CardRarity {
-    match self {
-      StratagemCard(card, _extra) => card.rarity(),
-    }
+  #[field]
+  pub async fn tcg_id(&self) -> &str {
+    &self.0.tcg_id
   }
 
-  pub fn number(&self) -> &str {
-    match self {
-      StratagemCard(card, _extra) => card.number(),
-    }
+  #[field]
+  pub async fn rarity(&self) -> CardRarity {
+    self.0.rarity
   }
 
-  pub fn category(&self) -> &CardCategory {
-    match self {
-      StratagemCard(card, _extra) => card.category(),
-    }
+  #[field]
+  pub async fn number(&self) -> &str {
+    &self.0.number
   }
 
-  pub fn wave(&self, context: &Context) -> QueryResult<Wave> {
-    match self {
-      StratagemCard(card, _extra) => card.wave(context),
-    }
+  #[field]
+  pub async fn category(&self) -> CardCategory {
+    self.0.category
   }
 
-  pub fn title(&self) -> &str {
-    match self {
-      StratagemCard(_card, extra) => &extra.title,
-    }
-  }
-
-  pub fn requirement(&self) -> &str {
-    match self {
-      StratagemCard(_card, extra) => &extra.requirement,
-    }
-  }
-
-  pub fn stars(&self) -> i32 {
-    match self {
-      StratagemCard(_card, extra) => extra.stars,
-    }
-  }
-
-  pub fn faction(&self) -> &Option<Faction> {
-    match self {
-      StratagemCard(_card, extra) => &extra.faction,
-    }
-  }
-}
-
-juniper::graphql_object!(StratagemCard: Context |&self| {
-  interfaces: [&Node, &Card]
-
-  field id() -> ID {
-    self.id()
-  }
-
-  field tcg_id() -> &str {
-    self.tcg_id()
-  }
-
-  field rarity() -> &CardRarity {
-    self.rarity()
-  }
-
-  field number() -> &str {
-    self.number()
-  }
-
-  field category() -> &CardCategory {
-    self.category()
-  }
-
-  field wave(&executor) -> FieldResult<Wave> {
-    let context = executor.context();
-    // TODO: weird conversion between result types
-    let wave = self.wave(context)?;
+  #[field]
+  pub async fn wave(&self, ctx: &Context<'_>) -> FieldResult<Wave> {
+    let pool = ctx.data::<ConnPool>();
+    let wave = get_wave(pool, self.0.wave_id).await?;
     Ok(wave)
   }
 
-  field title() -> &str {
-    self.title()
+  #[field]
+  pub async fn title(&self) -> &str {
+    &self.1.title
   }
 
-  field requirement() -> &str {
-    self.requirement()
+  #[field]
+  pub async fn requirement(&self) -> &str {
+    &self.1.requirement
   }
 
-  field stars() -> i32 {
-    self.stars()
+  #[field]
+  pub async fn stars(&self) -> i32 {
+    self.1.stars
   }
 
-  field faction() -> &Option<Faction> {
-    self.faction()
+  #[field]
+  pub async fn faction(&self) -> &Option<Faction> {
+    &self.1.faction
   }
-});
+}

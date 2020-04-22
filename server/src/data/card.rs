@@ -1,102 +1,32 @@
 use crate::data::{BattleCard, CardCategory, CardRarity, CharacterCard, StratagemCard, Wave, ID};
-use crate::database_schema::{cards_with_pageinfo, waves};
-use crate::graphql_schema::Context;
-use diesel::prelude::*;
-use juniper::FieldResult;
+use crate::database_schema::cards_with_pageinfo;
 
 #[derive(Identifiable, Queryable, Clone, PartialEq, Eq, Debug)]
 #[table_name = "cards_with_pageinfo"]
 pub struct Card {
-  id: ID,
-  tcg_id: String,
-  rarity: CardRarity,
-  number: String,
-  category: CardCategory,
-  wave_id: ID,
-  sort_order: i32,
+  pub id: ID,
+  pub tcg_id: String,
+  pub rarity: CardRarity,
+  pub number: String,
+  pub category: CardCategory,
+  pub wave_id: ID,
+  pub sort_order: i32,
   pub has_previous: bool,
   pub has_next: bool,
 }
 
-impl Card {
-  pub fn id(&self) -> ID {
-    self.id
-  }
+pub mod schema {
+  use super::*;
+  use async_graphql::FieldResult;
 
-  pub fn tcg_id(&self) -> &str {
-    &self.tcg_id
-  }
-
-  pub fn rarity(&self) -> &CardRarity {
-    &self.rarity
-  }
-
-  pub fn number(&self) -> &str {
-    &self.number
-  }
-
-  pub fn category(&self) -> &CardCategory {
-    &self.category
-  }
-
-  pub fn wave(&self, context: &Context) -> QueryResult<Wave> {
-    waves::table
-      .filter(waves::id.eq(self.wave_id))
-      .first::<Wave>(&context.connection)
-  }
+  #[async_graphql::Interface(
+    field(name = "id", type = "ID"),
+    field(name = "tcg_id", type = "&str"),
+    field(name = "rarity", type = "CardRarity"),
+    field(name = "number", type = "&str"),
+    field(name = "category", type = "CardCategory"),
+    field(name = "wave", type = "FieldResult<Wave>", context)
+  )]
+  #[derive(Clone, Debug)]
+  pub struct Card(BattleCard, CharacterCard, StratagemCard);
 }
-
-juniper::graphql_interface!(Card: Context |&self| {
-  field tcg_id() -> &str {
-    self.tcg_id()
-  }
-
-  field rarity() -> &CardRarity {
-    self.rarity()
-  }
-
-  field number() -> &str {
-    self.number()
-  }
-
-  field category() -> &CardCategory {
-    self.category()
-  }
-
-  field wave(&executor) -> FieldResult<Wave> {
-    let context = executor.context();
-    // TODO: weird conversion between result types
-    let wave = self.wave(context)?;
-    Ok(wave)
-  }
-
-  instance_resolvers: |&context| {
-    BattleCard => {
-      match self.category {
-        CardCategory::Battle => {
-          let card = self;
-          BattleCard::load_from_card(card, context)
-        }
-        _ => None
-      }
-    },
-    CharacterCard => {
-      match self.category {
-        CardCategory::Character => {
-          let card = self;
-          CharacterCard::load_from_card(card, context)
-        },
-        _ => None
-      }
-    },
-    StratagemCard => {
-      match self.category {
-        CardCategory::Stratagem => {
-          let card = self;
-          StratagemCard::load_from_card(card, context)
-        }
-        _ => None
-      }
-    }
-  }
-});

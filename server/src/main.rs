@@ -1,11 +1,6 @@
 #[macro_use]
 extern crate diesel;
 
-use iron::prelude::*;
-use juniper_iron::{GraphQLHandler, GraphiQLHandler};
-use logger::Logger;
-use mount::Mount;
-
 mod data;
 mod database;
 mod database_schema;
@@ -13,35 +8,56 @@ mod graphql_schema;
 mod pagination;
 mod schema;
 
-use database::establish_connection;
-use graphql_schema::{Context, Mutation, Query};
+use graphql_schema::QueryRoot;
 
-fn context_factory(_: &mut Request) -> IronResult<Context> {
-    Ok(Context {
-        connection: establish_connection(),
-    })
-}
+use async_graphql::http::{playground_source, GQLResponse};
+use async_graphql::{EmptyMutation, EmptySubscription, QueryBuilder, Schema};
+use async_graphql_warp::BadRequest;
+use std::convert::Infallible;
+use std::error::Error;
+use warp::{http::Response, Filter, Rejection, Reply};
 
-fn main() {
-    env_logger::init();
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn Error>> {
+    let pool = database::pool()?;
 
-    let mut mount = Mount::new();
+    let schema = Schema::build(QueryRoot, EmptyMutation, EmptySubscription)
+        .data(pool)
+        .register_type::<data::Node>()
+        .finish();
 
-    let graphql_endpoint = GraphQLHandler::new(context_factory, Query, Mutation);
-    let graphiql_endpoint = GraphiQLHandler::new("/graphql");
+    let graphql_post = async_graphql_warp::graphql(schema).and_then(
+        |(schema, builder): (_, QueryBuilder)| async move {
+            let resp = builder.execute(&schema).await;
+            Ok::<_, Infallible>(warp::reply::json(&GQLResponse(resp)).into_response())
+        },
+    );
 
-    mount.mount("/", graphiql_endpoint);
-    mount.mount("/graphql", graphql_endpoint);
+    let graphql_playground = warp::path::end().and(warp::get()).map(|| {
+        Response::builder()
+            .header("content-type", "text/html")
+            .body(playground_source("/", None))
+    });
 
-    let (logger_before, logger_after) = Logger::new(None);
+    let routes = graphql_post
+        .or(graphql_playground)
+        .recover(|err: Rejection| async move {
+            if let Some(BadRequest(err)) = err.find() {
+                return Ok::<_, Infallible>(warp::reply::with_status(
+                    err.to_string(),
+                    warp::http::StatusCode::BAD_REQUEST,
+                ));
+            }
 
-    let mut chain = Chain::new(mount);
-    chain.link_before(logger_before);
-    chain.link_after(logger_after);
+            Ok(warp::reply::with_status(
+                "INTERNAL_SERVER_ERROR".to_string(),
+                warp::http::StatusCode::INTERNAL_SERVER_ERROR,
+            ))
+        });
 
-    // let host = env::var("LISTEN").unwrap_or_else(|_| "0.0.0.0:8080".to_owned());
-    // println!("GraphQL server started on {}", host);
+    println!("Playground at: http://localhost:3000");
 
-    let _server = Iron::new(chain).http("0.0.0.0:3000").unwrap();
-    println!("On 3000");
+    warp::serve(routes).run(([0, 0, 0, 0], 3000)).await;
+
+    Ok(())
 }

@@ -1,14 +1,29 @@
+use async_graphql::{Result, Scalar, Value};
 use diesel_derive_newtype::DieselNewType;
+use serde_json;
 use uuid::Uuid;
 
-#[derive(Debug, PartialEq, Eq, Hash, Clone, Copy, DieselNewType, juniper::GraphQLScalarValue)]
+#[derive(Debug, PartialEq, Eq, Hash, Clone, Copy, DieselNewType)]
 pub struct ID(Uuid);
 
-impl ID {
-  pub fn empty() -> Self {
-    ID(Uuid::nil())
+impl Scalar for ID {
+  fn type_name() -> &'static str {
+    "ID"
+  }
+
+  fn parse(value: &Value) -> Option<Self> {
+    match value {
+      Value::String(s) => Some(ID(Uuid::parse_str(&s).ok()?)),
+      _ => None,
+    }
+  }
+
+  fn to_json(&self) -> Result<serde_json::Value> {
+    Ok(self.0.to_string().into())
   }
 }
+
+async_graphql::impl_scalar!(ID);
 
 impl From<Uuid> for ID {
   fn from(uuid: Uuid) -> ID {
