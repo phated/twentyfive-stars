@@ -19,12 +19,17 @@ use warp::{http::Response, Filter, Rejection, Reply};
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error>> {
+    env_logger::init();
+
     let pool = database::pool()?;
 
     let schema = Schema::build(QueryRoot, EmptyMutation, EmptySubscription)
         .data(pool)
         .register_type::<data::Node>()
         .finish();
+
+    // TODO: restrict this some
+    let cors = warp::cors().allow_any_origin().allow_method("POST");
 
     let graphql_post = async_graphql_warp::graphql(schema).and_then(
         |(schema, builder): (_, QueryBuilder)| async move {
@@ -40,7 +45,9 @@ async fn main() -> Result<(), Box<dyn Error>> {
     });
 
     let routes = graphql_post
+        .with(cors)
         .or(graphql_playground)
+        .with(warp::log("requests"))
         .recover(|err: Rejection| async move {
             if let Some(BadRequest(err)) = err.find() {
                 return Ok::<_, Infallible>(warp::reply::with_status(
