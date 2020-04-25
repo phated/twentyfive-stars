@@ -8,11 +8,6 @@ module BattleCardFragment = [%relay.fragment
     stars
     title
     type_: type
-    wave {
-      name
-      released
-      tcgId
-    }
   }
 |}
 ];

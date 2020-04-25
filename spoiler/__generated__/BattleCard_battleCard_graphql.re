@@ -76,12 +76,6 @@ let wrap_enum_Faction: enum_Faction => string =
   | `FutureAddedValue(v) => v;
 
 module Types = {
-  type fragment_wave = {
-    name: string,
-    released: ReasonRelay.any,
-    tcgId: string,
-  };
-
   type fragment = {
     attackModifier: option(int),
     defenseModifier: option(int),
@@ -110,7 +104,6 @@ module Types = {
       | `UPGRADE_WEAPON
       | `FutureAddedValue(string)
     ],
-    wave: fragment_wave,
   };
 };
 
@@ -199,38 +192,6 @@ let node: operationType = [%raw
       "name": "type",
       "args": null,
       "storageKey": null
-    },
-    {
-      "kind": "LinkedField",
-      "alias": null,
-      "name": "wave",
-      "storageKey": null,
-      "args": null,
-      "concreteType": "Wave",
-      "plural": false,
-      "selections": [
-        {
-          "kind": "ScalarField",
-          "alias": null,
-          "name": "name",
-          "args": null,
-          "storageKey": null
-        },
-        {
-          "kind": "ScalarField",
-          "alias": null,
-          "name": "released",
-          "args": null,
-          "storageKey": null
-        },
-        {
-          "kind": "ScalarField",
-          "alias": null,
-          "name": "tcgId",
-          "args": null,
-          "storageKey": null
-        }
-      ]
     }
   ]
 } |json}
