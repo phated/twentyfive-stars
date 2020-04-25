@@ -1,0 +1,31 @@
+{
+  "name": "twentyfive-stars",
+  "reason": {
+    "react-jsx": 3
+  },
+  "sources": {
+    "dir": "spoiler",
+    "subdirs": true
+  },
+  "bsc-flags": [
+    "-bs-super-errors",
+    "-bs-no-version-header"
+  ],
+  "package-specs": [
+    {
+      "module": "commonjs",
+      "in-source": true
+    }
+  ],
+  "suffix": ".bs.js",
+  "namespace": true,
+  "ppx-flags": [
+    "reason-relay/ppx"
+  ],
+  "bs-dependencies": [
+    "bs-fetch",
+    "reason-react",
+    "reason-relay"
+  ],
+  "refmt": 3
+}

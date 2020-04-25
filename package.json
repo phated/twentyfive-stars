@@ -1,0 +1,36 @@
+{
+  "name": "twentyfive-stars",
+  "version": "0.1.0",
+  "author": "Blaine Bublitz <blaine.bublitz@gmail.com>",
+  "license": "MPL-2.0",
+  "scripts": {
+    "build": "bsb -make-world",
+    "clean": "bsb -clean-world",
+    "prestart": "bsb -clean-world -make-world",
+    "start": "budo spoiler/Index.bs.js --dir spoiler --live --port 9000",
+    "relay": "reason-relay-compiler",
+    "schema": "graphql get-schema"
+  },
+  "dependencies": {
+    "bs-fetch": "^0.5.2",
+    "graphql": "^14.6.0",
+    "react": "0.0.0-experimental-e5d06e34b",
+    "react-dom": "0.0.0-experimental-e5d06e34b",
+    "react-relay": "0.0.0-experimental-8cc94ddc",
+    "reason-promise": "^1.0.2",
+    "reason-react": ">=0.7.0",
+    "reason-relay": "^0.8.0",
+    "relay-runtime": "^9.0.0"
+  },
+  "devDependencies": {
+    "bs-platform": "^7.2.2",
+    "budo": "^11.6.3",
+    "graphql-cli": "^3.0.14",
+    "relay-compiler": "^9.0.0",
+    "relay-config": "^9.0.0"
+  },
+  "resolutions": {
+    "react": "0.0.0-experimental-e5d06e34b",
+    "react-dom": "0.0.0-experimental-e5d06e34b"
+  }
+}
