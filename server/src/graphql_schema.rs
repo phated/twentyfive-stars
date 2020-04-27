@@ -14,7 +14,6 @@ impl QueryRoot {
   //   Ok(node)
   // }
 
-  #[field]
   async fn all_cards(
     &self,
     ctx: &Context<'_>,
