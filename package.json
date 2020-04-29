@@ -12,6 +12,7 @@
     "schema": "graphql get-schema"
   },
   "dependencies": {
+    "@ahrefs/bs-emotion": "^1.0.1",
     "bs-fetch": "^0.5.2",
     "graphql": "^14.6.0",
     "react": "0.0.0-experimental-e5d06e34b",
@@ -23,6 +24,8 @@
     "relay-runtime": "^9.0.0"
   },
   "devDependencies": {
+    "@ahrefs/bs-emotion-ppx": "^1.0.2-dev.1",
+    "@davesnx/styled-ppx": "^0.9.0",
     "bs-platform": "^7.2.2",
     "budo": "^11.6.3",
     "graphql-cli": "^3.0.14",

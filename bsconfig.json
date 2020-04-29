@@ -20,9 +20,12 @@
   "suffix": ".bs.js",
   "namespace": true,
   "ppx-flags": [
-    "reason-relay/ppx"
+    "reason-relay/ppx",
+    // "@davesnx/styled-ppx/styled-ppx",
+    "@ahrefs/bs-emotion-ppx/bin/bs-emotion-ppx"
   ],
   "bs-dependencies": [
+    "@ahrefs/bs-emotion",
     "bs-fetch",
     "reason-react",
     "reason-relay"

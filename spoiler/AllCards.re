@@ -27,6 +27,17 @@ module AllCardsQuery = [%relay.query
 |}
 ];
 
+module Styles = {
+  open Emotion;
+
+  let card = [%css
+    [
+      padding(rem(0.5)),
+      boxShadow(~x=px(5), ~y=px(5), ~blur=px(5), rgba(0, 0, 0, 0.1)),
+    ]
+  ];
+};
+
 [@react.component]
 let make = () => {
   let queryData = AllCardsQuery.use(~variables=(), ());
@@ -34,15 +45,14 @@ let make = () => {
   let children =
     Belt.Array.keepMap(edges, edge => {
       Belt.Option.map(edge, edge => {
-        <div key={edge.node.tcgId}>
-          <div> {React.string(edge.node.tcgId)} </div>
-          <div> <CardCategory card={edge.node.getFragmentRefs()} /> </div>
-          <div> {React.string(edge.node.number)} </div>
-          <Wave wave={edge.node.wave.getFragmentRefs()} />
+        <div className=Styles.card key={edge.node.tcgId}>
           {switch (edge.node.category) {
            | `BATTLE => <BattleCard card={edge.node.getFragmentRefs()} />
            | _ => React.null
            }}
+          <div> {React.string(edge.node.tcgId)} </div>
+          <div> <CardCategory card={edge.node.getFragmentRefs()} /> </div>
+          <Wave wave={edge.node.wave.getFragmentRefs()} />
         </div>
       })
     });
