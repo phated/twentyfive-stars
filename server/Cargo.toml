@@ -9,8 +9,8 @@ name = "server"
 path = "src/main.rs"
 
 [dependencies]
-async-graphql = "1.9.13"
-async-graphql-warp = "1.1.0"
+async-graphql = "1.9.23"
+async-graphql-warp = "1.1.11"
 chrono = "0.4.1"
 diesel = { version = "=1.4.3", features = ["postgres", "chrono", "uuidv07"] }
 diesel-derive-newtype = "0.1.2"
