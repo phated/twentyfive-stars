@@ -4,7 +4,6 @@ use crate::database_schema::battle_cards;
 use crate::schema::Cursor;
 use async_graphql::{Context, FieldResult};
 use diesel::prelude::*;
-use tokio_diesel::*;
 
 #[derive(Identifiable, Queryable, Clone, PartialEq, Eq, Debug)]
 #[table_name = "battle_cards"]
@@ -29,11 +28,12 @@ impl BattleCard {
     BattleCard(card, extra)
   }
 
-  pub async fn load_from_card(card: Card, pool: &ConnPool) -> AsyncResult<BattleCard> {
+  pub fn load_from_card(card: Card, pool: &ConnPool) -> QueryResult<BattleCard> {
+    let conn = pool.get().unwrap();
+
     battle_cards::table
       .filter(battle_cards::card_id.eq(card.id))
-      .first_async::<ExtraProps>(&pool)
-      .await
+      .first::<ExtraProps>(&conn)
       // TODO: performance of cloning this?
       .map(|extra| BattleCard::new(card.clone(), extra))
   }
@@ -68,7 +68,7 @@ impl BattleCard {
 
   pub async fn wave(&self, ctx: &Context<'_>) -> FieldResult<Wave> {
     let pool = ctx.data::<ConnPool>();
-    let wave = get_wave(pool, self.0.wave_id).await?;
+    let wave = get_wave(pool, self.0.wave_id)?;
     Ok(wave)
   }
 

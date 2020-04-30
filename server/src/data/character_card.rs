@@ -4,7 +4,6 @@ use crate::database_schema::character_modes;
 use crate::schema::Cursor;
 use async_graphql::{Context, FieldResult};
 use diesel::prelude::*;
-use tokio_diesel::*;
 
 #[derive(Clone, Debug)]
 pub struct ExtraProps {
@@ -19,11 +18,12 @@ impl CharacterCard {
     CharacterCard(card, modes)
   }
 
-  pub async fn load_from_card(card: Card, pool: &ConnPool) -> AsyncResult<CharacterCard> {
+  pub fn load_from_card(card: Card, pool: &ConnPool) -> QueryResult<CharacterCard> {
+    let conn = pool.get().unwrap();
+
     character_modes::table
       .filter(character_modes::card_id.eq(card.id))
-      .load_async::<CharacterMode>(&pool)
-      .await
+      .load::<CharacterMode>(&conn)
       // TODO: performance of cloning this?
       .map(|modes| CharacterCard::new(card.clone(), ExtraProps { modes }))
   }
@@ -58,7 +58,7 @@ impl CharacterCard {
 
   pub async fn wave(&self, ctx: &Context<'_>) -> FieldResult<Wave> {
     let pool = ctx.data::<ConnPool>();
-    let wave = get_wave(pool, self.0.wave_id).await?;
+    let wave = get_wave(pool, self.0.wave_id)?;
     Ok(wave)
   }
 

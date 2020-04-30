@@ -33,7 +33,7 @@ impl QueryRoot {
     for card in cards {
       match card.category {
         CardCategory::Battle => {
-          let battle_card = BattleCard::load_from_card(card, pool).await?;
+          let battle_card = BattleCard::load_from_card(card, pool)?;
           nodes.push((
             battle_card.cursor().into(),
             EmptyEdgeFields,
@@ -41,7 +41,7 @@ impl QueryRoot {
           ))
         }
         CardCategory::Character => {
-          let character_card = CharacterCard::load_from_card(card, pool).await?;
+          let character_card = CharacterCard::load_from_card(card, pool)?;
           nodes.push((
             character_card.cursor().into(),
             EmptyEdgeFields,
@@ -49,7 +49,7 @@ impl QueryRoot {
           ))
         }
         CardCategory::Stratagem => {
-          let stratagem_card = StratagemCard::load_from_card(card, pool).await?;
+          let stratagem_card = StratagemCard::load_from_card(card, pool)?;
           nodes.push((
             stratagem_card.cursor().into(),
             EmptyEdgeFields,
