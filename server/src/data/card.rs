@@ -17,7 +17,6 @@ pub struct Card {
 
 pub mod schema {
   use super::*;
-  use async_graphql::FieldResult;
 
   #[async_graphql::Interface(
     field(name = "id", type = "ID"),
@@ -25,7 +24,7 @@ pub mod schema {
     field(name = "rarity", type = "CardRarity"),
     field(name = "number", type = "&str"),
     field(name = "category", type = "CardCategory"),
-    field(name = "wave", type = "FieldResult<Wave>", context)
+    field(name = "wave", type = "Wave")
   )]
   #[derive(Clone, Debug)]
   pub struct Card(BattleCard, CharacterCard, StratagemCard);
