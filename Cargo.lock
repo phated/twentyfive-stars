@@ -42,9 +42,9 @@ checksum = "eab1c04a571841102f5345a8fc0f6bb3d31c315dec879b5c6e42e40ce7ffa34e"
 
 [[package]]
 name = "async-graphql"
-version = "1.9.23"
+version = "1.10.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8e71746552cfce3e60f666799a655693e116fa6a517ff5ededcc1eac647bbd99"
+checksum = "e727e33697689748a0425b3f4eb8f241e0e6f31041ab1b6479e76ac0bc8900d7"
 dependencies = [
  "Inflector",
  "anyhow",
@@ -72,15 +72,16 @@ dependencies = [
  "slab",
  "tempdir",
  "thiserror",
+ "tracing",
  "url",
  "uuid 0.8.1",
 ]
 
 [[package]]
 name = "async-graphql-derive"
-version = "1.9.23"
+version = "1.10.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fa4e8721e2dfa5bf752795bc02131c62986e7aae8fec637c45ef1cc9d5bf6a5c"
+checksum = "f471e1487f05098dfbb8bff3100990e8f004b018f728f5031b2cd96736598ac4"
 dependencies = [
  "Inflector",
  "graphql-parser",
@@ -91,9 +92,9 @@ dependencies = [
 
 [[package]]
 name = "async-graphql-warp"
-version = "1.1.11"
+version = "1.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9251b1f7f93695969ed51ae10a65690d90513f836c3a957bb49bd570a8997912"
+checksum = "4809a8ce7167a3fd366a25a067762a76ebbb45ab945f95e1764974760fa98186"
 dependencies = [
  "async-graphql",
  "bytes",
@@ -1643,6 +1644,36 @@ name = "tower-service"
 version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e987b6bf443f4b5b3b6f38704195592cca41c5bb7aedd3c3693c7081f8289860"
+
+[[package]]
+name = "tracing"
+version = "0.1.13"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1721cc8cf7d770cc4257872507180f35a4797272f5962f24c806af9e7faf52ab"
+dependencies = [
+ "cfg-if",
+ "tracing-attributes",
+ "tracing-core",
+]
+
+[[package]]
+name = "tracing-attributes"
+version = "0.1.7"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7fbad39da2f9af1cae3016339ad7f2c7a9e870f12e8fd04c4fd7ef35b30c0d2b"
+dependencies = [
+ "quote 1.0.3",
+ "syn 1.0.17",
+]
+
+[[package]]
+name = "tracing-core"
+version = "0.1.10"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0aa83a9a47081cd522c09c81b31aec2c9273424976f922ad61c053b58350b715"
+dependencies = [
+ "lazy_static",
+]
 
 [[package]]
 name = "try-lock"
