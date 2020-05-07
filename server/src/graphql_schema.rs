@@ -22,41 +22,41 @@ impl QueryRoot {
     first: Option<i32>,
     last: Option<i32>,
   ) -> FieldResult<Connection<Card, EmptyEdgeFields>> {
-    let pool = ctx.data::<database::ConnPool>();
+    let db = ctx.data::<database::Database>();
     let pagination = Pagination::new(first, last, before, after);
-    let cards = database::get_cards(&pool, pagination).await?;
+    let cards = db.get_cards(pagination)?;
 
     let has_previous = cards.first().map_or(false, |card| card.has_previous);
     let has_next = cards.last().map_or(false, |card| card.has_next);
     let mut nodes = vec![];
 
     for card in cards {
-      match card.category {
-        CardCategory::Battle => {
-          let battle_card = BattleCard::load_from_card(card, pool)?;
-          nodes.push((
-            battle_card.cursor().into(),
-            EmptyEdgeFields,
-            battle_card.into(),
-          ))
-        }
-        CardCategory::Character => {
-          let character_card = CharacterCard::load_from_card(card, pool)?;
-          nodes.push((
-            character_card.cursor().into(),
-            EmptyEdgeFields,
-            character_card.into(),
-          ))
-        }
-        CardCategory::Stratagem => {
-          let stratagem_card = StratagemCard::load_from_card(card, pool)?;
-          nodes.push((
-            stratagem_card.cursor().into(),
-            EmptyEdgeFields,
-            stratagem_card.into(),
-          ))
-        }
-      }
+      // match card.category {
+      //   CardCategory::Battle => {
+      //     let battle_card = BattleCard::load_from_card(card, pool)?;
+      //     nodes.push((
+      //       battle_card.cursor().into(),
+      //       EmptyEdgeFields,
+      //       battle_card.into(),
+      //     ))
+      //   }
+      //   CardCategory::Character => {
+      //     let character_card = CharacterCard::load_from_card(card, pool)?;
+      //     nodes.push((
+      //       character_card.cursor().into(),
+      //       EmptyEdgeFields,
+      //       character_card.into(),
+      //     ))
+      //   }
+      //   CardCategory::Stratagem => {
+      //     let stratagem_card = StratagemCard::load_from_card(card, pool)?;
+      //     nodes.push((
+      //       stratagem_card.cursor().into(),
+      //       EmptyEdgeFields,
+      //       stratagem_card.into(),
+      //     ))
+      //   }
+      // }
     }
     // let battle_cards = cards
     //   .into_iter()

@@ -8,6 +8,7 @@ mod graphql_schema;
 mod pagination;
 mod schema;
 
+use database::Database;
 use graphql_schema::QueryRoot;
 
 use async_graphql::http::playground_source;
@@ -43,13 +44,15 @@ fn main() -> Result<()> {
     dotenv()?;
     env_logger::init();
 
-    let database_url = env::var("DATABASE_URL").expect("a fucking db url");
+    let database_url = env::var("DATABASE_URL")?;
     let listen_addr = env::var("LISTEN_ADDR").unwrap_or(String::from("0.0.0.0:3000"));
 
-    let pool = database::pool(&database_url);
+    let db = Database::new(&database_url)?;
 
+    // TODO: The Tide example says that it is probably worth making the
+    // schema a singleton using lazy_static library
     let schema = Schema::build(QueryRoot, EmptyMutation, EmptySubscription)
-        .data(pool)
+        .data(db)
         .register_type::<data::Node>()
         .finish();
 

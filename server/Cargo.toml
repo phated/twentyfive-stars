@@ -9,7 +9,7 @@ name = "server"
 path = "src/main.rs"
 
 [dependencies]
-async-graphql = "1.10.0"
+async-graphql = "1.10.10"
 async-graphql-tide = "1.0.0"
 chrono = "0.4.1"
 diesel = { version = "=1.4.3", features = ["postgres", "chrono", "uuidv07", "r2d2"] }

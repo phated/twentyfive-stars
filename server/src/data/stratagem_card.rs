@@ -1,5 +1,5 @@
 use crate::data::{Card, CardCategory, CardRarity, Faction, Wave, ID};
-use crate::database::{get_wave, ConnPool};
+use crate::database::Database;
 use crate::database_schema::stratagem_cards;
 use crate::schema::Cursor;
 use async_graphql::{Context, FieldResult};
@@ -25,15 +25,15 @@ impl StratagemCard {
     StratagemCard(card, extra)
   }
 
-  pub fn load_from_card(card: Card, pool: &ConnPool) -> QueryResult<StratagemCard> {
-    let conn = pool.get().unwrap();
+  // pub fn load_from_card(card: Card, pool: &ConnPool) -> QueryResult<StratagemCard> {
+  //   let conn = pool.get().unwrap();
 
-    stratagem_cards::table
-      .filter(stratagem_cards::card_id.eq(card.id))
-      .first::<ExtraProps>(&conn)
-      // TODO: performance of cloning this?
-      .map(|extra| StratagemCard::new(card.clone(), extra))
-  }
+  //   stratagem_cards::table
+  //     .filter(stratagem_cards::card_id.eq(card.id))
+  //     .first::<ExtraProps>(&conn)
+  //     // TODO: performance of cloning this?
+  //     .map(|extra| StratagemCard::new(card.clone(), extra))
+  // }
 }
 
 #[async_graphql::Object]
@@ -64,8 +64,8 @@ impl StratagemCard {
   }
 
   pub async fn wave(&self, ctx: &Context<'_>) -> FieldResult<Wave> {
-    let pool = ctx.data::<ConnPool>();
-    let wave = get_wave(pool, self.0.wave_id)?;
+    let db = ctx.data::<Database>();
+    let wave = db.get_wave(self.0.wave_id)?;
     Ok(wave)
   }
 
