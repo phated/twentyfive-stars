@@ -3,7 +3,8 @@ use chrono::NaiveDate;
 use diesel_derive_newtype::DieselNewType;
 use serde_json;
 
-#[derive(Debug, PartialEq, Eq, Hash, Clone, Copy, DieselNewType)]
+#[derive(Debug, PartialEq, Eq, Hash, Clone, Copy, sqlx::Type)]
+#[sqlx(transparent)]
 pub struct Date(NaiveDate);
 
 #[Scalar]

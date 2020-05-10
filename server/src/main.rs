@@ -5,7 +5,6 @@ mod data;
 mod database;
 mod database_schema;
 mod graphql_schema;
-mod pagination;
 mod schema;
 
 use database::Database;
@@ -47,17 +46,17 @@ fn main() -> Result<()> {
     let database_url = env::var("DATABASE_URL")?;
     let listen_addr = env::var("LISTEN_ADDR").unwrap_or(String::from("0.0.0.0:3000"));
 
-    let db = Database::new(&database_url)?;
-
-    // TODO: The Tide example says that it is probably worth making the
-    // schema a singleton using lazy_static library
-    let schema = Schema::build(QueryRoot, EmptyMutation, EmptySubscription)
-        .data(db)
-        .register_type::<data::Node>()
-        .finish();
-
     smol::block_on(async {
         println!("Playground: http://{}", listen_addr);
+
+        let db = Database::new(&database_url).await?;
+
+        // TODO: The Tide example says that it is probably worth making the
+        // schema a singleton using lazy_static library
+        let schema = Schema::build(QueryRoot, EmptyMutation, EmptySubscription)
+            .data(db)
+            .register_type::<schema::interfaces::Node>()
+            .finish();
 
         let app_state = AppState { schema };
 
