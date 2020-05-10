@@ -5,7 +5,6 @@ mod data;
 mod database;
 mod database_schema;
 mod graphql_schema;
-mod pagination;
 mod schema;
 
 use database::Database;
@@ -53,7 +52,7 @@ fn main() -> Result<()> {
     // schema a singleton using lazy_static library
     let schema = Schema::build(QueryRoot, EmptyMutation, EmptySubscription)
         .data(db)
-        .register_type::<data::Node>()
+        .register_type::<schema::interfaces::Node>()
         .finish();
 
     smol::block_on(async {

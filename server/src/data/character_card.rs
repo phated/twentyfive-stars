@@ -1,41 +1,29 @@
 use crate::data::{Card, CardCategory, CardRarity, CharacterMode, Wave, ID};
 use crate::database::Database;
-use crate::database_schema::character_modes;
-use crate::schema::Cursor;
-use async_graphql::{Context, FieldResult};
-use diesel::prelude::*;
+use async_graphql::{Context, Cursor, FieldResult};
 
 #[derive(Clone, Debug)]
-pub struct ExtraProps {
-  modes: Vec<CharacterMode>,
+pub struct CharacterCardProps {
+  pub modes: Vec<CharacterMode>,
 }
 
 #[derive(Clone, Debug)]
-pub struct CharacterCard(Card, ExtraProps);
+pub struct CharacterCard(Card, CharacterCardProps);
 
 impl CharacterCard {
-  pub fn new(card: Card, modes: ExtraProps) -> Self {
-    CharacterCard(card, modes)
+  pub fn new(card: Card, extra: CharacterCardProps) -> Self {
+    CharacterCard(card, extra)
   }
+}
 
-  // pub fn load_from_card(card: Card, pool: &ConnPool) -> QueryResult<CharacterCard> {
-  //   let conn = pool.get().unwrap();
-
-  //   character_modes::table
-  //     .filter(character_modes::card_id.eq(card.id))
-  //     .load::<CharacterMode>(&conn)
-  //     // TODO: performance of cloning this?
-  //     .map(|modes| CharacterCard::new(card.clone(), ExtraProps { modes }))
-  // }
+impl Into<Cursor> for CharacterCard {
+  fn into(self) -> Cursor {
+    self.0.id.into()
+  }
 }
 
 #[async_graphql::Object]
 impl CharacterCard {
-  #[field(skip)]
-  pub fn cursor(&self) -> Cursor {
-    Cursor::new(self.0.id)
-  }
-
   pub async fn id(&self) -> ID {
     self.0.id
   }

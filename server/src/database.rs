@@ -1,9 +1,17 @@
-use crate::data::{Card, CardCategory, Wave, ID};
-use crate::database_schema::{cards, cards_with_pageinfo, waves};
-use crate::pagination::Pagination;
+use crate::data::battle_card::{BattleCard, BattleCardProps};
+use crate::data::character_card::{CharacterCard, CharacterCardProps};
+use crate::data::stratagem_card::{StratagemCard, StratagemCardProps};
+use crate::data::{Card, CardCategory, CharacterMode, Wave, ID};
+use crate::database_schema::{
+  battle_cards, cards, cards_with_pageinfo, character_modes, stratagem_cards, waves,
+};
 use diesel::pg::PgConnection;
 use diesel::prelude::*;
 use diesel::r2d2::{ConnectionManager, Pool};
+
+// TODO: this shouldn't be in this file
+use async_graphql::QueryOperation;
+use uuid::Uuid;
 
 pub type ConnPool = Pool<ConnectionManager<PgConnection>>;
 pub type Error = Box<dyn std::error::Error + Send + Sync>;
@@ -28,6 +36,7 @@ impl Database {
     Ok(wave)
   }
 
+  #[allow(dead_code)]
   pub fn get_card(&self, id: ID) -> Result<Card, Error> {
     let conn = self.pool.get()?;
     let card = cards_with_pageinfo::table
@@ -50,6 +59,7 @@ impl Database {
   //   Ok(node)
   // }
 
+  #[allow(dead_code)]
   pub fn get_character_cards(&self) -> Result<Vec<Card>, Error> {
     let conn = self.pool.get()?;
 
@@ -60,6 +70,7 @@ impl Database {
     Ok(cards)
   }
 
+  #[allow(dead_code)]
   pub fn get_battle_cards(&self) -> Result<Vec<Card>, Error> {
     let conn = self.pool.get()?;
 
@@ -70,6 +81,7 @@ impl Database {
     Ok(cards)
   }
 
+  #[allow(dead_code)]
   pub fn get_stratagem_cards(&self) -> Result<Vec<Card>, Error> {
     let conn = self.pool.get()?;
 
@@ -80,7 +92,7 @@ impl Database {
     Ok(cards)
   }
 
-  pub fn get_cards(&self, pagination: Pagination) -> Result<Vec<Card>, Error> {
+  pub fn get_cards(&self, pagination: &QueryOperation) -> Result<Vec<Card>, Error> {
     let conn = self.pool.get()?;
 
     // ID and Cursor are interchangable
@@ -93,8 +105,9 @@ impl Database {
     };
 
     let cards = match pagination {
-      Pagination::None => cards_with_pageinfo::table.load::<Card>(&conn)?,
-      Pagination::Before(before_cursor) => {
+      QueryOperation::None => cards_with_pageinfo::table.load::<Card>(&conn)?,
+      QueryOperation::Before { before } => {
+        let before_cursor = Uuid::parse_str(&before.to_string())?;
         let before_subselect = subselect(before_cursor);
 
         cards_with_pageinfo::table
@@ -106,7 +119,8 @@ impl Database {
           .order(cards_with_pageinfo::sort_order.asc())
           .load::<Card>(&conn)?
       }
-      Pagination::After(after_cursor) => {
+      QueryOperation::After { after } => {
+        let after_cursor = Uuid::parse_str(&after.to_string())?;
         let after_subselect = subselect(after_cursor);
 
         cards_with_pageinfo::table
@@ -118,9 +132,12 @@ impl Database {
           .order(cards_with_pageinfo::sort_order.asc())
           .load::<Card>(&conn)?
       }
-      Pagination::Betwixt(before_cursor, after_cursor) => {
-        let before_subselect = subselect(before_cursor);
+      QueryOperation::Between { after, before } => {
+        let after_cursor = Uuid::parse_str(&after.to_string())?;
         let after_subselect = subselect(after_cursor);
+
+        let before_cursor = Uuid::parse_str(&before.to_string())?;
+        let before_subselect = subselect(before_cursor);
 
         cards_with_pageinfo::table
           .filter(
@@ -136,11 +153,12 @@ impl Database {
           .order(cards_with_pageinfo::sort_order.asc())
           .load::<Card>(&conn)?
       }
-      Pagination::First(limit) => cards_with_pageinfo::table
+      QueryOperation::First { limit } => cards_with_pageinfo::table
         .order(cards_with_pageinfo::sort_order.asc())
-        .limit(limit)
+        .limit(*limit as i64)
         .load::<Card>(&conn)?,
-      Pagination::FirstAfter(limit, after_cursor) => {
+      QueryOperation::FirstAfter { limit, after } => {
+        let after_cursor = Uuid::parse_str(&after.to_string())?;
         let after_subselect = subselect(after_cursor);
 
         cards_with_pageinfo::table
@@ -150,10 +168,11 @@ impl Database {
               .gt(after_subselect),
           )
           .order(cards_with_pageinfo::sort_order.asc())
-          .limit(limit)
+          .limit(*limit as i64)
           .load::<Card>(&conn)?
       }
-      Pagination::FirstBefore(limit, before_cursor) => {
+      QueryOperation::FirstBefore { limit, before } => {
+        let before_cursor = Uuid::parse_str(&before.to_string())?;
         let before_subselect = subselect(before_cursor);
 
         cards_with_pageinfo::table
@@ -163,11 +182,17 @@ impl Database {
               .lt(before_subselect),
           )
           .order(cards_with_pageinfo::sort_order.asc())
-          .limit(limit)
+          .limit(*limit as i64)
           .load::<Card>(&conn)?
       }
-      Pagination::FirstBetwixt(limit, before_cursor, after_cursor) => {
+      QueryOperation::FirstBetween {
+        limit,
+        after,
+        before,
+      } => {
+        let before_cursor = Uuid::parse_str(&before.to_string())?;
         let before_subselect = subselect(before_cursor);
+        let after_cursor = Uuid::parse_str(&after.to_string())?;
         let after_subselect = subselect(after_cursor);
 
         cards_with_pageinfo::table
@@ -182,18 +207,19 @@ impl Database {
               .lt(before_subselect),
           )
           .order(cards_with_pageinfo::sort_order.asc())
-          .limit(limit)
+          .limit(*limit as i64)
           .load::<Card>(&conn)?
       }
-      Pagination::Last(limit) => cards_with_pageinfo::table
+      QueryOperation::Last { limit } => cards_with_pageinfo::table
         .order(cards_with_pageinfo::sort_order.desc())
-        .limit(limit)
+        .limit(*limit as i64)
         .load::<Card>(&conn)?
         .iter()
         .cloned()
         .rev()
         .collect::<Vec<Card>>(),
-      Pagination::LastAfter(limit, after_cursor) => {
+      QueryOperation::LastAfter { limit, after } => {
+        let after_cursor = Uuid::parse_str(&after.to_string())?;
         let after_subselect = subselect(after_cursor);
 
         cards_with_pageinfo::table
@@ -203,14 +229,15 @@ impl Database {
               .gt(after_subselect),
           )
           .order(cards_with_pageinfo::sort_order.desc())
-          .limit(limit)
+          .limit(*limit as i64)
           .load::<Card>(&conn)?
           .iter()
           .cloned()
           .rev()
           .collect::<Vec<Card>>()
       }
-      Pagination::LastBefore(limit, before_cursor) => {
+      QueryOperation::LastBefore { limit, before } => {
+        let before_cursor = Uuid::parse_str(&before.to_string())?;
         let before_subselect = subselect(before_cursor);
 
         cards_with_pageinfo::table
@@ -220,15 +247,21 @@ impl Database {
               .lt(before_subselect),
           )
           .order(cards_with_pageinfo::sort_order.desc())
-          .limit(limit)
+          .limit(*limit as i64)
           .load::<Card>(&conn)?
           .iter()
           .cloned()
           .rev()
           .collect::<Vec<Card>>()
       }
-      Pagination::LastBetwixt(limit, before_cursor, after_cursor) => {
+      QueryOperation::LastBetween {
+        limit,
+        after,
+        before,
+      } => {
+        let before_cursor = Uuid::parse_str(&before.to_string())?;
         let before_subselect = subselect(before_cursor);
+        let after_cursor = Uuid::parse_str(&after.to_string())?;
         let after_subselect = subselect(after_cursor);
 
         cards_with_pageinfo::table
@@ -243,7 +276,7 @@ impl Database {
               .lt(before_subselect),
           )
           .order(cards_with_pageinfo::sort_order.desc())
-          .limit(limit)
+          .limit(*limit as i64)
           .load::<Card>(&conn)?
           .iter()
           .cloned()
@@ -251,9 +284,48 @@ impl Database {
           .collect::<Vec<Card>>()
       }
       // TODO: How can I error?
-      Pagination::Invalid => Vec::new(),
+      QueryOperation::Invalid => Vec::new(),
     };
 
     Ok(cards.into_iter().map(|card| card.into()).collect())
+  }
+}
+
+// These need to go away
+impl Database {
+  pub fn load_battle_card(&self, card: Card) -> Result<BattleCard, Error> {
+    let conn = self.pool.get()?;
+
+    let battle_card = battle_cards::table
+      .filter(battle_cards::card_id.eq(card.id))
+      .first::<BattleCardProps>(&conn)
+      // TODO: performance of cloning this?
+      .map(|extra| BattleCard::new(card.clone(), extra))?;
+
+    Ok(battle_card)
+  }
+
+  pub fn load_character_card(&self, card: Card) -> Result<CharacterCard, Error> {
+    let conn = self.pool.get()?;
+
+    let character_card = character_modes::table
+      .filter(character_modes::card_id.eq(card.id))
+      .load::<CharacterMode>(&conn)
+      // TODO: performance of cloning this?
+      .map(|modes| CharacterCard::new(card.clone(), CharacterCardProps { modes }))?;
+
+    Ok(character_card)
+  }
+
+  pub fn load_stratagem_card(&self, card: Card) -> Result<StratagemCard, Error> {
+    let conn = self.pool.get()?;
+
+    let stratagem_card = stratagem_cards::table
+      .filter(stratagem_cards::card_id.eq(card.id))
+      .first::<StratagemCardProps>(&conn)
+      // TODO: performance of cloning this?
+      .map(|extra| StratagemCard::new(card.clone(), extra))?;
+
+    Ok(stratagem_card)
   }
 }

@@ -42,9 +42,9 @@ checksum = "eab1c04a571841102f5345a8fc0f6bb3d31c315dec879b5c6e42e40ce7ffa34e"
 
 [[package]]
 name = "async-graphql"
-version = "1.10.10"
+version = "1.10.12"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a08722088a2b49fe05e16e38eaac8029caa10c073ebe16be31830d519fd3c069"
+checksum = "e5b429b8b65c2ad7a1bcbbbf7725244ff9b5f713e13b592e36ef17f519aee583"
 dependencies = [
  "Inflector",
  "anyhow",
@@ -79,9 +79,9 @@ dependencies = [
 
 [[package]]
 name = "async-graphql-derive"
-version = "1.10.10"
+version = "1.10.12"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9b94f555c4368ec411b81e85059ce4fe54e6b65d5c21caa2f3a12a9048bbe428"
+checksum = "b62d17a2199fb5050b3a1a26849028400ac799b16d181f7df2155530231ac4f0"
 dependencies = [
  "Inflector",
  "graphql-parser",
@@ -1684,6 +1684,7 @@ version = "0.1.0"
 dependencies = [
  "async-graphql",
  "async-graphql-tide",
+ "async-trait",
  "chrono",
  "diesel",
  "diesel-derive-newtype",
