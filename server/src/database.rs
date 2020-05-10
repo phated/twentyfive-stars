@@ -1,262 +1,331 @@
-use crate::data::{Card, Wave, ID};
-use crate::database_schema::{cards, cards_with_pageinfo, waves};
-use crate::pagination::Pagination;
+use crate::data::battle_card::{BattleCard, BattleCardProps};
+use crate::data::character_card::{CharacterCard, CharacterCardProps};
+use crate::data::stratagem_card::{StratagemCard, StratagemCardProps};
+use crate::data::{Card, CardCategory, CharacterMode, Wave, ID};
+use crate::database_schema::{
+  battle_cards, cards, cards_with_pageinfo, character_modes, stratagem_cards, waves,
+};
 use diesel::pg::PgConnection;
 use diesel::prelude::*;
 use diesel::r2d2::{ConnectionManager, Pool};
-use dotenv::dotenv;
-use std::env;
-use std::error::Error;
-use tokio_diesel::*;
+
+// TODO: this shouldn't be in this file
+use async_graphql::QueryOperation;
+use uuid::Uuid;
 
 pub type ConnPool = Pool<ConnectionManager<PgConnection>>;
+pub type Error = Box<dyn std::error::Error + Send + Sync>;
 
-pub fn pool() -> Result<ConnPool, Box<dyn Error>> {
-  dotenv().ok();
-
-  let database_url = env::var("DATABASE_URL")?;
-  let manager = ConnectionManager::<PgConnection>::new(database_url);
-  let pool = Pool::builder().build(manager)?;
-
-  Ok(pool)
+pub struct Database {
+  pool: ConnPool,
 }
 
-pub async fn get_wave(pool: &ConnPool, id: ID) -> AsyncResult<Wave> {
-  waves::table
-    .filter(waves::id.eq(id))
-    .first_async::<Wave>(pool)
-    .await
+impl Database {
+  pub fn new(database_url: &str) -> Result<Database, Error> {
+    let manager = ConnectionManager::<PgConnection>::new(database_url);
+    let pool = Pool::builder().build(manager)?;
+    let db = Database { pool };
+    Ok(db)
+  }
 }
 
-// pub fn get_card(connection: &PgConnection, id: ID) -> QueryResult<Card> {
-//   cards_with_pageinfo::table
-//     .filter(cards_with_pageinfo::id.eq(id))
-//     .first::<Card>(connection)
-// }
+impl Database {
+  pub fn get_wave(&self, id: ID) -> Result<Wave, Error> {
+    let conn = self.pool.get()?;
+    let wave = waves::table.filter(waves::id.eq(id)).first::<Wave>(&conn)?;
+    Ok(wave)
+  }
 
-// pub fn get_node(connection: &PgConnection, id: ID) -> QueryResult<Node> {
-//   let which_table = global_uuids::table
-//     .select(global_uuids::in_table)
-//     .filter(global_uuids::id.eq(id))
-//     .first::<UuidTable>(pool).await?;
+  #[allow(dead_code)]
+  pub fn get_card(&self, id: ID) -> Result<Card, Error> {
+    let conn = self.pool.get()?;
+    let card = cards_with_pageinfo::table
+      .filter(cards_with_pageinfo::id.eq(id))
+      .first::<Card>(&conn)?;
+    Ok(card)
+  }
 
-//   let node = match which_table {
-//     UuidTable::Waves => Node::from(get_wave(connection, id)?),
-//     UuidTable::Cards => Node::from(get_card(connection, id)?),
-//   };
+  // pub fn get_node(connection: &PgConnection, id: ID) -> QueryResult<Node> {
+  //   let which_table = global_uuids::table
+  //     .select(global_uuids::in_table)
+  //     .filter(global_uuids::id.eq(id))
+  //     .first::<UuidTable>(&conn)?;
 
-//   Ok(node)
-// }
+  //   let node = match which_table {
+  //     UuidTable::Waves => Node::from(get_wave(connection, id)?),
+  //     UuidTable::Cards => Node::from(get_card(connection, id)?),
+  //   };
 
-pub async fn get_cards(pool: &ConnPool, pagination: Pagination) -> AsyncResult<Vec<Card>> {
-  // ID and Cursor are interchangable
-  let subselect = |cursor| {
-    // This is using the cards table instead of the view because Diesel sucks
-    cards::table
-      .select(cards::sort_order)
-      .filter(cards::id.eq(cursor))
-      .single_value()
-  };
+  //   Ok(node)
+  // }
 
-  let cards = match pagination {
-    Pagination::None => cards_with_pageinfo::table.load_async::<Card>(pool).await?,
-    Pagination::Before(before_cursor) => {
-      let before_subselect = subselect(before_cursor);
+  #[allow(dead_code)]
+  pub fn get_character_cards(&self) -> Result<Vec<Card>, Error> {
+    let conn = self.pool.get()?;
 
-      cards_with_pageinfo::table
-        .filter(
-          cards_with_pageinfo::sort_order
-            .nullable()
-            .lt(before_subselect),
-        )
+    let cards = cards_with_pageinfo::table
+      .filter(cards_with_pageinfo::category.eq(CardCategory::Character))
+      .load::<Card>(&conn)?;
+
+    Ok(cards)
+  }
+
+  #[allow(dead_code)]
+  pub fn get_battle_cards(&self) -> Result<Vec<Card>, Error> {
+    let conn = self.pool.get()?;
+
+    let cards = cards_with_pageinfo::table
+      .filter(cards_with_pageinfo::category.eq(CardCategory::Battle))
+      .load::<Card>(&conn)?;
+
+    Ok(cards)
+  }
+
+  #[allow(dead_code)]
+  pub fn get_stratagem_cards(&self) -> Result<Vec<Card>, Error> {
+    let conn = self.pool.get()?;
+
+    let cards = cards_with_pageinfo::table
+      .filter(cards_with_pageinfo::category.eq(CardCategory::Stratagem))
+      .load::<Card>(&conn)?;
+
+    Ok(cards)
+  }
+
+  pub fn get_cards(&self, pagination: &QueryOperation) -> Result<Vec<Card>, Error> {
+    let conn = self.pool.get()?;
+
+    // ID and Cursor are interchangable
+    let subselect = |cursor| {
+      // This is using the cards table instead of the view because Diesel sucks
+      cards::table
+        .select(cards::sort_order)
+        .filter(cards::id.eq(cursor))
+        .single_value()
+    };
+
+    let cards = match pagination {
+      QueryOperation::None => cards_with_pageinfo::table.load::<Card>(&conn)?,
+      QueryOperation::Before { before } => {
+        let before_cursor = Uuid::parse_str(&before.to_string())?;
+        let before_subselect = subselect(before_cursor);
+
+        cards_with_pageinfo::table
+          .filter(
+            cards_with_pageinfo::sort_order
+              .nullable()
+              .lt(before_subselect),
+          )
+          .order(cards_with_pageinfo::sort_order.asc())
+          .load::<Card>(&conn)?
+      }
+      QueryOperation::After { after } => {
+        let after_cursor = Uuid::parse_str(&after.to_string())?;
+        let after_subselect = subselect(after_cursor);
+
+        cards_with_pageinfo::table
+          .filter(
+            cards_with_pageinfo::sort_order
+              .nullable()
+              .gt(after_subselect),
+          )
+          .order(cards_with_pageinfo::sort_order.asc())
+          .load::<Card>(&conn)?
+      }
+      QueryOperation::Between { after, before } => {
+        let after_cursor = Uuid::parse_str(&after.to_string())?;
+        let after_subselect = subselect(after_cursor);
+
+        let before_cursor = Uuid::parse_str(&before.to_string())?;
+        let before_subselect = subselect(before_cursor);
+
+        cards_with_pageinfo::table
+          .filter(
+            cards_with_pageinfo::sort_order
+              .nullable()
+              .gt(after_subselect),
+          )
+          .filter(
+            cards_with_pageinfo::sort_order
+              .nullable()
+              .lt(before_subselect),
+          )
+          .order(cards_with_pageinfo::sort_order.asc())
+          .load::<Card>(&conn)?
+      }
+      QueryOperation::First { limit } => cards_with_pageinfo::table
         .order(cards_with_pageinfo::sort_order.asc())
-        .load_async::<Card>(pool)
-        .await?
-    }
-    Pagination::After(after_cursor) => {
-      let after_subselect = subselect(after_cursor);
+        .limit(*limit as i64)
+        .load::<Card>(&conn)?,
+      QueryOperation::FirstAfter { limit, after } => {
+        let after_cursor = Uuid::parse_str(&after.to_string())?;
+        let after_subselect = subselect(after_cursor);
 
-      cards_with_pageinfo::table
-        .filter(
-          cards_with_pageinfo::sort_order
-            .nullable()
-            .gt(after_subselect),
-        )
-        .order(cards_with_pageinfo::sort_order.asc())
-        .load_async::<Card>(pool)
-        .await?
-    }
-    Pagination::Betwixt(before_cursor, after_cursor) => {
-      let before_subselect = subselect(before_cursor);
-      let after_subselect = subselect(after_cursor);
+        cards_with_pageinfo::table
+          .filter(
+            cards_with_pageinfo::sort_order
+              .nullable()
+              .gt(after_subselect),
+          )
+          .order(cards_with_pageinfo::sort_order.asc())
+          .limit(*limit as i64)
+          .load::<Card>(&conn)?
+      }
+      QueryOperation::FirstBefore { limit, before } => {
+        let before_cursor = Uuid::parse_str(&before.to_string())?;
+        let before_subselect = subselect(before_cursor);
 
-      cards_with_pageinfo::table
-        .filter(
-          cards_with_pageinfo::sort_order
-            .nullable()
-            .gt(after_subselect),
-        )
-        .filter(
-          cards_with_pageinfo::sort_order
-            .nullable()
-            .lt(before_subselect),
-        )
-        .order(cards_with_pageinfo::sort_order.asc())
-        .load_async::<Card>(pool)
-        .await?
-    }
-    Pagination::First(limit) => {
-      cards_with_pageinfo::table
-        .order(cards_with_pageinfo::sort_order.asc())
-        .limit(limit)
-        .load_async::<Card>(pool)
-        .await?
-    }
-    Pagination::FirstAfter(limit, after_cursor) => {
-      let after_subselect = subselect(after_cursor);
+        cards_with_pageinfo::table
+          .filter(
+            cards_with_pageinfo::sort_order
+              .nullable()
+              .lt(before_subselect),
+          )
+          .order(cards_with_pageinfo::sort_order.asc())
+          .limit(*limit as i64)
+          .load::<Card>(&conn)?
+      }
+      QueryOperation::FirstBetween {
+        limit,
+        after,
+        before,
+      } => {
+        let before_cursor = Uuid::parse_str(&before.to_string())?;
+        let before_subselect = subselect(before_cursor);
+        let after_cursor = Uuid::parse_str(&after.to_string())?;
+        let after_subselect = subselect(after_cursor);
 
-      cards_with_pageinfo::table
-        .filter(
-          cards_with_pageinfo::sort_order
-            .nullable()
-            .gt(after_subselect),
-        )
-        .order(cards_with_pageinfo::sort_order.asc())
-        .limit(limit)
-        .load_async::<Card>(pool)
-        .await?
-    }
-    Pagination::FirstBefore(limit, before_cursor) => {
-      let before_subselect = subselect(before_cursor);
-
-      cards_with_pageinfo::table
-        .filter(
-          cards_with_pageinfo::sort_order
-            .nullable()
-            .lt(before_subselect),
-        )
-        .order(cards_with_pageinfo::sort_order.asc())
-        .limit(limit)
-        .load_async::<Card>(pool)
-        .await?
-    }
-    Pagination::FirstBetwixt(limit, before_cursor, after_cursor) => {
-      let before_subselect = subselect(before_cursor);
-      let after_subselect = subselect(after_cursor);
-
-      cards_with_pageinfo::table
-        .filter(
-          cards_with_pageinfo::sort_order
-            .nullable()
-            .gt(after_subselect),
-        )
-        .filter(
-          cards_with_pageinfo::sort_order
-            .nullable()
-            .lt(before_subselect),
-        )
-        .order(cards_with_pageinfo::sort_order.asc())
-        .limit(limit)
-        .load_async::<Card>(pool)
-        .await?
-    }
-    Pagination::Last(limit) => cards_with_pageinfo::table
-      .order(cards_with_pageinfo::sort_order.desc())
-      .limit(limit)
-      .load_async::<Card>(pool)
-      .await?
-      .iter()
-      .cloned()
-      .rev()
-      .collect::<Vec<Card>>(),
-    Pagination::LastAfter(limit, after_cursor) => {
-      let after_subselect = subselect(after_cursor);
-
-      cards_with_pageinfo::table
-        .filter(
-          cards_with_pageinfo::sort_order
-            .nullable()
-            .gt(after_subselect),
-        )
+        cards_with_pageinfo::table
+          .filter(
+            cards_with_pageinfo::sort_order
+              .nullable()
+              .gt(after_subselect),
+          )
+          .filter(
+            cards_with_pageinfo::sort_order
+              .nullable()
+              .lt(before_subselect),
+          )
+          .order(cards_with_pageinfo::sort_order.asc())
+          .limit(*limit as i64)
+          .load::<Card>(&conn)?
+      }
+      QueryOperation::Last { limit } => cards_with_pageinfo::table
         .order(cards_with_pageinfo::sort_order.desc())
-        .limit(limit)
-        .load_async::<Card>(pool)
-        .await?
+        .limit(*limit as i64)
+        .load::<Card>(&conn)?
         .iter()
         .cloned()
         .rev()
-        .collect::<Vec<Card>>()
-    }
-    Pagination::LastBefore(limit, before_cursor) => {
-      let before_subselect = subselect(before_cursor);
+        .collect::<Vec<Card>>(),
+      QueryOperation::LastAfter { limit, after } => {
+        let after_cursor = Uuid::parse_str(&after.to_string())?;
+        let after_subselect = subselect(after_cursor);
 
-      cards_with_pageinfo::table
-        .filter(
-          cards_with_pageinfo::sort_order
-            .nullable()
-            .lt(before_subselect),
-        )
-        .order(cards_with_pageinfo::sort_order.desc())
-        .limit(limit)
-        .load_async::<Card>(pool)
-        .await?
-        .iter()
-        .cloned()
-        .rev()
-        .collect::<Vec<Card>>()
-    }
-    Pagination::LastBetwixt(limit, before_cursor, after_cursor) => {
-      let before_subselect = subselect(before_cursor);
-      let after_subselect = subselect(after_cursor);
+        cards_with_pageinfo::table
+          .filter(
+            cards_with_pageinfo::sort_order
+              .nullable()
+              .gt(after_subselect),
+          )
+          .order(cards_with_pageinfo::sort_order.desc())
+          .limit(*limit as i64)
+          .load::<Card>(&conn)?
+          .iter()
+          .cloned()
+          .rev()
+          .collect::<Vec<Card>>()
+      }
+      QueryOperation::LastBefore { limit, before } => {
+        let before_cursor = Uuid::parse_str(&before.to_string())?;
+        let before_subselect = subselect(before_cursor);
 
-      cards_with_pageinfo::table
-        .filter(
-          cards_with_pageinfo::sort_order
-            .nullable()
-            .gt(after_subselect),
-        )
-        .filter(
-          cards_with_pageinfo::sort_order
-            .nullable()
-            .lt(before_subselect),
-        )
-        .order(cards_with_pageinfo::sort_order.desc())
-        .limit(limit)
-        .load_async::<Card>(pool)
-        .await?
-        .iter()
-        .cloned()
-        .rev()
-        .collect::<Vec<Card>>()
-    }
-    // TODO: How can I error?
-    Pagination::Invalid => Vec::new(),
-  };
+        cards_with_pageinfo::table
+          .filter(
+            cards_with_pageinfo::sort_order
+              .nullable()
+              .lt(before_subselect),
+          )
+          .order(cards_with_pageinfo::sort_order.desc())
+          .limit(*limit as i64)
+          .load::<Card>(&conn)?
+          .iter()
+          .cloned()
+          .rev()
+          .collect::<Vec<Card>>()
+      }
+      QueryOperation::LastBetween {
+        limit,
+        after,
+        before,
+      } => {
+        let before_cursor = Uuid::parse_str(&before.to_string())?;
+        let before_subselect = subselect(before_cursor);
+        let after_cursor = Uuid::parse_str(&after.to_string())?;
+        let after_subselect = subselect(after_cursor);
 
-  Ok(cards.into_iter().map(|card| card.into()).collect())
-  // Ok(cards)
+        cards_with_pageinfo::table
+          .filter(
+            cards_with_pageinfo::sort_order
+              .nullable()
+              .gt(after_subselect),
+          )
+          .filter(
+            cards_with_pageinfo::sort_order
+              .nullable()
+              .lt(before_subselect),
+          )
+          .order(cards_with_pageinfo::sort_order.desc())
+          .limit(*limit as i64)
+          .load::<Card>(&conn)?
+          .iter()
+          .cloned()
+          .rev()
+          .collect::<Vec<Card>>()
+      }
+      // TODO: How can I error?
+      QueryOperation::Invalid => Vec::new(),
+    };
+
+    Ok(cards.into_iter().map(|card| card.into()).collect())
+  }
 }
 
-// pub fn get_character_cards(connection: &PgConnection) -> QueryResult<Vec<Card>> {
-//   let cards = cards_with_pageinfo::table
-//     .filter(cards_with_pageinfo::category.eq(CardCategory::Character))
-//     .load_async::<Card>(pool).await?;
+// These need to go away
+impl Database {
+  pub fn load_battle_card(&self, card: Card) -> Result<BattleCard, Error> {
+    let conn = self.pool.get()?;
 
-//   Ok(cards)
-// }
+    let battle_card = battle_cards::table
+      .filter(battle_cards::card_id.eq(card.id))
+      .first::<BattleCardProps>(&conn)
+      // TODO: performance of cloning this?
+      .map(|extra| BattleCard::new(card.clone(), extra))?;
 
-// pub fn get_battle_cards(connection: &PgConnection) -> QueryResult<Vec<Card>> {
-//   let cards = cards_with_pageinfo::table
-//     .filter(cards_with_pageinfo::category.eq(CardCategory::Battle))
-//     .load_async::<Card>(pool).await?;
+    Ok(battle_card)
+  }
 
-//   Ok(cards)
-// }
+  pub fn load_character_card(&self, card: Card) -> Result<CharacterCard, Error> {
+    let conn = self.pool.get()?;
 
-// pub fn get_stratagem_cards(connection: &PgConnection) -> QueryResult<Vec<Card>> {
-//   let cards = cards_with_pageinfo::table
-//     .filter(cards_with_pageinfo::category.eq(CardCategory::Stratagem))
-//     .load_async::<Card>(pool).await?;
+    let character_card = character_modes::table
+      .filter(character_modes::card_id.eq(card.id))
+      .load::<CharacterMode>(&conn)
+      // TODO: performance of cloning this?
+      .map(|modes| CharacterCard::new(card.clone(), CharacterCardProps { modes }))?;
 
-//   Ok(cards)
-// }
+    Ok(character_card)
+  }
+
+  pub fn load_stratagem_card(&self, card: Card) -> Result<StratagemCard, Error> {
+    let conn = self.pool.get()?;
+
+    let stratagem_card = stratagem_cards::table
+      .filter(stratagem_cards::card_id.eq(card.id))
+      .first::<StratagemCardProps>(&conn)
+      // TODO: performance of cloning this?
+      .map(|extra| StratagemCard::new(card.clone(), extra))?;
+
+    Ok(stratagem_card)
+  }
+}

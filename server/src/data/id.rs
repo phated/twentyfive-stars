@@ -1,4 +1,4 @@
-use async_graphql::{Result, Scalar, ScalarType, Value};
+use async_graphql::{Cursor, Result, Scalar, ScalarType, Value};
 use diesel_derive_newtype::DieselNewType;
 use serde_json;
 use uuid::Uuid;
@@ -33,5 +33,12 @@ impl From<Uuid> for ID {
 impl Into<Uuid> for ID {
     fn into(self) -> Uuid {
         self.0
+    }
+}
+
+impl Into<Cursor> for ID {
+    // TODO: Into<Cursor> for Uuid
+    fn into(self) -> Cursor {
+        self.0.to_string().into()
     }
 }

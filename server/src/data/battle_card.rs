@@ -1,14 +1,11 @@
 use crate::data::{BattleIcon, BattleType, Card, CardCategory, CardRarity, Faction, Wave, ID};
-use crate::database::{get_wave, ConnPool};
+use crate::database::Database;
 use crate::database_schema::battle_cards;
-use crate::schema::Cursor;
-use async_graphql::{Context, FieldResult};
-use diesel::prelude::*;
-use tokio_diesel::*;
+use async_graphql::{Context, Cursor, FieldResult};
 
 #[derive(Identifiable, Queryable, Clone, PartialEq, Eq, Debug)]
 #[table_name = "battle_cards"]
-pub struct ExtraProps {
+pub struct BattleCardProps {
   id: ID,
   card_id: ID,
   title: String,
@@ -22,30 +19,22 @@ pub struct ExtraProps {
 }
 
 #[derive(Clone, Debug)]
-pub struct BattleCard(Card, ExtraProps);
+pub struct BattleCard(Card, BattleCardProps);
 
 impl BattleCard {
-  pub fn new(card: Card, extra: ExtraProps) -> Self {
+  pub fn new(card: Card, extra: BattleCardProps) -> Self {
     BattleCard(card, extra)
   }
+}
 
-  pub async fn load_from_card(card: Card, pool: &ConnPool) -> AsyncResult<BattleCard> {
-    battle_cards::table
-      .filter(battle_cards::card_id.eq(card.id))
-      .first_async::<ExtraProps>(&pool)
-      .await
-      // TODO: performance of cloning this?
-      .map(|extra| BattleCard::new(card.clone(), extra))
+impl Into<Cursor> for BattleCard {
+  fn into(self) -> Cursor {
+    self.0.id.into()
   }
 }
 
 #[async_graphql::Object]
 impl BattleCard {
-  #[field(skip)]
-  pub fn cursor(&self) -> Cursor {
-    Cursor::new(self.0.id)
-  }
-
   pub async fn id(&self) -> ID {
     self.0.id
   }
@@ -67,8 +56,8 @@ impl BattleCard {
   }
 
   pub async fn wave(&self, ctx: &Context<'_>) -> FieldResult<Wave> {
-    let pool = ctx.data::<ConnPool>();
-    let wave = get_wave(pool, self.0.wave_id).await?;
+    let db = ctx.data::<Database>();
+    let wave = db.get_wave(self.0.wave_id)?;
     Ok(wave)
   }
 
