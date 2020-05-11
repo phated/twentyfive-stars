@@ -1,4 +1,4 @@
-use async_graphql::{Cursor, Result, Scalar, ScalarType, Value};
+use async_graphql::{Cursor, InputValueError, InputValueResult, Result, Scalar, ScalarType, Value};
 use diesel_derive_newtype::DieselNewType;
 use serde_json;
 use uuid::Uuid;
@@ -12,10 +12,10 @@ impl ScalarType for ID {
         "ID"
     }
 
-    fn parse(value: &Value) -> Option<Self> {
+    fn parse(value: &Value) -> InputValueResult<Self> {
         match value {
-            Value::String(s) => Some(ID(Uuid::parse_str(&s).ok()?)),
-            _ => None,
+            Value::String(s) => Ok(Uuid::parse_str(&s).map(ID)?),
+            _ => Err(InputValueError::ExpectedType),
         }
     }
 

@@ -1,4 +1,4 @@
-use async_graphql::{Result, Scalar, ScalarType, Value};
+use async_graphql::{InputValueError, InputValueResult, Result, Scalar, ScalarType, Value};
 use chrono::NaiveDate;
 use diesel_derive_newtype::DieselNewType;
 use serde_json;
@@ -12,10 +12,10 @@ impl ScalarType for Date {
         "Date"
     }
 
-    fn parse(value: &Value) -> Option<Self> {
+    fn parse(value: &Value) -> InputValueResult<Self> {
         match value {
-            Value::String(s) => Some(Date(NaiveDate::parse_from_str(s, "%Y-%m-%d").ok()?)),
-            _ => None,
+            Value::String(s) => Ok(NaiveDate::parse_from_str(s, "%Y-%m-%d").map(Date)?),
+            _ => Err(InputValueError::ExpectedType),
         }
     }
 
