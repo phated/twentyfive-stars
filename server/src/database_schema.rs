@@ -84,7 +84,6 @@ table! {
         tcg_id -> Varchar,
         name -> Varchar,
         released -> Date,
-        sort_order -> Int4,
     }
 }
 
