@@ -15,15 +15,15 @@ type DB = diesel::pg::Pg;
   field(name = "faction", type = "Faction")
 )]
 #[derive(Clone, Debug)]
-pub struct CharacterMode(
-  AltMode,
-  BotMode,
-  CombinerMode,
-  UpgradeMode,
-  BodyMode,
-  HeadMode,
-  CombinerBodyMode,
-);
+pub enum CharacterMode {
+  AltMode(AltMode),
+  BotMode(BotMode),
+  CombinerMode(CombinerMode),
+  UpgradeMode(UpgradeMode),
+  BodyMode(BodyMode),
+  HeadMode(HeadMode),
+  CombinerBodyMode(CombinerBodyMode),
+}
 
 impl Queryable<character_modes::SqlType, DB> for CharacterMode {
   type Row = (

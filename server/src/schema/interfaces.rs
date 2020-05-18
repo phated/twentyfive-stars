@@ -1,14 +1,14 @@
 use crate::data::{BattleCard, CardCategory, CardRarity, CharacterCard, StratagemCard, Wave, ID};
 
 #[async_graphql::Interface(field(name = "id", type = "ID"))]
-pub struct Node(
-  BattleCard,
-  CharacterCard,
-  StratagemCard,
+pub enum Node {
+  BattleCard(BattleCard),
+  CharacterCard(CharacterCard),
+  StratagemCard(StratagemCard),
   // TODO: get methods supported on interfaces
   // CharacterMode,
-  Wave,
-);
+  Wave(Wave),
+}
 
 #[async_graphql::Interface(
   field(name = "id", type = "ID"),
@@ -19,4 +19,8 @@ pub struct Node(
   field(name = "wave", type = "Wave")
 )]
 #[derive(Clone, Debug)]
-pub struct Card(BattleCard, CharacterCard, StratagemCard);
+pub enum Card {
+  BattleCard(BattleCard),
+  CharacterCard(CharacterCard),
+  StratagemCard(StratagemCard),
+}

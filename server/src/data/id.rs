@@ -12,10 +12,10 @@ impl ScalarType for ID {
         "ID"
     }
 
-    fn parse(value: &Value) -> InputValueResult<Self> {
+    fn parse(value: Value) -> InputValueResult<Self> {
         match value {
             Value::String(s) => Ok(Uuid::parse_str(&s).map(ID)?),
-            _ => Err(InputValueError::ExpectedType),
+            _ => Err(InputValueError::ExpectedType(value)),
         }
     }
 
