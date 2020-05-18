@@ -20,5 +20,6 @@ env_logger = "0.7.1"
 futures = "0.3.4"
 serde_json = "1.0.51"
 smol = "0.1.0"
+sqlx = { path = "../../sqlx", features = ["postgres", "chrono", "uuid"] }
 tide = "0.8.0"
 uuid = { version = "0.8.1", features = ["serde", "v4"] }

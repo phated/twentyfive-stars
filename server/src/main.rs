@@ -7,7 +7,7 @@ mod database_schema;
 mod graphql_schema;
 mod schema;
 
-use database::Database;
+use database::{Database, SqlxDatabase};
 use graphql_schema::QueryRoot;
 
 use async_graphql::http::playground_source;
@@ -57,6 +57,10 @@ fn main() -> Result<()> {
 
     smol::block_on(async {
         println!("Playground: http://{}", listen_addr);
+
+        let sqlx = SqlxDatabase::new(&database_url).await?;
+
+        let wave = sqlx.get_wave(1).await?;
 
         let app_state = AppState { schema };
 

@@ -8,6 +8,7 @@ use crate::database_schema::{
 use diesel::pg::PgConnection;
 use diesel::prelude::*;
 use diesel::r2d2::{ConnectionManager, Pool};
+use sqlx::postgres::PgPool;
 
 // TODO: this shouldn't be in this file
 use async_graphql::QueryOperation;
@@ -18,6 +19,43 @@ pub type Error = Box<dyn std::error::Error + Send + Sync>;
 
 pub struct Database {
     pool: ConnPool,
+}
+
+pub struct SqlxDatabase {
+    pool: PgPool,
+}
+
+impl SqlxDatabase {
+    pub async fn new(database_url: &str) -> Result<SqlxDatabase, Error> {
+        let pool = PgPool::builder()
+            .max_size(5) // maximum number of connections in the pool
+            .build(database_url)
+            .await?;
+        let db = SqlxDatabase { pool };
+        Ok(db)
+    }
+}
+
+impl SqlxDatabase {
+    pub async fn get_wave(&self, id: i32) -> Result<Wave, Error> {
+        let row = sqlx::query!(
+            r#"
+            SELECT nodes.node_id, tcg_id, name, released
+            FROM waves, nodes
+            WHERE waves.id = nodes.id AND nodes.id = $1;
+            "#,
+            id
+        )
+        .fetch_one(&self.pool)
+        .await?;
+
+        Ok(Wave {
+            id: row.node_id.unwrap().into(),
+            tcg_id: row.tcg_id,
+            name: row.name,
+            released: row.released,
+        })
+    }
 }
 
 impl Database {
