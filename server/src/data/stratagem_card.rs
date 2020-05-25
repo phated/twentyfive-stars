@@ -1,76 +1,72 @@
-use crate::data::{Card, CardCategory, CardRarity, Faction, Wave, ID};
-use crate::database::Database;
-use crate::database_schema::stratagem_cards;
+use crate::data::{CardCategory, CardRarity, Faction, Wave};
+use crate::graphql_schema::ContextData;
 use async_graphql::{Context, Cursor, FieldResult};
+use uuid::Uuid;
 
-#[derive(Identifiable, Queryable, PartialEq, Eq, Clone, Debug)]
-#[table_name = "stratagem_cards"]
-pub struct StratagemCardProps {
-  id: ID,
-  card_id: ID,
-  title: String,
-  requirement: String,
-  faction: Option<Faction>,
-  stars: i32,
-  sort_order: i32,
-}
-
-#[derive(Clone, Debug)]
-pub struct StratagemCard(Card, StratagemCardProps);
-
-impl StratagemCard {
-  pub fn new(card: Card, extra: StratagemCardProps) -> Self {
-    StratagemCard(card, extra)
-  }
+#[derive(Debug, Clone, sqlx::FromRow)]
+pub struct StratagemCard {
+    // Generic card props
+    pub id: i32,
+    pub node_id: Uuid,
+    pub tcg_id: String,
+    pub rarity: CardRarity,
+    pub number: String,
+    pub category: CardCategory,
+    // Stratagem card specific props
+    pub title: String,
+    pub requirement: String,
+    pub stars: i32,
+    pub faction: Faction,
 }
 
 impl Into<Cursor> for StratagemCard {
-  fn into(self) -> Cursor {
-    self.0.id.into()
-  }
+    fn into(self) -> Cursor {
+        self.id.into()
+    }
 }
 
 #[async_graphql::Object]
 impl StratagemCard {
-  pub async fn id(&self) -> ID {
-    self.0.id
-  }
+    pub async fn id(&self) -> async_graphql::ID {
+        self.node_id.into()
+    }
 
-  pub async fn tcg_id(&self) -> &str {
-    &self.0.tcg_id
-  }
+    pub async fn tcg_id(&self) -> &str {
+        &self.tcg_id
+    }
 
-  pub async fn rarity(&self) -> CardRarity {
-    self.0.rarity
-  }
+    pub async fn rarity(&self) -> CardRarity {
+        self.rarity
+    }
 
-  pub async fn number(&self) -> &str {
-    &self.0.number
-  }
+    pub async fn number(&self) -> &str {
+        &self.number
+    }
 
-  pub async fn category(&self) -> CardCategory {
-    self.0.category
-  }
+    pub async fn category(&self) -> CardCategory {
+        self.category
+    }
 
-  pub async fn wave(&self, ctx: &Context<'_>) -> FieldResult<Wave> {
-    let db = ctx.data::<Database>();
-    let wave = db.get_wave(self.0.wave_id)?;
-    Ok(wave)
-  }
+    pub async fn wave(&self, ctx: &Context<'_>) -> FieldResult<Wave> {
+        let data = ctx.data::<ContextData>();
+        let wave = data.db.get_wave_for_stratagem_card(self).await?;
 
-  pub async fn title(&self) -> &str {
-    &self.1.title
-  }
+        Ok(wave)
+    }
 
-  pub async fn requirement(&self) -> &str {
-    &self.1.requirement
-  }
+    pub async fn title(&self) -> &str {
+        &self.title
+    }
 
-  pub async fn stars(&self) -> i32 {
-    self.1.stars
-  }
+    pub async fn requirement(&self) -> &str {
+        &self.requirement
+    }
 
-  pub async fn faction(&self) -> &Option<Faction> {
-    &self.1.faction
-  }
+    pub async fn stars(&self) -> i32 {
+        self.stars
+    }
+
+    pub async fn faction(&self) -> Faction {
+        self.faction
+    }
 }

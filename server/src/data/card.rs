@@ -1,75 +1,55 @@
-use crate::data::{CardCategory, CardRarity, ID};
-use crate::database;
-use crate::database_schema::cards_with_pageinfo;
+use crate::data::{BattleCard, CharacterCard, NodeType, StratagemCard};
+use crate::graphql_schema::ContextData;
 
-#[derive(Identifiable, Queryable, Clone, PartialEq, Eq, Debug)]
-#[table_name = "cards_with_pageinfo"]
-pub struct Card {
-  pub id: ID,
-  pub tcg_id: String,
-  pub rarity: CardRarity,
-  pub number: String,
-  pub category: CardCategory,
-  pub wave_id: ID,
-  pub sort_order: i32,
-  pub has_previous: bool,
-  pub has_next: bool,
+#[async_graphql::Union]
+#[derive(Debug, Clone)]
+pub enum Card {
+    Battle(BattleCard),
+    Character(CharacterCard),
+    Stratagem(StratagemCard),
 }
 
 pub mod datasource {
-  use super::*;
-  use crate::schema::interfaces;
-  use async_graphql::{
-    Connection, Context, DataSource, EmptyEdgeFields, FieldResult, QueryOperation,
-  };
+    use super::*;
+    use crate::schema::interfaces;
+    use async_graphql::{
+        Connection, Context, DataSource, EmptyEdgeFields, FieldResult, QueryOperation,
+    };
 
-  pub struct CardDataSource;
+    pub struct CardDataSource;
 
-  #[async_trait::async_trait]
-  impl DataSource for CardDataSource {
-    type Element = interfaces::Card;
-    type EdgeFieldsObj = EmptyEdgeFields;
+    #[async_trait::async_trait]
+    impl DataSource for CardDataSource {
+        type Element = interfaces::Card;
+        type EdgeFieldsObj = EmptyEdgeFields;
 
-    async fn query_operation(
-      &self,
-      ctx: &Context<'_>,
-      pagination: &QueryOperation,
-    ) -> FieldResult<Connection<Self::Element, Self::EdgeFieldsObj>> {
-      let db = ctx.data::<database::Database>();
-      let cards = db.get_cards(pagination)?;
+        async fn query_operation(
+            &self,
+            ctx: &Context<'_>,
+            pagination: &QueryOperation,
+        ) -> FieldResult<Connection<Self::Element, Self::EdgeFieldsObj>> {
+            let data = ctx.data::<ContextData>();
+            let card_nodes = data.db.get_card_nodes().await?;
 
-      let has_previous = cards.first().map_or(false, |card| card.has_previous);
-      let has_next = cards.last().map_or(false, |card| card.has_next);
-      let mut nodes = vec![];
+            // let has_previous = cards.first().map_or(false, |card| card.has_previous);
+            let has_previous = false;
+            // let has_next = cards.last().map_or(false, |card| card.has_next);
+            let has_next = false;
+            let mut nodes = vec![];
 
-      for card in cards {
-        match card.category {
-          CardCategory::Battle => {
-            let battle_card = db.load_battle_card(card)?;
-            // The .into() takes ownership so we can't convert to the interface
-            let cursor = battle_card.clone().into();
-            let node = battle_card.into();
-            nodes.push((cursor, EmptyEdgeFields, node))
-          }
-          CardCategory::Character => {
-            let character_card = db.load_character_card(card)?;
-            // The .into() takes ownership so we can't convert to the interface
-            let cursor = character_card.clone().into();
-            let node = character_card.clone().into();
-            nodes.push((cursor, EmptyEdgeFields, node))
-          }
-          CardCategory::Stratagem => {
-            let stratagem_card = db.load_stratagem_card(card)?;
-            // The .into() takes ownership so we can't convert to the interface
-            let cursor = stratagem_card.clone().into();
-            let node = stratagem_card.into();
-            nodes.push((cursor, EmptyEdgeFields, node))
-          }
+            for card_node in card_nodes {
+                match card_node.node_type {
+                    NodeType::Battle => {
+                        let cursor = card_node.node_id.into();
+                        let node = data.db.get_battle_card(card_node.id).await?.into();
+                        nodes.push((cursor, EmptyEdgeFields, node))
+                    }
+                    _ => todo!(),
+                }
+            }
+
+            let connection = Connection::new(None, has_previous, has_next, nodes);
+            Ok(connection)
         }
-      }
-
-      let connection = Connection::new(None, has_previous, has_next, nodes);
-      Ok(connection)
     }
-  }
 }

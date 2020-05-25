@@ -9,7 +9,7 @@ CREATE TABLE stratagem_cards (
   -- Stratagem card specific traits
   title VARCHAR NOT NULL,
   requirement VARCHAR NOT NULL,
-  faction FACTION,
+  faction FACTION NOT NULL,
   stars INT NOT NULL CHECK (stars >= 0),
 
   PRIMARY KEY (id),

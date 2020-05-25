@@ -1,91 +1,88 @@
-use crate::data::{BattleIcon, BattleType, Card, CardCategory, CardRarity, Faction, Wave, ID};
-use crate::database::Database;
-use crate::database_schema::battle_cards;
+use crate::data::{BattleIcon, BattleType, CardCategory, CardRarity, Faction, Wave};
+use crate::graphql_schema::ContextData;
 use async_graphql::{Context, Cursor, FieldResult};
+use uuid::Uuid;
 
-#[derive(Identifiable, Queryable, Clone, PartialEq, Eq, Debug)]
-#[table_name = "battle_cards"]
-pub struct BattleCardProps {
-  id: ID,
-  card_id: ID,
-  title: String,
-  type_: BattleType,
-  faction: Option<Faction>,
-  stars: Option<i32>,
-  icons: Vec<BattleIcon>,
-  attack_modifier: Option<i32>,
-  defense_modifier: Option<i32>,
-  sort_order: i32,
-}
-
-#[derive(Clone, Debug)]
-pub struct BattleCard(Card, BattleCardProps);
-
-impl BattleCard {
-  pub fn new(card: Card, extra: BattleCardProps) -> Self {
-    BattleCard(card, extra)
-  }
+#[derive(Debug, Clone, sqlx::FromRow)]
+pub struct BattleCard {
+    // Generic card props
+    pub id: i32,
+    pub node_id: Uuid,
+    pub tcg_id: String,
+    pub rarity: CardRarity,
+    pub number: String,
+    pub category: CardCategory,
+    // Battle card specific props
+    pub title: String,
+    pub stars: Option<i32>,
+    // pub icons: Vec<BattleIcon>,
+    pub r#type: BattleType,
+    pub faction: Option<Faction>,
+    pub attack_modifier: Option<i32>,
+    pub defense_modifier: Option<i32>,
 }
 
 impl Into<Cursor> for BattleCard {
-  fn into(self) -> Cursor {
-    self.0.id.into()
-  }
+    fn into(self) -> Cursor {
+        self.id.into()
+    }
 }
 
 #[async_graphql::Object]
 impl BattleCard {
-  pub async fn id(&self) -> ID {
-    self.0.id
-  }
+    pub async fn id(&self) -> async_graphql::ID {
+        self.node_id.into()
+    }
 
-  pub async fn tcg_id(&self) -> &str {
-    &self.0.tcg_id
-  }
+    pub async fn tcg_id(&self) -> &str {
+        &self.tcg_id
+    }
 
-  pub async fn rarity(&self) -> CardRarity {
-    self.0.rarity
-  }
+    pub async fn rarity(&self) -> CardRarity {
+        self.rarity
+    }
 
-  pub async fn number(&self) -> &str {
-    &self.0.number
-  }
+    pub async fn number(&self) -> &str {
+        &self.number
+    }
 
-  pub async fn category(&self) -> CardCategory {
-    self.0.category
-  }
+    pub async fn category(&self) -> CardCategory {
+        self.category
+    }
 
-  pub async fn wave(&self, ctx: &Context<'_>) -> FieldResult<Wave> {
-    let db = ctx.data::<Database>();
-    let wave = db.get_wave(self.0.wave_id)?;
-    Ok(wave)
-  }
+    pub async fn wave(&self, ctx: &Context<'_>) -> FieldResult<Wave> {
+        let data = ctx.data::<ContextData>();
+        let wave = data.db.get_wave_for_battle_card(self).await?;
 
-  pub async fn title(&self) -> &str {
-    &self.1.title
-  }
+        Ok(wave)
+    }
 
-  pub async fn stars(&self) -> Option<i32> {
-    self.1.stars
-  }
+    pub async fn title(&self) -> &str {
+        &self.title
+    }
 
-  pub async fn icons(&self) -> &Vec<BattleIcon> {
-    &self.1.icons
-  }
+    pub async fn stars(&self) -> Option<i32> {
+        self.stars
+    }
 
-  pub async fn type_(&self) -> BattleType {
-    self.1.type_
-  }
+    pub async fn icons(&self) -> Vec<BattleIcon> {
+        // self.icons
+        vec![]
+    }
 
-  pub async fn faction(&self) -> Option<Faction> {
-    self.1.faction
-  }
+    pub async fn type_(&self) -> BattleType {
+        self.r#type
+    }
 
-  pub async fn attack_modifier(&self) -> Option<i32> {
-    self.1.attack_modifier
-  }
+    pub async fn faction(&self) -> Option<Faction> {
+        self.faction
+    }
 
-  pub async fn defense_modifier(&self) -> Option<i32> {
-    self.1.defense_modifier
-  }
+    pub async fn attack_modifier(&self) -> Option<i32> {
+        self.attack_modifier
+    }
+
+    pub async fn defense_modifier(&self) -> Option<i32> {
+        self.defense_modifier
+    }
 }
