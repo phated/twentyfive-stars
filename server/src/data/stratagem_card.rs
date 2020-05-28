@@ -1,6 +1,6 @@
 use crate::data::{CardCategory, CardRarity, Faction, Wave};
 use crate::graphql_schema::ContextData;
-use async_graphql::{Context, Cursor, FieldResult};
+use async_graphql::{Context, FieldResult};
 use uuid::Uuid;
 
 #[derive(Debug, Clone, sqlx::FromRow)]
@@ -17,12 +17,6 @@ pub struct StratagemCard {
     pub requirement: String,
     pub stars: i32,
     pub faction: Faction,
-}
-
-impl Into<Cursor> for StratagemCard {
-    fn into(self) -> Cursor {
-        self.id.into()
-    }
 }
 
 #[async_graphql::Object]

@@ -12,43 +12,97 @@ pub enum Card {
 pub mod datasource {
     use super::*;
     use crate::schema::interfaces;
-    use async_graphql::{
-        Connection, Context, DataSource, EmptyEdgeFields, FieldResult, QueryOperation,
-    };
+    use async_graphql::connection::{Connection, DataSource, Edge, EmptyFields};
+    use async_graphql::{Context, FieldResult};
 
     pub struct CardDataSource;
 
-    #[async_trait::async_trait]
+    #[async_graphql::DataSource]
     impl DataSource for CardDataSource {
-        type Element = interfaces::Card;
-        type EdgeFieldsObj = EmptyEdgeFields;
+        type CursorType = String;
+        type NodeType = interfaces::Card;
+        type ConnectionFieldsType = EmptyFields;
+        type EdgeFieldsType = EmptyFields;
 
-        async fn query_operation(
+        async fn execute_query(
             &self,
             ctx: &Context<'_>,
-            pagination: &QueryOperation,
-        ) -> FieldResult<Connection<Self::Element, Self::EdgeFieldsObj>> {
+            after: Option<Self::CursorType>,
+            before: Option<Self::CursorType>,
+            first: Option<usize>,
+            last: Option<usize>,
+        ) -> FieldResult<
+            Connection<
+                Self::CursorType,
+                Self::NodeType,
+                Self::ConnectionFieldsType,
+                Self::EdgeFieldsType,
+            >,
+        > {
             let data = ctx.data::<ContextData>();
             let card_nodes = data.db.get_card_nodes().await?;
 
-            // let has_previous = cards.first().map_or(false, |card| card.has_previous);
-            let has_previous = false;
-            // let has_next = cards.last().map_or(false, |card| card.has_next);
-            let has_next = false;
-            let mut nodes = vec![];
+            let start_idx = after
+                .and_then(|cursor| {
+                    card_nodes
+                        .clone()
+                        .into_iter()
+                        .position(|node| node.node_id.to_string() == cursor)
+                        .map(|idx| idx + 1)
+                })
+                .unwrap_or(0);
+            let end_idx = before
+                .and_then(|cursor| {
+                    card_nodes
+                        .clone()
+                        .into_iter()
+                        .rposition(|node| node.node_id.to_string() == cursor)
+                })
+                .unwrap_or(card_nodes.len());
 
-            for card_node in card_nodes {
-                match card_node.node_type {
-                    NodeType::Battle => {
-                        let cursor = card_node.node_id.into();
-                        let node = data.db.get_battle_card(card_node.id).await?.into();
-                        nodes.push((cursor, EmptyEdgeFields, node))
-                    }
-                    _ => todo!(),
+            let has_previous_page = start_idx > 0;
+            let has_next_page = end_idx < card_nodes.len();
+
+            let mut nodes = &card_nodes[start_idx..end_idx];
+
+            if let Some(first) = first {
+                if nodes.len() > first {
+                    let slice_begin = 0;
+                    let slice_end = first;
+                    nodes = &nodes[slice_begin..slice_end];
                 }
             }
 
-            let connection = Connection::new(None, has_previous, has_next, nodes);
+            if let Some(last) = last {
+                if nodes.len() > last {
+                    let slice_begin = nodes.len() - last;
+                    let slice_end = nodes.len();
+                    nodes = &nodes[slice_begin..slice_end];
+                }
+            }
+
+            let mut edges = vec![];
+
+            for node in nodes {
+                let edge = match node.node_type {
+                    NodeType::Battle => {
+                        let node = data.db.get_battle_card(node.id).await?;
+                        let cursor = node.node_id.to_string().into();
+                        Edge::new(cursor, node.into())
+                    }
+                    NodeType::Character => {
+                        let node = data.db.get_character_card(node.id).await?;
+                        let cursor = node.node_id.to_string().into();
+                        Edge::new(cursor, node.into())
+                    }
+                    _ => todo!(),
+                };
+                edges.push(Ok(edge));
+            }
+
+            let mut connection = Connection::new(has_previous_page, has_next_page);
+            connection.append(edges)?;
+
             Ok(connection)
         }
     }

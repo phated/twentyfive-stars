@@ -1,6 +1,6 @@
 use crate::data::{BattleIcon, BattleType, CardCategory, CardRarity, Faction, Wave};
 use crate::graphql_schema::ContextData;
-use async_graphql::{Context, Cursor, FieldResult};
+use async_graphql::{Context, FieldResult};
 use uuid::Uuid;
 
 #[derive(Debug, Clone, sqlx::FromRow)]
@@ -20,12 +20,6 @@ pub struct BattleCard {
     pub faction: Option<Faction>,
     pub attack_modifier: Option<i32>,
     pub defense_modifier: Option<i32>,
-}
-
-impl Into<Cursor> for BattleCard {
-    fn into(self) -> Cursor {
-        self.id.into()
-    }
 }
 
 #[async_graphql::Object]

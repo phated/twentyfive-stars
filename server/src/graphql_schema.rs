@@ -1,7 +1,9 @@
 use crate::data::CardDataSource;
 use crate::database::Database;
 use crate::schema::interfaces;
-use async_graphql::{Connection, Context, Cursor, DataSource, EmptyEdgeFields, FieldResult};
+use async_graphql::connection::{Connection, DataSource, EmptyFields};
+use async_graphql::{Context, FieldResult};
+
 pub struct QueryRoot;
 
 pub struct ContextData {
@@ -18,11 +20,11 @@ impl QueryRoot {
     async fn all_cards(
         &self,
         ctx: &Context<'_>,
-        after: Option<Cursor>,
-        before: Option<Cursor>,
+        after: Option<String>,
+        before: Option<String>,
         first: Option<i32>,
         last: Option<i32>,
-    ) -> FieldResult<Connection<interfaces::Card, EmptyEdgeFields>> {
+    ) -> FieldResult<Connection<String, interfaces::Card, EmptyFields, EmptyFields>> {
         CardDataSource.query(ctx, after, before, first, last).await
     }
 

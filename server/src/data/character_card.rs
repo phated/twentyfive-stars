@@ -1,6 +1,6 @@
 use crate::data::{CardCategory, CardRarity, CharacterMode, Wave};
 use crate::graphql_schema::ContextData;
-use async_graphql::{Context, Cursor, FieldResult};
+use async_graphql::{Context, FieldResult};
 use uuid::Uuid;
 
 #[derive(Debug, Clone, sqlx::FromRow)]
@@ -12,12 +12,6 @@ pub struct CharacterCard {
     pub rarity: CardRarity,
     pub number: String,
     pub category: CardCategory,
-}
-
-impl Into<Cursor> for CharacterCard {
-    fn into(self) -> Cursor {
-        self.id.into()
-    }
 }
 
 #[async_graphql::Object]
@@ -49,7 +43,10 @@ impl CharacterCard {
         Ok(wave)
     }
 
-    // pub async fn modes(&self) -> &Vec<CharacterMode> {
-    //     &self.1.modes
-    // }
+    pub async fn modes(&self, ctx: &Context<'_>) -> FieldResult<Vec<CharacterMode>> {
+        let data = ctx.data::<ContextData>();
+        let modes = data.db.get_modes_for_character_card(self).await?;
+
+        Ok(modes)
+    }
 }

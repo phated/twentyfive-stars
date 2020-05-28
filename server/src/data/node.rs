@@ -17,6 +17,4 @@ pub struct Node {
     pub id: i32,
     pub node_id: Uuid,
     pub node_type: NodeType,
-    pub has_previous: bool,
-    pub has_next: bool,
 }

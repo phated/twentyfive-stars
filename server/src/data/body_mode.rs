@@ -4,8 +4,10 @@ use uuid::Uuid;
 #[async_graphql::SimpleObject]
 #[derive(Clone, Debug)]
 pub struct BodyMode {
-    pub id: i32,
+    #[field(skip)]
     pub node_id: Uuid,
+
+    pub id: i32,
     pub title: String,
     pub subtitle: String,
     pub stars: i32,
