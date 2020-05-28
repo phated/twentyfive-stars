@@ -16,6 +16,8 @@ dotenv = "0.15.0"
 env_logger = "0.7.1"
 futures = "0.3.5"
 smol = "0.1.0"
-sqlx = { path = "../../sqlx", features = ["postgres", "chrono", "uuid", "offline"] }
+# Note: This is replaced by a fork that hard codes custom types and their OID
+# That will be an issue after a new migration
+sqlx = { version = "0.3.5", features = ["postgres", "chrono", "uuid", "offline"] }
 tide = "0.8.1"
 uuid = { version = "0.8.1", features = ["serde", "v4"] }

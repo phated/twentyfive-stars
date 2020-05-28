@@ -1695,14 +1695,23 @@ dependencies = [
 [[package]]
 name = "sqlx"
 version = "0.3.5"
+source = "git+https://github.com/phated/sqlx?branch=custom-types-offline#3d4e05be7e4fa8a43922fd7452300b6ec767e244"
 dependencies = [
  "sqlx-core",
  "sqlx-macros",
 ]
 
 [[package]]
+name = "sqlx"
+version = "0.3.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8974cacd80085fbe49e778708d660dec6fb351604dc34c3905b26efb2803b038"
+replace = "sqlx 0.3.5 (git+https://github.com/phated/sqlx?branch=custom-types-offline)"
+
+[[package]]
 name = "sqlx-core"
 version = "0.3.5"
+source = "git+https://github.com/phated/sqlx?branch=custom-types-offline#3d4e05be7e4fa8a43922fd7452300b6ec767e244"
 dependencies = [
  "async-native-tls",
  "async-std",
@@ -1736,6 +1745,7 @@ dependencies = [
 [[package]]
 name = "sqlx-macros"
 version = "0.3.5"
+source = "git+https://github.com/phated/sqlx?branch=custom-types-offline#3d4e05be7e4fa8a43922fd7452300b6ec767e244"
 dependencies = [
  "async-std",
  "dotenv",
@@ -1928,7 +1938,7 @@ dependencies = [
  "env_logger",
  "futures",
  "smol",
- "sqlx",
+ "sqlx 0.3.5 (registry+https://github.com/rust-lang/crates.io-index)",
  "tide",
  "uuid",
 ]
