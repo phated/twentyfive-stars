@@ -1,8 +1,10 @@
-use crate::data::CardDataSource;
+use crate::data::{CardDataSource, NodeType};
 use crate::database::Database;
 use crate::schema::interfaces;
 use async_graphql::connection::{Connection, DataSource, EmptyFields};
-use async_graphql::{Context, FieldResult};
+use async_graphql::{Context, FieldResult, ID};
+use std::convert::TryFrom;
+use uuid::Uuid;
 
 pub struct QueryRoot;
 
@@ -12,12 +14,22 @@ pub struct ContextData {
 
 #[async_graphql::Object]
 impl QueryRoot {
-    // fn node(context: &Context, id: ID) -> FieldResult<Node> {
-    //   let node = database::get_node(&context.connection, id)?;
-    //   Ok(node)
-    // }
+    pub async fn node(&self, ctx: &Context<'_>, id: ID) -> FieldResult<interfaces::Node> {
+        let data = ctx.data::<ContextData>();
+        let node_id = Uuid::try_from(id)?;
+        let node = data.db.get_node_by_uuid(node_id).await?;
 
-    async fn all_cards(
+        match node.node_type {
+            NodeType::Battle => {
+                let battle_card = data.db.get_battle_card(node.id).await?;
+
+                Ok(battle_card.into())
+            }
+            _ => todo!(),
+        }
+    }
+
+    pub async fn all_cards(
         &self,
         ctx: &Context<'_>,
         after: Option<String>,

@@ -1,5 +1,45 @@
 {
   "db": "PostgreSQL",
+  "0b7cae1e267eb61494d3b8ddfadcf9b455b2a5f90018e43e466461d939b0972a": {
+    "query": "\n            SELECT id, node_id, node_type\n            FROM nodes\n            WHERE node_id = $1;\n            ",
+    "describe": {
+      "param_types": [
+        {
+          "id": 2950,
+          "name": "UUID"
+        }
+      ],
+      "result_columns": [
+        {
+          "name": "id",
+          "table_id": 17203,
+          "type_info": {
+            "id": 23,
+            "name": "INT4"
+          },
+          "non_null": true
+        },
+        {
+          "name": "node_id",
+          "table_id": 17203,
+          "type_info": {
+            "id": 2950,
+            "name": "UUID"
+          },
+          "non_null": false
+        },
+        {
+          "name": "node_type",
+          "table_id": 17203,
+          "type_info": {
+            "id": 17086,
+            "name": "NODE_TYPE"
+          },
+          "non_null": true
+        }
+      ]
+    }
+  },
   "643a1ee5662887c397a613f655ab025c3b0dde1d30ce9a68aaad714e2b22a206": {
     "query": "\n            SELECT w.id, n.node_id, w.tcg_id, w.name, w.released\n            FROM stratagem_cards AS s, waves AS w, nodes AS n\n            WHERE w.id = n.id AND w.id = s.wave_id AND s.id = $1;\n            ",
     "describe": {

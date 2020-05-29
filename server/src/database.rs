@@ -7,6 +7,7 @@ use crate::data::{
 };
 use sqlx::postgres::PgPool;
 use std::convert::TryFrom;
+use uuid::Uuid;
 
 pub type Error = Box<dyn std::error::Error + Send + Sync>;
 
@@ -39,6 +40,22 @@ impl Database {
         .await?;
 
         Ok(card_nodes)
+    }
+
+    pub async fn get_node_by_uuid(&self, node_id: Uuid) -> Result<Node, Error> {
+        let node = sqlx::query_as!(
+            Node,
+            r#"
+            SELECT id, node_id, node_type
+            FROM nodes
+            WHERE node_id = $1;
+            "#,
+            node_id
+        )
+        .fetch_one(&self.pool)
+        .await?;
+
+        Ok(node)
     }
 }
 
