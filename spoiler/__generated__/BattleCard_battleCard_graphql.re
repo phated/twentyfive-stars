@@ -104,13 +104,15 @@ module Types = {
       | `UPGRADE_WEAPON
       | `FutureAddedValue(string)
     ],
+    getFragmentRefs:
+      unit => {. "__$fragment_ref__Card_card": Card_card_graphql.t},
   };
 };
 
 module Internal = {
   type fragmentRaw;
   let fragmentConverter: Js.Dict.t(Js.Dict.t(Js.Dict.t(string))) = [%raw
-    {json| {"__root":{"attackModifier":{"n":""},"defenseModifier":{"n":""},"faction":{"n":"","e":"enum_Faction"},"icons":{"e":"enum_BattleIcon"},"stars":{"n":""},"type_":{"e":"enum_BattleType"}}} |json}
+    {json| {"__root":{"attackModifier":{"n":""},"defenseModifier":{"n":""},"faction":{"n":"","e":"enum_Faction"},"icons":{"e":"enum_BattleIcon"},"stars":{"n":""},"type_":{"e":"enum_BattleType"},"":{"f":""}}} |json}
   ];
   let fragmentConverterMap = {
     "enum_Faction": unwrap_enum_Faction,
@@ -192,6 +194,11 @@ let node: operationType = [%raw
       "name": "type",
       "args": null,
       "storageKey": null
+    },
+    {
+      "kind": "FragmentSpread",
+      "name": "Card_card",
+      "args": null
     }
   ]
 } |json}

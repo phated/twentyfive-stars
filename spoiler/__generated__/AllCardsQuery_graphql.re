@@ -1,91 +1,28 @@
 /* @generated */
 
-type enum_CardRarity = [
-  | `COMMON
-  | `PROMO
-  | `RARE
-  | `SUPER_RARE
-  | `THEME
-  | `UNCOMMON
-  | `FutureAddedValue(string)
-];
-
-let unwrap_enum_CardRarity: string => enum_CardRarity =
-  fun
-  | "COMMON" => `COMMON
-  | "PROMO" => `PROMO
-  | "RARE" => `RARE
-  | "SUPER_RARE" => `SUPER_RARE
-  | "THEME" => `THEME
-  | "UNCOMMON" => `UNCOMMON
-  | v => `FutureAddedValue(v);
-
-let wrap_enum_CardRarity: enum_CardRarity => string =
-  fun
-  | `COMMON => "COMMON"
-  | `PROMO => "PROMO"
-  | `RARE => "RARE"
-  | `SUPER_RARE => "SUPER_RARE"
-  | `THEME => "THEME"
-  | `UNCOMMON => "UNCOMMON"
-  | `FutureAddedValue(v) => v;
-
-type enum_CardCategory = [
-  | `BATTLE
-  | `CHARACTER
-  | `STRATAGEM
-  | `FutureAddedValue(string)
-];
-
-let unwrap_enum_CardCategory: string => enum_CardCategory =
-  fun
-  | "BATTLE" => `BATTLE
-  | "CHARACTER" => `CHARACTER
-  | "STRATAGEM" => `STRATAGEM
-  | v => `FutureAddedValue(v);
-
-let wrap_enum_CardCategory: enum_CardCategory => string =
-  fun
-  | `BATTLE => "BATTLE"
-  | `CHARACTER => "CHARACTER"
-  | `STRATAGEM => "STRATAGEM"
-  | `FutureAddedValue(v) => v;
-
 module Types = {
-  type response_allCards_edges_node_wave = {
-    getFragmentRefs:
-      unit => {. "__$fragment_ref__Wave_wave": Wave_wave_graphql.t},
-  };
-  type response_allCards_edges_node = {
-    __typename: string,
-    tcgId: string,
-    category: [
-      | `BATTLE
-      | `CHARACTER
-      | `STRATAGEM
-      | `FutureAddedValue(string)
-    ],
-    number: string,
-    rarity: [
-      | `COMMON
-      | `PROMO
-      | `RARE
-      | `SUPER_RARE
-      | `THEME
-      | `UNCOMMON
-      | `FutureAddedValue(string)
-    ],
-    wave: response_allCards_edges_node_wave,
-    id: option(string),
+  type response_allCards_edges_node_BattleCard = {
+    id: string,
     getFragmentRefs:
       unit =>
       {
         .
-        "__$fragment_ref__CardCategory_card": CardCategory_card_graphql.t,
         "__$fragment_ref__BattleCard_battleCard": BattleCard_battleCard_graphql.t,
       },
   };
-  type response_allCards_edges = {node: response_allCards_edges_node};
+  type response_allCards_edges_node_CharacterCard = {id: string};
+  type response_allCards_edges_node = [
+    | `BattleCard(response_allCards_edges_node_BattleCard)
+    | `CharacterCard(response_allCards_edges_node_CharacterCard)
+    | `UnselectedUnionMember(string)
+  ];
+  type response_allCards_edges = {
+    node: [
+      | `BattleCard(response_allCards_edges_node_BattleCard)
+      | `CharacterCard(response_allCards_edges_node_CharacterCard)
+      | `UnselectedUnionMember(string)
+    ],
+  };
   type response_allCards = {
     edges: option(array(option(response_allCards_edges))),
   };
@@ -94,14 +31,39 @@ module Types = {
   type variables = unit;
 };
 
+let unwrap_response_allCards_edges_node:
+  {. "__typename": string} =>
+  [
+    | `BattleCard(Types.response_allCards_edges_node_BattleCard)
+    | `CharacterCard(Types.response_allCards_edges_node_CharacterCard)
+    | `UnselectedUnionMember(string)
+  ] =
+  u =>
+    switch (u##__typename) {
+    | "BattleCard" => `BattleCard(u->Obj.magic)
+    | "CharacterCard" => `CharacterCard(u->Obj.magic)
+    | v => `UnselectedUnionMember(v)
+    };
+
+let wrap_response_allCards_edges_node:
+  [
+    | `BattleCard(Types.response_allCards_edges_node_BattleCard)
+    | `CharacterCard(Types.response_allCards_edges_node_CharacterCard)
+    | `UnselectedUnionMember(string)
+  ] =>
+  {. "__typename": string} =
+  fun
+  | `BattleCard(v) => v->Obj.magic
+  | `CharacterCard(v) => v->Obj.magic
+  | `UnselectedUnionMember(v) => {"__typename": v};
+
 module Internal = {
   type responseRaw;
   let responseConverter: Js.Dict.t(Js.Dict.t(Js.Dict.t(string))) = [%raw
-    {json| {"__root":{"allCards_edges":{"n":"","na":""},"allCards_edges_node_category":{"e":"enum_CardCategory"},"allCards_edges_node_rarity":{"e":"enum_CardRarity"},"allCards_edges_node_wave":{"f":""},"allCards_edges_node_id":{"n":""},"allCards_edges_node":{"f":""}}} |json}
+    {json| {"__root":{"allCards_edges":{"n":"","na":""},"allCards_edges_node":{"u":"response_allCards_edges_node"},"allCards_edges_node_battlecard":{"f":""}}} |json}
   ];
   let responseConverterMap = {
-    "enum_CardCategory": unwrap_enum_CardCategory,
-    "enum_CardRarity": unwrap_enum_CardRarity,
+    "response_allCards_edges_node": unwrap_response_allCards_edges_node,
   };
   let convertResponse = v =>
     v
@@ -142,35 +104,14 @@ var v0 = {
 v1 = {
   "kind": "ScalarField",
   "alias": null,
-  "name": "tcgId",
+  "name": "id",
   "args": null,
   "storageKey": null
 },
 v2 = {
   "kind": "ScalarField",
   "alias": null,
-  "name": "category",
-  "args": null,
-  "storageKey": null
-},
-v3 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "number",
-  "args": null,
-  "storageKey": null
-},
-v4 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "rarity",
-  "args": null,
-  "storageKey": null
-},
-v5 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "id",
+  "name": "tcgId",
   "args": null,
   "storageKey": null
 };
@@ -189,7 +130,7 @@ return {
         "name": "allCards",
         "storageKey": null,
         "args": null,
-        "concreteType": "CardConnection",
+        "concreteType": "CardsConnection",
         "plural": false,
         "selections": [
           {
@@ -198,7 +139,7 @@ return {
             "name": "edges",
             "storageKey": null,
             "args": null,
-            "concreteType": "CardEdge",
+            "concreteType": "CardsEdge",
             "plural": true,
             "selections": [
               {
@@ -211,35 +152,11 @@ return {
                 "plural": false,
                 "selections": [
                   (v0/*: any*/),
-                  (v1/*: any*/),
-                  (v2/*: any*/),
-                  (v3/*: any*/),
-                  (v4/*: any*/),
-                  {
-                    "kind": "LinkedField",
-                    "alias": null,
-                    "name": "wave",
-                    "storageKey": null,
-                    "args": null,
-                    "concreteType": "Wave",
-                    "plural": false,
-                    "selections": [
-                      {
-                        "kind": "FragmentSpread",
-                        "name": "Wave_wave",
-                        "args": null
-                      }
-                    ]
-                  },
-                  {
-                    "kind": "FragmentSpread",
-                    "name": "CardCategory_card",
-                    "args": null
-                  },
                   {
                     "kind": "InlineFragment",
                     "type": "BattleCard",
                     "selections": [
+                      (v1/*: any*/),
                       {
                         "kind": "FragmentSpread",
                         "name": "BattleCard_battleCard",
@@ -251,7 +168,7 @@ return {
                     "kind": "InlineFragment",
                     "type": "CharacterCard",
                     "selections": [
-                      (v5/*: any*/)
+                      (v1/*: any*/)
                     ]
                   }
                 ]
@@ -273,7 +190,7 @@ return {
         "name": "allCards",
         "storageKey": null,
         "args": null,
-        "concreteType": "CardConnection",
+        "concreteType": "CardsConnection",
         "plural": false,
         "selections": [
           {
@@ -282,7 +199,7 @@ return {
             "name": "edges",
             "storageKey": null,
             "args": null,
-            "concreteType": "CardEdge",
+            "concreteType": "CardsEdge",
             "plural": true,
             "selections": [
               {
@@ -296,41 +213,45 @@ return {
                 "selections": [
                   (v0/*: any*/),
                   (v1/*: any*/),
-                  (v2/*: any*/),
-                  (v3/*: any*/),
-                  (v4/*: any*/),
-                  {
-                    "kind": "LinkedField",
-                    "alias": null,
-                    "name": "wave",
-                    "storageKey": null,
-                    "args": null,
-                    "concreteType": "Wave",
-                    "plural": false,
-                    "selections": [
-                      {
-                        "kind": "ScalarField",
-                        "alias": null,
-                        "name": "name",
-                        "args": null,
-                        "storageKey": null
-                      },
-                      (v1/*: any*/),
-                      {
-                        "kind": "ScalarField",
-                        "alias": null,
-                        "name": "released",
-                        "args": null,
-                        "storageKey": null
-                      },
-                      (v5/*: any*/)
-                    ]
-                  },
-                  (v5/*: any*/),
                   {
                     "kind": "InlineFragment",
                     "type": "BattleCard",
                     "selections": [
+                      (v2/*: any*/),
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "name": "category",
+                        "args": null,
+                        "storageKey": null
+                      },
+                      {
+                        "kind": "LinkedField",
+                        "alias": null,
+                        "name": "wave",
+                        "storageKey": null,
+                        "args": null,
+                        "concreteType": "Wave",
+                        "plural": false,
+                        "selections": [
+                          {
+                            "kind": "ScalarField",
+                            "alias": null,
+                            "name": "name",
+                            "args": null,
+                            "storageKey": null
+                          },
+                          (v2/*: any*/),
+                          {
+                            "kind": "ScalarField",
+                            "alias": null,
+                            "name": "released",
+                            "args": null,
+                            "storageKey": null
+                          },
+                          (v1/*: any*/)
+                        ]
+                      },
                       {
                         "kind": "ScalarField",
                         "alias": null,
@@ -394,7 +315,7 @@ return {
     "operationKind": "query",
     "name": "AllCardsQuery",
     "id": null,
-    "text": "query AllCardsQuery {\n  allCards {\n    edges {\n      node {\n        __typename\n        tcgId\n        category\n        ...CardCategory_card\n        number\n        rarity\n        wave {\n          ...Wave_wave\n          id\n        }\n        ... on BattleCard {\n          ...BattleCard_battleCard\n        }\n        ... on CharacterCard {\n          id\n        }\n        id\n      }\n    }\n  }\n}\n\nfragment BattleCard_battleCard on BattleCard {\n  attackModifier\n  defenseModifier\n  faction\n  icons\n  stars\n  title\n  type_: type\n}\n\nfragment CardCategory_card on Card {\n  category\n}\n\nfragment Wave_wave on Wave {\n  name\n  tcgId\n  released\n}\n",
+    "text": "query AllCardsQuery {\n  allCards {\n    edges {\n      node {\n        __typename\n        ... on BattleCard {\n          id\n          ...BattleCard_battleCard\n        }\n        ... on CharacterCard {\n          id\n        }\n        ... on Node {\n          id\n        }\n      }\n    }\n  }\n}\n\nfragment BattleCard_battleCard on BattleCard {\n  ...Card_card\n  attackModifier\n  defenseModifier\n  faction\n  icons\n  stars\n  title\n  type_: type\n}\n\nfragment CardCategory_card on Card {\n  category\n}\n\nfragment Card_card on Card {\n  tcgId\n  ...CardCategory_card\n  wave {\n    ...Wave_wave\n    id\n  }\n}\n\nfragment Wave_wave on Wave {\n  name\n  tcgId\n  released\n}\n",
     "metadata": {}
   }
 };
