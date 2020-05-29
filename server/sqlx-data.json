@@ -1,5 +1,63 @@
 {
   "db": "PostgreSQL",
+  "07dc8a31e993cd56a00570cf0598e1faec9ab23bbdddeb84e7a7a01062a2d5dd": {
+    "query": "\n            SELECT w.id, n.node_id, w.tcg_id, w.name, w.released\n            FROM waves AS w, nodes AS n\n            WHERE w.id = n.id AND n.id = $1\n            ORDER BY n.id;\n            ",
+    "describe": {
+      "param_types": [
+        {
+          "id": 23,
+          "name": "INT4"
+        }
+      ],
+      "result_columns": [
+        {
+          "name": "id",
+          "table_id": 17212,
+          "type_info": {
+            "id": 23,
+            "name": "INT4"
+          },
+          "non_null": true
+        },
+        {
+          "name": "node_id",
+          "table_id": 17203,
+          "type_info": {
+            "id": 2950,
+            "name": "UUID"
+          },
+          "non_null": false
+        },
+        {
+          "name": "tcg_id",
+          "table_id": 17212,
+          "type_info": {
+            "id": 1043,
+            "name": "VARCHAR"
+          },
+          "non_null": true
+        },
+        {
+          "name": "name",
+          "table_id": 17212,
+          "type_info": {
+            "id": 1043,
+            "name": "VARCHAR"
+          },
+          "non_null": true
+        },
+        {
+          "name": "released",
+          "table_id": 17212,
+          "type_info": {
+            "id": 1082,
+            "name": "DATE"
+          },
+          "non_null": true
+        }
+      ]
+    }
+  },
   "0b7cae1e267eb61494d3b8ddfadcf9b455b2a5f90018e43e466461d939b0972a": {
     "query": "\n            SELECT id, node_id, node_type\n            FROM nodes\n            WHERE node_id = $1;\n            ",
     "describe": {
@@ -34,6 +92,252 @@
           "type_info": {
             "id": 17086,
             "name": "NODE_TYPE"
+          },
+          "non_null": true
+        }
+      ]
+    }
+  },
+  "1f059a6843d068939dd48cda1e0f4975ad7b9bd58fb50ae0ddecbc66db16bd24": {
+    "query": "\n        SELECT bc.id, n.node_id, bc.tcg_id, bc.rarity, bc.number, bc.category, bc.title, bc.stars, bc.type, bc.attack_modifier, bc.defense_modifier, bc.faction\n        FROM battle_cards AS bc, nodes AS n\n        WHERE bc.id = n.id AND n.id = $1\n        ORDER BY n.id;\n        ",
+    "describe": {
+      "param_types": [
+        {
+          "id": 23,
+          "name": "INT4"
+        }
+      ],
+      "result_columns": [
+        {
+          "name": "id",
+          "table_id": 17229,
+          "type_info": {
+            "id": 23,
+            "name": "INT4"
+          },
+          "non_null": true
+        },
+        {
+          "name": "node_id",
+          "table_id": 17203,
+          "type_info": {
+            "id": 2950,
+            "name": "UUID"
+          },
+          "non_null": false
+        },
+        {
+          "name": "tcg_id",
+          "table_id": 17229,
+          "type_info": {
+            "id": 1043,
+            "name": "VARCHAR"
+          },
+          "non_null": true
+        },
+        {
+          "name": "rarity",
+          "table_id": 17229,
+          "type_info": {
+            "id": 17098,
+            "name": "CARD_RARITY"
+          },
+          "non_null": true
+        },
+        {
+          "name": "number",
+          "table_id": 17229,
+          "type_info": {
+            "id": 1043,
+            "name": "VARCHAR"
+          },
+          "non_null": true
+        },
+        {
+          "name": "category",
+          "table_id": 17229,
+          "type_info": {
+            "id": 17112,
+            "name": "CARD_CATEGORY"
+          },
+          "non_null": true
+        },
+        {
+          "name": "title",
+          "table_id": 17229,
+          "type_info": {
+            "id": 1043,
+            "name": "VARCHAR"
+          },
+          "non_null": true
+        },
+        {
+          "name": "stars",
+          "table_id": 17229,
+          "type_info": {
+            "id": 23,
+            "name": "INT4"
+          },
+          "non_null": false
+        },
+        {
+          "name": "type",
+          "table_id": 17229,
+          "type_info": {
+            "id": 17144,
+            "name": "BATTLE_TYPE"
+          },
+          "non_null": true
+        },
+        {
+          "name": "attack_modifier",
+          "table_id": 17229,
+          "type_info": {
+            "id": 23,
+            "name": "INT4"
+          },
+          "non_null": false
+        },
+        {
+          "name": "defense_modifier",
+          "table_id": 17229,
+          "type_info": {
+            "id": 23,
+            "name": "INT4"
+          },
+          "non_null": false
+        },
+        {
+          "name": "faction",
+          "table_id": 17229,
+          "type_info": {
+            "id": 17194,
+            "name": "FACTION"
+          },
+          "non_null": false
+        }
+      ]
+    }
+  },
+  "2a16aa0376ec64226158c93065530f694304dbd19f49a3e84ca58f2cb9deed85": {
+    "query": "\n        SELECT sc.id, n.node_id, sc.tcg_id, sc.rarity, sc.number, sc.category\n        FROM stratagem_cards AS sc, nodes AS n\n        WHERE sc.id = n.id AND n.id = $1;\n        ",
+    "describe": {
+      "param_types": [
+        {
+          "id": 23,
+          "name": "INT4"
+        }
+      ],
+      "result_columns": [
+        {
+          "name": "id",
+          "table_id": 17290,
+          "type_info": {
+            "id": 23,
+            "name": "INT4"
+          },
+          "non_null": true
+        },
+        {
+          "name": "node_id",
+          "table_id": 17203,
+          "type_info": {
+            "id": 2950,
+            "name": "UUID"
+          },
+          "non_null": false
+        },
+        {
+          "name": "tcg_id",
+          "table_id": 17290,
+          "type_info": {
+            "id": 1043,
+            "name": "VARCHAR"
+          },
+          "non_null": true
+        },
+        {
+          "name": "rarity",
+          "table_id": 17290,
+          "type_info": {
+            "id": 17098,
+            "name": "CARD_RARITY"
+          },
+          "non_null": true
+        },
+        {
+          "name": "number",
+          "table_id": 17290,
+          "type_info": {
+            "id": 1043,
+            "name": "VARCHAR"
+          },
+          "non_null": true
+        },
+        {
+          "name": "category",
+          "table_id": 17290,
+          "type_info": {
+            "id": 17112,
+            "name": "CARD_CATEGORY"
+          },
+          "non_null": true
+        }
+      ]
+    }
+  },
+  "59a52a00ccfe732b41f6623f683f1596d88894925928e00a5139d62a5696775c": {
+    "query": "\n            SELECT w.id, n.node_id, w.tcg_id, w.name, w.released\n            FROM waves AS w, nodes AS n\n            WHERE w.id = n.id AND n.id= $1;\n            ",
+    "describe": {
+      "param_types": [
+        {
+          "id": 23,
+          "name": "INT4"
+        }
+      ],
+      "result_columns": [
+        {
+          "name": "id",
+          "table_id": 17212,
+          "type_info": {
+            "id": 23,
+            "name": "INT4"
+          },
+          "non_null": true
+        },
+        {
+          "name": "node_id",
+          "table_id": 17203,
+          "type_info": {
+            "id": 2950,
+            "name": "UUID"
+          },
+          "non_null": false
+        },
+        {
+          "name": "tcg_id",
+          "table_id": 17212,
+          "type_info": {
+            "id": 1043,
+            "name": "VARCHAR"
+          },
+          "non_null": true
+        },
+        {
+          "name": "name",
+          "table_id": 17212,
+          "type_info": {
+            "id": 1043,
+            "name": "VARCHAR"
+          },
+          "non_null": true
+        },
+        {
+          "name": "released",
+          "table_id": 17212,
+          "type_info": {
+            "id": 1082,
+            "name": "DATE"
           },
           "non_null": true
         }
@@ -219,6 +523,41 @@
       ]
     }
   },
+  "7d1a7caaf3304bccd7265bc3126b30c87235530c535bbdfc4d0d31811caecdf2": {
+    "query": "\n        SELECT id, node_id, node_type\n        FROM nodes\n        WHERE node_type IN ('BATTLE', 'CHARACTER', 'STRATAGEM')\n        ORDER BY id\n        ",
+    "describe": {
+      "param_types": [],
+      "result_columns": [
+        {
+          "name": "id",
+          "table_id": 17203,
+          "type_info": {
+            "id": 23,
+            "name": "INT4"
+          },
+          "non_null": true
+        },
+        {
+          "name": "node_id",
+          "table_id": 17203,
+          "type_info": {
+            "id": 2950,
+            "name": "UUID"
+          },
+          "non_null": false
+        },
+        {
+          "name": "node_type",
+          "table_id": 17203,
+          "type_info": {
+            "id": 17086,
+            "name": "NODE_TYPE"
+          },
+          "non_null": true
+        }
+      ]
+    }
+  },
   "7e52634894999cb3275d7e7fad406591d09806f1ee1ce0cbe5388bd0eeaf81c4": {
     "query": "\n        SELECT cc.id, n.node_id, cc.tcg_id, cc.rarity, cc.number, cc.category\n        FROM character_cards AS cc, nodes AS n\n        WHERE cc.id = n.id AND n.id = $1;\n        ",
     "describe": {
@@ -280,6 +619,100 @@
           "type_info": {
             "id": 17112,
             "name": "CARD_CATEGORY"
+          },
+          "non_null": true
+        }
+      ]
+    }
+  },
+  "9a028879cae2f0a9add39d19d2a32c05889efa909280dea20422a335eb3c20f3": {
+    "query": "\n        SELECT sc.id, n.node_id, sc.tcg_id, sc.rarity, sc.number, sc.category, sc.faction, sc.requirement, sc.stars\n        FROM stratagem_cards AS sc, nodes AS n\n        WHERE sc.id = n.id AND n.id = $1;\n        ",
+    "describe": {
+      "param_types": [
+        {
+          "id": 23,
+          "name": "INT4"
+        }
+      ],
+      "result_columns": [
+        {
+          "name": "id",
+          "table_id": 17290,
+          "type_info": {
+            "id": 23,
+            "name": "INT4"
+          },
+          "non_null": true
+        },
+        {
+          "name": "node_id",
+          "table_id": 17203,
+          "type_info": {
+            "id": 2950,
+            "name": "UUID"
+          },
+          "non_null": false
+        },
+        {
+          "name": "tcg_id",
+          "table_id": 17290,
+          "type_info": {
+            "id": 1043,
+            "name": "VARCHAR"
+          },
+          "non_null": true
+        },
+        {
+          "name": "rarity",
+          "table_id": 17290,
+          "type_info": {
+            "id": 17098,
+            "name": "CARD_RARITY"
+          },
+          "non_null": true
+        },
+        {
+          "name": "number",
+          "table_id": 17290,
+          "type_info": {
+            "id": 1043,
+            "name": "VARCHAR"
+          },
+          "non_null": true
+        },
+        {
+          "name": "category",
+          "table_id": 17290,
+          "type_info": {
+            "id": 17112,
+            "name": "CARD_CATEGORY"
+          },
+          "non_null": true
+        },
+        {
+          "name": "faction",
+          "table_id": 17290,
+          "type_info": {
+            "id": 17194,
+            "name": "FACTION"
+          },
+          "non_null": true
+        },
+        {
+          "name": "requirement",
+          "table_id": 17290,
+          "type_info": {
+            "id": 1043,
+            "name": "VARCHAR"
+          },
+          "non_null": true
+        },
+        {
+          "name": "stars",
+          "table_id": 17290,
+          "type_info": {
+            "id": 23,
+            "name": "INT4"
           },
           "non_null": true
         }
@@ -402,6 +835,139 @@
       ]
     }
   },
+  "9f9fe7109156c2ce25886910f0da3489e6a5a70a41d8a5d5c50c2e01db9307ee": {
+    "query": "\n            SELECT id, node_id, node_type\n            FROM nodes\n            WHERE node_id = $1\n            ORDER BY id;\n            ",
+    "describe": {
+      "param_types": [
+        {
+          "id": 2950,
+          "name": "UUID"
+        }
+      ],
+      "result_columns": [
+        {
+          "name": "id",
+          "table_id": 17203,
+          "type_info": {
+            "id": 23,
+            "name": "INT4"
+          },
+          "non_null": true
+        },
+        {
+          "name": "node_id",
+          "table_id": 17203,
+          "type_info": {
+            "id": 2950,
+            "name": "UUID"
+          },
+          "non_null": false
+        },
+        {
+          "name": "node_type",
+          "table_id": 17203,
+          "type_info": {
+            "id": 17086,
+            "name": "NODE_TYPE"
+          },
+          "non_null": true
+        }
+      ]
+    }
+  },
+  "a704ee04c52bca2ea971f7816939ae03473ef88eea3e117055b8c065a789e830": {
+    "query": "\n            SELECT w.id, n.node_id, w.tcg_id, w.name, w.released\n            FROM waves AS w, nodes AS n\n            WHERE w.id = n.id AND n.id = $1;\n            ",
+    "describe": {
+      "param_types": [
+        {
+          "id": 23,
+          "name": "INT4"
+        }
+      ],
+      "result_columns": [
+        {
+          "name": "id",
+          "table_id": 17212,
+          "type_info": {
+            "id": 23,
+            "name": "INT4"
+          },
+          "non_null": true
+        },
+        {
+          "name": "node_id",
+          "table_id": 17203,
+          "type_info": {
+            "id": 2950,
+            "name": "UUID"
+          },
+          "non_null": false
+        },
+        {
+          "name": "tcg_id",
+          "table_id": 17212,
+          "type_info": {
+            "id": 1043,
+            "name": "VARCHAR"
+          },
+          "non_null": true
+        },
+        {
+          "name": "name",
+          "table_id": 17212,
+          "type_info": {
+            "id": 1043,
+            "name": "VARCHAR"
+          },
+          "non_null": true
+        },
+        {
+          "name": "released",
+          "table_id": 17212,
+          "type_info": {
+            "id": 1082,
+            "name": "DATE"
+          },
+          "non_null": true
+        }
+      ]
+    }
+  },
+  "a847c26521452c37d6456e16cee407b4bdd0828b66e26752fc2624058f0f6dcf": {
+    "query": "\n        SELECT id, node_id, node_type\n        FROM nodes\n        WHERE node_type IN ('BATTLE', 'CHARACTER', 'STRATAGEM')\n        ORDER BY id;\n        ",
+    "describe": {
+      "param_types": [],
+      "result_columns": [
+        {
+          "name": "id",
+          "table_id": 17203,
+          "type_info": {
+            "id": 23,
+            "name": "INT4"
+          },
+          "non_null": true
+        },
+        {
+          "name": "node_id",
+          "table_id": 17203,
+          "type_info": {
+            "id": 2950,
+            "name": "UUID"
+          },
+          "non_null": false
+        },
+        {
+          "name": "node_type",
+          "table_id": 17203,
+          "type_info": {
+            "id": 17086,
+            "name": "NODE_TYPE"
+          },
+          "non_null": true
+        }
+      ]
+    }
+  },
   "b5638cec96f1aae79569cf21e674f2e581d5d7f4f2dd472c9aa46d3a12e62a38": {
     "query": "\n            SELECT id, node_id, node_type\n            FROM nodes\n            WHERE node_type IN ('BATTLE', 'CHARACTER', 'STRATAGEM')",
     "describe": {
@@ -433,6 +999,136 @@
             "name": "NODE_TYPE"
           },
           "non_null": true
+        }
+      ]
+    }
+  },
+  "e1e6ef8a9272e70dcd4f870fa1fbe96b26f0305b03f8ee7583deed92cdd8bb0b": {
+    "query": "\n        SELECT cm.id, n.node_id, cm.title, cm.subtitle, cm.faction, cm.traits::TEXT[], cm.type,\n        cm.stars, cm.health, cm.attack, cm.defense, cm.attack_modifier, cm.defense_modifier\n        FROM character_modes AS cm, nodes AS n\n        WHERE cm.id = n.id AND character_id = $1\n        ORDER BY n.id;\n        ",
+    "describe": {
+      "param_types": [
+        {
+          "id": 23,
+          "name": "INT4"
+        }
+      ],
+      "result_columns": [
+        {
+          "name": "id",
+          "table_id": 17270,
+          "type_info": {
+            "id": 23,
+            "name": "INT4"
+          },
+          "non_null": true
+        },
+        {
+          "name": "node_id",
+          "table_id": 17203,
+          "type_info": {
+            "id": 2950,
+            "name": "UUID"
+          },
+          "non_null": false
+        },
+        {
+          "name": "title",
+          "table_id": 17270,
+          "type_info": {
+            "id": 1043,
+            "name": "VARCHAR"
+          },
+          "non_null": true
+        },
+        {
+          "name": "subtitle",
+          "table_id": 17270,
+          "type_info": {
+            "id": 1043,
+            "name": "VARCHAR"
+          },
+          "non_null": false
+        },
+        {
+          "name": "faction",
+          "table_id": 17270,
+          "type_info": {
+            "id": 17194,
+            "name": "FACTION"
+          },
+          "non_null": true
+        },
+        {
+          "name": "traits",
+          "table_id": null,
+          "type_info": {
+            "id": 1009,
+            "name": "TEXT[]"
+          },
+          "non_null": null
+        },
+        {
+          "name": "type",
+          "table_id": 17270,
+          "type_info": {
+            "id": 17120,
+            "name": "MODE_TYPE"
+          },
+          "non_null": true
+        },
+        {
+          "name": "stars",
+          "table_id": 17270,
+          "type_info": {
+            "id": 23,
+            "name": "INT4"
+          },
+          "non_null": true
+        },
+        {
+          "name": "health",
+          "table_id": 17270,
+          "type_info": {
+            "id": 23,
+            "name": "INT4"
+          },
+          "non_null": false
+        },
+        {
+          "name": "attack",
+          "table_id": 17270,
+          "type_info": {
+            "id": 23,
+            "name": "INT4"
+          },
+          "non_null": false
+        },
+        {
+          "name": "defense",
+          "table_id": 17270,
+          "type_info": {
+            "id": 23,
+            "name": "INT4"
+          },
+          "non_null": false
+        },
+        {
+          "name": "attack_modifier",
+          "table_id": 17270,
+          "type_info": {
+            "id": 23,
+            "name": "INT4"
+          },
+          "non_null": false
+        },
+        {
+          "name": "defense_modifier",
+          "table_id": 17270,
+          "type_info": {
+            "id": 23,
+            "name": "INT4"
+          },
+          "non_null": false
         }
       ]
     }
@@ -563,6 +1259,144 @@
             "name": "INT4"
           },
           "non_null": false
+        }
+      ]
+    }
+  },
+  "ec8f9118e566a6183994c150a432d8c7f5595f3a6a2eb4a2d08a4feffb06e02a": {
+    "query": "\n            SELECT id, node_id, node_type\n            FROM nodes\n            WHERE node_type IN ('BATTLE', 'CHARACTER', 'STRATAGEM')\n            ",
+    "describe": {
+      "param_types": [],
+      "result_columns": [
+        {
+          "name": "id",
+          "table_id": 17203,
+          "type_info": {
+            "id": 23,
+            "name": "INT4"
+          },
+          "non_null": true
+        },
+        {
+          "name": "node_id",
+          "table_id": 17203,
+          "type_info": {
+            "id": 2950,
+            "name": "UUID"
+          },
+          "non_null": false
+        },
+        {
+          "name": "node_type",
+          "table_id": 17203,
+          "type_info": {
+            "id": 17086,
+            "name": "NODE_TYPE"
+          },
+          "non_null": true
+        }
+      ]
+    }
+  },
+  "f6d41278b339464f3b01e5a808eb3541a164f4f06d23bd669159fda6194c601e": {
+    "query": "\n        SELECT sc.id, n.node_id, sc.tcg_id, sc.rarity, sc.number, sc.category, sc.title, sc.faction, sc.requirement, sc.stars\n        FROM stratagem_cards AS sc, nodes AS n\n        WHERE sc.id = n.id AND n.id = $1;\n        ",
+    "describe": {
+      "param_types": [
+        {
+          "id": 23,
+          "name": "INT4"
+        }
+      ],
+      "result_columns": [
+        {
+          "name": "id",
+          "table_id": 17290,
+          "type_info": {
+            "id": 23,
+            "name": "INT4"
+          },
+          "non_null": true
+        },
+        {
+          "name": "node_id",
+          "table_id": 17203,
+          "type_info": {
+            "id": 2950,
+            "name": "UUID"
+          },
+          "non_null": false
+        },
+        {
+          "name": "tcg_id",
+          "table_id": 17290,
+          "type_info": {
+            "id": 1043,
+            "name": "VARCHAR"
+          },
+          "non_null": true
+        },
+        {
+          "name": "rarity",
+          "table_id": 17290,
+          "type_info": {
+            "id": 17098,
+            "name": "CARD_RARITY"
+          },
+          "non_null": true
+        },
+        {
+          "name": "number",
+          "table_id": 17290,
+          "type_info": {
+            "id": 1043,
+            "name": "VARCHAR"
+          },
+          "non_null": true
+        },
+        {
+          "name": "category",
+          "table_id": 17290,
+          "type_info": {
+            "id": 17112,
+            "name": "CARD_CATEGORY"
+          },
+          "non_null": true
+        },
+        {
+          "name": "title",
+          "table_id": 17290,
+          "type_info": {
+            "id": 1043,
+            "name": "VARCHAR"
+          },
+          "non_null": true
+        },
+        {
+          "name": "faction",
+          "table_id": 17290,
+          "type_info": {
+            "id": 17194,
+            "name": "FACTION"
+          },
+          "non_null": true
+        },
+        {
+          "name": "requirement",
+          "table_id": 17290,
+          "type_info": {
+            "id": 1043,
+            "name": "VARCHAR"
+          },
+          "non_null": true
+        },
+        {
+          "name": "stars",
+          "table_id": 17290,
+          "type_info": {
+            "id": 23,
+            "name": "INT4"
+          },
+          "non_null": true
         }
       ]
     }
