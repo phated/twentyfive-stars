@@ -1,5 +1,13 @@
-use crate::data::{BattleCard, CharacterCard, NodeType, StratagemCard};
+use crate::data::NodeType;
 use crate::graphql_schema::ContextData;
+
+pub mod battle_card;
+pub mod character_card;
+pub mod stratagem_card;
+
+pub use battle_card::BattleCard;
+pub use character_card::CharacterCard;
+pub use stratagem_card::StratagemCard;
 
 #[async_graphql::Union]
 #[derive(Debug, Clone)]

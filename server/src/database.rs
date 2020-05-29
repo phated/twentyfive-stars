@@ -32,9 +32,11 @@ impl Database {
         let card_nodes = sqlx::query_as!(
             Node,
             r#"
-            SELECT id, node_id, node_type
-            FROM nodes
-            WHERE node_type IN ('BATTLE', 'CHARACTER', 'STRATAGEM')"#
+        SELECT id, node_id, node_type
+        FROM nodes
+        WHERE node_type IN ('BATTLE', 'CHARACTER', 'STRATAGEM')
+        ORDER BY id;
+        "#
         )
         .fetch_all(&self.pool)
         .await?;
@@ -122,6 +124,7 @@ impl Database {
         cm.stars, cm.health, cm.attack, cm.defense, cm.attack_modifier, cm.defense_modifier
         FROM character_modes AS cm, nodes AS n
         WHERE cm.id = n.id AND character_id = $1
+        ORDER BY n.id;
         "#,
             card.id
         )
