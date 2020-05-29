@@ -3,7 +3,7 @@ use crate::graphql_schema::ContextData;
 
 #[async_graphql::Union]
 #[derive(Debug, Clone)]
-pub enum Card {
+pub enum Cards {
     Battle(BattleCard),
     Character(CharacterCard),
     Stratagem(StratagemCard),
@@ -11,7 +11,6 @@ pub enum Card {
 
 pub mod datasource {
     use super::*;
-    use crate::schema::interfaces;
     use async_graphql::connection::{Connection, DataSource, Edge, EmptyFields};
     use async_graphql::{Context, FieldResult};
 
@@ -20,7 +19,7 @@ pub mod datasource {
     #[async_graphql::DataSource]
     impl DataSource for CardDataSource {
         type CursorType = String;
-        type NodeType = interfaces::Card;
+        type NodeType = Cards;
         type ConnectionFieldsType = EmptyFields;
         type EdgeFieldsType = EmptyFields;
 

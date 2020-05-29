@@ -1,4 +1,4 @@
-use crate::data::{CardDataSource, NodeType};
+use crate::data::{CardDataSource, Cards, NodeType};
 use crate::database::Database;
 use crate::schema::interfaces;
 use async_graphql::connection::{Connection, DataSource, EmptyFields};
@@ -25,6 +25,21 @@ impl QueryRoot {
 
                 Ok(battle_card.into())
             }
+            NodeType::Character => {
+                let character_card = data.db.get_character_card(node.id).await?;
+
+                Ok(character_card.into())
+            }
+            NodeType::Stratagem => {
+                let stratagem_card = data.db.get_stratagem_card(node.id).await?;
+
+                Ok(stratagem_card.into())
+            }
+            NodeType::Wave => {
+                let wave = data.db.get_wave(node.id).await?;
+
+                Ok(wave.into())
+            }
             _ => todo!(),
         }
     }
@@ -36,7 +51,7 @@ impl QueryRoot {
         before: Option<String>,
         first: Option<i32>,
         last: Option<i32>,
-    ) -> FieldResult<Connection<String, interfaces::Card, EmptyFields, EmptyFields>> {
+    ) -> FieldResult<Connection<String, Cards, EmptyFields, EmptyFields>> {
         CardDataSource.query(ctx, after, before, first, last).await
     }
 

@@ -17,7 +17,7 @@ pub use battle_card::BattleCard;
 pub use battle_icon::BattleIcon;
 pub use battle_type::BattleType;
 pub use card::datasource::CardDataSource;
-pub use card::Card;
+pub use card::Cards;
 pub use card_category::CardCategory;
 pub use card_rarity::CardRarity;
 pub use character_card::CharacterCard;

@@ -92,6 +92,22 @@ impl Database {
 
         Ok(character_card)
     }
+
+    pub async fn get_stratagem_card(&self, id: i32) -> Result<StratagemCard, Error> {
+        let stratagem_card = sqlx::query_as!(
+            StratagemCard,
+            r#"
+        SELECT sc.id, n.node_id, sc.tcg_id, sc.rarity, sc.number, sc.category, sc.title, sc.faction, sc.requirement, sc.stars
+        FROM stratagem_cards AS sc, nodes AS n
+        WHERE sc.id = n.id AND n.id = $1;
+        "#,
+            id
+        )
+        .fetch_one(&self.pool)
+        .await?;
+
+        Ok(stratagem_card)
+    }
 }
 
 // Character Modes
@@ -145,6 +161,22 @@ impl Database {
 
 // Waves
 impl Database {
+    pub async fn get_wave(&self, id: i32) -> Result<Wave, Error> {
+        let wave = sqlx::query_as!(
+            Wave,
+            r#"
+            SELECT w.id, n.node_id, w.tcg_id, w.name, w.released
+            FROM waves AS w, nodes AS n
+            WHERE w.id = n.id AND n.id = $1;
+            "#,
+            id
+        )
+        .fetch_one(&self.pool)
+        .await?;
+
+        Ok(wave)
+    }
+
     pub async fn get_wave_for_battle_card(&self, card: &BattleCard) -> Result<Wave, Error> {
         let wave = sqlx::query_as!(
             Wave,

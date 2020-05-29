@@ -52,6 +52,7 @@ fn main() -> Result<()> {
         let schema = Schema::build(QueryRoot, EmptyMutation, EmptySubscription)
             .data(ContextData { db })
             .register_type::<schema::interfaces::Node>()
+            .register_type::<schema::interfaces::Card>()
             .finish();
 
         let app_state = AppState { schema };
