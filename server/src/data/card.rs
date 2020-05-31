@@ -104,11 +104,11 @@ pub mod datasource {
                     }
                     _ => todo!(),
                 };
-                edges.push(Ok(edge));
+                edges.push(edge);
             }
 
             let mut connection = Connection::new(has_previous_page, has_next_page);
-            connection.append(edges)?;
+            connection.append(edges);
 
             Ok(connection)
         }

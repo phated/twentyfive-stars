@@ -42,9 +42,9 @@ checksum = "cff77d8686867eceff3105329d4698d96c2391c176d5d03adc90c7389162b5b8"
 
 [[package]]
 name = "async-graphql"
-version = "1.14.3"
+version = "1.14.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e27d1f1faf0fa8b605c80def336d1d5dfc113a404985c0f9f2bf2594489f23e4"
+checksum = "efc9cb64cc16a8a29b2711d54f82945f3d605aae25b7954b855e441396d96dff"
 dependencies = [
  "Inflector",
  "anyhow",
@@ -110,9 +110,9 @@ dependencies = [
 
 [[package]]
 name = "async-graphql-tide"
-version = "1.14.3"
+version = "1.14.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "91a962caa8a52a9bb731b62d4242767bc8e4f682909ecf53972285fbcd0511e4"
+checksum = "f1a43b97af261db2dba7ef1a05b15d2a89a98a5782b3c9bdfcf0c961f1fe8b2a"
 dependencies = [
  "async-graphql",
  "async-std",
@@ -1702,13 +1702,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "sqlx"
-version = "0.3.5"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8974cacd80085fbe49e778708d660dec6fb351604dc34c3905b26efb2803b038"
-replace = "sqlx 0.3.5 (git+https://github.com/phated/sqlx?branch=custom-types-offline)"
-
-[[package]]
 name = "sqlx-core"
 version = "0.3.5"
 source = "git+https://github.com/phated/sqlx?branch=custom-types-offline#3d4e05be7e4fa8a43922fd7452300b6ec767e244"
@@ -1938,7 +1931,7 @@ dependencies = [
  "env_logger",
  "futures",
  "smol",
- "sqlx 0.3.5 (registry+https://github.com/rust-lang/crates.io-index)",
+ "sqlx",
  "tide",
  "uuid",
 ]
