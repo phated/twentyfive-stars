@@ -1,5 +1,12 @@
 use chrono::NaiveDate;
 use uuid::Uuid;
+#[async_graphql::InputObject]
+#[derive(Debug, Clone)]
+pub struct WaveInput {
+    pub tcg_id: String,
+    pub name: String,
+    pub released: NaiveDate,
+}
 
 #[derive(Debug, Clone)]
 pub struct Wave {

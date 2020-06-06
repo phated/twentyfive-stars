@@ -17,9 +17,12 @@ pub use card_rarity::CardRarity;
 pub use character_trait::CharacterTrait;
 pub use faction::Faction;
 pub use mode_type::ModeType;
-pub use node::Node;
-pub use node::NodeType;
-pub use wave::Wave;
+
+// Node
+pub use node::{Node, NodeType};
+
+// Wave
+pub use wave::{Wave, WaveInput};
 
 // Cards
 pub use card::datasource::CardDataSource;

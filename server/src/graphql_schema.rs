@@ -1,4 +1,4 @@
-use crate::data::{CardDataSource, Cards, NodeType};
+use crate::data::{CardDataSource, Cards, NodeType, Wave, WaveInput};
 use crate::database::Database;
 use crate::schema::interfaces;
 use async_graphql::connection::{Connection, DataSource, EmptyFields};
@@ -7,6 +7,7 @@ use std::convert::TryFrom;
 use uuid::Uuid;
 
 pub struct QueryRoot;
+pub struct MutationRoot;
 
 pub struct ContextData {
     pub db: Database,
@@ -81,4 +82,20 @@ impl QueryRoot {
     //   // TODO: weird conversion between result types
     //   Ok(cards)
     // }
+}
+
+#[async_graphql::Object]
+impl MutationRoot {
+    pub async fn add_wave(&self, ctx: &Context<'_>, wave: WaveInput) -> FieldResult<Wave> {
+        let data = ctx.data::<ContextData>();
+        let result = data.db.create_wave(wave).await;
+
+        match result {
+            Ok(wave) => Ok(wave),
+            Err(_) => {
+                // TODO: why doesn't this error print?
+                Err("Unable to add wave".into())
+            }
+        }
+    }
 }

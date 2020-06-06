@@ -4,10 +4,10 @@ mod graphql_schema;
 mod schema;
 
 use database::Database;
-use graphql_schema::{ContextData, QueryRoot};
+use graphql_schema::{ContextData, MutationRoot, QueryRoot};
 
 use async_graphql::http::playground_source;
-use async_graphql::{EmptyMutation, EmptySubscription, Schema};
+use async_graphql::{EmptySubscription, Schema};
 use dotenv::dotenv;
 use std::env;
 use tide::{
@@ -19,7 +19,7 @@ use tide::{
 type Result<T> = std::result::Result<T, Box<dyn std::error::Error + Send + Sync>>;
 
 struct AppState {
-    schema: Schema<QueryRoot, EmptyMutation, EmptySubscription>,
+    schema: Schema<QueryRoot, MutationRoot, EmptySubscription>,
 }
 
 async fn handle_graphql(cx: Request<AppState>) -> tide::Result {
@@ -49,7 +49,7 @@ fn main() -> Result<()> {
 
         // TODO: The Tide example says that it is probably worth making the
         // schema a singleton using lazy_static library
-        let schema = Schema::build(QueryRoot, EmptyMutation, EmptySubscription)
+        let schema = Schema::build(QueryRoot, MutationRoot, EmptySubscription)
             .data(ContextData { db })
             .register_type::<schema::interfaces::Node>()
             .register_type::<schema::interfaces::Card>()

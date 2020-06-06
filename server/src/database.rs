@@ -3,7 +3,7 @@ use crate::data::CharacterCard;
 use crate::data::StratagemCard;
 use crate::data::{
     BattleType, CardCategory, CardRarity, CharacterMode, CharacterTrait, Faction, ModeType, Node,
-    NodeType, Wave,
+    NodeType, Wave, WaveInput,
 };
 use sqlx::postgres::PgPool;
 use std::convert::TryFrom;
@@ -164,6 +164,39 @@ impl Database {
 
 // Waves
 impl Database {
+    pub async fn create_wave(&self, input: WaveInput) -> Result<Wave, Error> {
+        let mut tx = self.pool.begin().await?;
+
+        let result = sqlx::query_as!(
+            Wave,
+            r#"
+            WITH node AS (
+                INSERT INTO nodes (node_type) VALUES ('WAVE') RETURNING *
+            ), wave AS (
+                INSERT INTO waves (id, tcg_id, name, released) SELECT id, $1, $2, $3 FROM node RETURNING *
+            )
+            SELECT n.id, n.node_id, w.tcg_id, w.name, w.released FROM node AS n, wave AS w;
+            "#,
+            input.tcg_id,
+            input.name,
+            input.released
+        )
+        .fetch_one(&mut tx)
+        .await;
+
+        match result {
+            Ok(wave) => {
+                tx.commit().await?;
+                Ok(wave)
+            }
+            Err(err) => {
+                println!("{}", err);
+                tx.rollback().await?;
+                Err(err.into())
+            }
+        }
+    }
+
     pub async fn get_wave(&self, id: i32) -> Result<Wave, Error> {
         let wave = sqlx::query_as!(
             Wave,
