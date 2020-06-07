@@ -1,10 +1,11 @@
-use crate::data::BattleCard;
 use crate::data::CharacterCard;
 use crate::data::StratagemCard;
+use crate::data::{BattleCard, BattleCardInput};
 use crate::data::{
     BattleType, CardCategory, CardRarity, CharacterMode, CharacterTrait, Faction, ModeType, Node,
-    NodeType, Wave, WaveInput,
+    NodeType,
 };
+use crate::data::{Wave, WaveInput};
 use sqlx::postgres::PgPool;
 use std::convert::TryFrom;
 use uuid::Uuid;
@@ -63,11 +64,96 @@ impl Database {
 
 // Cards
 impl Database {
+    pub async fn create_battle_card(&self, input: BattleCardInput) -> Result<BattleCard, Error> {
+        let mut tx = self.pool.begin().await?;
+
+        let result = sqlx::query_as!(
+            BattleCard,
+            r#"
+            WITH node AS (
+                INSERT INTO nodes (node_type) VALUES ('BATTLE') RETURNING *
+            ), wave AS (
+                SELECT id FROM waves WHERE tcg_id = $11
+            ), card AS (
+                INSERT INTO battle_cards (
+                    id,
+                    category,
+                    wave_id,
+                    icons,
+                    tcg_id,
+                    rarity,
+                    number,
+                    title,
+                    type,
+                    faction,
+                    stars,
+                    attack_modifier,
+                    defense_modifier
+                ) SELECT
+                    n.id,
+                    'BATTLE',
+                    w.id,
+                    CAST($1::TEXT[] as BATTLE_ICON[]),
+                    $2,
+                    $3,
+                    $4,
+                    $5,
+                    $6,
+                    $7,
+                    $8,
+                    $9,
+                    $10
+                FROM node AS n, wave AS w RETURNING *
+            )
+            SELECT
+                n.id,
+                n.node_id,
+                c.tcg_id,
+                c.category,
+                c.title,
+                c.icons::TEXT[],
+                c.type,
+                c.rarity,
+                c.number,
+                c.faction,
+                c.stars,
+                c.attack_modifier,
+                c.defense_modifier
+            FROM card AS c, node AS n;
+            "#,
+            &input.icons,
+            input.tcg_id,
+            input.rarity,
+            input.number,
+            input.title,
+            input.type_,
+            input.faction,
+            input.stars,
+            input.attack_modifier,
+            input.defense_modifier,
+            input.wave_tcg_id
+        )
+        .fetch_one(&mut tx)
+        .await;
+
+        match result {
+            Ok(wave) => {
+                tx.commit().await?;
+                Ok(wave)
+            }
+            Err(err) => {
+                println!("{}", err);
+                tx.rollback().await?;
+                Err(err.into())
+            }
+        }
+    }
+
     pub async fn get_battle_card(&self, id: i32) -> Result<BattleCard, Error> {
         let battle_card = sqlx::query_as!(
             BattleCard,
             r#"
-        SELECT bc.id, n.node_id, bc.tcg_id, bc.rarity, bc.number, bc.category, bc.title, bc.stars, bc.type, bc.attack_modifier, bc.defense_modifier, bc.faction
+        SELECT bc.id, n.node_id, bc.tcg_id, bc.rarity, bc.number, bc.category, bc.title, bc.icons::TEXT[], bc.stars, bc.type, bc.attack_modifier, bc.defense_modifier, bc.faction
         FROM battle_cards AS bc, nodes AS n
         WHERE bc.id = n.id AND n.id = $1;
         "#,

@@ -26,10 +26,10 @@ pub use wave::{Wave, WaveInput};
 
 // Cards
 pub use card::datasource::CardDataSource;
-pub use card::BattleCard;
 pub use card::Cards;
 pub use card::CharacterCard;
 pub use card::StratagemCard;
+pub use card::{BattleCard, BattleCardInput};
 
 // Character modes
 pub use character_mode::AltMode;

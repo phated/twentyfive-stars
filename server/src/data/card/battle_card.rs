@@ -1,7 +1,24 @@
-use crate::data::{BattleIcon, BattleType, CardCategory, CardRarity, Faction, Wave};
+use crate::data::{BattleType, CardCategory, CardRarity, Faction, Wave};
 use crate::graphql_schema::ContextData;
 use async_graphql::{Context, FieldResult};
 use uuid::Uuid;
+
+#[async_graphql::InputObject]
+#[derive(Debug, Clone)]
+pub struct BattleCardInput {
+    pub tcg_id: String,
+    pub rarity: CardRarity,
+    pub number: String,
+    pub title: String,
+    pub stars: Option<i32>,
+    // TODO: Vec<BattleIcon>
+    pub icons: Vec<String>,
+    pub type_: BattleType,
+    pub faction: Option<Faction>,
+    pub attack_modifier: Option<i32>,
+    pub defense_modifier: Option<i32>,
+    pub wave_tcg_id: String,
+}
 
 #[derive(Debug, Clone, sqlx::FromRow)]
 pub struct BattleCard {
@@ -15,7 +32,8 @@ pub struct BattleCard {
     // Battle card specific props
     pub title: String,
     pub stars: Option<i32>,
-    // pub icons: Vec<BattleIcon>,
+    // TODO: Vec<BattleIcon>,
+    pub icons: Vec<String>,
     pub r#type: BattleType,
     pub faction: Option<Faction>,
     pub attack_modifier: Option<i32>,
@@ -59,9 +77,9 @@ impl BattleCard {
         self.stars
     }
 
-    pub async fn icons(&self) -> Vec<BattleIcon> {
-        // self.icons
-        vec![]
+    // TODO: Vec<BattleIcon>
+    pub async fn icons(&self) -> Vec<String> {
+        self.icons.clone()
     }
 
     pub async fn type_(&self) -> BattleType {

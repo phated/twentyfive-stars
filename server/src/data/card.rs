@@ -5,9 +5,9 @@ pub mod battle_card;
 pub mod character_card;
 pub mod stratagem_card;
 
-pub use battle_card::BattleCard;
-pub use character_card::CharacterCard;
-pub use stratagem_card::StratagemCard;
+pub use battle_card::*;
+pub use character_card::*;
+pub use stratagem_card::*;
 
 #[async_graphql::Union]
 #[derive(Debug, Clone)]

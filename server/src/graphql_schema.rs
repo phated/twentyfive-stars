@@ -1,3 +1,4 @@
+use crate::data::{BattleCard, BattleCardInput};
 use crate::data::{CardDataSource, Cards, NodeType, Wave, WaveInput};
 use crate::database::Database;
 use crate::schema::interfaces;
@@ -95,6 +96,23 @@ impl MutationRoot {
             Err(_) => {
                 // TODO: why doesn't this error print?
                 Err("Unable to add wave".into())
+            }
+        }
+    }
+
+    pub async fn add_battle_card(
+        &self,
+        ctx: &Context<'_>,
+        card: BattleCardInput,
+    ) -> FieldResult<BattleCard> {
+        let data = ctx.data::<ContextData>();
+        let result = data.db.create_battle_card(card).await;
+
+        match result {
+            Ok(card) => Ok(card),
+            Err(_) => {
+                // TODO: why doesn't this error print?
+                Err("Unable to add battle card".into())
             }
         }
     }

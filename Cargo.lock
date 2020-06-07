@@ -1695,7 +1695,7 @@ dependencies = [
 [[package]]
 name = "sqlx"
 version = "0.3.5"
-source = "git+https://github.com/phated/sqlx?branch=custom-types-offline#3d4e05be7e4fa8a43922fd7452300b6ec767e244"
+source = "git+https://github.com/phated/sqlx?branch=custom-types-offline#9f103f70414d7863945fb730e9fef22154d9b47f"
 dependencies = [
  "sqlx-core",
  "sqlx-macros",
@@ -1704,7 +1704,7 @@ dependencies = [
 [[package]]
 name = "sqlx-core"
 version = "0.3.5"
-source = "git+https://github.com/phated/sqlx?branch=custom-types-offline#3d4e05be7e4fa8a43922fd7452300b6ec767e244"
+source = "git+https://github.com/phated/sqlx?branch=custom-types-offline#9f103f70414d7863945fb730e9fef22154d9b47f"
 dependencies = [
  "async-native-tls",
  "async-std",
@@ -1738,7 +1738,7 @@ dependencies = [
 [[package]]
 name = "sqlx-macros"
 version = "0.3.5"
-source = "git+https://github.com/phated/sqlx?branch=custom-types-offline#3d4e05be7e4fa8a43922fd7452300b6ec767e244"
+source = "git+https://github.com/phated/sqlx?branch=custom-types-offline#9f103f70414d7863945fb730e9fef22154d9b47f"
 dependencies = [
  "async-std",
  "dotenv",
