@@ -1,0 +1,226 @@
+
+mutation Waves {
+  w0: addWave(
+    wave: {
+      tcgId: "1C"
+      name: "Convention Edition (2018)"
+      released: "2018-07-18"
+    }
+  ) {
+    id
+  }
+
+  w1: addWave(wave: { tcgId: "1", name: "Wave 1", released: "2018-09-28" }) {
+    id
+  }
+
+  w2: addWave(
+    wave: { tcgId: "1S", name: "Autobot Starter", released: "2018-09-28" }
+  ) {
+    id
+  }
+
+  w3: addWave(
+    wave: { tcgId: "1A", name: "Metroplex Deck", released: "2018-11-16" }
+  ) {
+    id
+  }
+
+  w4: addWave(
+    wave: { tcgId: "2", name: "Rise of the Combiners", released: "2019-03-01" }
+  ) {
+    id
+  }
+
+  w5: addWave(
+    wave: { tcgId: "2A", name: "Devastator Deck", released: "2019-03-29" }
+  ) {
+    id
+  }
+
+  w6: addWave(
+    wave: {
+      tcgId: "2S"
+      name: "Bumblebee vs Megatron Starter Set"
+      released: "2019-05-03"
+    }
+  ) {
+    id
+  }
+
+  w7: addWave(
+    wave: {
+      tcgId: "3"
+      name: "War For Cybertron: Siege 1"
+      released: "2019-06-28"
+    }
+  ) {
+    id
+  }
+
+  w8: addWave(
+    wave: {
+      tcgId: "3C"
+      name: "Convention Edition (2019)"
+      released: "2019-07-18"
+    }
+  ) {
+    id
+  }
+
+  w9: addWave(
+    wave: {
+      tcgId: "35th Anniversary"
+      name: "Blaster vs Soundwave Deck (35th Anniversary)"
+      released: "2019-07-18"
+    }
+  ) {
+    id
+  }
+
+  w10: addWave(
+    wave: {
+      tcgId: "Blaster vs Soundwave"
+      name: "Blaster vs Soundwave Deck"
+      released: "2019-09-20"
+    }
+  ) {
+    id
+  }
+
+  w11: addWave(
+    wave: {
+      tcgId: "4"
+      name: "War For Cybertron: Siege 2"
+      released: "2019-11-08"
+    }
+  ) {
+    id
+  }
+
+  w12: addWave(
+    wave: {
+      tcgId: "Energon Edition"
+      name: "Wave 1 Energon Edition"
+      released: "2019-12-02"
+    }
+  ) {
+    id
+  }
+
+  w13: addWave(
+    wave: { tcgId: "5", name: "Titan Masters Attack", released: "2020-04-17" }
+  ) {
+    id
+  }
+}
+
+mutation BattleCards {
+  bc0: addBattleCard(
+    card: {
+      tcgId: "U 001/081"
+      number: "001"
+      rarity: UNCOMMON
+      waveTcgId: "1"
+      title: "Aerial Recon"
+      type: UPGRADE_UTILITY
+      faction: null
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: null
+      defenseModifier: 1
+    }
+  ) {
+    id
+  }
+
+  bc1: addBattleCard(
+    card: {
+      tcgId: "R 002/081"
+      number: "002"
+      rarity: RARE
+      waveTcgId: "1"
+      title: "Agility of Bumblebee"
+      type: UPGRADE_UTILITY
+      faction: AUTOBOT
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: 1
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc2: addBattleCard(
+    card: {
+      tcgId: "U 003/081"
+      number: "003"
+      rarity: UNCOMMON
+      waveTcgId: "1"
+      title: "Armed Hovercraft"
+      type: UPGRADE_WEAPON
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: 1
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc3: addBattleCard(
+    card: {
+      tcgId: "C 004/081"
+      number: "004"
+      rarity: COMMON
+      waveTcgId: "1"
+      title: "Armored Plating"
+      type: UPGRADE_ARMOR
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: 1
+    }
+  ) {
+    id
+  }
+
+  bc4: addBattleCard(
+    card: {
+      tcgId: "U 005/081"
+      number: "005"
+      rarity: UNCOMMON
+      waveTcgId: "1"
+      title: "Backup Plan"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["WHITE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc5: addBattleCard(
+    card: {
+      tcgId: "C 006/081"
+      number: "006"
+      rarity: COMMON
+      waveTcgId: "1"
+      title: "Battle Ready"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+}
