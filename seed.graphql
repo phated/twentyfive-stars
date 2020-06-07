@@ -120,8 +120,8 @@ mutation BattleCards {
     card: {
       tcgId: "U 001/081"
       number: "001"
-      rarity: UNCOMMON
       waveTcgId: "1"
+      rarity: UNCOMMON
       title: "Aerial Recon"
       type: UPGRADE_UTILITY
       faction: null
@@ -138,8 +138,8 @@ mutation BattleCards {
     card: {
       tcgId: "R 002/081"
       number: "002"
-      rarity: RARE
       waveTcgId: "1"
+      rarity: RARE
       title: "Agility of Bumblebee"
       type: UPGRADE_UTILITY
       faction: AUTOBOT
@@ -156,8 +156,8 @@ mutation BattleCards {
     card: {
       tcgId: "U 003/081"
       number: "003"
-      rarity: UNCOMMON
       waveTcgId: "1"
+      rarity: UNCOMMON
       title: "Armed Hovercraft"
       type: UPGRADE_WEAPON
       faction: null
@@ -174,8 +174,8 @@ mutation BattleCards {
     card: {
       tcgId: "C 004/081"
       number: "004"
-      rarity: COMMON
       waveTcgId: "1"
+      rarity: COMMON
       title: "Armored Plating"
       type: UPGRADE_ARMOR
       faction: null
@@ -192,8 +192,8 @@ mutation BattleCards {
     card: {
       tcgId: "U 005/081"
       number: "005"
-      rarity: UNCOMMON
       waveTcgId: "1"
+      rarity: UNCOMMON
       title: "Backup Plan"
       type: ACTION
       faction: null
@@ -210,13 +210,5305 @@ mutation BattleCards {
     card: {
       tcgId: "C 006/081"
       number: "006"
-      rarity: COMMON
       waveTcgId: "1"
+      rarity: COMMON
       title: "Battle Ready"
       type: ACTION
       faction: null
       stars: null
       icons: ["ORANGE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc6: addBattleCard(
+    card: {
+      tcgId: "U 007/081"
+      number: "007"
+      waveTcgId: "1"
+      rarity: UNCOMMON
+      title: "Blast Shield"
+      type: UPGRADE_ARMOR
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: 2
+    }
+  ) {
+    id
+  }
+
+  bc7: addBattleCard(
+    card: {
+      tcgId: "U 008/081"
+      number: "008"
+      waveTcgId: "1"
+      rarity: UNCOMMON
+      title: "Body Armor"
+      type: UPGRADE_ARMOR
+      faction: null
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc8: addBattleCard(
+    card: {
+      tcgId: "R 009/081"
+      number: "009"
+      waveTcgId: "1"
+      rarity: RARE
+      title: "Bombing Run"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc9: addBattleCard(
+    card: {
+      tcgId: "C 010/081"
+      number: "010"
+      waveTcgId: "1"
+      rarity: COMMON
+      title: "Brainstorm"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc10: addBattleCard(
+    card: {
+      tcgId: "U 011/081"
+      number: "011"
+      waveTcgId: "1"
+      rarity: UNCOMMON
+      title: "Bug Bomb"
+      type: UPGRADE_UTILITY
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc11: addBattleCard(
+    card: {
+      tcgId: "R 012/081"
+      number: "012"
+      waveTcgId: "1"
+      rarity: RARE
+      title: "Cargo Trailer"
+      type: UPGRADE_UTILITY
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc12: addBattleCard(
+    card: {
+      tcgId: "U 013/081"
+      number: "013"
+      waveTcgId: "1"
+      rarity: UNCOMMON
+      title: "Collateral Damage"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc13: addBattleCard(
+    card: {
+      tcgId: "R 014/081"
+      number: "014"
+      waveTcgId: "1"
+      rarity: RARE
+      title: "Combat Training"
+      type: UPGRADE_UTILITY
+      faction: null
+      stars: null
+      icons: ["WHITE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc14: addBattleCard(
+    card: {
+      tcgId: "U 015/081"
+      number: "015"
+      waveTcgId: "1"
+      rarity: UNCOMMON
+      title: "Computer Sabotage"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc15: addBattleCard(
+    card: {
+      tcgId: "C 016/081"
+      number: "016"
+      waveTcgId: "1"
+      rarity: COMMON
+      title: "Crushing Size"
+      type: UPGRADE_UTILITY
+      faction: null
+      stars: null
+      icons: ["WHITE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc16: addBattleCard(
+    card: {
+      tcgId: "U 017/081"
+      number: "017"
+      waveTcgId: "1"
+      rarity: UNCOMMON
+      title: "Crushing Treads"
+      type: UPGRADE_UTILITY
+      faction: null
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc17: addBattleCard(
+    card: {
+      tcgId: "R 018/081"
+      number: "018"
+      waveTcgId: "1"
+      rarity: RARE
+      title: "Cybertonium Bow"
+      type: UPGRADE_WEAPON
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: 1
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc18: addBattleCard(
+    card: {
+      tcgId: "R 019/081"
+      number: "019"
+      waveTcgId: "1"
+      rarity: RARE
+      title: "Data Bank"
+      type: UPGRADE_UTILITY
+      faction: null
+      stars: null
+      icons: ["WHITE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc19: addBattleCard(
+    card: {
+      tcgId: "C 020/081"
+      number: "020"
+      waveTcgId: "1"
+      rarity: COMMON
+      title: "Data Pad"
+      type: UPGRADE_UTILITY
+      faction: null
+      stars: null
+      icons: ["WHITE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc20: addBattleCard(
+    card: {
+      tcgId: "U 021/081"
+      number: "021"
+      waveTcgId: "1"
+      rarity: UNCOMMON
+      title: "Debilitating Crystal"
+      type: UPGRADE_UTILITY
+      faction: null
+      stars: null
+      icons: ["WHITE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc21: addBattleCard(
+    card: {
+      tcgId: "R 022/081"
+      number: "022"
+      waveTcgId: "1"
+      rarity: RARE
+      title: "Dino-Chomp!"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc22: addBattleCard(
+    card: {
+      tcgId: "U 023/081"
+      number: "023"
+      waveTcgId: "1"
+      rarity: UNCOMMON
+      title: "Disarm"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc23: addBattleCard(
+    card: {
+      tcgId: "U 024/081"
+      number: "024"
+      waveTcgId: "1"
+      rarity: UNCOMMON
+      title: "Disruption"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc24: addBattleCard(
+    card: {
+      tcgId: "U 025/081"
+      number: "025"
+      waveTcgId: "1"
+      rarity: UNCOMMON
+      title: "Disruptive Entrance"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc25: addBattleCard(
+    card: {
+      tcgId: "C 026/081"
+      number: "026"
+      waveTcgId: "1"
+      rarity: COMMON
+      title: "Drill Arms"
+      type: UPGRADE_WEAPON
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: 1
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc26: addBattleCard(
+    card: {
+      tcgId: "U 027/081"
+      number: "027"
+      waveTcgId: "1"
+      rarity: UNCOMMON
+      title: "Emergency Maintenance"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc27: addBattleCard(
+    card: {
+      tcgId: "R 028/081"
+      number: "028"
+      waveTcgId: "1"
+      rarity: RARE
+      title: "Energon Axe"
+      type: UPGRADE_WEAPON
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: 3
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc28: addBattleCard(
+    card: {
+      tcgId: "U 029/081"
+      number: "029"
+      waveTcgId: "1"
+      rarity: UNCOMMON
+      title: "Equipment Enthusiast"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["WHITE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc29: addBattleCard(
+    card: {
+      tcgId: "C 030/081"
+      number: "030"
+      waveTcgId: "1"
+      rarity: COMMON
+      title: "Flamethrower"
+      type: UPGRADE_WEAPON
+      faction: null
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc30: addBattleCard(
+    card: {
+      tcgId: "C 031/081"
+      number: "031"
+      waveTcgId: "1"
+      rarity: COMMON
+      title: "Force Field"
+      type: UPGRADE_ARMOR
+      faction: null
+      stars: null
+      icons: ["WHITE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc31: addBattleCard(
+    card: {
+      tcgId: "R 032/081"
+      number: "032"
+      waveTcgId: "1"
+      rarity: RARE
+      title: "Fusion Cannon of Megatron"
+      type: UPGRADE_WEAPON
+      faction: DECEPTICON
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: 1
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc32: addBattleCard(
+    card: {
+      tcgId: "U 033/081"
+      number: "033"
+      waveTcgId: "1"
+      rarity: UNCOMMON
+      title: "Grenade Launcher"
+      type: UPGRADE_WEAPON
+      faction: null
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: 4
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc33: addBattleCard(
+    card: {
+      tcgId: "C 034/081"
+      number: "034"
+      waveTcgId: "1"
+      rarity: COMMON
+      title: "Handheld Blaster"
+      type: UPGRADE_WEAPON
+      faction: null
+      stars: null
+      icons: ["BLUE", "BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc34: addBattleCard(
+    card: {
+      tcgId: "R 035/081"
+      number: "035"
+      waveTcgId: "1"
+      rarity: RARE
+      title: "Heroism"
+      type: UPGRADE_UTILITY
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc35: addBattleCard(
+    card: {
+      tcgId: "R 036/081"
+      number: "036"
+      waveTcgId: "1"
+      rarity: RARE
+      title: "Hunker Down"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc36: addBattleCard(
+    card: {
+      tcgId: "R 037/081"
+      number: "037"
+      waveTcgId: "1"
+      rarity: RARE
+      title: "I Still Function!"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: []
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc37: addBattleCard(
+    card: {
+      tcgId: "C 038/081"
+      number: "038"
+      waveTcgId: "1"
+      rarity: COMMON
+      title: "Improvised Shield"
+      type: UPGRADE_ARMOR
+      faction: null
+      stars: null
+      icons: ["ORANGE", "ORANGE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc38: addBattleCard(
+    card: {
+      tcgId: "C 039/081"
+      number: "039"
+      waveTcgId: "1"
+      rarity: COMMON
+      title: "Incoming Transmission"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc39: addBattleCard(
+    card: {
+      tcgId: "C 040/081"
+      number: "040"
+      waveTcgId: "1"
+      rarity: COMMON
+      title: "Inspiring Leadership"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc40: addBattleCard(
+    card: {
+      tcgId: "R 041/081"
+      number: "041"
+      waveTcgId: "1"
+      rarity: RARE
+      title: "Ion Blaster of Optimus Prime"
+      type: UPGRADE_WEAPON
+      faction: AUTOBOT
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: 2
+      defenseModifier: 1
+    }
+  ) {
+    id
+  }
+
+  bc41: addBattleCard(
+    card: {
+      tcgId: "U 042/081"
+      number: "042"
+      waveTcgId: "1"
+      rarity: UNCOMMON
+      title: "Jaws of Steel"
+      type: UPGRADE_UTILITY
+      faction: null
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc42: addBattleCard(
+    card: {
+      tcgId: "C 043/081"
+      number: "043"
+      waveTcgId: "1"
+      rarity: COMMON
+      title: "Leap Into Battle"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc43: addBattleCard(
+    card: {
+      tcgId: "R 044/081"
+      number: "044"
+      waveTcgId: "1"
+      rarity: RARE
+      title: "Matrix of Leadership"
+      type: UPGRADE_UTILITY
+      faction: AUTOBOT
+      stars: null
+      icons: ["ORANGE", "BLUE"]
+      attackModifier: 1
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc44: addBattleCard(
+    card: {
+      tcgId: "C 045/081"
+      number: "045"
+      waveTcgId: "1"
+      rarity: COMMON
+      title: "Medic!"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: []
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc45: addBattleCard(
+    card: {
+      tcgId: "U 046/081"
+      number: "046"
+      waveTcgId: "1"
+      rarity: UNCOMMON
+      title: "Multi-Mission Gear"
+      type: UPGRADE_ARMOR
+      faction: null
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: null
+      defenseModifier: 1
+    }
+  ) {
+    id
+  }
+
+  bc46: addBattleCard(
+    card: {
+      tcgId: "U 047/081"
+      number: "047"
+      waveTcgId: "1"
+      rarity: UNCOMMON
+      title: "Multi-Tool"
+      type: UPGRADE_WEAPON
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: 1
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc47: addBattleCard(
+    card: {
+      tcgId: "C 048/081"
+      number: "048"
+      waveTcgId: "1"
+      rarity: COMMON
+      title: "New Designs"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc48: addBattleCard(
+    card: {
+      tcgId: "R 049/081"
+      number: "049"
+      waveTcgId: "1"
+      rarity: RARE
+      title: "Null-Ray of Starscream"
+      type: UPGRADE_WEAPON
+      faction: DECEPTICON
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: 1
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc49: addBattleCard(
+    card: {
+      tcgId: "R 050/081"
+      number: "050"
+      waveTcgId: "1"
+      rarity: RARE
+      title: "One Shall Stand, One Shall Fall"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: []
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc50: addBattleCard(
+    card: {
+      tcgId: "R 051/081"
+      number: "051"
+      waveTcgId: "1"
+      rarity: RARE
+      title: "Peace Through Tyranny"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["ORANGE", "ORANGE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc51: addBattleCard(
+    card: {
+      tcgId: "R 052/081"
+      number: "052"
+      waveTcgId: "1"
+      rarity: RARE
+      title: "Photon Bomb"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: []
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc52: addBattleCard(
+    card: {
+      tcgId: "C 053/081"
+      number: "053"
+      waveTcgId: "1"
+      rarity: COMMON
+      title: "Piercing Blaster"
+      type: UPGRADE_WEAPON
+      faction: null
+      stars: null
+      icons: ["WHITE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc53: addBattleCard(
+    card: {
+      tcgId: "U 054/081"
+      number: "054"
+      waveTcgId: "1"
+      rarity: UNCOMMON
+      title: "Plasma Burst"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: []
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc54: addBattleCard(
+    card: {
+      tcgId: "U 055/081"
+      number: "055"
+      waveTcgId: "1"
+      rarity: UNCOMMON
+      title: "Power Sword"
+      type: UPGRADE_WEAPON
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc55: addBattleCard(
+    card: {
+      tcgId: "C 056/081"
+      number: "056"
+      waveTcgId: "1"
+      rarity: COMMON
+      title: "Primary Laser"
+      type: UPGRADE_WEAPON
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: 2
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc56: addBattleCard(
+    card: {
+      tcgId: "U 057/081"
+      number: "057"
+      waveTcgId: "1"
+      rarity: UNCOMMON
+      title: "Ramming Speed"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc57: addBattleCard(
+    card: {
+      tcgId: "U 058/081"
+      number: "058"
+      waveTcgId: "1"
+      rarity: UNCOMMON
+      title: "Rapid Ascent"
+      type: UPGRADE_ARMOR
+      faction: null
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: null
+      defenseModifier: 1
+    }
+  ) {
+    id
+  }
+
+  bc58: addBattleCard(
+    card: {
+      tcgId: "C 059/081"
+      number: "059"
+      waveTcgId: "1"
+      rarity: COMMON
+      title: "Rapid Conversion"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["WHITE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc59: addBattleCard(
+    card: {
+      tcgId: "C 060/081"
+      number: "060"
+      waveTcgId: "1"
+      rarity: COMMON
+      title: "Ready For Action"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: []
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc60: addBattleCard(
+    card: {
+      tcgId: "C 061/081"
+      number: "061"
+      waveTcgId: "1"
+      rarity: COMMON
+      title: "Reinforced Plating"
+      type: UPGRADE_ARMOR
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc61: addBattleCard(
+    card: {
+      tcgId: "C 062/081"
+      number: "062"
+      waveTcgId: "1"
+      rarity: COMMON
+      title: "Repair Bay"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc62: addBattleCard(
+    card: {
+      tcgId: "R 063/081"
+      number: "063"
+      waveTcgId: "1"
+      rarity: RARE
+      title: "Roll Out!"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["ORANGE", "BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc63: addBattleCard(
+    card: {
+      tcgId: "R 064/081"
+      number: "064"
+      waveTcgId: "1"
+      rarity: RARE
+      title: "Salvage for Parts"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: []
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc64: addBattleCard(
+    card: {
+      tcgId: "C 065/081"
+      number: "065"
+      waveTcgId: "1"
+      rarity: COMMON
+      title: "Scrapper Gauntlets"
+      type: UPGRADE_ARMOR
+      faction: null
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: null
+      defenseModifier: 1
+    }
+  ) {
+    id
+  }
+
+  bc65: addBattleCard(
+    card: {
+      tcgId: "R 066/081"
+      number: "066"
+      waveTcgId: "1"
+      rarity: RARE
+      title: "Security Checkpoint"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["BLUE", "BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc66: addBattleCard(
+    card: {
+      tcgId: "R 067/081"
+      number: "067"
+      waveTcgId: "1"
+      rarity: RARE
+      title: "Shock Absorbers"
+      type: UPGRADE_ARMOR
+      faction: null
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: null
+      defenseModifier: 1
+    }
+  ) {
+    id
+  }
+
+  bc67: addBattleCard(
+    card: {
+      tcgId: "R 068/081"
+      number: "068"
+      waveTcgId: "1"
+      rarity: RARE
+      title: "Start Your Engines"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc68: addBattleCard(
+    card: {
+      tcgId: "R 069/081"
+      number: "069"
+      waveTcgId: "1"
+      rarity: RARE
+      title: "Static Laser of Ironhide"
+      type: UPGRADE_WEAPON
+      faction: AUTOBOT
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: 3
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc69: addBattleCard(
+    card: {
+      tcgId: "U 070/081"
+      number: "070"
+      waveTcgId: "1"
+      rarity: UNCOMMON
+      title: "Strafing Run"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: []
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc70: addBattleCard(
+    card: {
+      tcgId: "C 071/081"
+      number: "071"
+      waveTcgId: "1"
+      rarity: COMMON
+      title: "Supercharge"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc71: addBattleCard(
+    card: {
+      tcgId: "U 072/081"
+      number: "072"
+      waveTcgId: "1"
+      rarity: UNCOMMON
+      title: "Swap Missions"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc72: addBattleCard(
+    card: {
+      tcgId: "R 073/081"
+      number: "073"
+      waveTcgId: "1"
+      rarity: RARE
+      title: "Swap Parts"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["WHITE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc73: addBattleCard(
+    card: {
+      tcgId: "R 074/081"
+      number: "074"
+      waveTcgId: "1"
+      rarity: RARE
+      title: "Swarm!"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc74: addBattleCard(
+    card: {
+      tcgId: "R 075/081"
+      number: "075"
+      waveTcgId: "1"
+      rarity: RARE
+      title: "System Reboot"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["WHITE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc75: addBattleCard(
+    card: {
+      tcgId: "R 076/081"
+      number: "076"
+      waveTcgId: "1"
+      rarity: RARE
+      title: "Team-Up Tactics"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc76: addBattleCard(
+    card: {
+      tcgId: "R 077/081"
+      number: "077"
+      waveTcgId: "1"
+      rarity: RARE
+      title: "The Bigger They Are"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc77: addBattleCard(
+    card: {
+      tcgId: "R 078/081"
+      number: "078"
+      waveTcgId: "1"
+      rarity: RARE
+      title: "Thermal Weaponry"
+      type: UPGRADE_WEAPON
+      faction: null
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: 1
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc78: addBattleCard(
+    card: {
+      tcgId: "U 079/081"
+      number: "079"
+      waveTcgId: "1"
+      rarity: UNCOMMON
+      title: "Treasure Hunt"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc79: addBattleCard(
+    card: {
+      tcgId: "U 080/081"
+      number: "080"
+      waveTcgId: "1"
+      rarity: UNCOMMON
+      title: "Turbo Boosters"
+      type: UPGRADE_UTILITY
+      faction: null
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: 1
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc80: addBattleCard(
+    card: {
+      tcgId: "C 081/081"
+      number: "081"
+      waveTcgId: "1"
+      rarity: COMMON
+      title: "Zap"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc81: addBattleCard(
+    card: {
+      tcgId: "R 001/003"
+      number: "001"
+      waveTcgId: "1A"
+      rarity: THEME
+      title: "Height Advantage"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc82: addBattleCard(
+    card: {
+      tcgId: "R 002/003"
+      number: "002"
+      waveTcgId: "1A"
+      rarity: THEME
+      title: "Protected By Metroplex"
+      type: UPGRADE_UTILITY
+      faction: AUTOBOT
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc83: addBattleCard(
+    card: {
+      tcgId: "R 003/003"
+      number: "003"
+      waveTcgId: "1A"
+      rarity: THEME
+      title: "Rally The City"
+      type: ACTION
+      faction: AUTOBOT
+      stars: null
+      icons: ["WHITE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc84: addBattleCard(
+    card: {
+      tcgId: "R 001/002"
+      number: "001"
+      waveTcgId: "1C"
+      rarity: PROMO
+      title: "All-Out Attack"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc85: addBattleCard(
+    card: {
+      tcgId: "R 002/002"
+      number: "002"
+      waveTcgId: "1C"
+      rarity: PROMO
+      title: "Tandem Targeting System"
+      type: UPGRADE_UTILITY
+      faction: null
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: 1
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc86: addBattleCard(
+    card: {
+      tcgId: "U 001/081"
+      number: "001"
+      waveTcgId: "2"
+      rarity: UNCOMMON
+      title: "Aerialbot Enigma"
+      type: ACTION
+      faction: AUTOBOT
+      stars: null
+      icons: ["GREEN"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc87: addBattleCard(
+    card: {
+      tcgId: "R 002/081"
+      number: "002"
+      waveTcgId: "2"
+      rarity: RARE
+      title: "Aerialbot Formation"
+      type: UPGRADE_WEAPON
+      faction: AUTOBOT
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc88: addBattleCard(
+    card: {
+      tcgId: "R 003/081"
+      number: "003"
+      waveTcgId: "2"
+      rarity: RARE
+      title: "Ancient Wisdom"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc89: addBattleCard(
+    card: {
+      tcgId: "C 004/081"
+      number: "004"
+      waveTcgId: "2"
+      rarity: COMMON
+      title: "Armored Plating"
+      type: UPGRADE_ARMOR
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: 1
+    }
+  ) {
+    id
+  }
+
+  bc90: addBattleCard(
+    card: {
+      tcgId: "U 005/081"
+      number: "005"
+      waveTcgId: "2"
+      rarity: UNCOMMON
+      title: "Attack Drone"
+      type: UPGRADE_WEAPON
+      faction: null
+      stars: null
+      icons: ["WHITE", "GREEN"]
+      attackModifier: 1
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc91: addBattleCard(
+    card: {
+      tcgId: "U 006/081"
+      number: "006"
+      waveTcgId: "2"
+      rarity: UNCOMMON
+      title: "Backup Beam"
+      type: UPGRADE_WEAPON
+      faction: null
+      stars: null
+      icons: ["BLUE", "GREEN"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc92: addBattleCard(
+    card: {
+      tcgId: "R 007/081"
+      number: "007"
+      waveTcgId: "2"
+      rarity: RARE
+      title: "Bad Attitude"
+      type: ACTION
+      faction: DECEPTICON
+      stars: null
+      icons: []
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc93: addBattleCard(
+    card: {
+      tcgId: "C 008/081"
+      number: "008"
+      waveTcgId: "2"
+      rarity: COMMON
+      title: "Bashing Shield"
+      type: UPGRADE_ARMOR
+      faction: null
+      stars: null
+      icons: ["ORANGE", "GREEN"]
+      attackModifier: null
+      defenseModifier: 1
+    }
+  ) {
+    id
+  }
+
+  bc94: addBattleCard(
+    card: {
+      tcgId: "U 009/081"
+      number: "009"
+      waveTcgId: "2"
+      rarity: UNCOMMON
+      title: "Bolt Of Lightning"
+      type: ACTION
+      faction: null
+      stars: 1
+      icons: []
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc95: addBattleCard(
+    card: {
+      tcgId: "U 010/081"
+      number: "010"
+      waveTcgId: "2"
+      rarity: UNCOMMON
+      title: "Bravery"
+      type: UPGRADE_UTILITY
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc96: addBattleCard(
+    card: {
+      tcgId: "R 011/081"
+      number: "011"
+      waveTcgId: "2"
+      rarity: RARE
+      title: "Bumpers"
+      type: UPGRADE_ARMOR
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: 1
+    }
+  ) {
+    id
+  }
+
+  bc97: addBattleCard(
+    card: {
+      tcgId: "R 012/081"
+      number: "012"
+      waveTcgId: "2"
+      rarity: RARE
+      title: "Combat Commands"
+      type: UPGRADE_UTILITY
+      faction: AUTOBOT
+      stars: null
+      icons: ["WHITE"]
+      attackModifier: 1
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc98: addBattleCard(
+    card: {
+      tcgId: "C 013/081"
+      number: "013"
+      waveTcgId: "2"
+      rarity: COMMON
+      title: "Confidence"
+      type: ACTION
+      faction: AUTOBOT
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc99: addBattleCard(
+    card: {
+      tcgId: "C 014/081"
+      number: "014"
+      waveTcgId: "2"
+      rarity: COMMON
+      title: "Cooling Vents"
+      type: UPGRADE_ARMOR
+      faction: null
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: null
+      defenseModifier: 1
+    }
+  ) {
+    id
+  }
+
+  bc100: addBattleCard(
+    card: {
+      tcgId: "U 015/081"
+      number: "015"
+      waveTcgId: "2"
+      rarity: UNCOMMON
+      title: "Cornered!"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["GREEN"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc101: addBattleCard(
+    card: {
+      tcgId: "R 016/081"
+      number: "016"
+      waveTcgId: "2"
+      rarity: RARE
+      title: "Crash Landing"
+      type: UPGRADE_UTILITY
+      faction: null
+      stars: null
+      icons: []
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc102: addBattleCard(
+    card: {
+      tcgId: "R 017/081"
+      number: "017"
+      waveTcgId: "2"
+      rarity: RARE
+      title: "Decepticon Crown"
+      type: UPGRADE_UTILITY
+      faction: DECEPTICON
+      stars: null
+      icons: ["WHITE", "GREEN"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc103: addBattleCard(
+    card: {
+      tcgId: "R 018/081"
+      number: "018"
+      waveTcgId: "2"
+      rarity: RARE
+      title: "Defensive Driving"
+      type: UPGRADE_ARMOR
+      faction: null
+      stars: null
+      icons: ["WHITE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc104: addBattleCard(
+    card: {
+      tcgId: "R 019/081"
+      number: "019"
+      waveTcgId: "2"
+      rarity: RARE
+      title: "Dinobot Enigma"
+      type: ACTION
+      faction: AUTOBOT
+      stars: null
+      icons: ["GREEN"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc105: addBattleCard(
+    card: {
+      tcgId: "R 020/081"
+      number: "020"
+      waveTcgId: "2"
+      rarity: RARE
+      title: "Electrified Spikes"
+      type: UPGRADE_ARMOR
+      faction: AUTOBOT
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: null
+      defenseModifier: 1
+    }
+  ) {
+    id
+  }
+
+  bc106: addBattleCard(
+    card: {
+      tcgId: "U 021/081"
+      number: "021"
+      waveTcgId: "2"
+      rarity: UNCOMMON
+      title: "Enemy Combat Analysis"
+      type: UPGRADE_UTILITY
+      faction: null
+      stars: null
+      icons: ["GREEN"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc107: addBattleCard(
+    card: {
+      tcgId: "R 022/081"
+      number: "022"
+      waveTcgId: "2"
+      rarity: RARE
+      title: "Energized Field"
+      type: UPGRADE_ARMOR
+      faction: null
+      stars: 1
+      icons: ["BLUE", "BLUE"]
+      attackModifier: null
+      defenseModifier: 1
+    }
+  ) {
+    id
+  }
+
+  bc108: addBattleCard(
+    card: {
+      tcgId: "C 023/081"
+      number: "023"
+      waveTcgId: "2"
+      rarity: COMMON
+      title: "Energon Slingshot"
+      type: UPGRADE_WEAPON
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: 1
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc109: addBattleCard(
+    card: {
+      tcgId: "C 024/081"
+      number: "024"
+      waveTcgId: "2"
+      rarity: COMMON
+      title: "Enforcement Batons"
+      type: UPGRADE_WEAPON
+      faction: null
+      stars: null
+      icons: ["ORANGE", "GREEN"]
+      attackModifier: 1
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc110: addBattleCard(
+    card: {
+      tcgId: "C 025/081"
+      number: "025"
+      waveTcgId: "2"
+      rarity: COMMON
+      title: "Erratic Lightning"
+      type: UPGRADE_WEAPON
+      faction: null
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: 3
+      defenseModifier: -1
+    }
+  ) {
+    id
+  }
+
+  bc111: addBattleCard(
+    card: {
+      tcgId: "C 026/081"
+      number: "026"
+      waveTcgId: "2"
+      rarity: COMMON
+      title: "Escape Route"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["WHITE", "GREEN"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc112: addBattleCard(
+    card: {
+      tcgId: "R 027/081"
+      number: "027"
+      waveTcgId: "2"
+      rarity: RARE
+      title: "Espionage"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["WHITE", "GREEN"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc113: addBattleCard(
+    card: {
+      tcgId: "U 028/081"
+      number: "028"
+      waveTcgId: "2"
+      rarity: UNCOMMON
+      title: "Evasive Maneuvers"
+      type: UPGRADE_ARMOR
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc114: addBattleCard(
+    card: {
+      tcgId: "C 029/081"
+      number: "029"
+      waveTcgId: "2"
+      rarity: COMMON
+      title: "Field Communicator"
+      type: UPGRADE_UTILITY
+      faction: null
+      stars: null
+      icons: ["WHITE"]
+      attackModifier: 1
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc115: addBattleCard(
+    card: {
+      tcgId: "C 030/081"
+      number: "030"
+      waveTcgId: "2"
+      rarity: COMMON
+      title: "Field Repair"
+      type: ACTION
+      faction: AUTOBOT
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc116: addBattleCard(
+    card: {
+      tcgId: "C 031/081"
+      number: "031"
+      waveTcgId: "2"
+      rarity: COMMON
+      title: "Fling"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: []
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc117: addBattleCard(
+    card: {
+      tcgId: "U 032/081"
+      number: "032"
+      waveTcgId: "2"
+      rarity: UNCOMMON
+      title: "Focus Fire"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["ORANGE", "GREEN"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc118: addBattleCard(
+    card: {
+      tcgId: "R 033/081"
+      number: "033"
+      waveTcgId: "2"
+      rarity: RARE
+      title: "Fog Of War"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["WHITE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc119: addBattleCard(
+    card: {
+      tcgId: "C 034/081"
+      number: "034"
+      waveTcgId: "2"
+      rarity: COMMON
+      title: "Handheld Blaster"
+      type: UPGRADE_WEAPON
+      faction: null
+      stars: null
+      icons: ["BLUE", "BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc120: addBattleCard(
+    card: {
+      tcgId: "R 035/081"
+      number: "035"
+      waveTcgId: "2"
+      rarity: RARE
+      title: "Heavy-Handed"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc121: addBattleCard(
+    card: {
+      tcgId: "C 036/081"
+      number: "036"
+      waveTcgId: "2"
+      rarity: COMMON
+      title: "Improvised Shield"
+      type: UPGRADE_ARMOR
+      faction: null
+      stars: null
+      icons: ["ORANGE", "ORANGE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc122: addBattleCard(
+    card: {
+      tcgId: "R 037/081"
+      number: "037"
+      waveTcgId: "2"
+      rarity: RARE
+      title: "Inferno Breath"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc123: addBattleCard(
+    card: {
+      tcgId: "R 038/081"
+      number: "038"
+      waveTcgId: "2"
+      rarity: RARE
+      title: "Intelligence Mission"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["WHITE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc124: addBattleCard(
+    card: {
+      tcgId: "R 039/081"
+      number: "039"
+      waveTcgId: "2"
+      rarity: RARE
+      title: "Inverted"
+      type: UPGRADE_UTILITY
+      faction: null
+      stars: null
+      icons: ["WHITE", "GREEN"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc125: addBattleCard(
+    card: {
+      tcgId: "U 040/081"
+      number: "040"
+      waveTcgId: "2"
+      rarity: UNCOMMON
+      title: "Leap Of Faith"
+      type: ACTION
+      faction: null
+      stars: 1
+      icons: ["WHITE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc126: addBattleCard(
+    card: {
+      tcgId: "R 041/081"
+      number: "041"
+      waveTcgId: "2"
+      rarity: RARE
+      title: "Marksmanship"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc127: addBattleCard(
+    card: {
+      tcgId: "R 042/081"
+      number: "042"
+      waveTcgId: "2"
+      rarity: RARE
+      title: "Master Plan"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["BLUE", "GREEN"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc128: addBattleCard(
+    card: {
+      tcgId: "R 043/081"
+      number: "043"
+      waveTcgId: "2"
+      rarity: RARE
+      title: "Mining Pick"
+      type: UPGRADE_WEAPON
+      faction: null
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: 1
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc129: addBattleCard(
+    card: {
+      tcgId: "R 044/081"
+      number: "044"
+      waveTcgId: "2"
+      rarity: RARE
+      title: "Mounted Missiles"
+      type: UPGRADE_WEAPON
+      faction: null
+      stars: 1
+      icons: ["ORANGE", "ORANGE"]
+      attackModifier: 2
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc130: addBattleCard(
+    card: {
+      tcgId: "U 045/081"
+      number: "045"
+      waveTcgId: "2"
+      rarity: UNCOMMON
+      title: "Noble's Blaster"
+      type: UPGRADE_WEAPON
+      faction: AUTOBOT
+      stars: null
+      icons: ["BLUE", "GREEN"]
+      attackModifier: 2
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc131: addBattleCard(
+    card: {
+      tcgId: "U 046/081"
+      number: "046"
+      waveTcgId: "2"
+      rarity: UNCOMMON
+      title: "Pep Talk"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc132: addBattleCard(
+    card: {
+      tcgId: "U 047/081"
+      number: "047"
+      waveTcgId: "2"
+      rarity: UNCOMMON
+      title: "Power Punch"
+      type: UPGRADE_WEAPON
+      faction: null
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc133: addBattleCard(
+    card: {
+      tcgId: "R 048/081"
+      number: "048"
+      waveTcgId: "2"
+      rarity: RARE
+      title: "Predacon Enigma"
+      type: ACTION
+      faction: DECEPTICON
+      stars: null
+      icons: ["GREEN"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc134: addBattleCard(
+    card: {
+      tcgId: "R 049/081"
+      number: "049"
+      waveTcgId: "2"
+      rarity: RARE
+      title: "Press The Advantage"
+      type: ACTION
+      faction: AUTOBOT
+      stars: null
+      icons: ["ORANGE", "GREEN"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc135: addBattleCard(
+    card: {
+      tcgId: "C 050/081"
+      number: "050"
+      waveTcgId: "2"
+      rarity: COMMON
+      title: "Primary Laser"
+      type: UPGRADE_WEAPON
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: 2
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc136: addBattleCard(
+    card: {
+      tcgId: "C 051/081"
+      number: "051"
+      waveTcgId: "2"
+      rarity: COMMON
+      title: "Rapid Conversion"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["WHITE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc137: addBattleCard(
+    card: {
+      tcgId: "U 052/081"
+      number: "052"
+      waveTcgId: "2"
+      rarity: UNCOMMON
+      title: "Reckless Charge"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc138: addBattleCard(
+    card: {
+      tcgId: "R 053/081"
+      number: "053"
+      waveTcgId: "2"
+      rarity: RARE
+      title: "Recon System"
+      type: UPGRADE_UTILITY
+      faction: null
+      stars: 1
+      icons: ["ORANGE", "BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc139: addBattleCard(
+    card: {
+      tcgId: "C 054/081"
+      number: "054"
+      waveTcgId: "2"
+      rarity: COMMON
+      title: "Rest And Relaxation"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["GREEN"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc140: addBattleCard(
+    card: {
+      tcgId: "U 055/081"
+      number: "055"
+      waveTcgId: "2"
+      rarity: UNCOMMON
+      title: "Scoundrel's Blaster"
+      type: UPGRADE_WEAPON
+      faction: DECEPTICON
+      stars: null
+      icons: ["BLUE", "GREEN"]
+      attackModifier: 2
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc141: addBattleCard(
+    card: {
+      tcgId: "U 056/081"
+      number: "056"
+      waveTcgId: "2"
+      rarity: UNCOMMON
+      title: "Scrounge"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["ORANGE", "GREEN"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc142: addBattleCard(
+    card: {
+      tcgId: "U 057/081"
+      number: "057"
+      waveTcgId: "2"
+      rarity: UNCOMMON
+      title: "Secret Dealings"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["WHITE", "GREEN"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc143: addBattleCard(
+    card: {
+      tcgId: "C 058/081"
+      number: "058"
+      waveTcgId: "2"
+      rarity: COMMON
+      title: "Security Console"
+      type: UPGRADE_UTILITY
+      faction: null
+      stars: null
+      icons: ["WHITE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc144: addBattleCard(
+    card: {
+      tcgId: "R 059/081"
+      number: "059"
+      waveTcgId: "2"
+      rarity: RARE
+      title: "Sentinel Enigma"
+      type: ACTION
+      faction: AUTOBOT
+      stars: null
+      icons: ["GREEN"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc145: addBattleCard(
+    card: {
+      tcgId: "U 060/081"
+      number: "060"
+      waveTcgId: "2"
+      rarity: UNCOMMON
+      title: "Smelt"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["BLUE", "GREEN"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc146: addBattleCard(
+    card: {
+      tcgId: "U 061/081"
+      number: "061"
+      waveTcgId: "2"
+      rarity: UNCOMMON
+      title: "Sonic Scramble"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["GREEN"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc147: addBattleCard(
+    card: {
+      tcgId: "C 062/081"
+      number: "062"
+      waveTcgId: "2"
+      rarity: COMMON
+      title: "Spare Parts"
+      type: UPGRADE_UTILITY
+      faction: null
+      stars: null
+      icons: ["WHITE", "GREEN"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc148: addBattleCard(
+    card: {
+      tcgId: "U 063/081"
+      number: "063"
+      waveTcgId: "2"
+      rarity: UNCOMMON
+      title: "Sparring Gear"
+      type: UPGRADE_ARMOR
+      faction: null
+      stars: null
+      icons: ["ORANGE", "GREEN"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc149: addBattleCard(
+    card: {
+      tcgId: "U 064/081"
+      number: "064"
+      waveTcgId: "2"
+      rarity: UNCOMMON
+      title: "Stealthiness"
+      type: UPGRADE_UTILITY
+      faction: null
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc150: addBattleCard(
+    card: {
+      tcgId: "R 065/081"
+      number: "065"
+      waveTcgId: "2"
+      rarity: RARE
+      title: "Steamroll"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: []
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc151: addBattleCard(
+    card: {
+      tcgId: "U 066/081"
+      number: "066"
+      waveTcgId: "2"
+      rarity: UNCOMMON
+      title: "Stunticon Enigma"
+      type: ACTION
+      faction: DECEPTICON
+      stars: null
+      icons: ["GREEN"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc152: addBattleCard(
+    card: {
+      tcgId: "R 067/081"
+      number: "067"
+      waveTcgId: "2"
+      rarity: RARE
+      title: "Stunticon Swagger"
+      type: UPGRADE_UTILITY
+      faction: DECEPTICON
+      stars: null
+      icons: []
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc153: addBattleCard(
+    card: {
+      tcgId: "U 068/081"
+      number: "068"
+      waveTcgId: "2"
+      rarity: UNCOMMON
+      title: "Superior Cannon"
+      type: UPGRADE_WEAPON
+      faction: null
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc154: addBattleCard(
+    card: {
+      tcgId: "U 069/081"
+      number: "069"
+      waveTcgId: "2"
+      rarity: UNCOMMON
+      title: "Superior Jetpack"
+      type: UPGRADE_UTILITY
+      faction: null
+      stars: null
+      icons: ["WHITE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc155: addBattleCard(
+    card: {
+      tcgId: "U 070/081"
+      number: "070"
+      waveTcgId: "2"
+      rarity: UNCOMMON
+      title: "Superior Plating"
+      type: UPGRADE_ARMOR
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc156: addBattleCard(
+    card: {
+      tcgId: "C 071/081"
+      number: "071"
+      waveTcgId: "2"
+      rarity: COMMON
+      title: "Surprise Attack"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["WHITE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc157: addBattleCard(
+    card: {
+      tcgId: "C 072/081"
+      number: "072"
+      waveTcgId: "2"
+      rarity: COMMON
+      title: "Swindled"
+      type: ACTION
+      faction: DECEPTICON
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc158: addBattleCard(
+    card: {
+      tcgId: "R 073/081"
+      number: "073"
+      waveTcgId: "2"
+      rarity: RARE
+      title: "Tackle"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc159: addBattleCard(
+    card: {
+      tcgId: "C 074/081"
+      number: "074"
+      waveTcgId: "2"
+      rarity: COMMON
+      title: "Tech Research"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["GREEN"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc160: addBattleCard(
+    card: {
+      tcgId: "C 075/081"
+      number: "075"
+      waveTcgId: "2"
+      rarity: COMMON
+      title: "Testify"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc161: addBattleCard(
+    card: {
+      tcgId: "R 076/081"
+      number: "076"
+      waveTcgId: "2"
+      rarity: RARE
+      title: "Tooth And Claw"
+      type: UPGRADE_UTILITY
+      faction: DECEPTICON
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: 1
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc162: addBattleCard(
+    card: {
+      tcgId: "C 077/081"
+      number: "077"
+      waveTcgId: "2"
+      rarity: COMMON
+      title: "Underhanded Tactics"
+      type: ACTION
+      faction: DECEPTICON
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc163: addBattleCard(
+    card: {
+      tcgId: "U 078/081"
+      number: "078"
+      waveTcgId: "2"
+      rarity: UNCOMMON
+      title: "Universal Network Access"
+      type: ACTION
+      faction: null
+      stars: 1
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc164: addBattleCard(
+    card: {
+      tcgId: "R 079/081"
+      number: "079"
+      waveTcgId: "2"
+      rarity: RARE
+      title: "Unleash Potential"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc165: addBattleCard(
+    card: {
+      tcgId: "U 080/081"
+      number: "080"
+      waveTcgId: "2"
+      rarity: UNCOMMON
+      title: "Vandalize"
+      type: ACTION
+      faction: null
+      stars: 1
+      icons: ["ORANGE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc166: addBattleCard(
+    card: {
+      tcgId: "C 081/081"
+      number: "081"
+      waveTcgId: "2"
+      rarity: COMMON
+      title: "Vaporize"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc167: addBattleCard(
+    card: {
+      tcgId: "R 001/005"
+      number: "001"
+      waveTcgId: "2A"
+      rarity: THEME
+      title: "Builder's Tools"
+      type: UPGRADE_UTILITY
+      faction: DECEPTICON
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc168: addBattleCard(
+    card: {
+      tcgId: "R 002/005"
+      number: "002"
+      waveTcgId: "2A"
+      rarity: THEME
+      title: "Constructicon Enigma"
+      type: ACTION
+      faction: DECEPTICON
+      stars: null
+      icons: ["GREEN"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc169: addBattleCard(
+    card: {
+      tcgId: "R 003/005"
+      number: "003"
+      waveTcgId: "2A"
+      rarity: THEME
+      title: "Heavy Landing"
+      type: ACTION
+      faction: DECEPTICON
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc170: addBattleCard(
+    card: {
+      tcgId: "R 004/005"
+      number: "004"
+      waveTcgId: "2A"
+      rarity: THEME
+      title: "Reclaim"
+      type: ACTION
+      faction: DECEPTICON
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc171: addBattleCard(
+    card: {
+      tcgId: "R 005/005"
+      number: "005"
+      waveTcgId: "2A"
+      rarity: THEME
+      title: "Work Overtime"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["WHITE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc172: addBattleCard(
+    card: {
+      tcgId: "U 001/064"
+      number: "001"
+      waveTcgId: "3"
+      rarity: UNCOMMON
+      title: "Anticipation Engine"
+      type: UPGRADE_WEAPON
+      faction: null
+      stars: null
+      icons: ["WHITE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc173: addBattleCard(
+    card: {
+      tcgId: "R 002/064"
+      number: "002"
+      waveTcgId: "3"
+      rarity: RARE
+      title: "Backup Bag"
+      type: UPGRADE_UTILITY
+      faction: null
+      stars: null
+      icons: ["WHITE", "GREEN"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc174: addBattleCard(
+    card: {
+      tcgId: "C 003/064"
+      number: "003"
+      waveTcgId: "3"
+      rarity: COMMON
+      title: "Basic Combat Protocol"
+      type: UPGRADE_UTILITY
+      faction: null
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc175: addBattleCard(
+    card: {
+      tcgId: "R 004/064"
+      number: "004"
+      waveTcgId: "3"
+      rarity: RARE
+      title: "Battering Ram"
+      type: UPGRADE_WEAPON
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: 2
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc176: addBattleCard(
+    card: {
+      tcgId: "C 005/064"
+      number: "005"
+      waveTcgId: "3"
+      rarity: COMMON
+      title: "Battlefield Report"
+      type: SECRET_ACTION
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc177: addBattleCard(
+    card: {
+      tcgId: "U 006/064"
+      number: "006"
+      waveTcgId: "3"
+      rarity: UNCOMMON
+      title: "Battlefield Scan"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["BLACK", "GREEN"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc178: addBattleCard(
+    card: {
+      tcgId: "U 007/064"
+      number: "007"
+      waveTcgId: "3"
+      rarity: UNCOMMON
+      title: "Bolster"
+      type: SECRET_ACTION
+      faction: null
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc179: addBattleCard(
+    card: {
+      tcgId: "C 008/064"
+      number: "008"
+      waveTcgId: "3"
+      rarity: COMMON
+      title: "Brainstorm"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc180: addBattleCard(
+    card: {
+      tcgId: "C 009/064"
+      number: "009"
+      waveTcgId: "3"
+      rarity: COMMON
+      title: "Calculated Strike"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["BLACK"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc181: addBattleCard(
+    card: {
+      tcgId: "R 010/064"
+      number: "010"
+      waveTcgId: "3"
+      rarity: RARE
+      title: "Callous Leadership"
+      type: ACTION
+      faction: DECEPTICON
+      stars: null
+      icons: ["WHITE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc182: addBattleCard(
+    card: {
+      tcgId: "C 011/064"
+      number: "011"
+      waveTcgId: "3"
+      rarity: COMMON
+      title: "Combat Dagger"
+      type: UPGRADE_WEAPON
+      faction: null
+      stars: null
+      icons: ["ORANGE", "BLACK"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc183: addBattleCard(
+    card: {
+      tcgId: "U 012/064"
+      number: "012"
+      waveTcgId: "3"
+      rarity: UNCOMMON
+      title: "Compact Shield"
+      type: UPGRADE_ARMOR
+      faction: AUTOBOT
+      stars: null
+      icons: ["BLACK"]
+      attackModifier: null
+      defenseModifier: 1
+    }
+  ) {
+    id
+  }
+
+  bc184: addBattleCard(
+    card: {
+      tcgId: "U 013/064"
+      number: "013"
+      waveTcgId: "3"
+      rarity: UNCOMMON
+      title: "Covert Armor"
+      type: UPGRADE_ARMOR
+      faction: null
+      stars: null
+      icons: ["BLUE", "GREEN"]
+      attackModifier: null
+      defenseModifier: 1
+    }
+  ) {
+    id
+  }
+
+  bc185: addBattleCard(
+    card: {
+      tcgId: "R 014/064"
+      number: "014"
+      waveTcgId: "3"
+      rarity: RARE
+      title: "Dampening Field"
+      type: SECRET_ACTION
+      faction: null
+      stars: null
+      icons: ["WHITE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc186: addBattleCard(
+    card: {
+      tcgId: "C 015/064"
+      number: "015"
+      waveTcgId: "3"
+      rarity: COMMON
+      title: "Defensive Formation"
+      type: SECRET_ACTION
+      faction: null
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc187: addBattleCard(
+    card: {
+      tcgId: "U 016/064"
+      number: "016"
+      waveTcgId: "3"
+      rarity: UNCOMMON
+      title: "Device Virus"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["BLACK"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc188: addBattleCard(
+    card: {
+      tcgId: "C 017/064"
+      number: "017"
+      waveTcgId: "3"
+      rarity: COMMON
+      title: "Dismantle"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["BLACK"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc189: addBattleCard(
+    card: {
+      tcgId: "C 018/064"
+      number: "018"
+      waveTcgId: "3"
+      rarity: COMMON
+      title: "Dismantling Claw"
+      type: UPGRADE_WEAPON
+      faction: null
+      stars: null
+      icons: ["BLUE", "GREEN"]
+      attackModifier: 1
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc190: addBattleCard(
+    card: {
+      tcgId: "C 019/064"
+      number: "019"
+      waveTcgId: "3"
+      rarity: COMMON
+      title: "EM24 IR Laser Launcher"
+      type: UPGRADE_WEAPON
+      faction: null
+      stars: null
+      icons: []
+      attackModifier: 3
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc191: addBattleCard(
+    card: {
+      tcgId: "R 020/064"
+      number: "020"
+      waveTcgId: "3"
+      rarity: RARE
+      title: "Emergency Defense Field"
+      type: UPGRADE_ARMOR
+      faction: null
+      stars: null
+      icons: []
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc192: addBattleCard(
+    card: {
+      tcgId: "U 021/064"
+      number: "021"
+      waveTcgId: "3"
+      rarity: UNCOMMON
+      title: "EMP Wave"
+      type: ACTION
+      faction: null
+      stars: 1
+      icons: ["BLUE", "BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc193: addBattleCard(
+    card: {
+      tcgId: "R 022/064"
+      number: "022"
+      waveTcgId: "3"
+      rarity: RARE
+      title: "Energy Pack"
+      type: UPGRADE_UTILITY
+      faction: null
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc194: addBattleCard(
+    card: {
+      tcgId: "R 023/064"
+      number: "023"
+      waveTcgId: "3"
+      rarity: RARE
+      title: "Erratic Energy Grenade"
+      type: UPGRADE_UTILITY
+      faction: null
+      stars: null
+      icons: ["BLACK"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc195: addBattleCard(
+    card: {
+      tcgId: "U 024/064"
+      number: "024"
+      waveTcgId: "3"
+      rarity: UNCOMMON
+      title: "Extra Padding"
+      type: UPGRADE_ARMOR
+      faction: null
+      stars: null
+      icons: ["BLUE", "GREEN"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc196: addBattleCard(
+    card: {
+      tcgId: "R 025/064"
+      number: "025"
+      waveTcgId: "3"
+      rarity: RARE
+      title: "Firecon Flame"
+      type: UPGRADE_UTILITY
+      faction: DECEPTICON
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc197: addBattleCard(
+    card: {
+      tcgId: "C 026/064"
+      number: "026"
+      waveTcgId: "3"
+      rarity: COMMON
+      title: "Force Field"
+      type: UPGRADE_ARMOR
+      faction: null
+      stars: null
+      icons: ["WHITE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc198: addBattleCard(
+    card: {
+      tcgId: "C 027/064"
+      number: "027"
+      waveTcgId: "3"
+      rarity: COMMON
+      title: "Frag Toss"
+      type: ACTION
+      faction: DECEPTICON
+      stars: null
+      icons: ["WHITE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc199: addBattleCard(
+    card: {
+      tcgId: "U 028/064"
+      number: "028"
+      waveTcgId: "3"
+      rarity: UNCOMMON
+      title: "Fuel Cache"
+      type: ACTION
+      faction: null
+      stars: 1
+      icons: ["WHITE", "ORANGE", "BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc200: addBattleCard(
+    card: {
+      tcgId: "U 029/064"
+      number: "029"
+      waveTcgId: "3"
+      rarity: UNCOMMON
+      title: "Full Loadout"
+      type: ACTION
+      faction: null
+      stars: 1
+      icons: ["ORANGE", "ORANGE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc201: addBattleCard(
+    card: {
+      tcgId: "R 030/064"
+      number: "030"
+      waveTcgId: "3"
+      rarity: RARE
+      title: "Heat Of Battle"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["WHITE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc202: addBattleCard(
+    card: {
+      tcgId: "R 031/064"
+      number: "031"
+      waveTcgId: "3"
+      rarity: RARE
+      title: "Heroic Team-Up"
+      type: ACTION
+      faction: AUTOBOT
+      stars: 1
+      icons: ["ORANGE", "BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc203: addBattleCard(
+    card: {
+      tcgId: "U 032/064"
+      number: "032"
+      waveTcgId: "3"
+      rarity: UNCOMMON
+      title: "Hiding Spot"
+      type: SECRET_ACTION
+      faction: null
+      stars: null
+      icons: ["BLACK"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc204: addBattleCard(
+    card: {
+      tcgId: "U 033/064"
+      number: "033"
+      waveTcgId: "3"
+      rarity: UNCOMMON
+      title: "HV Electron Breacher"
+      type: UPGRADE_WEAPON
+      faction: DECEPTICON
+      stars: null
+      icons: ["BLACK"]
+      attackModifier: 2
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc205: addBattleCard(
+    card: {
+      tcgId: "R 034/064"
+      number: "034"
+      waveTcgId: "3"
+      rarity: RARE
+      title: "Infiltrate"
+      type: SECRET_ACTION
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc206: addBattleCard(
+    card: {
+      tcgId: "R 035/064"
+      number: "035"
+      waveTcgId: "3"
+      rarity: RARE
+      title: "Laser Cutlass"
+      type: UPGRADE_WEAPON
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: 1
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc207: addBattleCard(
+    card: {
+      tcgId: "R 036/064"
+      number: "036"
+      waveTcgId: "3"
+      rarity: RARE
+      title: "LV Gamma-Disruptor Launcher"
+      type: UPGRADE_WEAPON
+      faction: DECEPTICON
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: 2
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc208: addBattleCard(
+    card: {
+      tcgId: "R 037/064"
+      number: "037"
+      waveTcgId: "3"
+      rarity: RARE
+      title: "Ultra Magnus Armor"
+      type: UPGRADE_ARMOR
+      faction: AUTOBOT
+      stars: 2
+      icons: ["ORANGE", "BLUE"]
+      attackModifier: 2
+      defenseModifier: 2
+    }
+  ) {
+    id
+  }
+
+  bc209: addBattleCard(
+    card: {
+      tcgId: "C 038/064"
+      number: "038"
+      waveTcgId: "3"
+      rarity: COMMON
+      title: "Medic!"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: []
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc210: addBattleCard(
+    card: {
+      tcgId: "U 039/064"
+      number: "039"
+      waveTcgId: "3"
+      rarity: UNCOMMON
+      title: "Metal Detector"
+      type: UPGRADE_UTILITY
+      faction: null
+      stars: null
+      icons: ["BLACK", "GREEN"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc211: addBattleCard(
+    card: {
+      tcgId: "R 040/064"
+      number: "040"
+      waveTcgId: "3"
+      rarity: RARE
+      title: "Micro Capacitor"
+      type: UPGRADE_UTILITY
+      faction: null
+      stars: null
+      icons: []
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc212: addBattleCard(
+    card: {
+      tcgId: "C 041/064"
+      number: "041"
+      waveTcgId: "3"
+      rarity: COMMON
+      title: "Pep Talk"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc213: addBattleCard(
+    card: {
+      tcgId: "C 042/064"
+      number: "042"
+      waveTcgId: "3"
+      rarity: COMMON
+      title: "Personal Targeting Drone"
+      type: UPGRADE_UTILITY
+      faction: null
+      stars: null
+      icons: ["WHITE", "GREEN"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc214: addBattleCard(
+    card: {
+      tcgId: "U 043/064"
+      number: "043"
+      waveTcgId: "3"
+      rarity: UNCOMMON
+      title: "Point-Defense System"
+      type: UPGRADE_ARMOR
+      faction: null
+      stars: null
+      icons: ["BLACK"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc215: addBattleCard(
+    card: {
+      tcgId: "R 044/064"
+      number: "044"
+      waveTcgId: "3"
+      rarity: RARE
+      title: "Pop A Wheelie"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["WHITE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc216: addBattleCard(
+    card: {
+      tcgId: "R 045/064"
+      number: "045"
+      waveTcgId: "3"
+      rarity: RARE
+      title: "Quartermaster"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["WHITE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc217: addBattleCard(
+    card: {
+      tcgId: "C 046/064"
+      number: "046"
+      waveTcgId: "3"
+      rarity: COMMON
+      title: "Reactive Armor"
+      type: UPGRADE_ARMOR
+      faction: null
+      stars: null
+      icons: ["ORANGE", "GREEN"]
+      attackModifier: null
+      defenseModifier: 1
+    }
+  ) {
+    id
+  }
+
+  bc218: addBattleCard(
+    card: {
+      tcgId: "U 047/064"
+      number: "047"
+      waveTcgId: "3"
+      rarity: UNCOMMON
+      title: "Reflex Circuits"
+      type: UPGRADE_ARMOR
+      faction: null
+      stars: null
+      icons: ["BLUE", "GREEN"]
+      attackModifier: null
+      defenseModifier: 1
+    }
+  ) {
+    id
+  }
+
+  bc219: addBattleCard(
+    card: {
+      tcgId: "C 048/064"
+      number: "048"
+      waveTcgId: "3"
+      rarity: COMMON
+      title: "Repurpose"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["BLACK"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc220: addBattleCard(
+    card: {
+      tcgId: "U 049/064"
+      number: "049"
+      waveTcgId: "3"
+      rarity: UNCOMMON
+      title: "Rock Toss"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["ORANGE", "BLACK"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc221: addBattleCard(
+    card: {
+      tcgId: "R 050/064"
+      number: "050"
+      waveTcgId: "3"
+      rarity: RARE
+      title: "RR Disruptor Blade"
+      type: UPGRADE_WEAPON
+      faction: null
+      stars: null
+      icons: ["BLACK"]
+      attackModifier: 3
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc222: addBattleCard(
+    card: {
+      tcgId: "R 051/064"
+      number: "051"
+      waveTcgId: "3"
+      rarity: RARE
+      title: "Scavenge The Battlefield"
+      type: SECRET_ACTION
+      faction: null
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc223: addBattleCard(
+    card: {
+      tcgId: "C 052/064"
+      number: "052"
+      waveTcgId: "3"
+      rarity: COMMON
+      title: "Smoke Cloak"
+      type: UPGRADE_ARMOR
+      faction: null
+      stars: null
+      icons: ["BLACK", "BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc224: addBattleCard(
+    card: {
+      tcgId: "C 053/064"
+      number: "053"
+      waveTcgId: "3"
+      rarity: COMMON
+      title: "Smokethrower"
+      type: UPGRADE_WEAPON
+      faction: null
+      stars: null
+      icons: ["BLACK"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc225: addBattleCard(
+    card: {
+      tcgId: "C 054/064"
+      number: "054"
+      waveTcgId: "3"
+      rarity: COMMON
+      title: "Diagnosis"
+      type: ACTION
+      faction: AUTOBOT
+      stars: null
+      icons: ["WHITE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc226: addBattleCard(
+    card: {
+      tcgId: "R 055/064"
+      number: "055"
+      waveTcgId: "3"
+      rarity: COMMON
+      title: "Special Ops Mission"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["WHITE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc227: addBattleCard(
+    card: {
+      tcgId: "U 056/064"
+      number: "056"
+      waveTcgId: "3"
+      rarity: UNCOMMON
+      title: "Spinner Rims"
+      type: UPGRADE_UTILITY
+      faction: null
+      stars: null
+      icons: ["WHITE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc228: addBattleCard(
+    card: {
+      tcgId: "U 057/064"
+      number: "057"
+      waveTcgId: "3"
+      rarity: UNCOMMON
+      title: "Squish Them Like Bugs"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc229: addBattleCard(
+    card: {
+      tcgId: "U 058/064"
+      number: "058"
+      waveTcgId: "3"
+      rarity: UNCOMMON
+      title: "Steady Shot"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["BLACK", "BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc230: addBattleCard(
+    card: {
+      tcgId: "U 059/064"
+      number: "059"
+      waveTcgId: "3"
+      rarity: UNCOMMON
+      title: "Sturdy Armor"
+      type: UPGRADE_ARMOR
+      faction: null
+      stars: null
+      icons: ["BLUE", "GREEN"]
+      attackModifier: null
+      defenseModifier: 1
+    }
+  ) {
+    id
+  }
+
+  bc231: addBattleCard(
+    card: {
+      tcgId: "R 060/064"
+      number: "060"
+      waveTcgId: "3"
+      rarity: RARE
+      title: "Take Cover"
+      type: SECRET_ACTION
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc232: addBattleCard(
+    card: {
+      tcgId: "R 061/064"
+      number: "061"
+      waveTcgId: "3"
+      rarity: RARE
+      title: "Two-Pronged Attack"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc233: addBattleCard(
+    card: {
+      tcgId: "R 062/064"
+      number: "062"
+      waveTcgId: "3"
+      rarity: RARE
+      title: "Unconventional Flying Object"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc234: addBattleCard(
+    card: {
+      tcgId: "C 063/064"
+      number: "063"
+      waveTcgId: "3"
+      rarity: COMMON
+      title: "Urban Camo"
+      type: UPGRADE_UTILITY
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc235: addBattleCard(
+    card: {
+      tcgId: "R 064/064"
+      number: "064"
+      waveTcgId: "3"
+      rarity: RARE
+      title: "W-5 Gyro Blaster"
+      type: UPGRADE_UTILITY
+      faction: null
+      stars: null
+      icons: []
+      attackModifier: 1
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc236: addBattleCard(
+    card: {
+      tcgId: "R 001/064"
+      number: "001"
+      waveTcgId: "4"
+      rarity: RARE
+      title: "4-Wheel Drive"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc237: addBattleCard(
+    card: {
+      tcgId: "U 002/064"
+      number: "002"
+      waveTcgId: "4"
+      rarity: UNCOMMON
+      title: "Acute Reflexes"
+      type: UPGRADE_UTILITY
+      faction: null
+      stars: null
+      icons: ["WHITE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc238: addBattleCard(
+    card: {
+      tcgId: "U 003/064"
+      number: "003"
+      waveTcgId: "4"
+      rarity: UNCOMMON
+      title: "Adaptive Plating"
+      type: UPGRADE_ARMOR
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc239: addBattleCard(
+    card: {
+      tcgId: "R 004/064"
+      number: "004"
+      waveTcgId: "4"
+      rarity: RARE
+      title: "Backfire"
+      type: SECRET_ACTION
+      faction: DECEPTICON
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc240: addBattleCard(
+    card: {
+      tcgId: "R 005/064"
+      number: "005"
+      waveTcgId: "4"
+      rarity: RARE
+      title: "Multi-Missile Pod"
+      type: UPGRADE_WEAPON
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc241: addBattleCard(
+    card: {
+      tcgId: "U 006/064"
+      number: "006"
+      waveTcgId: "4"
+      rarity: UNCOMMON
+      title: "Battlefield Incursion"
+      type: ACTION
+      faction: DECEPTICON
+      stars: null
+      icons: ["GREEN"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc242: addBattleCard(
+    card: {
+      tcgId: "U 007/064"
+      number: "007"
+      waveTcgId: "4"
+      rarity: UNCOMMON
+      title: "Blast Suit"
+      type: UPGRADE_ARMOR
+      faction: null
+      stars: 1
+      icons: []
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc243: addBattleCard(
+    card: {
+      tcgId: "R 008/064"
+      number: "008"
+      waveTcgId: "4"
+      rarity: RARE
+      title: "Composite Armor"
+      type: UPGRADE_ARMOR
+      faction: null
+      stars: null
+      icons: ["ORANGE", "BLACK"]
+      attackModifier: 1
+      defenseModifier: 3
+    }
+  ) {
+    id
+  }
+
+  bc244: addBattleCard(
+    card: {
+      tcgId: "U 009/064"
+      number: "009"
+      waveTcgId: "4"
+      rarity: UNCOMMON
+      title: "Contract Contingency"
+      type: ACTION
+      faction: MERCENARY
+      stars: null
+      icons: ["BLACK", "BLACK"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc245: addBattleCard(
+    card: {
+      tcgId: "R 010/064"
+      number: "010"
+      waveTcgId: "4"
+      rarity: RARE
+      title: "Conversion Engine"
+      type: UPGRADE_UTILITY
+      faction: null
+      stars: null
+      icons: ["WHITE"]
+      attackModifier: 1
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc246: addBattleCard(
+    card: {
+      tcgId: "R 011/064"
+      number: "011"
+      waveTcgId: "4"
+      rarity: RARE
+      title: "Coup"
+      type: SECRET_ACTION
+      faction: MERCENARY
+      stars: null
+      icons: ["BLACK"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc247: addBattleCard(
+    card: {
+      tcgId: "C 012/064"
+      number: "012"
+      waveTcgId: "4"
+      rarity: COMMON
+      title: "Crowbar"
+      type: UPGRADE_WEAPON
+      faction: null
+      stars: null
+      icons: ["BLACK", "BLACK"]
+      attackModifier: 2
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc248: addBattleCard(
+    card: {
+      tcgId: "R 013/064"
+      number: "013"
+      waveTcgId: "4"
+      rarity: RARE
+      title: "Crude Club"
+      type: UPGRADE_WEAPON
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc249: addBattleCard(
+    card: {
+      tcgId: "R 014/064"
+      number: "014"
+      waveTcgId: "4"
+      rarity: RARE
+      title: "Daring Escape"
+      type: ACTION
+      faction: AUTOBOT
+      stars: null
+      icons: ["BLUE", "GREEN"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc250: addBattleCard(
+    card: {
+      tcgId: "U 015/064"
+      number: "015"
+      waveTcgId: "4"
+      rarity: UNCOMMON
+      title: "Decipher"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["BLACK", "GREEN"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc251: addBattleCard(
+    card: {
+      tcgId: "R 016/064"
+      number: "016"
+      waveTcgId: "4"
+      rarity: RARE
+      title: "Defensive Configuration"
+      type: UPGRADE_UTILITY
+      faction: null
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc252: addBattleCard(
+    card: {
+      tcgId: "C 017/064"
+      number: "017"
+      waveTcgId: "4"
+      rarity: COMMON
+      title: "Designated Target"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["BLACK", "BLACK"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc253: addBattleCard(
+    card: {
+      tcgId: "U 018/064"
+      number: "018"
+      waveTcgId: "4"
+      rarity: UNCOMMON
+      title: "Dual Wield"
+      type: ACTION
+      faction: MERCENARY
+      stars: null
+      icons: ["BLACK", "BLACK"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc254: addBattleCard(
+    card: {
+      tcgId: "U 019/064"
+      number: "019"
+      waveTcgId: "4"
+      rarity: UNCOMMON
+      title: "Energy Transfer"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc255: addBattleCard(
+    card: {
+      tcgId: "U 020/064"
+      number: "020"
+      waveTcgId: "4"
+      rarity: UNCOMMON
+      title: "Erratic Cannon"
+      type: UPGRADE_WEAPON
+      faction: null
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc256: addBattleCard(
+    card: {
+      tcgId: "U 021/064"
+      number: "021"
+      waveTcgId: "4"
+      rarity: UNCOMMON
+      title: "Even the Score"
+      type: SECRET_ACTION
+      faction: DECEPTICON
+      stars: 1
+      icons: ["ORANGE", "ORANGE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc257: addBattleCard(
+    card: {
+      tcgId: "C 022/064"
+      number: "022"
+      waveTcgId: "4"
+      rarity: COMMON
+      title: "Fight For Position"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["ORANGE", "BLACK"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc258: addBattleCard(
+    card: {
+      tcgId: "C 023/064"
+      number: "023"
+      waveTcgId: "4"
+      rarity: COMMON
+      title: "Guarded Posture"
+      type: UPGRADE_ARMOR
+      faction: null
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: -1
+      defenseModifier: 2
+    }
+  ) {
+    id
+  }
+
+  bc259: addBattleCard(
+    card: {
+      tcgId: "C 024/064"
+      number: "024"
+      waveTcgId: "4"
+      rarity: COMMON
+      title: "Hazardous Shield"
+      type: UPGRADE_ARMOR
+      faction: DECEPTICON
+      stars: null
+      icons: ["BLACK"]
+      attackModifier: null
+      defenseModifier: 1
+    }
+  ) {
+    id
+  }
+
+  bc260: addBattleCard(
+    card: {
+      tcgId: "C 025/064"
+      number: "025"
+      waveTcgId: "4"
+      rarity: COMMON
+      title: "Head-On Collision"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["WHITE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc261: addBattleCard(
+    card: {
+      tcgId: "U 026/064"
+      number: "026"
+      waveTcgId: "4"
+      rarity: UNCOMMON
+      title: "Heroic Resolve"
+      type: SECRET_ACTION
+      faction: AUTOBOT
+      stars: 1
+      icons: ["BLUE", "BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc262: addBattleCard(
+    card: {
+      tcgId: "C 027/064"
+      number: "027"
+      waveTcgId: "4"
+      rarity: COMMON
+      title: "Hidden Fortification"
+      type: SECRET_ACTION
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc263: addBattleCard(
+    card: {
+      tcgId: "R 028/064"
+      number: "028"
+      waveTcgId: "4"
+      rarity: RARE
+      title: "Hijack"
+      type: SECRET_ACTION
+      faction: null
+      stars: null
+      icons: ["BLACK", "GREEN"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc264: addBattleCard(
+    card: {
+      tcgId: "U 029/064"
+      number: "029"
+      waveTcgId: "4"
+      rarity: UNCOMMON
+      title: "Immersed in Shadow"
+      type: UPGRADE_UTILITY
+      faction: null
+      stars: null
+      icons: ["ORANGE", "BLACK"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc265: addBattleCard(
+    card: {
+      tcgId: "U 030/064"
+      number: "030"
+      waveTcgId: "4"
+      rarity: UNCOMMON
+      title: "Increased Durability"
+      type: UPGRADE_ARMOR
+      faction: null
+      stars: null
+      icons: ["BLACK"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc266: addBattleCard(
+    card: {
+      tcgId: "U 031/064"
+      number: "031"
+      waveTcgId: "4"
+      rarity: UNCOMMON
+      title: "Indestructible Sword"
+      type: UPGRADE_WEAPON
+      faction: null
+      stars: 1
+      icons: ["BLACK", "BLACK"]
+      attackModifier: 2
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc267: addBattleCard(
+    card: {
+      tcgId: "R 032/064"
+      number: "032"
+      waveTcgId: "4"
+      rarity: RARE
+      title: "Involuntary Promotion"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["BLACK"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc268: addBattleCard(
+    card: {
+      tcgId: "R 033/064"
+      number: "033"
+      waveTcgId: "4"
+      rarity: RARE
+      title: "Jam Signals"
+      type: SECRET_ACTION
+      faction: null
+      stars: null
+      icons: ["ORANGE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc269: addBattleCard(
+    card: {
+      tcgId: "C 034/064"
+      number: "034"
+      waveTcgId: "4"
+      rarity: COMMON
+      title: "Kinetic Converter"
+      type: UPGRADE_UTILITY
+      faction: null
+      stars: null
+      icons: ["WHITE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc270: addBattleCard(
+    card: {
+      tcgId: "C 035/064"
+      number: "035"
+      waveTcgId: "4"
+      rarity: COMMON
+      title: "Kinetic Intensifier Whip"
+      type: UPGRADE_WEAPON
+      faction: null
+      stars: null
+      icons: ["WHITE"]
+      attackModifier: 1
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc271: addBattleCard(
+    card: {
+      tcgId: "R 036/064"
+      number: "036"
+      waveTcgId: "4"
+      rarity: RARE
+      title: "Lucky Vest"
+      type: UPGRADE_ARMOR
+      faction: null
+      stars: null
+      icons: []
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc272: addBattleCard(
+    card: {
+      tcgId: "C 037/064"
+      number: "037"
+      waveTcgId: "4"
+      rarity: COMMON
+      title: "Medic's Protective Field"
+      type: UPGRADE_ARMOR
+      faction: AUTOBOT
+      stars: null
+      icons: ["WHITE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc273: addBattleCard(
+    card: {
+      tcgId: "C 038/064"
+      number: "038"
+      waveTcgId: "4"
+      rarity: COMMON
+      title: "Minor Medic Kit"
+      type: UPGRADE_UTILITY
+      faction: null
+      stars: null
+      icons: ["BLACK", "BLACK"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc274: addBattleCard(
+    card: {
+      tcgId: "U 039/064"
+      number: "039"
+      waveTcgId: "4"
+      rarity: UNCOMMON
+      title: "New Orders"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["BLACK"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc275: addBattleCard(
+    card: {
+      tcgId: "R 040/064"
+      number: "040"
+      waveTcgId: "4"
+      rarity: RARE
+      title: "Opportune Offensive"
+      type: ACTION
+      faction: MERCENARY
+      stars: null
+      icons: ["BLACK", "BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc276: addBattleCard(
+    card: {
+      tcgId: "R 041/064"
+      number: "041"
+      waveTcgId: "4"
+      rarity: RARE
+      title: "Opportune Repairs"
+      type: ACTION
+      faction: MERCENARY
+      stars: null
+      icons: ["ORANGE", "BLACK"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc277: addBattleCard(
+    card: {
+      tcgId: "R 042/064"
+      number: "042"
+      waveTcgId: "4"
+      rarity: RARE
+      title: "Overheat"
+      type: SECRET_ACTION
+      faction: null
+      stars: null
+      icons: ["WHITE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc278: addBattleCard(
+    card: {
+      tcgId: "R 043/064"
+      number: "043"
+      waveTcgId: "4"
+      rarity: RARE
+      title: "Overwhelming Advantage"
+      type: ACTION
+      faction: DECEPTICON
+      stars: null
+      icons: ["ORANGE", "GREEN"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc279: addBattleCard(
+    card: {
+      tcgId: "R 044/064"
+      number: "044"
+      waveTcgId: "4"
+      rarity: RARE
+      title: "Pincer Movement"
+      type: ACTION
+      faction: DECEPTICON
+      stars: 1
+      icons: ["ORANGE", "BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc280: addBattleCard(
+    card: {
+      tcgId: "U 045/064"
+      number: "045"
+      waveTcgId: "4"
+      rarity: UNCOMMON
+      title: "Plunder"
+      type: ACTION
+      faction: null
+      stars: 1
+      icons: ["BLACK", "BLACK", "BLACK"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc281: addBattleCard(
+    card: {
+      tcgId: "R 046/064"
+      number: "046"
+      waveTcgId: "4"
+      rarity: RARE
+      title: "Pocket Processor"
+      type: UPGRADE_UTILITY
+      faction: null
+      stars: null
+      icons: ["GREEN"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc282: addBattleCard(
+    card: {
+      tcgId: "U 047/064"
+      number: "047"
+      waveTcgId: "4"
+      rarity: UNCOMMON
+      title: "Point Position"
+      type: UPGRADE_UTILITY
+      faction: null
+      stars: null
+      icons: ["BLACK", "BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc283: addBattleCard(
+    card: {
+      tcgId: "R 048/064"
+      number: "048"
+      waveTcgId: "4"
+      rarity: RARE
+      title: "Relentless Invasion"
+      type: ACTION
+      faction: DECEPTICON
+      stars: 1
+      icons: ["WHITE", "ORANGE", "BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc284: addBattleCard(
+    card: {
+      tcgId: "C 049/064"
+      number: "049"
+      waveTcgId: "4"
+      rarity: COMMON
+      title: "Reprocess"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["GREEN"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc285: addBattleCard(
+    card: {
+      tcgId: "U 050/064"
+      number: "050"
+      waveTcgId: "4"
+      rarity: UNCOMMON
+      title: "Sabotaged Armaments"
+      type: SECRET_ACTION
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc286: addBattleCard(
+    card: {
+      tcgId: "R 051/064"
+      number: "051"
+      waveTcgId: "4"
+      rarity: RARE
+      title: "Shoulder Holster"
+      type: UPGRADE_UTILITY
+      faction: null
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc287: addBattleCard(
+    card: {
+      tcgId: "C 052/064"
+      number: "052"
+      waveTcgId: "4"
+      rarity: COMMON
+      title: "Showing Off"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: []
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc288: addBattleCard(
+    card: {
+      tcgId: "C 053/064"
+      number: "053"
+      waveTcgId: "4"
+      rarity: COMMON
+      title: "Soldier's Blaster"
+      type: UPGRADE_WEAPON
+      faction: null
+      stars: null
+      icons: ["GREEN"]
+      attackModifier: 1
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc289: addBattleCard(
+    card: {
+      tcgId: "C 054/064"
+      number: "054"
+      waveTcgId: "4"
+      rarity: COMMON
+      title: "Special Delivery"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["BLACK"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc290: addBattleCard(
+    card: {
+      tcgId: "C 055/064"
+      number: "055"
+      waveTcgId: "4"
+      rarity: COMMON
+      title: "Stable Cover"
+      type: SECRET_ACTION
+      faction: null
+      stars: null
+      icons: ["BLACK"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc291: addBattleCard(
+    card: {
+      tcgId: "R 056/064"
+      number: "056"
+      waveTcgId: "4"
+      rarity: RARE
+      title: "Step Forward"
+      type: SECRET_ACTION
+      faction: AUTOBOT
+      stars: null
+      icons: ["BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc292: addBattleCard(
+    card: {
+      tcgId: "U 057/064"
+      number: "057"
+      waveTcgId: "4"
+      rarity: UNCOMMON
+      title: "Sturdy Javelin"
+      type: UPGRADE_WEAPON
+      faction: null
+      stars: null
+      icons: ["WHITE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc293: addBattleCard(
+    card: {
+      tcgId: "U 058/064"
+      number: "058"
+      waveTcgId: "4"
+      rarity: UNCOMMON
+      title: "Swerve"
+      type: SECRET_ACTION
+      faction: null
+      stars: null
+      icons: ["WHITE", "BLACK"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc294: addBattleCard(
+    card: {
+      tcgId: "C 059/064"
+      number: "059"
+      waveTcgId: "4"
+      rarity: COMMON
+      title: "Terrifying Resilience"
+      type: UPGRADE_ARMOR
+      faction: DECEPTICON
+      stars: null
+      icons: ["ORANGE", "BLACK"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc295: addBattleCard(
+    card: {
+      tcgId: "R 060/064"
+      number: "060"
+      waveTcgId: "4"
+      rarity: RARE
+      title: "Toolbox"
+      type: UPGRADE_UTILITY
+      faction: null
+      stars: null
+      icons: ["GREEN"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc296: addBattleCard(
+    card: {
+      tcgId: "C 061/064"
+      number: "061"
+      waveTcgId: "4"
+      rarity: COMMON
+      title: "Unflinching Courage"
+      type: UPGRADE_WEAPON
+      faction: AUTOBOT
+      stars: null
+      icons: ["BLACK", "BLUE"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc297: addBattleCard(
+    card: {
+      tcgId: "R 062/064"
+      number: "062"
+      waveTcgId: "4"
+      rarity: RARE
+      title: "Valuable Contract"
+      type: UPGRADE_UTILITY
+      faction: MERCENARY
+      stars: null
+      icons: ["BLACK"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc298: addBattleCard(
+    card: {
+      tcgId: "C 063/064"
+      number: "063"
+      waveTcgId: "4"
+      rarity: COMMON
+      title: "War of Attrition"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["BLUE", "GREEN"]
+      attackModifier: null
+      defenseModifier: null
+    }
+  ) {
+    id
+  }
+
+  bc299: addBattleCard(
+    card: {
+      tcgId: "C 064/064"
+      number: "064"
+      waveTcgId: "4"
+      rarity: COMMON
+      title: "Wedge Formation"
+      type: ACTION
+      faction: null
+      stars: null
+      icons: ["ORANGE", "BLACK", "GREEN"]
       attackModifier: null
       defenseModifier: null
     }
