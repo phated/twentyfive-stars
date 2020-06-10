@@ -2,7 +2,7 @@
 mutation Waves {
   w0: addWave(
     wave: {
-      tcgId: "1C"
+      tcgId: "Wave 1C"
       name: "Convention Edition (2018)"
       released: "2018-07-18"
     }
@@ -10,37 +10,43 @@ mutation Waves {
     id
   }
 
-  w1: addWave(wave: { tcgId: "1", name: "Wave 1", released: "2018-09-28" }) {
+  w1: addWave(
+    wave: { tcgId: "Wave 1", name: "Wave 1", released: "2018-09-28" }
+  ) {
     id
   }
 
   w2: addWave(
-    wave: { tcgId: "1S", name: "Autobot Starter", released: "2018-09-28" }
+    wave: { tcgId: "Wave 1S", name: "Autobot Starter", released: "2018-09-28" }
   ) {
     id
   }
 
   w3: addWave(
-    wave: { tcgId: "1A", name: "Metroplex Deck", released: "2018-11-16" }
+    wave: { tcgId: "Wave 1A", name: "Metroplex Deck", released: "2018-11-16" }
   ) {
     id
   }
 
   w4: addWave(
-    wave: { tcgId: "2", name: "Rise of the Combiners", released: "2019-03-01" }
+    wave: {
+      tcgId: "Wave 2"
+      name: "Rise of the Combiners"
+      released: "2019-03-01"
+    }
   ) {
     id
   }
 
   w5: addWave(
-    wave: { tcgId: "2A", name: "Devastator Deck", released: "2019-03-29" }
+    wave: { tcgId: "Wave 2A", name: "Devastator Deck", released: "2019-03-29" }
   ) {
     id
   }
 
   w6: addWave(
     wave: {
-      tcgId: "2S"
+      tcgId: "Wave 2S"
       name: "Bumblebee vs Megatron Starter Set"
       released: "2019-05-03"
     }
@@ -49,18 +55,24 @@ mutation Waves {
   }
 
   w7: addWave(
-    wave: {
-      tcgId: "3"
-      name: "War For Cybertron: Siege 1"
-      released: "2019-06-28"
-    }
+    wave: { tcgId: "Wave 2P", name: "Loot Crate promo", released: "2019-02-19" }
   ) {
     id
   }
 
   w8: addWave(
     wave: {
-      tcgId: "3C"
+      tcgId: "Wave 3"
+      name: "War for Cybertron: Siege 1"
+      released: "2019-06-28"
+    }
+  ) {
+    id
+  }
+
+  w9: addWave(
+    wave: {
+      tcgId: "Wave 3C"
       name: "Convention Edition (2019)"
       released: "2019-07-18"
     }
@@ -68,7 +80,17 @@ mutation Waves {
     id
   }
 
-  w9: addWave(
+  w10: addWave(
+    wave: {
+      tcgId: "Wave 3P"
+      name: "War for Cybertron: Siege promos"
+      released: "2019-06-28"
+    }
+  ) {
+    id
+  }
+
+  w11: addWave(
     wave: {
       tcgId: "35th Anniversary"
       name: "Blaster vs Soundwave Deck (35th Anniversary)"
@@ -78,7 +100,7 @@ mutation Waves {
     id
   }
 
-  w10: addWave(
+  w12: addWave(
     wave: {
       tcgId: "Blaster vs Soundwave"
       name: "Blaster vs Soundwave Deck"
@@ -88,17 +110,27 @@ mutation Waves {
     id
   }
 
-  w11: addWave(
+  w13: addWave(
     wave: {
-      tcgId: "4"
-      name: "War For Cybertron: Siege 2"
+      tcgId: "Wave 4"
+      name: "War for Cybertron: Siege 2"
       released: "2019-11-08"
     }
   ) {
     id
   }
 
-  w12: addWave(
+  w14: addWave(
+    wave: {
+      tcgId: "Wave 4A"
+      name: "War for Cybertron: Siege 2 (Box Insert)"
+      released: "2019-11-08"
+    }
+  ) {
+    id
+  }
+
+  w15: addWave(
     wave: {
       tcgId: "Energon Edition"
       name: "Wave 1 Energon Edition"
@@ -108,8 +140,32 @@ mutation Waves {
     id
   }
 
-  w13: addWave(
-    wave: { tcgId: "5", name: "Titan Masters Attack", released: "2020-04-17" }
+  w16: addWave(
+    wave: {
+      tcgId: "Wave 5"
+      name: "Titan Masters Attack"
+      released: "2020-05-29"
+    }
+  ) {
+    id
+  }
+
+  w17: addWave(
+    wave: {
+      tcgId: "Wave 5A"
+      name: "Titan Masters Attack (Box Insert)"
+      released: "2020-05-29"
+    }
+  ) {
+    id
+  }
+
+  w17: addWave(
+    wave: {
+      tcgId: "Wave 5P"
+      name: "Titan Masters Attack promos"
+      released: "2020-05-29"
+    }
   ) {
     id
   }
