@@ -13,4 +13,6 @@ pub enum BattleType {
     UpgradeArmor,
     #[sqlx(rename = "UPGRADE_UTILITY")]
     UpgradeUtility,
+    #[sqlx(rename = "UPGRADE_WEAPON_ARMOR")]
+    UpgradeWeaponArmor,
 }
