@@ -429,6 +429,13 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
+"@babel/runtime@^7.4.4":
+  version "7.10.2"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.10.2.tgz#d103f21f2602497d38348a32e008637d506db839"
+  integrity sha512-6sF3uQw2ivImfVIl62RZ7MXhO2tap69WeWK57vAaimT6AZbE4FbqjdEJIN1UqoD6wI6B+1n9UiagafH1sxjOtg==
+  dependencies:
+    regenerator-runtime "^0.13.4"
+
 "@babel/template@^7.8.3", "@babel/template@^7.8.6":
   version "7.8.6"
   resolved "https://registry.yarnpkg.com/@babel/template/-/template-7.8.6.tgz#86b22af15f828dfb086474f964dcc3e39c43ce2b"
@@ -1281,6 +1288,19 @@ bs-platform@^7.2.2:
   version "7.2.2"
   resolved "https://registry.yarnpkg.com/bs-platform/-/bs-platform-7.2.2.tgz#76fdc63e4889458ae3d257a0132107a792f2309c"
   integrity sha512-PWcFfN+jCTtT/rMaHDhKh+W9RUTpaRunmSF9vbLYcrJbpgCNW6aFKAY33u0P3mLxwuhshN3b4FxqGUBPj6exZQ==
+
+bs-react-is-visible@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/bs-react-is-visible/-/bs-react-is-visible-0.2.0.tgz#cd347901ff23e6a5abef23a90e1a918c4044a252"
+  integrity sha512-y1G24AvkGhii3VKL6HOF1kb4gbAN8xwNPk8aWyHZYlt4o46oATSnqjgX29Z26RLSyg0NrThuOMNSwoIpvdLOrQ==
+  dependencies:
+    bs-webapi "^0.14.3"
+    react-is-visible "^1.0.4"
+
+bs-webapi@^0.14.3:
+  version "0.14.4"
+  resolved "https://registry.yarnpkg.com/bs-webapi/-/bs-webapi-0.14.4.tgz#d602bd1fdc0b9c67d3c9419f602e985470cb500d"
+  integrity sha512-trQ9BQoyAcFRAyB05mqGWcWX8kgDYFCruDXJqCrdTgbQxX+AQS8RZa8c+1zdYFh0ohfgKFc6sxgs6mgmwVP9Bg==
 
 bser@2.1.1:
   version "2.1.1"
@@ -3238,6 +3258,13 @@ hmac-drbg@^1.0.0:
     hash.js "^1.0.3"
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.1"
+
+hoist-non-react-statics@3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.3.0.tgz#b09178f0122184fb95acf525daaecb4d8f45958b"
+  integrity sha512-0XsbTXxgiaCDYDIWFcwkmerZPSwywfUqYmwT4jzewKTQSWoE6FCMoUVOeBJWK3E/CrWbxRG3m5GzY4lnIwGRBA==
+  dependencies:
+    react-is "^16.7.0"
 
 homedir-polyfill@^1.0.1:
   version "1.0.3"
@@ -5254,6 +5281,19 @@ react-dom@0.0.0-experimental-e5d06e34b, react-dom@>=16.8.1:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     scheduler "0.0.0-experimental-e5d06e34b"
+
+react-is-visible@^1.0.4:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-is-visible/-/react-is-visible-1.1.0.tgz#87533ac6ed9bf3adf524b30e1c4da15e8b5015ea"
+  integrity sha512-vq9EqTEZ9fEyW1C33Yuj1cNDbamnJEZfQCIPOGNxVKUMaG95XkVaANMecRkQHl33aGzCpPMFIkt6A69xJOuiQA==
+  dependencies:
+    "@babel/runtime" "^7.4.4"
+    hoist-non-react-statics "3.3.0"
+
+react-is@^16.7.0:
+  version "16.13.1"
+  resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
+  integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
 react-relay@0.0.0-experimental-8cc94ddc:
   version "0.0.0-experimental-8cc94ddc"

@@ -15,6 +15,7 @@
   "dependencies": {
     "@ahrefs/bs-emotion": "^1.0.1",
     "bs-fetch": "^0.5.2",
+    "bs-react-is-visible": "^0.2.0",
     "graphql": "^14.6.0",
     "react": "0.0.0-experimental-e5d06e34b",
     "react-dom": "0.0.0-experimental-e5d06e34b",
