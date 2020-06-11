@@ -9,7 +9,7 @@
     "prestart": "bsb -clean-world -make-world",
     "start": "budo spoiler/Index.bs.js --dir spoiler --live --port 9000",
     "relay": "reason-relay-compiler",
-    "schema": "graphql get-schema",
+    "schema": "graphql -p dev get-schema",
     "seed": "graphql query -p dev -a seed.graphql"
   },
   "dependencies": {

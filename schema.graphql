@@ -1,8 +1,9 @@
 # source: http://localhost:3000/
-# timestamp: Thu May 28 2020 21:30:17 GMT-0700 (Mountain Standard Time)
+# timestamp: Wed Jun 10 2020 18:03:19 GMT-0700 (Mountain Standard Time)
 
 schema {
   query: QueryRoot
+  mutation: MutationRoot
 }
 
 directive @defer on FIELD
@@ -31,19 +32,27 @@ type BattleCard implements Node & Card {
   wave: Wave!
   title: String!
   stars: Int
-  icons: [BattleIcon!]!
+  icons: [String!]!
   type: BattleType!
   faction: Faction
   attackModifier: Int
   defenseModifier: Int
+  image: Image
 }
 
-enum BattleIcon {
-  ORANGE
-  BLUE
-  WHITE
-  GREEN
-  BLACK
+input BattleCardInput {
+  tcgId: String!
+  rarity: CardRarity!
+  number: String!
+  title: String!
+  stars: Int
+  icons: [String!]!
+  type: BattleType!
+  faction: Faction
+  attackModifier: Int
+  defenseModifier: Int
+  waveTcgId: String!
+  image: ImageInput!
 }
 
 enum BattleType {
@@ -52,6 +61,7 @@ enum BattleType {
   UPGRADE_WEAPON
   UPGRADE_ARMOR
   UPGRADE_UTILITY
+  UPGRADE_WEAPON_ARMOR
 }
 
 type BodyMode implements CharacterMode {
@@ -196,6 +206,15 @@ type HeadMode implements CharacterMode {
   faction: Faction!
 }
 
+type Image {
+  id: ID!
+  originalUrl: String!
+}
+
+input ImageInput {
+  originalUrl: String!
+}
+
 enum ModeType {
   ALT
   ALT_1
@@ -208,6 +227,11 @@ enum ModeType {
   BODY
   HEAD
   COMBINER_BODY
+}
+
+type MutationRoot {
+  addWave(wave: WaveInput!): Wave!
+  addBattleCard(card: BattleCardInput!): BattleCard!
 }
 
 scalar NaiveDate
@@ -262,6 +286,12 @@ type UpgradeMode implements CharacterMode {
 
 type Wave implements Node {
   id: ID!
+  tcgId: String!
+  name: String!
+  released: NaiveDate!
+}
+
+input WaveInput {
   tcgId: String!
   name: String!
   released: NaiveDate!
