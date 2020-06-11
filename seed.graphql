@@ -185,7 +185,9 @@ mutation BattleCards {
       icons: ["BLACK"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/35th_anniversary/R_001_007.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/35th_anniversary/R_001_007.png"
+      }
     }
   ) {
     id
@@ -203,7 +205,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/35th_anniversary/R_002_007.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/35th_anniversary/R_002_007.png"
+      }
     }
   ) {
     id
@@ -221,7 +225,9 @@ mutation BattleCards {
       icons: ["WHITE"]
       attackModifier: 1
       defenseModifier: 1
-      # originalImageUrl: "https://tfsdb.netlify.com/images/35th_anniversary/R_003_007.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/35th_anniversary/R_003_007.png"
+      }
     }
   ) {
     id
@@ -239,7 +245,9 @@ mutation BattleCards {
       icons: ["BLACK", "BLACK"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/35th_anniversary/R_004_007.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/35th_anniversary/R_004_007.png"
+      }
     }
   ) {
     id
@@ -257,7 +265,9 @@ mutation BattleCards {
       icons: ["ORANGE", "ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/35th_anniversary/R_005_007.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/35th_anniversary/R_005_007.png"
+      }
     }
   ) {
     id
@@ -275,7 +285,9 @@ mutation BattleCards {
       icons: ["WHITE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/35th_anniversary/R_006_007.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/35th_anniversary/R_006_007.png"
+      }
     }
   ) {
     id
@@ -293,7 +305,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/35th_anniversary/R_007_007.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/35th_anniversary/R_007_007.png"
+      }
     }
   ) {
     id
@@ -311,7 +325,9 @@ mutation BattleCards {
       icons: ["BLACK"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/blaster_vs_soundwave/R_001_007.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/blaster_vs_soundwave/R_001_007.png"
+      }
     }
   ) {
     id
@@ -329,7 +345,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/blaster_vs_soundwave/R_002_007.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/blaster_vs_soundwave/R_002_007.png"
+      }
     }
   ) {
     id
@@ -347,7 +365,9 @@ mutation BattleCards {
       icons: ["WHITE"]
       attackModifier: 1
       defenseModifier: 1
-      # originalImageUrl: "https://tfsdb.netlify.com/images/blaster_vs_soundwave/R_003_007.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/blaster_vs_soundwave/R_003_007.png"
+      }
     }
   ) {
     id
@@ -365,7 +385,9 @@ mutation BattleCards {
       icons: ["BLACK", "BLACK"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/blaster_vs_soundwave/R_004_007.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/blaster_vs_soundwave/R_004_007.png"
+      }
     }
   ) {
     id
@@ -383,7 +405,9 @@ mutation BattleCards {
       icons: ["ORANGE", "ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/blaster_vs_soundwave/R_005_007.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/blaster_vs_soundwave/R_005_007.png"
+      }
     }
   ) {
     id
@@ -401,7 +425,9 @@ mutation BattleCards {
       icons: ["WHITE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/blaster_vs_soundwave/R_006_007.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/blaster_vs_soundwave/R_006_007.png"
+      }
     }
   ) {
     id
@@ -419,7 +445,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/blaster_vs_soundwave/R_007_007.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/blaster_vs_soundwave/R_007_007.png"
+      }
     }
   ) {
     id
@@ -437,7 +465,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: 1
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/energon_edition/R_001_006.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/energon_edition/R_001_006.png"
+      }
     }
   ) {
     id
@@ -455,7 +485,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/energon_edition/R_002_006.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/energon_edition/R_002_006.png"
+      }
     }
   ) {
     id
@@ -473,7 +505,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/energon_edition/R_003_006.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/energon_edition/R_003_006.png"
+      }
     }
   ) {
     id
@@ -491,7 +525,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: 1
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/energon_edition/R_004_006.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/energon_edition/R_004_006.png"
+      }
     }
   ) {
     id
@@ -509,7 +545,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: 2
       defenseModifier: 1
-      # originalImageUrl: "https://tfsdb.netlify.com/images/energon_edition/R_005_006.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/energon_edition/R_005_006.png"
+      }
     }
   ) {
     id
@@ -527,7 +565,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/energon_edition/R_006_006.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/energon_edition/R_006_006.png"
+      }
     }
   ) {
     id
@@ -545,7 +585,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/energon_edition/R_P11_2019.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/energon_edition/R_P11_2019.png"
+      }
     }
   ) {
     id
@@ -563,7 +605,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: 1
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/energon_edition/R_P12_2019.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/energon_edition/R_P12_2019.png"
+      }
     }
   ) {
     id
@@ -581,7 +625,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: 1
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/U_001_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/U_001_081.png"
+      }
     }
   ) {
     id
@@ -599,7 +645,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: 1
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/R_002_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/R_002_081.png"
+      }
     }
   ) {
     id
@@ -617,7 +665,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: 1
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/U_003_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/U_003_081.png"
+      }
     }
   ) {
     id
@@ -635,7 +685,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: 1
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/C_004_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/C_004_081.png"
+      }
     }
   ) {
     id
@@ -653,7 +705,9 @@ mutation BattleCards {
       icons: ["WHITE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/U_005_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/U_005_081.png"
+      }
     }
   ) {
     id
@@ -671,7 +725,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/C_006_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/C_006_081.png"
+      }
     }
   ) {
     id
@@ -689,7 +745,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: 2
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/U_007_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/U_007_081.png"
+      }
     }
   ) {
     id
@@ -707,7 +765,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/U_008_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/U_008_081.png"
+      }
     }
   ) {
     id
@@ -725,7 +785,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/R_009_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/R_009_081.png"
+      }
     }
   ) {
     id
@@ -743,7 +805,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/C_010_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/C_010_081.png"
+      }
     }
   ) {
     id
@@ -761,7 +825,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/U_011_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/U_011_081.png"
+      }
     }
   ) {
     id
@@ -779,7 +845,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/R_012_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/R_012_081.png"
+      }
     }
   ) {
     id
@@ -797,7 +865,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/U_013_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/U_013_081.png"
+      }
     }
   ) {
     id
@@ -815,7 +885,9 @@ mutation BattleCards {
       icons: ["WHITE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/R_014_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/R_014_081.png"
+      }
     }
   ) {
     id
@@ -833,7 +905,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/U_015_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/U_015_081.png"
+      }
     }
   ) {
     id
@@ -851,7 +925,9 @@ mutation BattleCards {
       icons: ["WHITE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/C_016_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/C_016_081.png"
+      }
     }
   ) {
     id
@@ -869,7 +945,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/U_017_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/U_017_081.png"
+      }
     }
   ) {
     id
@@ -887,7 +965,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: 1
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/R_018_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/R_018_081.png"
+      }
     }
   ) {
     id
@@ -905,7 +985,9 @@ mutation BattleCards {
       icons: ["WHITE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/R_019_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/R_019_081.png"
+      }
     }
   ) {
     id
@@ -923,7 +1005,9 @@ mutation BattleCards {
       icons: ["WHITE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/C_020_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/C_020_081.png"
+      }
     }
   ) {
     id
@@ -941,7 +1025,9 @@ mutation BattleCards {
       icons: ["WHITE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/U_021_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/U_021_081.png"
+      }
     }
   ) {
     id
@@ -959,7 +1045,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/R_022_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/R_022_081.png"
+      }
     }
   ) {
     id
@@ -977,7 +1065,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/U_023_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/U_023_081.png"
+      }
     }
   ) {
     id
@@ -995,7 +1085,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/U_024_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/U_024_081.png"
+      }
     }
   ) {
     id
@@ -1013,7 +1105,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/U_025_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/U_025_081.png"
+      }
     }
   ) {
     id
@@ -1031,7 +1125,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: 1
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/C_026_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/C_026_081.png"
+      }
     }
   ) {
     id
@@ -1049,7 +1145,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/U_027_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/U_027_081.png"
+      }
     }
   ) {
     id
@@ -1067,7 +1165,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: 3
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/R_028_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/R_028_081.png"
+      }
     }
   ) {
     id
@@ -1085,7 +1185,9 @@ mutation BattleCards {
       icons: ["WHITE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/U_029_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/U_029_081.png"
+      }
     }
   ) {
     id
@@ -1103,7 +1205,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/C_030_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/C_030_081.png"
+      }
     }
   ) {
     id
@@ -1121,7 +1225,9 @@ mutation BattleCards {
       icons: ["WHITE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/C_031_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/C_031_081.png"
+      }
     }
   ) {
     id
@@ -1139,7 +1245,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: 1
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/R_032_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/R_032_081.png"
+      }
     }
   ) {
     id
@@ -1157,7 +1265,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: 4
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/U_033_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/U_033_081.png"
+      }
     }
   ) {
     id
@@ -1175,7 +1285,9 @@ mutation BattleCards {
       icons: ["BLUE", "BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/C_034_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/C_034_081.png"
+      }
     }
   ) {
     id
@@ -1193,7 +1305,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/R_035_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/R_035_081.png"
+      }
     }
   ) {
     id
@@ -1211,7 +1325,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/R_036_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/R_036_081.png"
+      }
     }
   ) {
     id
@@ -1229,7 +1345,9 @@ mutation BattleCards {
       icons: []
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/R_037_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/R_037_081.png"
+      }
     }
   ) {
     id
@@ -1247,7 +1365,9 @@ mutation BattleCards {
       icons: ["ORANGE", "ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/C_038_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/C_038_081.png"
+      }
     }
   ) {
     id
@@ -1265,7 +1385,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/C_039_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/C_039_081.png"
+      }
     }
   ) {
     id
@@ -1283,7 +1405,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/C_040_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/C_040_081.png"
+      }
     }
   ) {
     id
@@ -1301,7 +1425,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: 2
       defenseModifier: 1
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/R_041_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/R_041_081.png"
+      }
     }
   ) {
     id
@@ -1319,7 +1445,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/U_042_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/U_042_081.png"
+      }
     }
   ) {
     id
@@ -1337,7 +1465,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/C_043_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/C_043_081.png"
+      }
     }
   ) {
     id
@@ -1355,7 +1485,9 @@ mutation BattleCards {
       icons: ["ORANGE", "BLUE"]
       attackModifier: 1
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/R_044_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/R_044_081.png"
+      }
     }
   ) {
     id
@@ -1373,7 +1505,9 @@ mutation BattleCards {
       icons: []
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/C_045_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/C_045_081.png"
+      }
     }
   ) {
     id
@@ -1391,7 +1525,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: 1
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/U_046_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/U_046_081.png"
+      }
     }
   ) {
     id
@@ -1409,7 +1545,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: 1
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/U_047_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/U_047_081.png"
+      }
     }
   ) {
     id
@@ -1427,7 +1565,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/C_048_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/C_048_081.png"
+      }
     }
   ) {
     id
@@ -1445,7 +1585,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: 1
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/R_049_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/R_049_081.png"
+      }
     }
   ) {
     id
@@ -1463,7 +1605,9 @@ mutation BattleCards {
       icons: []
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/R_050_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/R_050_081.png"
+      }
     }
   ) {
     id
@@ -1481,7 +1625,9 @@ mutation BattleCards {
       icons: ["ORANGE", "ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/R_051_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/R_051_081.png"
+      }
     }
   ) {
     id
@@ -1499,7 +1645,9 @@ mutation BattleCards {
       icons: []
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/R_052_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/R_052_081.png"
+      }
     }
   ) {
     id
@@ -1517,7 +1665,9 @@ mutation BattleCards {
       icons: ["WHITE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/C_053_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/C_053_081.png"
+      }
     }
   ) {
     id
@@ -1535,7 +1685,9 @@ mutation BattleCards {
       icons: []
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/U_054_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/U_054_081.png"
+      }
     }
   ) {
     id
@@ -1553,7 +1705,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/U_055_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/U_055_081.png"
+      }
     }
   ) {
     id
@@ -1571,7 +1725,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: 2
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/C_056_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/C_056_081.png"
+      }
     }
   ) {
     id
@@ -1589,7 +1745,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/U_057_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/U_057_081.png"
+      }
     }
   ) {
     id
@@ -1607,7 +1765,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: 1
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/U_058_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/U_058_081.png"
+      }
     }
   ) {
     id
@@ -1625,7 +1785,9 @@ mutation BattleCards {
       icons: ["WHITE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/C_059_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/C_059_081.png"
+      }
     }
   ) {
     id
@@ -1643,7 +1805,9 @@ mutation BattleCards {
       icons: []
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/C_060_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/C_060_081.png"
+      }
     }
   ) {
     id
@@ -1661,7 +1825,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/C_061_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/C_061_081.png"
+      }
     }
   ) {
     id
@@ -1679,7 +1845,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/C_062_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/C_062_081.png"
+      }
     }
   ) {
     id
@@ -1697,7 +1865,9 @@ mutation BattleCards {
       icons: ["ORANGE", "BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/R_063_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/R_063_081.png"
+      }
     }
   ) {
     id
@@ -1715,7 +1885,9 @@ mutation BattleCards {
       icons: []
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/R_064_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/R_064_081.png"
+      }
     }
   ) {
     id
@@ -1733,7 +1905,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: 1
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/C_065_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/C_065_081.png"
+      }
     }
   ) {
     id
@@ -1751,7 +1925,9 @@ mutation BattleCards {
       icons: ["BLUE", "BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/R_066_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/R_066_081.png"
+      }
     }
   ) {
     id
@@ -1769,7 +1945,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: 1
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/R_067_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/R_067_081.png"
+      }
     }
   ) {
     id
@@ -1787,7 +1965,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/R_068_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/R_068_081.png"
+      }
     }
   ) {
     id
@@ -1805,7 +1985,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: 3
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/R_069_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/R_069_081.png"
+      }
     }
   ) {
     id
@@ -1823,7 +2005,9 @@ mutation BattleCards {
       icons: []
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/U_070_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/U_070_081.png"
+      }
     }
   ) {
     id
@@ -1841,7 +2025,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/C_071_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/C_071_081.png"
+      }
     }
   ) {
     id
@@ -1859,7 +2045,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/U_072_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/U_072_081.png"
+      }
     }
   ) {
     id
@@ -1877,7 +2065,9 @@ mutation BattleCards {
       icons: ["WHITE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/R_073_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/R_073_081.png"
+      }
     }
   ) {
     id
@@ -1895,7 +2085,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/R_074_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/R_074_081.png"
+      }
     }
   ) {
     id
@@ -1913,7 +2105,9 @@ mutation BattleCards {
       icons: ["WHITE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/R_075_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/R_075_081.png"
+      }
     }
   ) {
     id
@@ -1931,7 +2125,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/R_076_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/R_076_081.png"
+      }
     }
   ) {
     id
@@ -1949,7 +2145,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/R_077_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/R_077_081.png"
+      }
     }
   ) {
     id
@@ -1967,7 +2165,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: 1
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/R_078_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/R_078_081.png"
+      }
     }
   ) {
     id
@@ -1985,7 +2185,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/U_079_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/U_079_081.png"
+      }
     }
   ) {
     id
@@ -2003,7 +2205,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: 1
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/U_080_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/U_080_081.png"
+      }
     }
   ) {
     id
@@ -2021,7 +2225,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1/C_081_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1/C_081_081.png"
+      }
     }
   ) {
     id
@@ -2039,7 +2245,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1a/R_001_003.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1a/R_001_003.png"
+      }
     }
   ) {
     id
@@ -2057,7 +2265,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1a/R_002_003.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1a/R_002_003.png"
+      }
     }
   ) {
     id
@@ -2075,7 +2285,9 @@ mutation BattleCards {
       icons: ["WHITE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1a/R_003_003.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1a/R_003_003.png"
+      }
     }
   ) {
     id
@@ -2093,7 +2305,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1c/R_001_002.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1c/R_001_002.png"
+      }
     }
   ) {
     id
@@ -2111,7 +2325,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: 1
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_1c/R_002_002.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_1c/R_002_002.png"
+      }
     }
   ) {
     id
@@ -2129,7 +2345,9 @@ mutation BattleCards {
       icons: ["GREEN"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/U_001_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/U_001_081.png"
+      }
     }
   ) {
     id
@@ -2147,7 +2365,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/R_002_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/R_002_081.png"
+      }
     }
   ) {
     id
@@ -2165,7 +2385,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/R_003_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/R_003_081.png"
+      }
     }
   ) {
     id
@@ -2183,7 +2405,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: 1
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/C_004_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/C_004_081.png"
+      }
     }
   ) {
     id
@@ -2201,7 +2425,9 @@ mutation BattleCards {
       icons: ["WHITE", "GREEN"]
       attackModifier: 1
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/U_005_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/U_005_081.png"
+      }
     }
   ) {
     id
@@ -2219,7 +2445,9 @@ mutation BattleCards {
       icons: ["BLUE", "GREEN"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/U_006_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/U_006_081.png"
+      }
     }
   ) {
     id
@@ -2237,7 +2465,9 @@ mutation BattleCards {
       icons: []
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/R_007_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/R_007_081.png"
+      }
     }
   ) {
     id
@@ -2255,7 +2485,9 @@ mutation BattleCards {
       icons: ["ORANGE", "GREEN"]
       attackModifier: null
       defenseModifier: 1
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/C_008_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/C_008_081.png"
+      }
     }
   ) {
     id
@@ -2273,7 +2505,9 @@ mutation BattleCards {
       icons: []
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/U_009_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/U_009_081.png"
+      }
     }
   ) {
     id
@@ -2291,7 +2525,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/U_010_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/U_010_081.png"
+      }
     }
   ) {
     id
@@ -2309,7 +2545,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: 1
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/R_011_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/R_011_081.png"
+      }
     }
   ) {
     id
@@ -2327,7 +2565,9 @@ mutation BattleCards {
       icons: ["WHITE"]
       attackModifier: 1
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/R_012_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/R_012_081.png"
+      }
     }
   ) {
     id
@@ -2345,7 +2585,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/C_013_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/C_013_081.png"
+      }
     }
   ) {
     id
@@ -2363,7 +2605,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: 1
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/C_014_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/C_014_081.png"
+      }
     }
   ) {
     id
@@ -2381,7 +2625,9 @@ mutation BattleCards {
       icons: ["GREEN"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/U_015_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/U_015_081.png"
+      }
     }
   ) {
     id
@@ -2399,7 +2645,9 @@ mutation BattleCards {
       icons: []
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/R_016_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/R_016_081.png"
+      }
     }
   ) {
     id
@@ -2417,7 +2665,9 @@ mutation BattleCards {
       icons: ["WHITE", "GREEN"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/R_017_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/R_017_081.png"
+      }
     }
   ) {
     id
@@ -2435,7 +2685,9 @@ mutation BattleCards {
       icons: ["WHITE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/R_018_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/R_018_081.png"
+      }
     }
   ) {
     id
@@ -2453,7 +2705,9 @@ mutation BattleCards {
       icons: ["GREEN"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/R_019_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/R_019_081.png"
+      }
     }
   ) {
     id
@@ -2471,7 +2725,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: 1
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/R_020_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/R_020_081.png"
+      }
     }
   ) {
     id
@@ -2489,7 +2745,9 @@ mutation BattleCards {
       icons: ["GREEN"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/U_021_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/U_021_081.png"
+      }
     }
   ) {
     id
@@ -2507,7 +2765,9 @@ mutation BattleCards {
       icons: ["BLUE", "BLUE"]
       attackModifier: null
       defenseModifier: 1
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/R_022_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/R_022_081.png"
+      }
     }
   ) {
     id
@@ -2525,7 +2785,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: 1
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/C_023_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/C_023_081.png"
+      }
     }
   ) {
     id
@@ -2543,7 +2805,9 @@ mutation BattleCards {
       icons: ["ORANGE", "GREEN"]
       attackModifier: 1
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/C_024_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/C_024_081.png"
+      }
     }
   ) {
     id
@@ -2561,7 +2825,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: 3
       defenseModifier: -1
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/C_025_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/C_025_081.png"
+      }
     }
   ) {
     id
@@ -2579,7 +2845,9 @@ mutation BattleCards {
       icons: ["WHITE", "GREEN"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/C_026_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/C_026_081.png"
+      }
     }
   ) {
     id
@@ -2597,7 +2865,9 @@ mutation BattleCards {
       icons: ["WHITE", "GREEN"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/R_027_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/R_027_081.png"
+      }
     }
   ) {
     id
@@ -2615,7 +2885,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/U_028_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/U_028_081.png"
+      }
     }
   ) {
     id
@@ -2633,7 +2905,9 @@ mutation BattleCards {
       icons: ["WHITE"]
       attackModifier: 1
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/C_029_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/C_029_081.png"
+      }
     }
   ) {
     id
@@ -2651,7 +2925,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/C_030_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/C_030_081.png"
+      }
     }
   ) {
     id
@@ -2669,7 +2945,9 @@ mutation BattleCards {
       icons: []
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/C_031_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/C_031_081.png"
+      }
     }
   ) {
     id
@@ -2687,7 +2965,9 @@ mutation BattleCards {
       icons: ["ORANGE", "GREEN"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/U_032_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/U_032_081.png"
+      }
     }
   ) {
     id
@@ -2705,7 +2985,9 @@ mutation BattleCards {
       icons: ["WHITE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/R_033_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/R_033_081.png"
+      }
     }
   ) {
     id
@@ -2723,7 +3005,9 @@ mutation BattleCards {
       icons: ["BLUE", "BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/C_034_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/C_034_081.png"
+      }
     }
   ) {
     id
@@ -2741,7 +3025,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/R_035_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/R_035_081.png"
+      }
     }
   ) {
     id
@@ -2759,7 +3045,9 @@ mutation BattleCards {
       icons: ["ORANGE", "ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/C_036_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/C_036_081.png"
+      }
     }
   ) {
     id
@@ -2777,7 +3065,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/R_037_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/R_037_081.png"
+      }
     }
   ) {
     id
@@ -2795,7 +3085,9 @@ mutation BattleCards {
       icons: ["WHITE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/R_038_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/R_038_081.png"
+      }
     }
   ) {
     id
@@ -2813,7 +3105,9 @@ mutation BattleCards {
       icons: ["WHITE", "GREEN"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/R_039_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/R_039_081.png"
+      }
     }
   ) {
     id
@@ -2831,7 +3125,9 @@ mutation BattleCards {
       icons: ["WHITE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/U_040_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/U_040_081.png"
+      }
     }
   ) {
     id
@@ -2849,7 +3145,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/R_041_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/R_041_081.png"
+      }
     }
   ) {
     id
@@ -2867,7 +3165,9 @@ mutation BattleCards {
       icons: ["BLUE", "GREEN"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/R_042_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/R_042_081.png"
+      }
     }
   ) {
     id
@@ -2885,7 +3185,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: 1
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/R_043_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/R_043_081.png"
+      }
     }
   ) {
     id
@@ -2903,7 +3205,9 @@ mutation BattleCards {
       icons: ["ORANGE", "ORANGE"]
       attackModifier: 2
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/R_044_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/R_044_081.png"
+      }
     }
   ) {
     id
@@ -2921,7 +3225,9 @@ mutation BattleCards {
       icons: ["BLUE", "GREEN"]
       attackModifier: 2
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/U_045_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/U_045_081.png"
+      }
     }
   ) {
     id
@@ -2939,7 +3245,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/U_046_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/U_046_081.png"
+      }
     }
   ) {
     id
@@ -2957,7 +3265,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/U_047_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/U_047_081.png"
+      }
     }
   ) {
     id
@@ -2975,7 +3285,9 @@ mutation BattleCards {
       icons: ["GREEN"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/R_048_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/R_048_081.png"
+      }
     }
   ) {
     id
@@ -2993,7 +3305,9 @@ mutation BattleCards {
       icons: ["ORANGE", "GREEN"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/R_049_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/R_049_081.png"
+      }
     }
   ) {
     id
@@ -3011,7 +3325,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: 2
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/C_050_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/C_050_081.png"
+      }
     }
   ) {
     id
@@ -3029,7 +3345,9 @@ mutation BattleCards {
       icons: ["WHITE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/C_051_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/C_051_081.png"
+      }
     }
   ) {
     id
@@ -3047,7 +3365,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/U_052_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/U_052_081.png"
+      }
     }
   ) {
     id
@@ -3065,7 +3385,9 @@ mutation BattleCards {
       icons: ["ORANGE", "BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/R_053_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/R_053_081.png"
+      }
     }
   ) {
     id
@@ -3083,7 +3405,9 @@ mutation BattleCards {
       icons: ["GREEN"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/C_054_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/C_054_081.png"
+      }
     }
   ) {
     id
@@ -3101,7 +3425,9 @@ mutation BattleCards {
       icons: ["BLUE", "GREEN"]
       attackModifier: 2
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/U_055_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/U_055_081.png"
+      }
     }
   ) {
     id
@@ -3119,7 +3445,9 @@ mutation BattleCards {
       icons: ["ORANGE", "GREEN"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/U_056_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/U_056_081.png"
+      }
     }
   ) {
     id
@@ -3137,7 +3465,9 @@ mutation BattleCards {
       icons: ["WHITE", "GREEN"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/U_057_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/U_057_081.png"
+      }
     }
   ) {
     id
@@ -3155,7 +3485,9 @@ mutation BattleCards {
       icons: ["WHITE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/C_058_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/C_058_081.png"
+      }
     }
   ) {
     id
@@ -3173,7 +3505,9 @@ mutation BattleCards {
       icons: ["GREEN"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/R_059_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/R_059_081.png"
+      }
     }
   ) {
     id
@@ -3191,7 +3525,9 @@ mutation BattleCards {
       icons: ["BLUE", "GREEN"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/U_060_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/U_060_081.png"
+      }
     }
   ) {
     id
@@ -3209,7 +3545,9 @@ mutation BattleCards {
       icons: ["GREEN"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/U_061_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/U_061_081.png"
+      }
     }
   ) {
     id
@@ -3227,7 +3565,9 @@ mutation BattleCards {
       icons: ["WHITE", "GREEN"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/C_062_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/C_062_081.png"
+      }
     }
   ) {
     id
@@ -3245,7 +3585,9 @@ mutation BattleCards {
       icons: ["ORANGE", "GREEN"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/U_063_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/U_063_081.png"
+      }
     }
   ) {
     id
@@ -3263,7 +3605,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/U_064_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/U_064_081.png"
+      }
     }
   ) {
     id
@@ -3281,7 +3625,9 @@ mutation BattleCards {
       icons: []
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/R_065_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/R_065_081.png"
+      }
     }
   ) {
     id
@@ -3299,7 +3645,9 @@ mutation BattleCards {
       icons: ["GREEN"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/U_066_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/U_066_081.png"
+      }
     }
   ) {
     id
@@ -3317,7 +3665,9 @@ mutation BattleCards {
       icons: []
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/R_067_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/R_067_081.png"
+      }
     }
   ) {
     id
@@ -3335,7 +3685,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/U_068_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/U_068_081.png"
+      }
     }
   ) {
     id
@@ -3353,7 +3705,9 @@ mutation BattleCards {
       icons: ["WHITE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/U_069_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/U_069_081.png"
+      }
     }
   ) {
     id
@@ -3371,7 +3725,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/U_070_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/U_070_081.png"
+      }
     }
   ) {
     id
@@ -3389,7 +3745,9 @@ mutation BattleCards {
       icons: ["WHITE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/C_071_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/C_071_081.png"
+      }
     }
   ) {
     id
@@ -3407,7 +3765,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/C_072_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/C_072_081.png"
+      }
     }
   ) {
     id
@@ -3425,7 +3785,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/R_073_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/R_073_081.png"
+      }
     }
   ) {
     id
@@ -3443,7 +3805,9 @@ mutation BattleCards {
       icons: ["GREEN"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/C_074_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/C_074_081.png"
+      }
     }
   ) {
     id
@@ -3461,7 +3825,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/C_075_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/C_075_081.png"
+      }
     }
   ) {
     id
@@ -3479,7 +3845,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: 1
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/R_076_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/R_076_081.png"
+      }
     }
   ) {
     id
@@ -3497,7 +3865,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/C_077_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/C_077_081.png"
+      }
     }
   ) {
     id
@@ -3515,7 +3885,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/U_078_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/U_078_081.png"
+      }
     }
   ) {
     id
@@ -3533,7 +3905,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/R_079_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/R_079_081.png"
+      }
     }
   ) {
     id
@@ -3551,7 +3925,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/U_080_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/U_080_081.png"
+      }
     }
   ) {
     id
@@ -3569,7 +3945,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2/C_081_081.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2/C_081_081.png"
+      }
     }
   ) {
     id
@@ -3587,7 +3965,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2a/R_001_005.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2a/R_001_005.png"
+      }
     }
   ) {
     id
@@ -3605,7 +3985,9 @@ mutation BattleCards {
       icons: ["GREEN"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2a/R_002_005.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2a/R_002_005.png"
+      }
     }
   ) {
     id
@@ -3623,7 +4005,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2a/R_003_005.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2a/R_003_005.png"
+      }
     }
   ) {
     id
@@ -3641,7 +4025,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2a/R_004_005.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2a/R_004_005.png"
+      }
     }
   ) {
     id
@@ -3659,7 +4045,9 @@ mutation BattleCards {
       icons: ["WHITE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_2a/R_005_005.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_2a/R_005_005.png"
+      }
     }
   ) {
     id
@@ -3677,7 +4065,9 @@ mutation BattleCards {
       icons: ["WHITE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/U_001_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/U_001_064.png"
+      }
     }
   ) {
     id
@@ -3695,7 +4085,9 @@ mutation BattleCards {
       icons: ["WHITE", "GREEN"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/R_002_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/R_002_064.png"
+      }
     }
   ) {
     id
@@ -3713,7 +4105,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/C_003_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/C_003_064.png"
+      }
     }
   ) {
     id
@@ -3731,7 +4125,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: 2
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/R_004_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/R_004_064.png"
+      }
     }
   ) {
     id
@@ -3749,7 +4145,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/C_005_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/C_005_064.png"
+      }
     }
   ) {
     id
@@ -3767,7 +4165,9 @@ mutation BattleCards {
       icons: ["BLACK", "GREEN"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/U_006_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/U_006_064.png"
+      }
     }
   ) {
     id
@@ -3785,7 +4185,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/U_007_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/U_007_064.png"
+      }
     }
   ) {
     id
@@ -3803,7 +4205,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/C_008_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/C_008_064.png"
+      }
     }
   ) {
     id
@@ -3821,7 +4225,9 @@ mutation BattleCards {
       icons: ["BLACK"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/C_009_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/C_009_064.png"
+      }
     }
   ) {
     id
@@ -3839,7 +4245,9 @@ mutation BattleCards {
       icons: ["WHITE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/R_010_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/R_010_064.png"
+      }
     }
   ) {
     id
@@ -3857,7 +4265,9 @@ mutation BattleCards {
       icons: ["ORANGE", "BLACK"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/C_011_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/C_011_064.png"
+      }
     }
   ) {
     id
@@ -3875,7 +4285,9 @@ mutation BattleCards {
       icons: ["BLACK"]
       attackModifier: null
       defenseModifier: 1
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/U_012_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/U_012_064.png"
+      }
     }
   ) {
     id
@@ -3893,7 +4305,9 @@ mutation BattleCards {
       icons: ["BLUE", "GREEN"]
       attackModifier: null
       defenseModifier: 1
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/U_013_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/U_013_064.png"
+      }
     }
   ) {
     id
@@ -3911,7 +4325,9 @@ mutation BattleCards {
       icons: ["WHITE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/R_014_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/R_014_064.png"
+      }
     }
   ) {
     id
@@ -3929,7 +4345,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/C_015_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/C_015_064.png"
+      }
     }
   ) {
     id
@@ -3947,7 +4365,9 @@ mutation BattleCards {
       icons: ["BLACK"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/U_016_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/U_016_064.png"
+      }
     }
   ) {
     id
@@ -3965,7 +4385,9 @@ mutation BattleCards {
       icons: ["BLACK"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/C_017_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/C_017_064.png"
+      }
     }
   ) {
     id
@@ -3983,7 +4405,9 @@ mutation BattleCards {
       icons: ["BLUE", "GREEN"]
       attackModifier: 1
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/C_018_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/C_018_064.png"
+      }
     }
   ) {
     id
@@ -4001,7 +4425,9 @@ mutation BattleCards {
       icons: []
       attackModifier: 3
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/C_019_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/C_019_064.png"
+      }
     }
   ) {
     id
@@ -4019,7 +4445,9 @@ mutation BattleCards {
       icons: []
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/R_020_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/R_020_064.png"
+      }
     }
   ) {
     id
@@ -4037,7 +4465,9 @@ mutation BattleCards {
       icons: ["BLUE", "BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/U_021_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/U_021_064.png"
+      }
     }
   ) {
     id
@@ -4055,7 +4485,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/R_022_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/R_022_064.png"
+      }
     }
   ) {
     id
@@ -4073,7 +4505,9 @@ mutation BattleCards {
       icons: ["BLACK"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/R_023_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/R_023_064.png"
+      }
     }
   ) {
     id
@@ -4091,7 +4525,9 @@ mutation BattleCards {
       icons: ["BLUE", "GREEN"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/U_024_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/U_024_064.png"
+      }
     }
   ) {
     id
@@ -4109,7 +4545,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/R_025_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/R_025_064.png"
+      }
     }
   ) {
     id
@@ -4127,7 +4565,9 @@ mutation BattleCards {
       icons: ["WHITE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/C_026_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/C_026_064.png"
+      }
     }
   ) {
     id
@@ -4145,7 +4585,9 @@ mutation BattleCards {
       icons: ["WHITE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/C_027_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/C_027_064.png"
+      }
     }
   ) {
     id
@@ -4163,7 +4605,9 @@ mutation BattleCards {
       icons: ["WHITE", "ORANGE", "BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/U_028_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/U_028_064.png"
+      }
     }
   ) {
     id
@@ -4181,7 +4625,9 @@ mutation BattleCards {
       icons: ["ORANGE", "ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/U_029_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/U_029_064.png"
+      }
     }
   ) {
     id
@@ -4199,7 +4645,9 @@ mutation BattleCards {
       icons: ["WHITE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/R_030_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/R_030_064.png"
+      }
     }
   ) {
     id
@@ -4217,7 +4665,9 @@ mutation BattleCards {
       icons: ["ORANGE", "BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/R_031_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/R_031_064.png"
+      }
     }
   ) {
     id
@@ -4235,7 +4685,9 @@ mutation BattleCards {
       icons: ["BLACK"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/U_032_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/U_032_064.png"
+      }
     }
   ) {
     id
@@ -4253,7 +4705,9 @@ mutation BattleCards {
       icons: ["BLACK"]
       attackModifier: 2
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/U_033_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/U_033_064.png"
+      }
     }
   ) {
     id
@@ -4271,7 +4725,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/R_034_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/R_034_064.png"
+      }
     }
   ) {
     id
@@ -4289,7 +4745,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: 1
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/R_035_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/R_035_064.png"
+      }
     }
   ) {
     id
@@ -4307,7 +4765,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: 2
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/R_036_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/R_036_064.png"
+      }
     }
   ) {
     id
@@ -4325,7 +4785,9 @@ mutation BattleCards {
       icons: ["ORANGE", "BLUE"]
       attackModifier: 2
       defenseModifier: 2
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/R_037_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/R_037_064.png"
+      }
     }
   ) {
     id
@@ -4343,7 +4805,9 @@ mutation BattleCards {
       icons: []
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/C_038_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/C_038_064.png"
+      }
     }
   ) {
     id
@@ -4361,7 +4825,9 @@ mutation BattleCards {
       icons: ["BLACK", "GREEN"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/U_039_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/U_039_064.png"
+      }
     }
   ) {
     id
@@ -4379,7 +4845,9 @@ mutation BattleCards {
       icons: []
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/R_040_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/R_040_064.png"
+      }
     }
   ) {
     id
@@ -4397,7 +4865,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/C_041_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/C_041_064.png"
+      }
     }
   ) {
     id
@@ -4415,7 +4885,9 @@ mutation BattleCards {
       icons: ["WHITE", "GREEN"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/C_042_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/C_042_064.png"
+      }
     }
   ) {
     id
@@ -4433,7 +4905,9 @@ mutation BattleCards {
       icons: ["BLACK"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/U_043_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/U_043_064.png"
+      }
     }
   ) {
     id
@@ -4451,7 +4925,9 @@ mutation BattleCards {
       icons: ["WHITE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/R_044_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/R_044_064.png"
+      }
     }
   ) {
     id
@@ -4469,7 +4945,9 @@ mutation BattleCards {
       icons: ["WHITE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/R_045_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/R_045_064.png"
+      }
     }
   ) {
     id
@@ -4487,7 +4965,9 @@ mutation BattleCards {
       icons: ["ORANGE", "GREEN"]
       attackModifier: null
       defenseModifier: 1
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/C_046_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/C_046_064.png"
+      }
     }
   ) {
     id
@@ -4505,7 +4985,9 @@ mutation BattleCards {
       icons: ["BLUE", "GREEN"]
       attackModifier: null
       defenseModifier: 1
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/U_047_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/U_047_064.png"
+      }
     }
   ) {
     id
@@ -4523,7 +5005,9 @@ mutation BattleCards {
       icons: ["BLACK"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/C_048_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/C_048_064.png"
+      }
     }
   ) {
     id
@@ -4541,7 +5025,9 @@ mutation BattleCards {
       icons: ["ORANGE", "BLACK"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/U_049_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/U_049_064.png"
+      }
     }
   ) {
     id
@@ -4559,7 +5045,9 @@ mutation BattleCards {
       icons: ["BLACK"]
       attackModifier: 3
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/R_050_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/R_050_064.png"
+      }
     }
   ) {
     id
@@ -4577,7 +5065,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/R_051_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/R_051_064.png"
+      }
     }
   ) {
     id
@@ -4595,7 +5085,9 @@ mutation BattleCards {
       icons: ["BLACK", "BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/C_052_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/C_052_064.png"
+      }
     }
   ) {
     id
@@ -4613,7 +5105,9 @@ mutation BattleCards {
       icons: ["BLACK"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/C_053_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/C_053_064.png"
+      }
     }
   ) {
     id
@@ -4631,7 +5125,9 @@ mutation BattleCards {
       icons: ["WHITE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/C_054_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/C_054_064.png"
+      }
     }
   ) {
     id
@@ -4649,7 +5145,9 @@ mutation BattleCards {
       icons: ["WHITE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/R_055_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/R_055_064.png"
+      }
     }
   ) {
     id
@@ -4667,7 +5165,9 @@ mutation BattleCards {
       icons: ["WHITE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/U_056_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/U_056_064.png"
+      }
     }
   ) {
     id
@@ -4685,7 +5185,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/U_057_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/U_057_064.png"
+      }
     }
   ) {
     id
@@ -4703,7 +5205,9 @@ mutation BattleCards {
       icons: ["BLACK", "BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/U_058_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/U_058_064.png"
+      }
     }
   ) {
     id
@@ -4721,7 +5225,9 @@ mutation BattleCards {
       icons: ["BLUE", "GREEN"]
       attackModifier: null
       defenseModifier: 1
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/U_059_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/U_059_064.png"
+      }
     }
   ) {
     id
@@ -4739,7 +5245,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/R_060_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/R_060_064.png"
+      }
     }
   ) {
     id
@@ -4757,7 +5265,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/R_061_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/R_061_064.png"
+      }
     }
   ) {
     id
@@ -4775,7 +5285,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/R_062_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/R_062_064.png"
+      }
     }
   ) {
     id
@@ -4793,7 +5305,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/C_063_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/C_063_064.png"
+      }
     }
   ) {
     id
@@ -4811,7 +5325,9 @@ mutation BattleCards {
       icons: []
       attackModifier: 1
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_3/R_064_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_3/R_064_064.png"
+      }
     }
   ) {
     id
@@ -4829,7 +5345,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/R_001_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/R_001_064.png"
+      }
     }
   ) {
     id
@@ -4847,7 +5365,9 @@ mutation BattleCards {
       icons: ["WHITE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/U_002_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/U_002_064.png"
+      }
     }
   ) {
     id
@@ -4865,7 +5385,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/U_003_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/U_003_064.png"
+      }
     }
   ) {
     id
@@ -4883,7 +5405,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/R_004_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/R_004_064.png"
+      }
     }
   ) {
     id
@@ -4901,7 +5425,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/R_005_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/R_005_064.png"
+      }
     }
   ) {
     id
@@ -4919,7 +5445,9 @@ mutation BattleCards {
       icons: ["GREEN"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/U_006_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/U_006_064.png"
+      }
     }
   ) {
     id
@@ -4937,7 +5465,9 @@ mutation BattleCards {
       icons: []
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/U_007_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/U_007_064.png"
+      }
     }
   ) {
     id
@@ -4955,7 +5485,9 @@ mutation BattleCards {
       icons: ["ORANGE", "BLACK"]
       attackModifier: 1
       defenseModifier: 3
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/R_008_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/R_008_064.png"
+      }
     }
   ) {
     id
@@ -4973,7 +5505,9 @@ mutation BattleCards {
       icons: ["BLACK", "BLACK"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/U_009_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/U_009_064.png"
+      }
     }
   ) {
     id
@@ -4991,7 +5525,9 @@ mutation BattleCards {
       icons: ["WHITE"]
       attackModifier: 1
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/R_010_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/R_010_064.png"
+      }
     }
   ) {
     id
@@ -5009,7 +5545,9 @@ mutation BattleCards {
       icons: ["BLACK"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/R_011_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/R_011_064.png"
+      }
     }
   ) {
     id
@@ -5027,7 +5565,9 @@ mutation BattleCards {
       icons: ["BLACK", "BLACK"]
       attackModifier: 2
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/C_012_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/C_012_064.png"
+      }
     }
   ) {
     id
@@ -5045,7 +5585,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/R_013_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/R_013_064.png"
+      }
     }
   ) {
     id
@@ -5063,7 +5605,9 @@ mutation BattleCards {
       icons: ["BLUE", "GREEN"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/R_014_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/R_014_064.png"
+      }
     }
   ) {
     id
@@ -5081,7 +5625,9 @@ mutation BattleCards {
       icons: ["BLACK", "GREEN"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/U_015_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/U_015_064.png"
+      }
     }
   ) {
     id
@@ -5099,7 +5645,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/R_016_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/R_016_064.png"
+      }
     }
   ) {
     id
@@ -5117,7 +5665,9 @@ mutation BattleCards {
       icons: ["BLACK", "BLACK"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/C_017_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/C_017_064.png"
+      }
     }
   ) {
     id
@@ -5135,7 +5685,9 @@ mutation BattleCards {
       icons: ["BLACK", "BLACK"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/U_018_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/U_018_064.png"
+      }
     }
   ) {
     id
@@ -5153,7 +5705,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/U_019_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/U_019_064.png"
+      }
     }
   ) {
     id
@@ -5171,7 +5725,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/U_020_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/U_020_064.png"
+      }
     }
   ) {
     id
@@ -5189,7 +5745,9 @@ mutation BattleCards {
       icons: ["ORANGE", "ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/U_021_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/U_021_064.png"
+      }
     }
   ) {
     id
@@ -5207,7 +5765,9 @@ mutation BattleCards {
       icons: ["ORANGE", "BLACK"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/C_022_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/C_022_064.png"
+      }
     }
   ) {
     id
@@ -5225,7 +5785,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: -1
       defenseModifier: 2
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/C_023_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/C_023_064.png"
+      }
     }
   ) {
     id
@@ -5243,7 +5805,9 @@ mutation BattleCards {
       icons: ["BLACK"]
       attackModifier: null
       defenseModifier: 1
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/C_024_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/C_024_064.png"
+      }
     }
   ) {
     id
@@ -5261,7 +5825,9 @@ mutation BattleCards {
       icons: ["WHITE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/C_025_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/C_025_064.png"
+      }
     }
   ) {
     id
@@ -5279,7 +5845,9 @@ mutation BattleCards {
       icons: ["BLUE", "BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/U_026_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/U_026_064.png"
+      }
     }
   ) {
     id
@@ -5297,7 +5865,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/C_027_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/C_027_064.png"
+      }
     }
   ) {
     id
@@ -5315,7 +5885,9 @@ mutation BattleCards {
       icons: ["BLACK", "GREEN"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/R_028_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/R_028_064.png"
+      }
     }
   ) {
     id
@@ -5333,7 +5905,9 @@ mutation BattleCards {
       icons: ["ORANGE", "BLACK"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/U_029_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/U_029_064.png"
+      }
     }
   ) {
     id
@@ -5351,7 +5925,9 @@ mutation BattleCards {
       icons: ["BLACK"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/U_030_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/U_030_064.png"
+      }
     }
   ) {
     id
@@ -5369,7 +5945,9 @@ mutation BattleCards {
       icons: ["BLACK", "BLACK"]
       attackModifier: 2
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/U_031_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/U_031_064.png"
+      }
     }
   ) {
     id
@@ -5387,7 +5965,9 @@ mutation BattleCards {
       icons: ["BLACK"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/R_032_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/R_032_064.png"
+      }
     }
   ) {
     id
@@ -5405,7 +5985,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/R_033_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/R_033_064.png"
+      }
     }
   ) {
     id
@@ -5423,7 +6005,9 @@ mutation BattleCards {
       icons: ["WHITE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/C_034_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/C_034_064.png"
+      }
     }
   ) {
     id
@@ -5441,7 +6025,9 @@ mutation BattleCards {
       icons: ["WHITE"]
       attackModifier: 1
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/C_035_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/C_035_064.png"
+      }
     }
   ) {
     id
@@ -5459,7 +6045,9 @@ mutation BattleCards {
       icons: []
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/R_036_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/R_036_064.png"
+      }
     }
   ) {
     id
@@ -5477,7 +6065,9 @@ mutation BattleCards {
       icons: ["WHITE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/C_037_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/C_037_064.png"
+      }
     }
   ) {
     id
@@ -5495,7 +6085,9 @@ mutation BattleCards {
       icons: ["BLACK", "BLACK"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/C_038_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/C_038_064.png"
+      }
     }
   ) {
     id
@@ -5513,7 +6105,9 @@ mutation BattleCards {
       icons: ["BLACK"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/U_039_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/U_039_064.png"
+      }
     }
   ) {
     id
@@ -5531,7 +6125,9 @@ mutation BattleCards {
       icons: ["BLACK", "BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/R_040_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/R_040_064.png"
+      }
     }
   ) {
     id
@@ -5549,7 +6145,9 @@ mutation BattleCards {
       icons: ["ORANGE", "BLACK"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/R_041_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/R_041_064.png"
+      }
     }
   ) {
     id
@@ -5567,7 +6165,9 @@ mutation BattleCards {
       icons: ["WHITE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/R_042_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/R_042_064.png"
+      }
     }
   ) {
     id
@@ -5585,7 +6185,9 @@ mutation BattleCards {
       icons: ["ORANGE", "GREEN"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/R_043_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/R_043_064.png"
+      }
     }
   ) {
     id
@@ -5603,7 +6205,9 @@ mutation BattleCards {
       icons: ["ORANGE", "BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/R_044_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/R_044_064.png"
+      }
     }
   ) {
     id
@@ -5621,7 +6225,9 @@ mutation BattleCards {
       icons: ["BLACK", "BLACK", "BLACK"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/U_045_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/U_045_064.png"
+      }
     }
   ) {
     id
@@ -5639,7 +6245,9 @@ mutation BattleCards {
       icons: ["GREEN"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/R_046_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/R_046_064.png"
+      }
     }
   ) {
     id
@@ -5657,7 +6265,9 @@ mutation BattleCards {
       icons: ["BLACK", "BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/U_047_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/U_047_064.png"
+      }
     }
   ) {
     id
@@ -5675,7 +6285,9 @@ mutation BattleCards {
       icons: ["WHITE", "ORANGE", "BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/R_048_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/R_048_064.png"
+      }
     }
   ) {
     id
@@ -5693,7 +6305,9 @@ mutation BattleCards {
       icons: ["GREEN"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/C_049_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/C_049_064.png"
+      }
     }
   ) {
     id
@@ -5711,7 +6325,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/U_050_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/U_050_064.png"
+      }
     }
   ) {
     id
@@ -5729,7 +6345,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/R_051_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/R_051_064.png"
+      }
     }
   ) {
     id
@@ -5747,7 +6365,9 @@ mutation BattleCards {
       icons: []
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/C_052_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/C_052_064.png"
+      }
     }
   ) {
     id
@@ -5765,7 +6385,9 @@ mutation BattleCards {
       icons: ["GREEN"]
       attackModifier: 1
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/C_053_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/C_053_064.png"
+      }
     }
   ) {
     id
@@ -5783,7 +6405,9 @@ mutation BattleCards {
       icons: ["BLACK"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/C_054_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/C_054_064.png"
+      }
     }
   ) {
     id
@@ -5801,7 +6425,9 @@ mutation BattleCards {
       icons: ["BLACK"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/C_055_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/C_055_064.png"
+      }
     }
   ) {
     id
@@ -5819,7 +6445,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/R_056_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/R_056_064.png"
+      }
     }
   ) {
     id
@@ -5837,7 +6465,9 @@ mutation BattleCards {
       icons: ["WHITE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/U_057_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/U_057_064.png"
+      }
     }
   ) {
     id
@@ -5855,7 +6485,9 @@ mutation BattleCards {
       icons: ["WHITE", "BLACK"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/U_058_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/U_058_064.png"
+      }
     }
   ) {
     id
@@ -5873,7 +6505,9 @@ mutation BattleCards {
       icons: ["ORANGE", "BLACK"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/C_059_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/C_059_064.png"
+      }
     }
   ) {
     id
@@ -5891,7 +6525,9 @@ mutation BattleCards {
       icons: ["GREEN"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/R_060_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/R_060_064.png"
+      }
     }
   ) {
     id
@@ -5909,7 +6545,9 @@ mutation BattleCards {
       icons: ["BLACK", "BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/C_061_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/C_061_064.png"
+      }
     }
   ) {
     id
@@ -5927,7 +6565,9 @@ mutation BattleCards {
       icons: ["BLACK"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/R_062_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/R_062_064.png"
+      }
     }
   ) {
     id
@@ -5945,7 +6585,9 @@ mutation BattleCards {
       icons: ["BLUE", "GREEN"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/C_063_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/C_063_064.png"
+      }
     }
   ) {
     id
@@ -5963,7 +6605,9 @@ mutation BattleCards {
       icons: ["ORANGE", "BLACK", "GREEN"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_4/C_064_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_4/C_064_064.png"
+      }
     }
   ) {
     id
@@ -5981,7 +6625,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/R_001_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/R_001_064.png"
+      }
     }
   ) {
     id
@@ -5999,7 +6645,9 @@ mutation BattleCards {
       icons: []
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/C_002_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/C_002_064.png"
+      }
     }
   ) {
     id
@@ -6017,7 +6665,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/C_003_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/C_003_064.png"
+      }
     }
   ) {
     id
@@ -6035,7 +6685,9 @@ mutation BattleCards {
       icons: ["BLACK"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/C_004_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/C_004_064.png"
+      }
     }
   ) {
     id
@@ -6053,7 +6705,9 @@ mutation BattleCards {
       icons: ["BLACK", "BLACK_PLANE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/U_005_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/U_005_064.png"
+      }
     }
   ) {
     id
@@ -6071,7 +6725,9 @@ mutation BattleCards {
       icons: ["WHITE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/U_006_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/U_006_064.png"
+      }
     }
   ) {
     id
@@ -6089,7 +6745,9 @@ mutation BattleCards {
       icons: ["BLACK", "GREEN"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/R_007_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/R_007_064.png"
+      }
     }
   ) {
     id
@@ -6107,7 +6765,9 @@ mutation BattleCards {
       icons: ["BLACK"]
       attackModifier: 3
       defenseModifier: 2
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/U_008_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/U_008_064.png"
+      }
     }
   ) {
     id
@@ -6125,7 +6785,9 @@ mutation BattleCards {
       icons: ["BLACK"]
       attackModifier: null
       defenseModifier: 1
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/C_009_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/C_009_064.png"
+      }
     }
   ) {
     id
@@ -6143,7 +6805,9 @@ mutation BattleCards {
       icons: ["BLACK", "GREEN"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/C_010_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/C_010_064.png"
+      }
     }
   ) {
     id
@@ -6161,7 +6825,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: 1
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/U_011_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/U_011_064.png"
+      }
     }
   ) {
     id
@@ -6179,7 +6845,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: 3
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/C_012_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/C_012_064.png"
+      }
     }
   ) {
     id
@@ -6197,7 +6865,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: 1
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/U_013_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/U_013_064.png"
+      }
     }
   ) {
     id
@@ -6215,7 +6885,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/R_014_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/R_014_064.png"
+      }
     }
   ) {
     id
@@ -6233,7 +6905,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: 2
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/R_015_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/R_015_064.png"
+      }
     }
   ) {
     id
@@ -6251,7 +6925,9 @@ mutation BattleCards {
       icons: ["BLACK"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/U_016_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/U_016_064.png"
+      }
     }
   ) {
     id
@@ -6269,7 +6945,9 @@ mutation BattleCards {
       icons: ["ORANGE", "BLACK"]
       attackModifier: 1
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/R_017_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/R_017_064.png"
+      }
     }
   ) {
     id
@@ -6287,7 +6965,9 @@ mutation BattleCards {
       icons: ["BLACK"]
       attackModifier: 3
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/U_018_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/U_018_064.png"
+      }
     }
   ) {
     id
@@ -6305,7 +6985,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: 3
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/R_019_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/R_019_064.png"
+      }
     }
   ) {
     id
@@ -6323,7 +7005,9 @@ mutation BattleCards {
       icons: ["BLACK"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/C_020_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/C_020_064.png"
+      }
     }
   ) {
     id
@@ -6341,7 +7025,9 @@ mutation BattleCards {
       icons: ["BLUE_MELEE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/U_021_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/U_021_064.png"
+      }
     }
   ) {
     id
@@ -6359,7 +7045,9 @@ mutation BattleCards {
       icons: ["BLUE", "BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/C_022_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/C_022_064.png"
+      }
     }
   ) {
     id
@@ -6377,7 +7065,9 @@ mutation BattleCards {
       icons: ["BLACK_TITAN_MASTER", "BLACK_TITAN_MASTER"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/R_023_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/R_023_064.png"
+      }
     }
   ) {
     id
@@ -6395,7 +7085,9 @@ mutation BattleCards {
       icons: ["GREEN"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/U_024_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/U_024_064.png"
+      }
     }
   ) {
     id
@@ -6413,7 +7105,9 @@ mutation BattleCards {
       icons: ["WHITE", "BLACK"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/C_025_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/C_025_064.png"
+      }
     }
   ) {
     id
@@ -6431,7 +7125,9 @@ mutation BattleCards {
       icons: ["WHITE", "GREEN"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/C_026_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/C_026_064.png"
+      }
     }
   ) {
     id
@@ -6449,7 +7145,9 @@ mutation BattleCards {
       icons: ["GREEN"]
       attackModifier: null
       defenseModifier: 1
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/U_027_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/U_027_064.png"
+      }
     }
   ) {
     id
@@ -6467,7 +7165,9 @@ mutation BattleCards {
       icons: ["ORANGE_TANK"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/C_028_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/C_028_064.png"
+      }
     }
   ) {
     id
@@ -6485,7 +7185,9 @@ mutation BattleCards {
       icons: ["ORANGE", "ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/C_029_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/C_029_064.png"
+      }
     }
   ) {
     id
@@ -6503,7 +7205,9 @@ mutation BattleCards {
       icons: ["BLACK"]
       attackModifier: 2
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/C_030_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/C_030_064.png"
+      }
     }
   ) {
     id
@@ -6521,7 +7225,9 @@ mutation BattleCards {
       icons: ["BLACK", "GREEN"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/R_031_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/R_031_064.png"
+      }
     }
   ) {
     id
@@ -6539,7 +7245,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/U_032_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/U_032_064.png"
+      }
     }
   ) {
     id
@@ -6557,7 +7265,9 @@ mutation BattleCards {
       icons: ["BLACK", "BLACK"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/C_033_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/C_033_064.png"
+      }
     }
   ) {
     id
@@ -6575,7 +7285,9 @@ mutation BattleCards {
       icons: ["BLACK"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/U_034_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/U_034_064.png"
+      }
     }
   ) {
     id
@@ -6593,7 +7305,9 @@ mutation BattleCards {
       icons: ["BLUE_PLANE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/C_035_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/C_035_064.png"
+      }
     }
   ) {
     id
@@ -6611,7 +7325,9 @@ mutation BattleCards {
       icons: ["ORANGE", "BLACK", "GREEN"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/R_036_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/R_036_064.png"
+      }
     }
   ) {
     id
@@ -6629,7 +7345,9 @@ mutation BattleCards {
       icons: []
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/U_037_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/U_037_064.png"
+      }
     }
   ) {
     id
@@ -6647,7 +7365,9 @@ mutation BattleCards {
       icons: ["ORANGE", "BLACK"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/U_038_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/U_038_064.png"
+      }
     }
   ) {
     id
@@ -6665,7 +7385,9 @@ mutation BattleCards {
       icons: ["ORANGE_SPECIALIST", "BLACK_RANGED", "BLUE_MELEE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/R_039_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/R_039_064.png"
+      }
     }
   ) {
     id
@@ -6683,7 +7405,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: 4
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/R_040_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/R_040_064.png"
+      }
     }
   ) {
     id
@@ -6701,7 +7425,9 @@ mutation BattleCards {
       icons: ["WHITE", "GREEN"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/C_041_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/C_041_064.png"
+      }
     }
   ) {
     id
@@ -6719,7 +7445,9 @@ mutation BattleCards {
       icons: ["BLACK_CAR", "BLACK"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/R_042_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/R_042_064.png"
+      }
     }
   ) {
     id
@@ -6737,7 +7465,9 @@ mutation BattleCards {
       icons: ["BLACK"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/R_043_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/R_043_064.png"
+      }
     }
   ) {
     id
@@ -6755,7 +7485,9 @@ mutation BattleCards {
       icons: ["WHITE", "GREEN_RANGED"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/R_044_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/R_044_064.png"
+      }
     }
   ) {
     id
@@ -6773,7 +7505,9 @@ mutation BattleCards {
       icons: ["WHITE"]
       attackModifier: 1
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/R_045_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/R_045_064.png"
+      }
     }
   ) {
     id
@@ -6791,7 +7525,9 @@ mutation BattleCards {
       icons: ["ORANGE", "BLACK"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/C_046_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/C_046_064.png"
+      }
     }
   ) {
     id
@@ -6809,7 +7545,9 @@ mutation BattleCards {
       icons: ["GREEN"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/R_047_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/R_047_064.png"
+      }
     }
   ) {
     id
@@ -6827,7 +7565,9 @@ mutation BattleCards {
       icons: ["GREEN"]
       attackModifier: null
       defenseModifier: 1
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/R_048_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/R_048_064.png"
+      }
     }
   ) {
     id
@@ -6845,7 +7585,9 @@ mutation BattleCards {
       icons: ["BLACK", "BLUE"]
       attackModifier: null
       defenseModifier: 1
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/R_049_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/R_049_064.png"
+      }
     }
   ) {
     id
@@ -6863,7 +7605,9 @@ mutation BattleCards {
       icons: ["BLACK", "BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/C_050_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/C_050_064.png"
+      }
     }
   ) {
     id
@@ -6881,7 +7625,9 @@ mutation BattleCards {
       icons: ["GREEN"]
       attackModifier: 2
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/C_051_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/C_051_064.png"
+      }
     }
   ) {
     id
@@ -6899,7 +7645,9 @@ mutation BattleCards {
       icons: ["GREEN"]
       attackModifier: 1
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/R_052_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/R_052_064.png"
+      }
     }
   ) {
     id
@@ -6917,7 +7665,9 @@ mutation BattleCards {
       icons: ["WHITE", "GREEN"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/R_053_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/R_053_064.png"
+      }
     }
   ) {
     id
@@ -6935,7 +7685,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/C_054_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/C_054_064.png"
+      }
     }
   ) {
     id
@@ -6953,7 +7705,9 @@ mutation BattleCards {
       icons: ["BLACK", "GREEN"]
       attackModifier: 1
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/U_055_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/U_055_064.png"
+      }
     }
   ) {
     id
@@ -6971,7 +7725,9 @@ mutation BattleCards {
       icons: ["BLACK_SPECIALIST", "BLACK", "GREEN"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/R_056_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/R_056_064.png"
+      }
     }
   ) {
     id
@@ -6989,7 +7745,9 @@ mutation BattleCards {
       icons: ["WHITE"]
       attackModifier: 1
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/R_057_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/R_057_064.png"
+      }
     }
   ) {
     id
@@ -7007,7 +7765,9 @@ mutation BattleCards {
       icons: []
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/U_058_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/U_058_064.png"
+      }
     }
   ) {
     id
@@ -7025,7 +7785,9 @@ mutation BattleCards {
       icons: []
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/U_059_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/U_059_064.png"
+      }
     }
   ) {
     id
@@ -7043,7 +7805,9 @@ mutation BattleCards {
       icons: ["GREEN"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/U_060_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/U_060_064.png"
+      }
     }
   ) {
     id
@@ -7061,7 +7825,9 @@ mutation BattleCards {
       icons: ["BLUE"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/U_061_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/U_061_064.png"
+      }
     }
   ) {
     id
@@ -7079,7 +7845,9 @@ mutation BattleCards {
       icons: ["ORANGE"]
       attackModifier: null
       defenseModifier: 1
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/R_062_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/R_062_064.png"
+      }
     }
   ) {
     id
@@ -7097,7 +7865,9 @@ mutation BattleCards {
       icons: ["BLACK"]
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/U_063_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/U_063_064.png"
+      }
     }
   ) {
     id
@@ -7115,7 +7885,9 @@ mutation BattleCards {
       icons: []
       attackModifier: null
       defenseModifier: null
-      # originalImageUrl: "https://tfsdb.netlify.com/images/wave_5/R_064_064.png"
+      image: {
+        originalUrl: "https://tfsdb.netlify.com/images/wave_5/R_064_064.png"
+      }
     }
   ) {
     id
