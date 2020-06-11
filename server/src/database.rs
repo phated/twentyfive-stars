@@ -1,4 +1,5 @@
 use crate::data::CharacterCard;
+use crate::data::Image;
 use crate::data::StratagemCard;
 use crate::data::{BattleCard, BattleCardInput};
 use crate::data::{
@@ -62,6 +63,25 @@ impl Database {
     }
 }
 
+// Images
+impl Database {
+    pub async fn get_image(&self, image_id: i32) -> Result<Image, Error> {
+        let image = sqlx::query_as!(
+            Image,
+            r#"
+            SELECT i.id, n.node_id, i.original_url
+            FROM images AS i, nodes AS n
+            WHERE i.id = n.id AND n.id = $1
+            "#,
+            image_id
+        )
+        .fetch_one(&self.pool)
+        .await?;
+
+        Ok(image)
+    }
+}
+
 // Cards
 impl Database {
     pub async fn create_battle_card(&self, input: BattleCardInput) -> Result<BattleCard, Error> {
@@ -70,7 +90,11 @@ impl Database {
         let result = sqlx::query_as!(
             BattleCard,
             r#"
-            WITH node AS (
+            WITH image_node AS (
+                INSERT INTO nodes (node_type) VALUES ('IMAGE') RETURNING *
+            ), image AS (
+                INSERT INTO images (id, original_url) SELECT n.id, $12 FROM image_node AS n RETURNING *
+            ), node AS (
                 INSERT INTO nodes (node_type) VALUES ('BATTLE') RETURNING *
             ), wave AS (
                 SELECT id FROM waves WHERE tcg_id = $11
@@ -88,7 +112,8 @@ impl Database {
                     faction,
                     stars,
                     attack_modifier,
-                    defense_modifier
+                    defense_modifier,
+                    image_id
                 ) SELECT
                     n.id,
                     'BATTLE',
@@ -102,8 +127,9 @@ impl Database {
                     $7,
                     $8,
                     $9,
-                    $10
-                FROM node AS n, wave AS w RETURNING *
+                    $10,
+                    i.id
+                FROM node AS n, wave AS w, image AS i RETURNING *
             )
             SELECT
                 n.id,
@@ -118,7 +144,8 @@ impl Database {
                 c.faction,
                 c.stars,
                 c.attack_modifier,
-                c.defense_modifier
+                c.defense_modifier,
+                c.image_id
             FROM card AS c, node AS n;
             "#,
             &input.icons,
@@ -131,7 +158,8 @@ impl Database {
             input.stars,
             input.attack_modifier,
             input.defense_modifier,
-            input.wave_tcg_id
+            input.wave_tcg_id,
+            input.image.original_url
         )
         .fetch_one(&mut tx)
         .await;
@@ -153,7 +181,7 @@ impl Database {
         let battle_card = sqlx::query_as!(
             BattleCard,
             r#"
-        SELECT bc.id, n.node_id, bc.tcg_id, bc.rarity, bc.number, bc.category, bc.title, bc.icons::TEXT[], bc.stars, bc.type, bc.attack_modifier, bc.defense_modifier, bc.faction
+        SELECT bc.id, n.node_id, bc.tcg_id, bc.rarity, bc.number, bc.category, bc.title, bc.icons::TEXT[], bc.stars, bc.type, bc.attack_modifier, bc.defense_modifier, bc.faction, bc.image_id
         FROM battle_cards AS bc, nodes AS n
         WHERE bc.id = n.id AND n.id = $1;
         "#,

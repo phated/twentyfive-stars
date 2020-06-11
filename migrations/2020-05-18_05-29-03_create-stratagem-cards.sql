@@ -12,6 +12,8 @@ CREATE TABLE stratagem_cards (
   faction FACTION NOT NULL,
   stars INT NOT NULL CHECK (stars >= 0),
 
+  image_id INT REFERENCES images (id),
+
   PRIMARY KEY (id),
   UNIQUE (tcg_id, wave_id)
 );

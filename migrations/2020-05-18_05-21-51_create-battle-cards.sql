@@ -15,6 +15,8 @@ CREATE TABLE battle_cards (
   attack_modifier INT,
   defense_modifier INT,
 
+  image_id INT REFERENCES images (id),
+
   PRIMARY KEY (id),
   UNIQUE (tcg_id, wave_id)
 );

@@ -13,5 +13,7 @@ CREATE TABLE character_modes (
   attack_modifier INT,
   defense_modifier INT,
 
+  image_id INT REFERENCES images (id),
+
   PRIMARY KEY (id)
 );

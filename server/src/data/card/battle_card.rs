@@ -1,4 +1,4 @@
-use crate::data::{BattleType, CardCategory, CardRarity, Faction, Wave};
+use crate::data::{BattleType, CardCategory, CardRarity, Faction, Image, ImageInput, Wave};
 use crate::graphql_schema::ContextData;
 use async_graphql::{Context, FieldResult};
 use uuid::Uuid;
@@ -18,6 +18,7 @@ pub struct BattleCardInput {
     pub attack_modifier: Option<i32>,
     pub defense_modifier: Option<i32>,
     pub wave_tcg_id: String,
+    pub image: ImageInput,
 }
 
 #[derive(Debug, Clone, sqlx::FromRow)]
@@ -38,6 +39,7 @@ pub struct BattleCard {
     pub faction: Option<Faction>,
     pub attack_modifier: Option<i32>,
     pub defense_modifier: Option<i32>,
+    pub image_id: Option<i32>,
 }
 
 #[async_graphql::Object]
@@ -96,5 +98,23 @@ impl BattleCard {
 
     pub async fn defense_modifier(&self) -> Option<i32> {
         self.defense_modifier
+    }
+
+    pub async fn image(&self, ctx: &Context<'_>) -> Option<Image> {
+        let data = ctx.data::<ContextData>();
+        match self.image_id {
+            Some(image_id) => {
+                let result = data.db.get_image(image_id).await;
+
+                match result {
+                    Ok(image) => Some(image),
+                    Err(_) => {
+                        // TODO: log error
+                        None
+                    }
+                }
+            }
+            None => None,
+        }
     }
 }
