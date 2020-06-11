@@ -67,8 +67,8 @@ pub mod datasource {
                 })
                 .unwrap_or(card_nodes.len());
 
-            let has_previous_page = start_idx > 0;
-            let has_next_page = end_idx < card_nodes.len();
+            let mut has_previous_page = start_idx > 0;
+            let mut has_next_page = end_idx < card_nodes.len();
 
             let mut nodes = &card_nodes[start_idx..end_idx];
 
@@ -77,6 +77,8 @@ pub mod datasource {
                     let slice_begin = 0;
                     let slice_end = first;
                     nodes = &nodes[slice_begin..slice_end];
+                    // TODO: need to check this
+                    has_next_page = true;
                 }
             }
 
@@ -85,6 +87,8 @@ pub mod datasource {
                     let slice_begin = nodes.len() - last;
                     let slice_end = nodes.len();
                     nodes = &nodes[slice_begin..slice_end];
+                    // TODO: need to check this
+                    has_previous_page = true;
                 }
             }
 
