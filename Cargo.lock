@@ -1572,18 +1572,18 @@ checksum = "f638d531eccd6e23b980caf34876660d38e265409d8e99b397ab71eb3612fad0"
 
 [[package]]
 name = "serde"
-version = "1.0.110"
+version = "1.0.111"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "99e7b308464d16b56eba9964e4972a3eee817760ab60d88c3f86e1fecb08204c"
+checksum = "c9124df5b40cbd380080b2cc6ab894c040a3070d995f5c9dc77e18c34a8ae37d"
 dependencies = [
  "serde_derive",
 ]
 
 [[package]]
 name = "serde_derive"
-version = "1.0.110"
+version = "1.0.111"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "818fbf6bfa9a42d3bfcaca148547aa00c7b915bec71d1757aa2d44ca68771984"
+checksum = "3f2c3ac8e6ca1e9c80b8be1023940162bf81ae3cffbb1809474152f2ce1eb250"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -1695,7 +1695,7 @@ dependencies = [
 [[package]]
 name = "sqlx"
 version = "0.3.5"
-source = "git+https://github.com/phated/sqlx?branch=custom-types-offline#9f103f70414d7863945fb730e9fef22154d9b47f"
+source = "git+https://github.com/phated/sqlx?branch=custom-types-offline#a70036d510507a20b14bdc8ab99be591037d3582"
 dependencies = [
  "sqlx-core",
  "sqlx-macros",
@@ -1704,7 +1704,7 @@ dependencies = [
 [[package]]
 name = "sqlx-core"
 version = "0.3.5"
-source = "git+https://github.com/phated/sqlx?branch=custom-types-offline#9f103f70414d7863945fb730e9fef22154d9b47f"
+source = "git+https://github.com/phated/sqlx?branch=custom-types-offline#a70036d510507a20b14bdc8ab99be591037d3582"
 dependencies = [
  "async-native-tls",
  "async-std",
@@ -1738,7 +1738,7 @@ dependencies = [
 [[package]]
 name = "sqlx-macros"
 version = "0.3.5"
-source = "git+https://github.com/phated/sqlx?branch=custom-types-offline#9f103f70414d7863945fb730e9fef22154d9b47f"
+source = "git+https://github.com/phated/sqlx?branch=custom-types-offline#a70036d510507a20b14bdc8ab99be591037d3582"
 dependencies = [
  "async-std",
  "dotenv",
@@ -1769,9 +1769,9 @@ checksum = "2d67a5a62ba6e01cb2192ff309324cb4875d0c451d55fe2319433abe7a05a8ee"
 
 [[package]]
 name = "syn"
-version = "1.0.27"
+version = "1.0.31"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ef781e621ee763a2a40721a8861ec519cb76966aee03bb5d00adb6a31dc1c1de"
+checksum = "b5304cfdf27365b7585c25d4af91b35016ed21ef88f17ced89c7093b43dba8b6"
 dependencies = [
  "proc-macro2",
  "quote",
