@@ -33,12 +33,17 @@ module Styles = {
     [
       display(grid),
       gridTemplateColumns(
-        list([repeat(autoFill, [minmax(px(200), fr(1.0))])]),
+        list([repeat(autoFill, [minmax(px(250), auto)])]),
       ),
       gridGap(rem(1.0)),
-      padding(rem(0.5)),
+      // display(flexBox),
+      // flexWrap(wrap),
     ]
   ];
+
+  let placeholderCard = [%css []];
+
+  let placeholderImage = [%css [minWidth(200->px), maxWidth(100.0->pct)]];
 };
 
 [@react.component]
@@ -70,14 +75,15 @@ let make = (~query as queryRef) => {
       }
     });
 
-  <div>
-    <div className=Styles.cardList>
-      {React.array(children)}
-      {hasNext
-         ? <div key="loading-placeholder" ref>
-             {React.string("Loading...")}
-           </div>
-         : React.null}
+  <div className=Styles.cardList>
+    {React.array(children)}
+    <div className=Styles.placeholderCard key="loading-placeholder" ref>
+      <div>
+        <img
+          className=Styles.placeholderImage
+          src="https://tfsdb.netlify.com/images/card_back.png"
+        />
+      </div>
     </div>
   </div>;
 };

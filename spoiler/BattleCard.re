@@ -20,26 +20,31 @@ module BattleCardFragment = [%relay.fragment
 module Styles = {
   open Emotion;
 
-  let card = [%css
-    [
-      padding(rem(0.5)),
-      boxShadow(~x=px(5), ~y=px(5), ~blur=px(5), rgba(0, 0, 0, 0.1)),
-    ]
-  ];
+  let card = [%css []];
 
-  let image = [%css [maxWidth(pct(100.0))]];
+  let image = [%css [minWidth(200->px), maxWidth(100.0->pct)]];
+
+  let info = [%css [minWidth(200->px)]];
 };
 
 [@react.component]
 let make = (~card as cardRef) => {
   let card = BattleCardFragment.use(cardRef);
 
+  let isActive = true;
+
   <div className=Styles.card>
-    {Belt.Option.mapWithDefault(card.image, React.null, image =>
-       <img className=Styles.image src={image.originalUrl} />
-     )}
-    <div> {React.string(card.title)} </div>
-    <br />
-    <Card card={card.getFragmentRefs()} />
+    <div>
+      {Belt.Option.mapWithDefault(card.image, React.null, image =>
+         <img className=Styles.image src={image.originalUrl} />
+       )}
+    </div>
   </div>;
+  // {isActive
+  //    ? <div className=Styles.info>
+  //        <div> {React.string(card.title)} </div>
+  //        <br />
+  //        <Card card={card.getFragmentRefs()} />
+  //      </div>
+  //    : React.null}
 };
