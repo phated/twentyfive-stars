@@ -21,7 +21,7 @@
           "name": "node_type",
           "type_info": {
             "Custom": {
-              "oid": 17757,
+              "oid": 18080,
               "name": "node_type",
               "kind": {
                 "Enum": [
@@ -36,257 +36,6 @@
             }
           },
           "not_null": true
-        }
-      ]
-    }
-  },
-  "26de742adb1d6969aa72251952eade0e9dc4770716d32f20189b937287a7d945": {
-    "query": "\n            WITH image_node AS (\n                INSERT INTO nodes (node_type) VALUES ('IMAGE') RETURNING *\n            ), image AS (\n                INSERT INTO images (id, original_url) SELECT n.id, $12 FROM image_node AS n RETURNING *\n            ), node AS (\n                INSERT INTO nodes (node_type) VALUES ('BATTLE') RETURNING *\n            ), wave AS (\n                SELECT id FROM waves WHERE tcg_id = $11\n            ), card AS (\n                INSERT INTO battle_cards (\n                    id,\n                    category,\n                    wave_id,\n                    icons,\n                    tcg_id,\n                    rarity,\n                    number,\n                    title,\n                    type,\n                    faction,\n                    stars,\n                    attack_modifier,\n                    defense_modifier,\n                    image_id\n                ) SELECT\n                    n.id,\n                    'BATTLE',\n                    w.id,\n                    $1,\n                    $2,\n                    $3,\n                    $4,\n                    $5,\n                    $6,\n                    $7,\n                    $8,\n                    $9,\n                    $10,\n                    i.id\n                FROM node AS n, wave AS w, image AS i RETURNING *\n            )\n            SELECT\n                n.id,\n                n.node_id,\n                c.tcg_id,\n                c.category,\n                c.title,\n                c.icons,\n                c.type,\n                c.rarity,\n                c.number,\n                c.faction,\n                c.stars,\n                c.attack_modifier,\n                c.defense_modifier,\n                c.image_id\n            FROM card AS c, node AS n;\n            ",
-    "describe": {
-      "params": [
-        {
-          "Custom": {
-            "oid": 17829,
-            "name": "_battle_icon",
-            "kind": {
-              "Array": {
-                "Custom": {
-                  "oid": 17830,
-                  "name": "battle_icon",
-                  "kind": {
-                    "Enum": [
-                      "ORANGE",
-                      "BLUE",
-                      "WHITE",
-                      "GREEN",
-                      "BLACK",
-                      "ORANGE_TANK",
-                      "BLUE_PLANE",
-                      "BLACK_TITAN_MASTER",
-                      "ORANGE_SPECIALIST",
-                      "BLACK_RANGED",
-                      "BLUE_MELEE",
-                      "BLACK_CAR",
-                      "GREEN_RANGED",
-                      "BLACK_SPECIALIST",
-                      "BLACK_PLANE"
-                    ]
-                  }
-                }
-              }
-            }
-          }
-        },
-        "Varchar",
-        {
-          "Custom": {
-            "oid": 17770,
-            "name": "card_rarity",
-            "kind": {
-              "Enum": [
-                "COMMON",
-                "UNCOMMON",
-                "RARE",
-                "SUPER_RARE",
-                "THEME",
-                "PROMO"
-              ]
-            }
-          }
-        },
-        "Varchar",
-        "Varchar",
-        {
-          "Custom": {
-            "oid": 17816,
-            "name": "battle_type",
-            "kind": {
-              "Enum": [
-                "ACTION",
-                "SECRET_ACTION",
-                "UPGRADE_WEAPON",
-                "UPGRADE_ARMOR",
-                "UPGRADE_UTILITY",
-                "UPGRADE_WEAPON_ARMOR"
-              ]
-            }
-          }
-        },
-        {
-          "Custom": {
-            "oid": 17888,
-            "name": "faction",
-            "kind": {
-              "Enum": [
-                "AUTOBOT",
-                "DECEPTICON",
-                "MERCENARY"
-              ]
-            }
-          }
-        },
-        "Int4",
-        "Int4",
-        "Int4",
-        "Text",
-        "Varchar"
-      ],
-      "columns": [
-        {
-          "name": "id",
-          "type_info": "Int4",
-          "not_null": true
-        },
-        {
-          "name": "node_id",
-          "type_info": "Uuid",
-          "not_null": false
-        },
-        {
-          "name": "tcg_id",
-          "type_info": "Varchar",
-          "not_null": true
-        },
-        {
-          "name": "category",
-          "type_info": {
-            "Custom": {
-              "oid": 17784,
-              "name": "card_category",
-              "kind": {
-                "Enum": [
-                  "CHARACTER",
-                  "BATTLE",
-                  "STRATAGEM"
-                ]
-              }
-            }
-          },
-          "not_null": true
-        },
-        {
-          "name": "title",
-          "type_info": "Varchar",
-          "not_null": true
-        },
-        {
-          "name": "icons",
-          "type_info": {
-            "Custom": {
-              "oid": 17829,
-              "name": "_battle_icon",
-              "kind": {
-                "Array": {
-                  "Custom": {
-                    "oid": 17830,
-                    "name": "battle_icon",
-                    "kind": {
-                      "Enum": [
-                        "ORANGE",
-                        "BLUE",
-                        "WHITE",
-                        "GREEN",
-                        "BLACK",
-                        "ORANGE_TANK",
-                        "BLUE_PLANE",
-                        "BLACK_TITAN_MASTER",
-                        "ORANGE_SPECIALIST",
-                        "BLACK_RANGED",
-                        "BLUE_MELEE",
-                        "BLACK_CAR",
-                        "GREEN_RANGED",
-                        "BLACK_SPECIALIST",
-                        "BLACK_PLANE"
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "not_null": true
-        },
-        {
-          "name": "type",
-          "type_info": {
-            "Custom": {
-              "oid": 17816,
-              "name": "battle_type",
-              "kind": {
-                "Enum": [
-                  "ACTION",
-                  "SECRET_ACTION",
-                  "UPGRADE_WEAPON",
-                  "UPGRADE_ARMOR",
-                  "UPGRADE_UTILITY",
-                  "UPGRADE_WEAPON_ARMOR"
-                ]
-              }
-            }
-          },
-          "not_null": true
-        },
-        {
-          "name": "rarity",
-          "type_info": {
-            "Custom": {
-              "oid": 17770,
-              "name": "card_rarity",
-              "kind": {
-                "Enum": [
-                  "COMMON",
-                  "UNCOMMON",
-                  "RARE",
-                  "SUPER_RARE",
-                  "THEME",
-                  "PROMO"
-                ]
-              }
-            }
-          },
-          "not_null": true
-        },
-        {
-          "name": "number",
-          "type_info": "Varchar",
-          "not_null": true
-        },
-        {
-          "name": "faction",
-          "type_info": {
-            "Custom": {
-              "oid": 17888,
-              "name": "faction",
-              "kind": {
-                "Enum": [
-                  "AUTOBOT",
-                  "DECEPTICON",
-                  "MERCENARY"
-                ]
-              }
-            }
-          },
-          "not_null": false
-        },
-        {
-          "name": "stars",
-          "type_info": "Int4",
-          "not_null": false
-        },
-        {
-          "name": "attack_modifier",
-          "type_info": "Int4",
-          "not_null": false
-        },
-        {
-          "name": "defense_modifier",
-          "type_info": "Int4",
-          "not_null": false
-        },
-        {
-          "name": "image_id",
-          "type_info": "Int4",
-          "not_null": false
         }
       ]
     }
@@ -352,7 +101,7 @@
           "name": "rarity",
           "type_info": {
             "Custom": {
-              "oid": 17770,
+              "oid": 18094,
               "name": "card_rarity",
               "kind": {
                 "Enum": [
@@ -377,7 +126,7 @@
           "name": "category",
           "type_info": {
             "Custom": {
-              "oid": 17784,
+              "oid": 18108,
               "name": "card_category",
               "kind": {
                 "Enum": [
@@ -542,7 +291,7 @@
           "name": "node_type",
           "type_info": {
             "Custom": {
-              "oid": 17757,
+              "oid": 18080,
               "name": "node_type",
               "kind": {
                 "Enum": [
@@ -569,7 +318,7 @@
         "Varchar",
         {
           "Custom": {
-            "oid": 17770,
+            "oid": 18094,
             "name": "card_rarity",
             "kind": {
               "Enum": [
@@ -587,7 +336,7 @@
         "Varchar",
         {
           "Custom": {
-            "oid": 17816,
+            "oid": 18140,
             "name": "battle_type",
             "kind": {
               "Enum": [
@@ -603,7 +352,7 @@
         },
         {
           "Custom": {
-            "oid": 17888,
+            "oid": 18212,
             "name": "faction",
             "kind": {
               "Enum": [
@@ -640,7 +389,7 @@
           "name": "category",
           "type_info": {
             "Custom": {
-              "oid": 17784,
+              "oid": 18108,
               "name": "card_category",
               "kind": {
                 "Enum": [
@@ -667,7 +416,7 @@
           "name": "type",
           "type_info": {
             "Custom": {
-              "oid": 17816,
+              "oid": 18140,
               "name": "battle_type",
               "kind": {
                 "Enum": [
@@ -687,7 +436,7 @@
           "name": "rarity",
           "type_info": {
             "Custom": {
-              "oid": 17770,
+              "oid": 18094,
               "name": "card_rarity",
               "kind": {
                 "Enum": [
@@ -712,7 +461,7 @@
           "name": "faction",
           "type_info": {
             "Custom": {
-              "oid": 17888,
+              "oid": 18212,
               "name": "faction",
               "kind": {
                 "Enum": [
@@ -774,7 +523,7 @@
           "name": "rarity",
           "type_info": {
             "Custom": {
-              "oid": 17770,
+              "oid": 18094,
               "name": "card_rarity",
               "kind": {
                 "Enum": [
@@ -799,7 +548,7 @@
           "name": "category",
           "type_info": {
             "Custom": {
-              "oid": 17784,
+              "oid": 18108,
               "name": "card_category",
               "kind": {
                 "Enum": [
@@ -831,7 +580,7 @@
           "name": "type",
           "type_info": {
             "Custom": {
-              "oid": 17816,
+              "oid": 18140,
               "name": "battle_type",
               "kind": {
                 "Enum": [
@@ -861,147 +610,7 @@
           "name": "faction",
           "type_info": {
             "Custom": {
-              "oid": 17888,
-              "name": "faction",
-              "kind": {
-                "Enum": [
-                  "AUTOBOT",
-                  "DECEPTICON",
-                  "MERCENARY"
-                ]
-              }
-            }
-          },
-          "not_null": false
-        },
-        {
-          "name": "image_id",
-          "type_info": "Int4",
-          "not_null": false
-        }
-      ]
-    }
-  },
-  "d5cd4e3b674d5c9e2f81f7d869206ea4eda39cf9bfb75e4eb28a4c02462679af": {
-    "query": "\n        SELECT bc.id, n.node_id, bc.tcg_id, bc.rarity, bc.number, bc.category, bc.title, bc.icons, bc.stars, bc.type, bc.attack_modifier, bc.defense_modifier, bc.faction, bc.image_id\n        FROM battle_cards AS bc, nodes AS n\n        WHERE bc.id = n.id AND n.id = $1;\n        ",
-    "describe": {
-      "params": [
-        "Int4"
-      ],
-      "columns": [
-        {
-          "name": "id",
-          "type_info": "Int4",
-          "not_null": true
-        },
-        {
-          "name": "node_id",
-          "type_info": "Uuid",
-          "not_null": false
-        },
-        {
-          "name": "tcg_id",
-          "type_info": "Varchar",
-          "not_null": true
-        },
-        {
-          "name": "rarity",
-          "type_info": {
-            "Custom": {
-              "oid": 17770,
-              "name": "card_rarity",
-              "kind": {
-                "Enum": [
-                  "COMMON",
-                  "UNCOMMON",
-                  "RARE",
-                  "SUPER_RARE",
-                  "THEME",
-                  "PROMO"
-                ]
-              }
-            }
-          },
-          "not_null": true
-        },
-        {
-          "name": "number",
-          "type_info": "Varchar",
-          "not_null": true
-        },
-        {
-          "name": "category",
-          "type_info": {
-            "Custom": {
-              "oid": 17784,
-              "name": "card_category",
-              "kind": {
-                "Enum": [
-                  "CHARACTER",
-                  "BATTLE",
-                  "STRATAGEM"
-                ]
-              }
-            }
-          },
-          "not_null": true
-        },
-        {
-          "name": "title",
-          "type_info": "Varchar",
-          "not_null": true
-        },
-        {
-          "name": "icons",
-          "type_info": {
-            "Custom": {
-              "oid": 17829,
-              "name": "_battle_icon",
-              "kind": "Simple"
-            }
-          },
-          "not_null": true
-        },
-        {
-          "name": "stars",
-          "type_info": "Int4",
-          "not_null": false
-        },
-        {
-          "name": "type",
-          "type_info": {
-            "Custom": {
-              "oid": 17816,
-              "name": "battle_type",
-              "kind": {
-                "Enum": [
-                  "ACTION",
-                  "SECRET_ACTION",
-                  "UPGRADE_WEAPON",
-                  "UPGRADE_ARMOR",
-                  "UPGRADE_UTILITY",
-                  "UPGRADE_WEAPON_ARMOR"
-                ]
-              }
-            }
-          },
-          "not_null": true
-        },
-        {
-          "name": "attack_modifier",
-          "type_info": "Int4",
-          "not_null": false
-        },
-        {
-          "name": "defense_modifier",
-          "type_info": "Int4",
-          "not_null": false
-        },
-        {
-          "name": "faction",
-          "type_info": {
-            "Custom": {
-              "oid": 17888,
+              "oid": 18212,
               "name": "faction",
               "kind": {
                 "Enum": [
@@ -1059,225 +668,6 @@
       ]
     }
   },
-  "d74d1f03813206a1de844283193298f42cb4c407659709ba8326ab332f31917f": {
-    "query": "\n            WITH image_node AS (\n                INSERT INTO nodes (node_type) VALUES ('IMAGE') RETURNING *\n            ), image AS (\n                INSERT INTO images (id, original_url) SELECT n.id, $12 FROM image_node AS n RETURNING *\n            ), node AS (\n                INSERT INTO nodes (node_type) VALUES ('BATTLE') RETURNING *\n            ), wave AS (\n                SELECT id FROM waves WHERE tcg_id = $11\n            ), card AS (\n                INSERT INTO battle_cards (\n                    id,\n                    category,\n                    wave_id,\n                    icons,\n                    tcg_id,\n                    rarity,\n                    number,\n                    title,\n                    type,\n                    faction,\n                    stars,\n                    attack_modifier,\n                    defense_modifier,\n                    image_id\n                ) SELECT\n                    n.id,\n                    'BATTLE',\n                    w.id,\n                    $1,\n                    $2,\n                    $3,\n                    $4,\n                    $5,\n                    $6,\n                    $7,\n                    $8,\n                    $9,\n                    $10,\n                    i.id\n                FROM node AS n, wave AS w, image AS i RETURNING *\n            )\n            SELECT\n                n.id,\n                n.node_id,\n                c.tcg_id,\n                c.category,\n                c.title,\n                c.icons::TEXT[],\n                c.type,\n                c.rarity,\n                c.number,\n                c.faction,\n                c.stars,\n                c.attack_modifier,\n                c.defense_modifier,\n                c.image_id\n            FROM card AS c, node AS n;\n            ",
-    "describe": {
-      "params": [
-        {
-          "Custom": {
-            "oid": 17829,
-            "name": "_battle_icon",
-            "kind": {
-              "Array": {
-                "Custom": {
-                  "oid": 17830,
-                  "name": "battle_icon",
-                  "kind": {
-                    "Enum": [
-                      "ORANGE",
-                      "BLUE",
-                      "WHITE",
-                      "GREEN",
-                      "BLACK",
-                      "ORANGE_TANK",
-                      "BLUE_PLANE",
-                      "BLACK_TITAN_MASTER",
-                      "ORANGE_SPECIALIST",
-                      "BLACK_RANGED",
-                      "BLUE_MELEE",
-                      "BLACK_CAR",
-                      "GREEN_RANGED",
-                      "BLACK_SPECIALIST",
-                      "BLACK_PLANE"
-                    ]
-                  }
-                }
-              }
-            }
-          }
-        },
-        "Varchar",
-        {
-          "Custom": {
-            "oid": 17770,
-            "name": "card_rarity",
-            "kind": {
-              "Enum": [
-                "COMMON",
-                "UNCOMMON",
-                "RARE",
-                "SUPER_RARE",
-                "THEME",
-                "PROMO"
-              ]
-            }
-          }
-        },
-        "Varchar",
-        "Varchar",
-        {
-          "Custom": {
-            "oid": 17816,
-            "name": "battle_type",
-            "kind": {
-              "Enum": [
-                "ACTION",
-                "SECRET_ACTION",
-                "UPGRADE_WEAPON",
-                "UPGRADE_ARMOR",
-                "UPGRADE_UTILITY",
-                "UPGRADE_WEAPON_ARMOR"
-              ]
-            }
-          }
-        },
-        {
-          "Custom": {
-            "oid": 17888,
-            "name": "faction",
-            "kind": {
-              "Enum": [
-                "AUTOBOT",
-                "DECEPTICON",
-                "MERCENARY"
-              ]
-            }
-          }
-        },
-        "Int4",
-        "Int4",
-        "Int4",
-        "Text",
-        "Varchar"
-      ],
-      "columns": [
-        {
-          "name": "id",
-          "type_info": "Int4",
-          "not_null": true
-        },
-        {
-          "name": "node_id",
-          "type_info": "Uuid",
-          "not_null": false
-        },
-        {
-          "name": "tcg_id",
-          "type_info": "Varchar",
-          "not_null": true
-        },
-        {
-          "name": "category",
-          "type_info": {
-            "Custom": {
-              "oid": 17784,
-              "name": "card_category",
-              "kind": {
-                "Enum": [
-                  "CHARACTER",
-                  "BATTLE",
-                  "STRATAGEM"
-                ]
-              }
-            }
-          },
-          "not_null": true
-        },
-        {
-          "name": "title",
-          "type_info": "Varchar",
-          "not_null": true
-        },
-        {
-          "name": "icons",
-          "type_info": "TextArray",
-          "not_null": null
-        },
-        {
-          "name": "type",
-          "type_info": {
-            "Custom": {
-              "oid": 17816,
-              "name": "battle_type",
-              "kind": {
-                "Enum": [
-                  "ACTION",
-                  "SECRET_ACTION",
-                  "UPGRADE_WEAPON",
-                  "UPGRADE_ARMOR",
-                  "UPGRADE_UTILITY",
-                  "UPGRADE_WEAPON_ARMOR"
-                ]
-              }
-            }
-          },
-          "not_null": true
-        },
-        {
-          "name": "rarity",
-          "type_info": {
-            "Custom": {
-              "oid": 17770,
-              "name": "card_rarity",
-              "kind": {
-                "Enum": [
-                  "COMMON",
-                  "UNCOMMON",
-                  "RARE",
-                  "SUPER_RARE",
-                  "THEME",
-                  "PROMO"
-                ]
-              }
-            }
-          },
-          "not_null": true
-        },
-        {
-          "name": "number",
-          "type_info": "Varchar",
-          "not_null": true
-        },
-        {
-          "name": "faction",
-          "type_info": {
-            "Custom": {
-              "oid": 17888,
-              "name": "faction",
-              "kind": {
-                "Enum": [
-                  "AUTOBOT",
-                  "DECEPTICON",
-                  "MERCENARY"
-                ]
-              }
-            }
-          },
-          "not_null": false
-        },
-        {
-          "name": "stars",
-          "type_info": "Int4",
-          "not_null": false
-        },
-        {
-          "name": "attack_modifier",
-          "type_info": "Int4",
-          "not_null": false
-        },
-        {
-          "name": "defense_modifier",
-          "type_info": "Int4",
-          "not_null": false
-        },
-        {
-          "name": "image_id",
-          "type_info": "Int4",
-          "not_null": false
-        }
-      ]
-    }
-  },
   "e1e6ef8a9272e70dcd4f870fa1fbe96b26f0305b03f8ee7583deed92cdd8bb0b": {
     "query": "\n        SELECT cm.id, n.node_id, cm.title, cm.subtitle, cm.faction, cm.traits::TEXT[], cm.type,\n        cm.stars, cm.health, cm.attack, cm.defense, cm.attack_modifier, cm.defense_modifier\n        FROM character_modes AS cm, nodes AS n\n        WHERE cm.id = n.id AND character_id = $1\n        ORDER BY n.id;\n        ",
     "describe": {
@@ -1309,7 +699,7 @@
           "name": "faction",
           "type_info": {
             "Custom": {
-              "oid": 17888,
+              "oid": 18212,
               "name": "faction",
               "kind": {
                 "Enum": [
@@ -1331,7 +721,7 @@
           "name": "type",
           "type_info": {
             "Custom": {
-              "oid": 17792,
+              "oid": 18116,
               "name": "mode_type",
               "kind": {
                 "Enum": [
@@ -1411,7 +801,7 @@
           "name": "rarity",
           "type_info": {
             "Custom": {
-              "oid": 17770,
+              "oid": 18094,
               "name": "card_rarity",
               "kind": {
                 "Enum": [
@@ -1436,7 +826,7 @@
           "name": "category",
           "type_info": {
             "Custom": {
-              "oid": 17784,
+              "oid": 18108,
               "name": "card_category",
               "kind": {
                 "Enum": [
@@ -1458,7 +848,7 @@
           "name": "faction",
           "type_info": {
             "Custom": {
-              "oid": 17888,
+              "oid": 18212,
               "name": "faction",
               "kind": {
                 "Enum": [
