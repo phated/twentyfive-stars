@@ -94,9 +94,9 @@ checksum = "cff77d8686867eceff3105329d4698d96c2391c176d5d03adc90c7389162b5b8"
 
 [[package]]
 name = "async-graphql"
-version = "1.15.10"
+version = "1.15.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8d3d266a3a03d65228c4b007009833add70bfee4c426a0336cc174faf12a6a0a"
+checksum = "7878e85352bfe2c5e0951c7e8d1d049fbd3c828d615ed51af87f9ae94762e4ef"
 dependencies = [
  "Inflector",
  "anyhow",
@@ -1800,7 +1800,7 @@ dependencies = [
 [[package]]
 name = "sqlx"
 version = "0.4.0-pre"
-source = "git+https://github.com/phated/sqlx?branch=custom-types-040#81fd350a71dbcb866fb5d56e6a4e09cff987dd24"
+source = "git+https://github.com/phated/sqlx?branch=custom-types-040#0cb1d1f078ea3cf2a09776a4e0cbdef1ce7bb55c"
 dependencies = [
  "sqlx-core",
  "sqlx-macros",
@@ -1809,7 +1809,7 @@ dependencies = [
 [[package]]
 name = "sqlx-core"
 version = "0.4.0-pre"
-source = "git+https://github.com/phated/sqlx?branch=custom-types-040#81fd350a71dbcb866fb5d56e6a4e09cff987dd24"
+source = "git+https://github.com/phated/sqlx?branch=custom-types-040#0cb1d1f078ea3cf2a09776a4e0cbdef1ce7bb55c"
 dependencies = [
  "atoi",
  "base64",
@@ -1853,7 +1853,7 @@ dependencies = [
 [[package]]
 name = "sqlx-macros"
 version = "0.4.0-pre"
-source = "git+https://github.com/phated/sqlx?branch=custom-types-040#81fd350a71dbcb866fb5d56e6a4e09cff987dd24"
+source = "git+https://github.com/phated/sqlx?branch=custom-types-040#0cb1d1f078ea3cf2a09776a4e0cbdef1ce7bb55c"
 dependencies = [
  "async-std",
  "dotenv",
@@ -1873,7 +1873,7 @@ dependencies = [
 [[package]]
 name = "sqlx-rt"
 version = "0.1.0-pre"
-source = "git+https://github.com/phated/sqlx?branch=custom-types-040#81fd350a71dbcb866fb5d56e6a4e09cff987dd24"
+source = "git+https://github.com/phated/sqlx?branch=custom-types-040#0cb1d1f078ea3cf2a09776a4e0cbdef1ce7bb55c"
 dependencies = [
  "async-native-tls",
  "async-std",
