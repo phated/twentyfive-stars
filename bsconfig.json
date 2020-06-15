@@ -28,7 +28,8 @@
     "@ahrefs/bs-emotion",
     "bs-fetch",
     "reason-react",
-    "reason-relay"
+    "reason-relay",
+    "bs-react-is-visible"
   ],
   "refmt": 3
 }

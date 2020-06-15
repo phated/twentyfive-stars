@@ -7,6 +7,6 @@ module.exports = {
   schema: "./schema.graphql",
   artifactDirectory: path.join(spoilerRoot, "__generated__"),
   customScalars: {
-    "Date": "string"
+    "NaiveDate": "string"
   }
 };

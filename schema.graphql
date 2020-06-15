@@ -1,279 +1,298 @@
 # source: http://localhost:3000/
-# timestamp: Sat Apr 25 2020 14:42:48 GMT-0700 (Mountain Standard Time)
+# timestamp: Wed Jun 10 2020 18:03:19 GMT-0700 (Mountain Standard Time)
 
 schema {
   query: QueryRoot
+  mutation: MutationRoot
 }
 
+directive @defer on FIELD
+
+directive @stream on FIELD
+
 type AltMode implements CharacterMode {
+  id: ID!
+  title: String!
+  subtitle: String!
+  stars: Int!
+  type: ModeType!
+  faction: Faction!
+  traits: [CharacterTrait!]!
+  health: Int!
   attack: Int!
   defense: Int!
-  faction: Faction!
-  health: Int!
-  id: ID!
-  stars: Int!
-  subtitle: String!
-  title: String!
-  traits: [CharacterTrait!]!
-  type: ModeType!
 }
 
 type BattleCard implements Node & Card {
-  attackModifier: Int
-  category: CardCategory!
-  defenseModifier: Int
-  faction: Faction
-  icons: [BattleIcon!]!
   id: ID!
-  number: String!
-  rarity: CardRarity!
-  stars: Int
   tcgId: String!
-  title: String!
-  type: BattleType!
+  rarity: CardRarity!
+  number: String!
+  category: CardCategory!
   wave: Wave!
+  title: String!
+  stars: Int
+  icons: [String!]!
+  type: BattleType!
+  faction: Faction
+  attackModifier: Int
+  defenseModifier: Int
+  image: Image
 }
 
-enum BattleIcon {
-  BLACK
-  ORANGE
-  BLUE
-  WHITE
-  GREEN
+input BattleCardInput {
+  tcgId: String!
+  rarity: CardRarity!
+  number: String!
+  title: String!
+  stars: Int
+  icons: [String!]!
+  type: BattleType!
+  faction: Faction
+  attackModifier: Int
+  defenseModifier: Int
+  waveTcgId: String!
+  image: ImageInput!
 }
 
 enum BattleType {
-  UPGRADE_ARMOR
-  SECRET_ACTION
   ACTION
+  SECRET_ACTION
   UPGRADE_WEAPON
+  UPGRADE_ARMOR
   UPGRADE_UTILITY
+  UPGRADE_WEAPON_ARMOR
 }
 
 type BodyMode implements CharacterMode {
+  id: ID!
+  title: String!
+  subtitle: String!
+  stars: Int!
+  type: ModeType!
+  faction: Faction!
+  traits: [CharacterTrait!]!
+  health: Int!
   attack: Int!
   defense: Int!
-  faction: Faction!
-  health: Int!
-  id: ID!
-  stars: Int!
-  subtitle: String!
-  title: String!
-  traits: [CharacterTrait!]!
-  type: ModeType!
 }
 
 type BotMode implements CharacterMode {
+  id: ID!
+  title: String!
+  subtitle: String!
+  stars: Int!
+  type: ModeType!
+  faction: Faction!
+  traits: [CharacterTrait!]!
+  health: Int!
   attack: Int!
   defense: Int!
-  faction: Faction!
-  health: Int!
-  id: ID!
-  stars: Int!
-  subtitle: String!
-  title: String!
-  traits: [CharacterTrait!]!
-  type: ModeType!
 }
 
 interface Card {
-  category: CardCategory!
   id: ID!
-  number: String!
-  rarity: CardRarity!
   tcgId: String!
+  rarity: CardRarity!
+  number: String!
+  category: CardCategory!
   wave: Wave!
 }
 
 enum CardCategory {
   CHARACTER
-  STRATAGEM
   BATTLE
-}
-
-type CardConnection {
-  """
-  A list of all of the objects returned in the connection. This is a convenience
-  field provided for quickly exploring the API; rather than querying for "{
-  edges { node } }" when no edge data is needed, this field can be be used
-  instead. Note that when clients like Relay need to fetch the "cursor" field on
-  the edge to enable efficient pagination, this shortcut cannot be used, and the
-  full "{ edges { node } }" version should be used instead.
-  """
-  cards: [Card!]
-
-  """A list of edges."""
-  edges: [CardEdge]
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """
-  A count of the total number of objects in this connection, ignoring
-  pagination. This allows a client to fetch the first five objects by passing
-  "5" as the argument to "first", then fetch the total count so it could display
-  "5 of 83", for example.
-  """
-  totalCount: Int
-}
-
-"""An edge in a connection."""
-type CardEdge {
-  """A cursor for use in pagination"""
-  cursor: String!
-
-  """The item at the end of the edge"""
-  node: Card!
+  STRATAGEM
 }
 
 enum CardRarity {
-  PROMO
   COMMON
   UNCOMMON
-  SUPER_RARE
   RARE
+  SUPER_RARE
   THEME
+  PROMO
 }
 
-type CharacterCard implements Node & Card {
-  category: CardCategory!
+union Cards = BattleCard | CharacterCard | StratagemCard
+
+type CardsConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [CardsEdge]
+}
+
+"""An edge in a connection."""
+type CardsEdge {
+  """The item at the end of the edge"""
+  node: Cards!
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+type CharacterCard implements Card & Node {
   id: ID!
-  modes: [CharacterMode!]!
-  number: String!
-  rarity: CardRarity!
   tcgId: String!
+  rarity: CardRarity!
+  number: String!
+  category: CardCategory!
   wave: Wave!
+  modes: [CharacterMode!]!
 }
 
 interface CharacterMode {
-  faction: Faction!
-  stars: Int!
+  id: ID!
   title: String!
+  stars: Int!
   type: ModeType!
+  faction: Faction!
 }
 
 enum CharacterTrait {
-  MOTORCYCLE
-  INSECTICON
-  CAR
-  TANK
-  SPECIALIST
   MELEE
-  TRUCK
+  RANGED
+  SPECIALIST
+  MOTORCYCLE
   SPACESHIP
+  TRUCK
+  LEADER
+  CAR
+  INSECTICON
+  TANK
   DINOBOT
   PLANE
-  LEADER
-  RANGED
 }
 
 type CombinerBodyMode implements CharacterMode {
+  id: ID!
+  title: String!
+  subtitle: String!
+  stars: Int!
+  type: ModeType!
+  faction: Faction!
+  traits: [CharacterTrait!]!
+  health: Int!
   attack: Int!
   defense: Int!
-  faction: Faction!
-  health: Int!
-  id: ID!
-  stars: Int!
-  subtitle: String!
-  title: String!
-  traits: [CharacterTrait!]!
-  type: ModeType!
 }
 
 type CombinerMode implements CharacterMode {
+  id: ID!
+  title: String!
+  subtitle: String!
+  stars: Int!
+  type: ModeType!
+  faction: Faction!
+  traits: [CharacterTrait!]!
+  health: Int!
   attack: Int!
   defense: Int!
-  faction: Faction!
-  health: Int!
-  id: ID!
-  stars: Int!
-  subtitle: String!
-  title: String!
-  traits: [CharacterTrait!]!
-  type: ModeType!
 }
 
-scalar Cursor
-
-scalar Date
-
 enum Faction {
-  MERCENARY
-  DECEPTICON
   AUTOBOT
+  DECEPTICON
+  MERCENARY
 }
 
 type HeadMode implements CharacterMode {
-  faction: Faction!
   id: ID!
-  stars: Int!
   title: String!
+  stars: Int!
   type: ModeType!
+  faction: Faction!
+}
+
+type Image {
+  id: ID!
+  originalUrl: String!
+}
+
+input ImageInput {
+  originalUrl: String!
 }
 
 enum ModeType {
-  BODY
-  UPGRADE_ARMOR
   ALT
+  ALT_1
   ALT_2
   BOT
   COMBINER
+  UPGRADE_WEAPON
+  UPGRADE_ARMOR
+  UPGRADE_UTILITY
+  BODY
   HEAD
   COMBINER_BODY
-  UPGRADE_UTILITY
-  ALT_1
-  UPGRADE_WEAPON
 }
+
+type MutationRoot {
+  addWave(wave: WaveInput!): Wave!
+  addBattleCard(card: BattleCardInput!): BattleCard!
+}
+
+scalar NaiveDate
 
 interface Node {
   id: ID!
 }
 
+"""Information about pagination in a connection"""
 type PageInfo {
-  """When paginating forwards, the cursor to continue."""
-  endCursor: String
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
 
   """When paginating forwards, are there more items?"""
   hasNextPage: Boolean!
 
-  """When paginating backwards, are there more items?"""
-  hasPreviousPage: Boolean!
-
   """When paginating backwards, the cursor to continue."""
   startCursor: String
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
 }
 
 type QueryRoot {
-  allCards(after: Cursor, before: Cursor, first: Int, last: Int): CardConnection!
+  node(id: ID!): Node!
+  allCards(after: String, before: String, first: Int, last: Int): CardsConnection!
 }
 
-type StratagemCard implements Card & Node {
-  category: CardCategory!
-  faction: Faction
+type StratagemCard implements Node & Card {
   id: ID!
-  number: String!
+  tcgId: String!
   rarity: CardRarity!
+  number: String!
+  category: CardCategory!
+  wave: Wave!
+  title: String!
   requirement: String!
   stars: Int!
-  tcgId: String!
-  title: String!
-  wave: Wave!
+  faction: Faction!
 }
 
 type UpgradeMode implements CharacterMode {
+  id: ID!
+  title: String!
+  stars: Int!
+  type: ModeType!
+  faction: Faction!
+  traits: [CharacterTrait!]!
   attackModifier: Int
   defenseModifier: Int
-  faction: Faction!
-  id: ID!
-  stars: Int!
-  title: String!
-  traits: [CharacterTrait!]!
-  type: ModeType!
 }
 
 type Wave implements Node {
   id: ID!
-  name: String!
-  released: Date!
   tcgId: String!
+  name: String!
+  released: NaiveDate!
+}
+
+input WaveInput {
+  tcgId: String!
+  name: String!
+  released: NaiveDate!
 }

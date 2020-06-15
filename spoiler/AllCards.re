@@ -1,20 +1,19 @@
-module AllCardsQuery = [%relay.query
+module Fragment = [%relay.fragment
   {|
-  query AllCardsQuery {
-    allCards {
+  fragment AllCards_query on QueryRoot
+    @refetchable(queryName: "AllCardsRefetchQuery")
+    @argumentDefinitions(
+      count: { type: "Int", defaultValue: 20 }
+      cursor: { type: "String", defaultValue: "" }
+    ) {
+    allCards(first: $count, after: $cursor)
+      @connection(key: "AllCards_allCards") {
       edges {
         node {
           __typename
-          tcgId
-          # It's weird that I need to request the `category` field AND the fragment
-          category
-          ...CardCategory_card
-          number
-          rarity
-          wave {
-            ...Wave_wave
-          }
+  
           ... on BattleCard {
+            id
             ...BattleCard_battleCard
           }
           ... on CharacterCard {
@@ -30,32 +29,61 @@ module AllCardsQuery = [%relay.query
 module Styles = {
   open Emotion;
 
-  let card = [%css
+  let cardList = [%css
     [
-      padding(rem(0.5)),
-      boxShadow(~x=px(5), ~y=px(5), ~blur=px(5), rgba(0, 0, 0, 0.1)),
+      display(grid),
+      gridTemplateColumns(
+        list([repeat(autoFill, [minmax(px(250), auto)])]),
+      ),
+      gridGap(rem(1.0)),
+      // display(flexBox),
+      // flexWrap(wrap),
     ]
   ];
+
+  let placeholderCard = [%css []];
+
+  let placeholderImage = [%css [minWidth(200->px), maxWidth(100.0->pct)]];
 };
 
 [@react.component]
-let make = () => {
-  let queryData = AllCardsQuery.use(~variables=(), ());
-  let edges = Belt.Option.getWithDefault(queryData.allCards.edges, [||]);
+let make = (~query as queryRef) => {
+  let (isVisible, ref) = ReactIsVisible.useIsVisible();
+
+  let ReasonRelay.{data, hasNext, isLoadingNext, loadNext} =
+    Fragment.usePagination(queryRef);
+
+  React.useEffect2(
+    () =>
+      if (isVisible && hasNext) {
+        let d = loadNext(~count=10, ());
+        Some(() => ReasonRelay.Disposable.dispose(d));
+      } else {
+        None;
+      },
+    (isVisible, hasNext),
+  );
+
+  let cards = data.allCards->Fragment.getConnectionNodes_allCards;
+
   let children =
-    Belt.Array.keepMap(edges, edge => {
-      Belt.Option.map(edge, edge => {
-        <div className=Styles.card key={edge.node.tcgId}>
-          {switch (edge.node.category) {
-           | `BATTLE => <BattleCard card={edge.node.getFragmentRefs()} />
-           | _ => React.null
-           }}
-          <div> {React.string(edge.node.tcgId)} </div>
-          <div> <CardCategory card={edge.node.getFragmentRefs()} /> </div>
-          <Wave wave={edge.node.wave.getFragmentRefs()} />
-        </div>
-      })
+    Belt.Array.map(cards, card => {
+      switch (card) {
+      | `BattleCard(card) =>
+        <BattleCard key={card.id} card={card.getFragmentRefs()} />
+      | _ => React.null
+      }
     });
 
-  React.array(children);
+  <div className=Styles.cardList>
+    {React.array(children)}
+    <div className=Styles.placeholderCard key="loading-placeholder" ref>
+      <div>
+        <img
+          className=Styles.placeholderImage
+          src="https://tfsdb.netlify.com/images/card_back.png"
+        />
+      </div>
+    </div>
+  </div>;
 };

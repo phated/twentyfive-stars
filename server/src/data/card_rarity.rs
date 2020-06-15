@@ -1,51 +1,14 @@
-// From https://github.com/diesel-rs/diesel/blob/1.4.x/diesel_tests/tests/custom_types.rs
+use async_graphql::GQLEnum;
 
-use diesel::deserialize::{self, FromSql};
-use diesel::pg::Pg;
-use diesel::serialize::{self, IsNull, Output, ToSql};
-use std::io::Write;
-
-#[async_graphql::Enum]
-#[derive(Debug, PartialEq, Eq, Copy, Clone, FromSqlRow, AsExpression, SqlType)]
-#[postgres(type_name = "CARD_RARITY")]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, sqlx::Type, GQLEnum)]
+#[sqlx(rename = "CARD_RARITY", rename_all = "uppercase")]
+#[graphql(name = "CardRarity")]
 pub enum CardRarity {
-  Common,
-  Uncommon,
-  Rare,
-  SuperRare,
-  Theme,
-  Promo,
-}
-
-impl ToSql<CardRarity, Pg> for CardRarity {
-  fn to_sql<W: Write>(&self, out: &mut Output<W, Pg>) -> serialize::Result {
-    match *self {
-      CardRarity::Common => out.write_all(b"COMMON")?,
-      CardRarity::Uncommon => out.write_all(b"UNCOMMON")?,
-      CardRarity::Rare => out.write_all(b"RARE")?,
-      CardRarity::SuperRare => out.write_all(b"SUPER_RARE")?,
-      CardRarity::Theme => out.write_all(b"THEME")?,
-      CardRarity::Promo => out.write_all(b"PROMO")?,
-    }
-    Ok(IsNull::No)
-  }
-}
-
-impl FromSql<CardRarity, Pg> for CardRarity {
-  fn from_sql(bytes: Option<&[u8]>) -> deserialize::Result<Self> {
-    match not_none!(bytes) {
-      b"COMMON" => Ok(CardRarity::Common),
-      b"UNCOMMON" => Ok(CardRarity::Uncommon),
-      b"RARE" => Ok(CardRarity::Rare),
-      b"SUPER_RARE" => Ok(CardRarity::SuperRare),
-      b"THEME" => Ok(CardRarity::Theme),
-      b"PROMO" => Ok(CardRarity::Promo),
-      // unimplemented!() is used here to give immediate feedback that
-      // I forgot to deserialize the type from a Postgres type.
-      not_implemented => unimplemented!(
-        "Unrecognized CardRarity variant: {}",
-        String::from_utf8_lossy(not_implemented)
-      ),
-    }
-  }
+    Common,
+    Uncommon,
+    Rare,
+    #[sqlx(rename = "SUPER_RARE")]
+    SuperRare,
+    Theme,
+    Promo,
 }

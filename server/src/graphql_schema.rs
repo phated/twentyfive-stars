@@ -1,51 +1,119 @@
-use crate::data::CardDataSource;
+use crate::data::{BattleCard, BattleCardInput};
+use crate::data::{Cards, NodeType, Wave, WaveInput};
+use crate::database::Database;
 use crate::schema::interfaces;
-use async_graphql::{Connection, Context, Cursor, DataSource, EmptyEdgeFields, FieldResult};
+use async_graphql::connection::{Connection, EmptyFields};
+use async_graphql::{Context, FieldResult, ID};
+use std::convert::TryFrom;
+use uuid::Uuid;
 
 pub struct QueryRoot;
+pub struct MutationRoot;
+
+pub struct ContextData {
+    pub db: Database,
+}
 
 #[async_graphql::Object]
 impl QueryRoot {
-  // fn node(context: &Context, id: ID) -> FieldResult<Node> {
-  //   let node = database::get_node(&context.connection, id)?;
-  //   Ok(node)
-  // }
+    pub async fn node(&self, ctx: &Context<'_>, id: ID) -> FieldResult<interfaces::Node> {
+        let data = ctx.data::<ContextData>();
+        let node_id = Uuid::try_from(id)?;
+        let node = data.db.get_node_by_uuid(node_id).await?;
 
-  async fn all_cards(
-    &self,
-    ctx: &Context<'_>,
-    after: Option<Cursor>,
-    before: Option<Cursor>,
-    first: Option<i32>,
-    last: Option<i32>,
-  ) -> FieldResult<Connection<interfaces::Card, EmptyEdgeFields>> {
-    CardDataSource.query(ctx, after, before, first, last).await
-  }
+        match node.node_type {
+            NodeType::Battle => {
+                let battle_card = data.db.get_battle_card(node.id).await?;
 
-  // fn all_character_cards(context: &Context) -> FieldResult<Vec<CharacterCard>> {
-  //   let cards = database::get_character_cards(&context.connection)?
-  //     .iter()
-  //     .filter_map(|card| CharacterCard::load_from_card(card, context))
-  //     .collect();
-  //   // TODO: weird conversion between result types
-  //   Ok(cards)
-  // }
+                Ok(battle_card.into())
+            }
+            NodeType::Character => {
+                let character_card = data.db.get_character_card(node.id).await?;
 
-  // fn all_battle_cards(context: &Context) -> FieldResult<Vec<BattleCard>> {
-  //   let cards = database::get_battle_cards(&context.connection)?
-  //     .iter()
-  //     .filter_map(|card| BattleCard::load_from_card(card, context))
-  //     .collect();
-  //   // TODO: weird conversion between result types
-  //   Ok(cards)
-  // }
+                Ok(character_card.into())
+            }
+            NodeType::Stratagem => {
+                let stratagem_card = data.db.get_stratagem_card(node.id).await?;
 
-  // fn all_stratagem_cards(context: &Context) -> FieldResult<Vec<StratagemCard>> {
-  //   let cards = database::get_stratagem_cards(&context.connection)?
-  //     .iter()
-  //     .filter_map(|card| StratagemCard::load_from_card(card, context))
-  //     .collect();
-  //   // TODO: weird conversion between result types
-  //   Ok(cards)
-  // }
+                Ok(stratagem_card.into())
+            }
+            NodeType::Wave => {
+                let wave = data.db.get_wave(node.id).await?;
+
+                Ok(wave.into())
+            }
+            _ => todo!(),
+        }
+    }
+
+    pub async fn all_cards(
+        &self,
+        ctx: &Context<'_>,
+        after: Option<String>,
+        before: Option<String>,
+        first: Option<i32>,
+        last: Option<i32>,
+    ) -> FieldResult<Connection<String, Cards, EmptyFields, EmptyFields>> {
+        Cards::query(ctx, after, before, first, last).await
+    }
+
+    // fn all_character_cards(context: &Context) -> FieldResult<Vec<CharacterCard>> {
+    //   let cards = database::get_character_cards(&context.connection)?
+    //     .iter()
+    //     .filter_map(|card| CharacterCard::load_from_card(card, context))
+    //     .collect();
+    //   // TODO: weird conversion between result types
+    //   Ok(cards)
+    // }
+
+    // fn all_battle_cards(context: &Context) -> FieldResult<Vec<BattleCard>> {
+    //   let cards = database::get_battle_cards(&context.connection)?
+    //     .iter()
+    //     .filter_map(|card| BattleCard::load_from_card(card, context))
+    //     .collect();
+    //   // TODO: weird conversion between result types
+    //   Ok(cards)
+    // }
+
+    // fn all_stratagem_cards(context: &Context) -> FieldResult<Vec<StratagemCard>> {
+    //   let cards = database::get_stratagem_cards(&context.connection)?
+    //     .iter()
+    //     .filter_map(|card| StratagemCard::load_from_card(card, context))
+    //     .collect();
+    //   // TODO: weird conversion between result types
+    //   Ok(cards)
+    // }
+}
+
+#[async_graphql::Object]
+impl MutationRoot {
+    pub async fn add_wave(&self, ctx: &Context<'_>, wave: WaveInput) -> FieldResult<Wave> {
+        let data = ctx.data::<ContextData>();
+        let result = data.db.create_wave(wave).await;
+
+        match result {
+            Ok(wave) => Ok(wave),
+            Err(_) => {
+                // TODO: why doesn't this error print?
+                Err("Unable to add wave".into())
+            }
+        }
+    }
+
+    pub async fn add_battle_card(
+        &self,
+        ctx: &Context<'_>,
+        card: BattleCardInput,
+    ) -> FieldResult<BattleCard> {
+        let data = ctx.data::<ContextData>();
+        let result = data.db.create_battle_card(card).await;
+
+        match result {
+            Ok(card) => Ok(card),
+            Err(_) => {
+                // TODO: why doesn't this error print?
+                Err("Unable to add battle card".into())
+            }
+        }
+    }
 }

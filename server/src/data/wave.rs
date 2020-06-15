@@ -1,13 +1,37 @@
-use crate::data::ID;
-use crate::database_schema::waves;
 use chrono::NaiveDate;
+use uuid::Uuid;
+#[async_graphql::InputObject]
+#[derive(Debug, Clone)]
+pub struct WaveInput {
+    pub tcg_id: String,
+    pub name: String,
+    pub released: NaiveDate,
+}
 
-#[async_graphql::SimpleObject]
-#[derive(Identifiable, Queryable, Debug)]
+#[derive(Debug, Clone)]
 pub struct Wave {
-  pub id: ID,
-  pub tcg_id: String,
-  pub name: String,
-  pub released: NaiveDate,
-  pub sort_order: i32,
+    pub id: i32,
+    pub node_id: Uuid,
+    pub tcg_id: String,
+    pub name: String,
+    pub released: NaiveDate,
+}
+
+#[async_graphql::Object]
+impl Wave {
+    pub async fn id(&self) -> async_graphql::ID {
+        self.node_id.into()
+    }
+
+    pub async fn tcg_id(&self) -> &str {
+        &self.tcg_id
+    }
+
+    pub async fn name(&self) -> &str {
+        &self.name
+    }
+
+    pub async fn released(&self) -> NaiveDate {
+        self.released
+    }
 }

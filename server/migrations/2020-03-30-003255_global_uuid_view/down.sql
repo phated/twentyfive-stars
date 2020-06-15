@@ -1,2 +1,0 @@
-DROP VIEW global_uuids;
-DROP TYPE UUID_TABLES;
