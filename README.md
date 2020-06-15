@@ -24,13 +24,28 @@ __Client:__
 * [Reason-Relay](https://reason-relay-documentation.zth.now.sh)
 * [Reason-React](https://reasonml.github.io/reason-react/)
 
-## Setting up
+## Setting up the server
 
-TODO
+You'll need the Rust toolchain and Postgres installed on your computer.
 
-## Complex query
+1. Make sure you have Postgres running and copy the `.env.example` to `.env` with the `DATABASE_URL` pointing to your local database.
+1. Install the `cargo sqlx` command using `cargo install --git git://github.com/phated/sqlx --branch custom-types-040 sqlx-cli`
+1. Create the database using `cargo sqlx database create`
+1. Migrate the new database using `cargo sqlx migrate run`
+1. Build and start the server with `cargo run`
 
-I strive to create a data model that represents the complexity I think GraphQL really excels at.
+## Seeding the database
+
+You'll need Node.js and Yarn installed on your computer.
+
+1. Fetch the Node dependencies using `yarn` command
+1. Then seed the database with `yarn seed`
+
+## Testing out the data
+
+You can test the newly seeded data with the built-in playground.
+
+Open your browser to `localhost:3000` and start exploring the schema and issuing requests!
 
 Here is an example of a valid query (with full `Relay` support) that you can send to this server.
 
