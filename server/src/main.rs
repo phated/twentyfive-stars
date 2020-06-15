@@ -6,7 +6,7 @@ mod schema;
 use database::Database;
 use graphql_schema::{ContextData, MutationRoot, QueryRoot};
 
-use async_graphql::http::playground_source;
+use async_graphql::http::{playground_source, GraphQLPlaygroundConfig};
 use async_graphql::{EmptySubscription, Schema};
 use dotenv::dotenv;
 use std::env;
@@ -28,9 +28,9 @@ async fn handle_graphql(cx: Request<AppState>) -> tide::Result {
 }
 
 async fn handle_graphiql(_: Request<AppState>) -> tide::Result {
-    let resp = Response::new(StatusCode::Ok)
-        .body_string(playground_source("/", None))
-        .set_header(headers::CONTENT_TYPE, mime::HTML.to_string());
+    let mut resp = Response::new(StatusCode::Ok);
+    resp.insert_header(headers::CONTENT_TYPE, mime::HTML.to_string());
+    resp.set_body(playground_source(GraphQLPlaygroundConfig::new("/")));
 
     Ok(resp)
 }

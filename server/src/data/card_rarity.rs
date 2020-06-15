@@ -1,7 +1,8 @@
-#[async_graphql::Enum]
-#[derive(Debug, Copy, Clone, sqlx::Type)]
-#[sqlx(rename = "CARD_RARITY")]
-#[sqlx(rename_all = "uppercase")]
+use async_graphql::GQLEnum;
+
+#[derive(Debug, Copy, Clone, Eq, PartialEq, sqlx::Type, GQLEnum)]
+#[sqlx(rename = "CARD_RARITY", rename_all = "uppercase")]
+#[graphql(name = "CardRarity")]
 pub enum CardRarity {
     Common,
     Uncommon,

@@ -1,8 +1,8 @@
 use crate::data::{BattleCard, BattleCardInput};
-use crate::data::{CardDataSource, Cards, NodeType, Wave, WaveInput};
+use crate::data::{Cards, NodeType, Wave, WaveInput};
 use crate::database::Database;
 use crate::schema::interfaces;
-use async_graphql::connection::{Connection, DataSource, EmptyFields};
+use async_graphql::connection::{Connection, EmptyFields};
 use async_graphql::{Context, FieldResult, ID};
 use std::convert::TryFrom;
 use uuid::Uuid;
@@ -54,7 +54,7 @@ impl QueryRoot {
         first: Option<i32>,
         last: Option<i32>,
     ) -> FieldResult<Connection<String, Cards, EmptyFields, EmptyFields>> {
-        CardDataSource.query(ctx, after, before, first, last).await
+        Cards::query(ctx, after, before, first, last).await
     }
 
     // fn all_character_cards(context: &Context) -> FieldResult<Vec<CharacterCard>> {

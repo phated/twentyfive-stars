@@ -40,7 +40,6 @@ pub use image::{Image, ImageInput};
 
 // Cards
 pub mod card;
-pub use card::datasource::CardDataSource;
 pub use card::Cards;
 pub use card::CharacterCard;
 pub use card::StratagemCard;

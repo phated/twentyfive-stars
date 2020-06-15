@@ -1,7 +1,9 @@
 use std::convert::TryFrom;
 
-#[async_graphql::Enum]
-#[derive(Debug, Clone)]
+use async_graphql::GQLEnum;
+
+#[derive(Debug, Copy, Clone, Eq, PartialEq, GQLEnum)]
+#[graphql(name = "CharacterTrait")]
 pub enum CharacterTrait {
     Melee,
     Ranged,

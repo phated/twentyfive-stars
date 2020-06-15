@@ -1,7 +1,8 @@
-#[async_graphql::Enum]
-#[derive(Debug, Copy, Clone, sqlx::Type)]
-#[sqlx(rename = "text")]
-#[sqlx(rename_all = "uppercase")]
+use async_graphql::GQLEnum;
+
+#[derive(Debug, Copy, Clone, Eq, PartialEq, sqlx::Type, GQLEnum)]
+#[sqlx(rename = "text", rename_all = "uppercase")]
+#[graphql(name = "BattleIcon")]
 pub enum BattleIcon {
     Orange,
     Blue,

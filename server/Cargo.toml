@@ -9,8 +9,8 @@ name = "server"
 path = "src/main.rs"
 
 [dependencies]
-async-graphql = "1.14.8"
-async-graphql-tide = "1.14.7"
+async-graphql = "1.15.10"
+async-graphql-tide = "1.15.0"
 chrono = "0.4.11"
 dotenv = "0.15.0"
 env_logger = "0.7.1"
@@ -19,5 +19,5 @@ smol = "0.1.0"
 # Note: This is replaced by a fork that hard codes custom types and their OID
 # That will be an issue after a new migration
 sqlx = { git = "https://github.com/phated/sqlx", branch = "custom-types-040", features = ["postgres", "chrono", "uuid", "offline"] }
-tide = "0.8.1"
+tide = "0.10.0"
 uuid = { version = "0.8.1", features = ["serde", "v4"] }
