@@ -7,7 +7,7 @@ use oauth2::{
 };
 use serde::Deserialize;
 
-#[derive(Deserialize, Debug, Clone)]
+#[derive(Debug, Clone, Deserialize)]
 pub struct AuthClient {
     client_id: ClientId,
     client_secret: ClientSecret,

@@ -4,4 +4,7 @@ projects:
     json: true
     extensions:
       endpoints:
-        default: http://localhost:3000/
+        default:
+          url: http://localhost:3000/
+          headers:
+            Authorization: "Bearer ${env:AUTH_TOKEN}"
