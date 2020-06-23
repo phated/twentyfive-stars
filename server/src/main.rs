@@ -51,8 +51,8 @@ async fn handle_graphiql(req: Request<State>) -> tide::Result {
     Ok(resp)
 }
 
-async fn handle_login(cx: Request<State>) -> tide::Result {
-    let client = &cx.state().oauth_client;
+async fn handle_login(req: Request<State>) -> tide::Result {
+    let client = &req.state().oauth_client;
 
     // Generate the authorization URL to which we'll redirect the user.
     let (authorize_url, csrf_state) = client
@@ -77,6 +77,17 @@ async fn handle_login(cx: Request<State>) -> tide::Result {
     );
 
     Ok(res)
+}
+
+async fn handle_logout(_req: Request<State>) -> tide::Result {
+    let client_id = env::var("OAUTH_CLIENT_ID").unwrap();
+    let domain = env::var("OAUTH_DOMAIN").unwrap();
+    let redirect_url = env::var("OAUTH_REDIRECT_URL").unwrap();
+    Ok(Redirect::new(format!(
+        "https://{}/v2/logout?client_id={}&returnTo={}",
+        domain, client_id, redirect_url
+    ))
+    .into())
 }
 
 fn main() -> Result<()> {
@@ -129,10 +140,13 @@ fn main() -> Result<()> {
         app.at("/")
             .middleware(middleware::authenticate_bearer())
             .post(handle_graphql);
+        // TODO: I don't actually like using the middleware here
+        // It doesn't erase the code & state so I get an error on refresh
         app.at("/")
             .middleware(middleware::obtain_bearer())
             .get(handle_graphiql);
         app.at("/login").get(handle_login);
+        app.at("/logout").get(handle_logout);
 
         app.listen(listen_addr).await?;
 
