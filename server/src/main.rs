@@ -107,7 +107,7 @@ fn main() -> Result<()> {
     let database_url = env::var("DATABASE_URL")?;
     let listen_addr = env::var("LISTEN_ADDR").unwrap_or(String::from("0.0.0.0:3000"));
 
-    let auth = envy::prefixed("OAUTH_").from_env::<AuthClient>()?;
+    let auth = envy::prefixed("AUTH0_").from_env::<AuthClient>()?;
 
     smol::block_on(async {
         println!("Playground: http://{}", listen_addr);
@@ -134,8 +134,6 @@ fn main() -> Result<()> {
         app.at("/")
             .middleware(middleware::authenticate_bearer())
             .post(handle_graphql);
-        // TODO: I don't actually like using the middleware here
-        // It doesn't erase the code & state so I get an error on refresh
         app.at("/").get(handle_graphiql);
         app.at("/login").get(handle_login);
         app.at("/login_success")
