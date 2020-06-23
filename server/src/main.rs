@@ -123,7 +123,7 @@ fn main() -> Result<()> {
 
     let auth = envy::prefixed("AUTH0_").from_env::<AuthClient>()?;
 
-    smol::block_on(async {
+    smol::run(async {
         println!("Playground: http://{}", listen_addr);
 
         let db = Database::new(&database_url).await?;
