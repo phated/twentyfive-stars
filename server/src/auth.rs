@@ -1,6 +1,7 @@
 mod bearer_token;
 mod client;
 mod oauth_querystring;
+mod permission;
 mod state_cookie;
 
 use crate::state::State;
@@ -14,6 +15,7 @@ use tide_http_auth::{BearerAuthRequest, Storage};
 pub use bearer_token::BearerToken;
 pub use client::AuthClient;
 pub use oauth_querystring::OAuthQuerystring;
+pub use permission::{Permission, PermissionGuard};
 pub use state_cookie::StateCookie;
 
 pub type JWKS = JWKSet<Empty>;

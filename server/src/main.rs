@@ -12,6 +12,7 @@ use auth::{AuthClient, BearerToken};
 use database::Database;
 use graphql_schema::{ContextData, MutationRoot, QueryRoot};
 use state::State;
+use user::User;
 
 use async_graphql::http::{playground_source, GraphQLPlaygroundConfig};
 use async_graphql::{EmptySubscription, Schema};
@@ -27,7 +28,20 @@ type Result<T> = std::result::Result<T, Box<dyn std::error::Error + Send + Sync>
 
 async fn handle_graphql(req: Request<State>) -> tide::Result {
     let schema = req.state().schema.clone();
-    async_graphql_tide::graphql(req, schema, |query_builder| query_builder).await
+    let maybe_user = if let Some(user) = req.ext::<User>() {
+        Some(user.clone())
+    } else {
+        None
+    };
+
+    async_graphql_tide::graphql(req, schema, |query_builder| {
+        if let Some(user) = maybe_user.clone() {
+            query_builder.data(user)
+        } else {
+            query_builder
+        }
+    })
+    .await
 }
 
 async fn handle_graphiql(req: Request<State>) -> tide::Result {
