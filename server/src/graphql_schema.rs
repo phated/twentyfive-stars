@@ -3,9 +3,11 @@ use crate::data::{Cards, NodeType, Wave, WaveInput};
 use crate::database::Database;
 use crate::schema::interfaces;
 use async_graphql::connection::{Connection, EmptyFields};
-use async_graphql::{Context, FieldResult, ID};
+use async_graphql::{Context, EmptySubscription, FieldResult, ID};
 use std::convert::TryFrom;
 use uuid::Uuid;
+
+pub type Schema = async_graphql::Schema<QueryRoot, MutationRoot, EmptySubscription>;
 
 pub struct QueryRoot;
 pub struct MutationRoot;
