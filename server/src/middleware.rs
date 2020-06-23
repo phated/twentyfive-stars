@@ -1,4 +1,4 @@
-use crate::auth::{Bearer, OAuthQuerystring};
+use crate::auth::{BearerToken, OAuthQuerystring};
 use crate::state::State;
 
 use futures::future::BoxFuture;
@@ -29,7 +29,7 @@ impl ObtainBearer {
         Self
     }
 }
-
+// TODO: Should this even be middleware?
 impl Middleware<State> for ObtainBearer {
     fn handle<'a>(
         &'a self,
@@ -38,9 +38,13 @@ impl Middleware<State> for ObtainBearer {
     ) -> BoxFuture<'a, Result<Response>> {
         Box::pin(async move {
             let (state, code) = match req.query() {
-                // If we don't have `state` or `code` in querystring, this is not an auth request
-                Err(_err) => return next.run(req).await,
                 Ok(OAuthQuerystring { state, code }) => (state, code),
+                Err(_err) => {
+                    return Err(tide::Error::from_str(
+                        StatusCode::BadRequest,
+                        "Invalid parameters",
+                    ))
+                }
             };
 
             let State { ref auth, .. } = req.state();
@@ -74,7 +78,7 @@ impl Middleware<State> for ObtainBearer {
                 }
             };
 
-            let bearer: Bearer = token.into();
+            let bearer: BearerToken = token.into();
             req.set_ext(bearer);
 
             let mut resp: Response = next.run(req).await?;

@@ -6,8 +6,9 @@ mod middleware;
 mod request;
 mod schema;
 mod state;
+mod user;
 
-use auth::{AuthClient, Bearer};
+use auth::{AuthClient, BearerToken};
 use database::Database;
 use graphql_schema::{ContextData, MutationRoot, QueryRoot};
 use state::State;
@@ -30,18 +31,23 @@ async fn handle_graphql(req: Request<State>) -> tide::Result {
 }
 
 async fn handle_graphiql(req: Request<State>) -> tide::Result {
-    let base_config = GraphQLPlaygroundConfig::new("/");
-
-    let body = if let Some(bearer) = req.ext::<Bearer>() {
-        let bearer_token = bearer.secret().clone();
-        let config = base_config.with_header("Authorization", &bearer_token);
-        playground_source(config)
+    let bearer_token = if let Some(bearer_cookie) = req.cookie("bearer") {
+        bearer_cookie.into()
     } else {
-        playground_source(base_config)
+        BearerToken::empty()
     };
+
+    let bearer_header = bearer_token.secret();
+
+    let playground_config =
+        GraphQLPlaygroundConfig::new("/").with_header("Authorization", &bearer_header);
+
+    let body = playground_source(playground_config);
 
     let mut resp = Response::new(StatusCode::Ok);
     resp.insert_header(headers::CONTENT_TYPE, mime::HTML);
+
+    // TODO: Should the bearer cookie be removed once we set up this Graphiql session?
 
     resp.set_body(body);
 
@@ -66,11 +72,32 @@ async fn handle_logout(req: Request<State>) -> tide::Result {
 
     let logout_url = auth.get_logout_redirect();
 
-    let resp: Response = Redirect::new(logout_url.to_string()).into();
+    let mut resp: Response = Redirect::new(logout_url.to_string()).into();
 
-    // TODO: Clear a bearer cookie if I save it
+    // Remove any bearer cookies we have hanging around
+    if let Some(cookie) = req.cookie("bearer") {
+        resp.remove_cookie(cookie);
+    }
 
     Ok(resp)
+}
+
+async fn handle_login_success(req: Request<State>) -> tide::Result {
+    if let Some(bearer) = req.ext::<BearerToken>() {
+        let bearer_token = bearer.clone();
+
+        let mut resp: Response = Redirect::new("/").into();
+
+        // TODO: Secure cookies
+        resp.insert_cookie(bearer_token.into());
+
+        Ok(resp)
+    } else {
+        Err(tide::Error::from_str(
+            StatusCode::BadRequest,
+            "Unable to obtain auth token",
+        ))
+    }
 }
 
 fn main() -> Result<()> {
@@ -109,10 +136,11 @@ fn main() -> Result<()> {
             .post(handle_graphql);
         // TODO: I don't actually like using the middleware here
         // It doesn't erase the code & state so I get an error on refresh
-        app.at("/")
-            .middleware(middleware::obtain_bearer())
-            .get(handle_graphiql);
+        app.at("/").get(handle_graphiql);
         app.at("/login").get(handle_login);
+        app.at("/login_success")
+            .middleware(middleware::obtain_bearer())
+            .get(handle_login_success);
         app.at("/logout").get(handle_logout);
 
         app.listen(listen_addr).await?;
