@@ -1,5 +1,4 @@
 use crate::auth::{Bearer, OAuthQuerystring};
-use crate::request;
 use crate::state::State;
 
 use futures::future::BoxFuture;
@@ -44,9 +43,11 @@ impl Middleware<State> for ObtainBearer {
                 Ok(OAuthQuerystring { state, code }) => (state, code),
             };
 
-            let client = &req.state().oauth_client;
+            let State { ref auth, .. } = req.state();
 
-            let expected_state = if let Some(cookie) = req.cookie("state") {
+            let state_cookie = req.cookie("state");
+
+            let expected_state = if let Some(cookie) = state_cookie.clone() {
                 CsrfToken::new(cookie.value().into())
             } else {
                 return Err(tide::Error::from_str(
@@ -63,7 +64,7 @@ impl Middleware<State> for ObtainBearer {
                 ));
             }
 
-            let token = match client.exchange_code(code).request(request::client).await {
+            let token = match auth.exchange_code(code).await {
                 Ok(token) => token.access_token().clone(),
                 Err(_err) => {
                     return Err(tide::Error::from_str(
@@ -76,7 +77,14 @@ impl Middleware<State> for ObtainBearer {
             let bearer: Bearer = token.into();
             req.set_ext(bearer);
 
-            next.run(req).await
+            let mut resp: Response = next.run(req).await?;
+
+            // Cleanup the state cookie
+            if let Some(cookie) = state_cookie.clone() {
+                resp.remove_cookie(cookie);
+            }
+
+            Ok(resp)
         })
     }
 }

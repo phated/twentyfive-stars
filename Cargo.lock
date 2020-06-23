@@ -697,6 +697,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "envy"
+version = "0.4.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f938a4abd5b75fe3737902dbc2e79ca142cc1526827a9e40b829a086758531a9"
+dependencies = [
+ "serde",
+]
+
+[[package]]
 name = "failure"
 version = "0.1.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1341,7 +1350,7 @@ dependencies = [
 [[package]]
 name = "oauth2"
 version = "4.0.0-alpha.1"
-source = "git+https://github.com/phated/oauth2-rs?branch=main#cf2cec08cf3c2cb5be9adda6bf2f847e1a776f98"
+source = "git+https://github.com/phated/oauth2-rs?branch=main#2407086e24e1c4f9c8fc20a650e95035efe56a9d"
 dependencies = [
  "base64",
  "failure",
@@ -2376,6 +2385,7 @@ dependencies = [
  "chrono",
  "dotenv",
  "env_logger",
+ "envy",
  "failure",
  "futures",
  "http-client",
@@ -2472,6 +2482,7 @@ dependencies = [
  "idna",
  "matches",
  "percent-encoding",
+ "serde",
 ]
 
 [[package]]
