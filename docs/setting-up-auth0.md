@@ -59,7 +59,7 @@ Navigate to "Applications" from the sidebar, then select the "Machine to Machine
 
 In the "Settings" pane, we'll need to set the "Allowed Callback URLs" to `http://localhost:3000/login_success` and the "Allowed Logout URLs" to `http://localhost:3000/`
 
-![Set allowed URLs](./assets/autho-allowed-urls.png)
+![Set allowed URLs](./assets/auth0-allowed-urls.png)
 
 Before saving, we need to change something in "Advanced Settings", so click "Show Advanced Settings" above the Save button.
 
