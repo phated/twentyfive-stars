@@ -45,6 +45,12 @@ impl AuthClient {
         url
     }
 
+    fn jwks_url(&self) -> Url {
+        let mut url = self.base_url.clone();
+        url.set_path("/.well-known/jwks.json");
+        url
+    }
+
     fn client(&self) -> BasicClient {
         let client_id = self.client_id.clone();
         let client_secret = Some(self.client_secret.clone());
@@ -73,6 +79,10 @@ impl AuthClient {
 
     pub fn get_logout_redirect(&self) -> Url {
         self.logout_url()
+    }
+
+    pub fn get_jwks_url(&self) -> Url {
+        self.jwks_url()
     }
 
     pub async fn exchange_code(

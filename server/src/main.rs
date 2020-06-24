@@ -137,7 +137,7 @@ fn main() -> Result<()> {
             .finish();
 
         // TODO: fix ? unwrapping
-        let jwks = request::jwks().await.unwrap();
+        let jwks = request::jwks(auth.get_jwks_url()).await.unwrap();
 
         let app_state = State { schema, auth, jwks };
 

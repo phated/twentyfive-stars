@@ -18,12 +18,9 @@ pub async fn client(request: Request) -> Result<Response, Error> {
     }
 }
 
-pub async fn jwks() -> Result<JWKSet<Empty>, Error> {
+pub async fn jwks(url: Url) -> Result<JWKSet<Empty>, Error> {
     let client = H1Client::new();
-    let request = Request::new(
-        Method::Get,
-        Url::parse("https://twentyfive-stars.us.auth0.com/.well-known/jwks.json").unwrap(),
-    );
+    let request = Request::new(Method::Get, url);
     match client.send(request).await {
         Ok(mut response) => match response.body_json::<JWKSet<Empty>>().await {
             Ok(jwks) => Ok(jwks),
