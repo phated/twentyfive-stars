@@ -1,10 +1,9 @@
 use crate::data::{BattleType, CardCategory, CardRarity, Faction, Image, ImageInput, Wave};
 use crate::graphql_schema::ContextData;
-use async_graphql::{Context, FieldResult};
+use async_graphql::{Context, FieldResult, GQLInputObject, ID};
 use uuid::Uuid;
 
-#[async_graphql::InputObject]
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, GQLInputObject)]
 pub struct BattleCardInput {
     pub tcg_id: String,
     pub rarity: CardRarity,
@@ -44,7 +43,7 @@ pub struct BattleCard {
 
 #[async_graphql::Object]
 impl BattleCard {
-    pub async fn id(&self) -> async_graphql::ID {
+    pub async fn id(&self) -> ID {
         self.node_id.into()
     }
 
@@ -65,7 +64,7 @@ impl BattleCard {
     }
 
     pub async fn wave(&self, ctx: &Context<'_>) -> FieldResult<Wave> {
-        let data = ctx.data::<ContextData>();
+        let data = ctx.data::<ContextData>()?;
         let wave = data.db.get_wave_for_battle_card(self).await?;
 
         Ok(wave)
@@ -100,9 +99,9 @@ impl BattleCard {
         self.defense_modifier
     }
 
-    pub async fn image(&self, ctx: &Context<'_>) -> Option<Image> {
-        let data = ctx.data::<ContextData>();
-        match self.image_id {
+    pub async fn image(&self, ctx: &Context<'_>) -> FieldResult<Option<Image>> {
+        let data = ctx.data::<ContextData>()?;
+        let image = match self.image_id {
             Some(image_id) => {
                 let result = data.db.get_image(image_id).await;
 
@@ -115,6 +114,7 @@ impl BattleCard {
                 }
             }
             None => None,
-        }
+        };
+        Ok(image)
     }
 }

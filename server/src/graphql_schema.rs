@@ -21,7 +21,7 @@ pub struct ContextData {
 #[async_graphql::Object]
 impl QueryRoot {
     pub async fn node(&self, ctx: &Context<'_>, id: ID) -> FieldResult<interfaces::Node> {
-        let data = ctx.data::<ContextData>();
+        let data = ctx.data::<ContextData>()?;
         let node_id = Uuid::try_from(id)?;
         let node = data.db.get_node_by_uuid(node_id).await?;
 
@@ -93,7 +93,7 @@ impl QueryRoot {
 impl MutationRoot {
     #[field(guard(PermissionGuard(permission = "Permission::CreateWaves")))]
     pub async fn add_wave(&self, ctx: &Context<'_>, wave: WaveInput) -> FieldResult<Wave> {
-        let data = ctx.data::<ContextData>();
+        let data = ctx.data::<ContextData>()?;
         let result = data.db.create_wave(wave).await;
 
         match result {
@@ -111,7 +111,7 @@ impl MutationRoot {
         ctx: &Context<'_>,
         card: BattleCardInput,
     ) -> FieldResult<BattleCard> {
-        let data = ctx.data::<ContextData>();
+        let data = ctx.data::<ContextData>()?;
         let result = data.db.create_battle_card(card).await;
 
         match result {

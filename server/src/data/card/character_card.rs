@@ -37,14 +37,14 @@ impl CharacterCard {
     }
 
     pub async fn wave(&self, ctx: &Context<'_>) -> FieldResult<Wave> {
-        let data = ctx.data::<ContextData>();
+        let data = ctx.data::<ContextData>()?;
         let wave = data.db.get_wave_for_character_card(self).await?;
 
         Ok(wave)
     }
 
     pub async fn modes(&self, ctx: &Context<'_>) -> FieldResult<Vec<CharacterMode>> {
-        let data = ctx.data::<ContextData>();
+        let data = ctx.data::<ContextData>()?;
         let modes = data.db.get_modes_for_character_card(self).await?;
 
         Ok(modes)

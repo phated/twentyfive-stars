@@ -13,6 +13,7 @@ use uuid::Uuid;
 
 pub type Error = Box<dyn std::error::Error + Send + Sync>;
 
+#[derive(Debug, Clone)]
 pub struct Database {
     pub pool: PgPool,
 }

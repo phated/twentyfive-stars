@@ -2,7 +2,6 @@ use async_graphql::GQLEnum;
 
 #[derive(Debug, Copy, Clone, Eq, PartialEq, sqlx::Type, GQLEnum)]
 #[sqlx(rename = "BATTLE_TYPE")]
-#[graphql(name = "BattleType")]
 // TODO: #[sqlx(rename_all = ["snake_case", "uppercase"])]
 pub enum BattleType {
     #[sqlx(rename = "ACTION")]

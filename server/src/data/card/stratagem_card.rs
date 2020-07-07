@@ -14,6 +14,8 @@ pub struct StratagemCard {
     pub category: CardCategory,
     // Stratagem card specific props
     pub title: String,
+    // TODO: It would be cool to reach into the graph
+    // for the characters tied to this requirement
     pub requirement: String,
     pub stars: i32,
     pub faction: Faction,
@@ -42,7 +44,7 @@ impl StratagemCard {
     }
 
     pub async fn wave(&self, ctx: &Context<'_>) -> FieldResult<Wave> {
-        let data = ctx.data::<ContextData>();
+        let data = ctx.data::<ContextData>()?;
         let wave = data.db.get_wave_for_stratagem_card(self).await?;
 
         Ok(wave)

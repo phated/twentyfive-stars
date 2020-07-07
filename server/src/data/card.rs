@@ -1,7 +1,7 @@
 use crate::data::NodeType;
 use crate::graphql_schema::ContextData;
 use async_graphql::connection::{query, Connection, Edge, EmptyFields};
-use async_graphql::{Context, FieldResult};
+use async_graphql::{Context, FieldResult, GQLUnion};
 
 pub mod battle_card;
 pub mod character_card;
@@ -11,8 +11,7 @@ pub use battle_card::*;
 pub use character_card::*;
 pub use stratagem_card::*;
 
-#[async_graphql::Union]
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, GQLUnion)]
 pub enum Cards {
     Battle(BattleCard),
     Character(CharacterCard),
@@ -33,7 +32,7 @@ impl Cards {
             first,
             last,
             |after, before, first, last| async move {
-                let data = ctx.data::<ContextData>();
+                let data = ctx.data::<ContextData>()?;
                 let card_nodes = data.db.get_card_nodes().await?;
 
                 let start_idx = after

@@ -1,8 +1,7 @@
 use uuid::Uuid;
 
 #[derive(Debug, Copy, Clone, sqlx::Type)]
-#[sqlx(rename = "NODE_TYPE")]
-#[sqlx(rename_all = "uppercase")]
+#[sqlx(rename = "NODE_TYPE", rename_all = "uppercase")]
 pub enum NodeType {
     Character,
     Battle,
