@@ -1,11 +1,15 @@
+use crate::auth::{Permission, PermissionGuard};
 use crate::data::{BattleCard, BattleCardInput};
 use crate::data::{Cards, NodeType, Wave, WaveInput};
 use crate::database::Database;
 use crate::schema::interfaces;
 use async_graphql::connection::{Connection, EmptyFields};
-use async_graphql::{Context, FieldResult, ID};
+use async_graphql::guard::Guard;
+use async_graphql::{Context, EmptySubscription, FieldResult, ID};
 use std::convert::TryFrom;
 use uuid::Uuid;
+
+pub type Schema = async_graphql::Schema<QueryRoot, MutationRoot, EmptySubscription>;
 
 pub struct QueryRoot;
 pub struct MutationRoot;
@@ -87,6 +91,7 @@ impl QueryRoot {
 
 #[async_graphql::Object]
 impl MutationRoot {
+    #[field(guard(PermissionGuard(permission = "Permission::CreateWaves")))]
     pub async fn add_wave(&self, ctx: &Context<'_>, wave: WaveInput) -> FieldResult<Wave> {
         let data = ctx.data::<ContextData>();
         let result = data.db.create_wave(wave).await;
@@ -100,6 +105,7 @@ impl MutationRoot {
         }
     }
 
+    #[field(guard(PermissionGuard(permission = "Permission::CreateBattleCards")))]
     pub async fn add_battle_card(
         &self,
         ctx: &Context<'_>,

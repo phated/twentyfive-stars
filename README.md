@@ -24,6 +24,12 @@ __Client:__
 * [Reason-Relay](https://reason-relay-documentation.zth.now.sh)
 * [Reason-React](https://reasonml.github.io/reason-react/)
 
+## Prerequisite: Auth0
+
+This project uses [Auth0](https://auth0.com) for OAuth2 authentication and JWT creation/validation.
+
+Please follow our [Setting up Auth0](./docs/setting-up-auth0.md) guide before trying to set up the server.
+
 ## Setting up the server
 
 You'll need the Rust toolchain and Postgres installed on your computer.
@@ -38,6 +44,8 @@ You'll need the Rust toolchain and Postgres installed on your computer.
 
 You'll need Node.js and Yarn installed on your computer.
 
+1. Get the JWT from a logged in GraphiQL session, by navigating to `localhost:3000/login` and then grabbing the token after "Bearer" under "HTTP Headers" once redirected to the GraphiQL interface.
+1. Add the token to your `.env` file as `AUTH_TOKEN`
 1. Fetch the Node dependencies using `yarn` command
 1. Then seed the database with `yarn seed`
 
