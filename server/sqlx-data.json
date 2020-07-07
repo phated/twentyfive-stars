@@ -1,132 +1,36 @@
 {
   "db": "PostgreSQL",
-  "0b7cae1e267eb61494d3b8ddfadcf9b455b2a5f90018e43e466461d939b0972a": {
-    "query": "\n            SELECT id, node_id, node_type\n            FROM nodes\n            WHERE node_id = $1;\n            ",
+  "1dc091c7cc96d8620c417e108535b8346cf2b3d277c69b9f7221987045ab3be1": {
+    "query": "\n            WITH image_node AS (\n                INSERT INTO nodes (node_type) VALUES ('IMAGE') RETURNING *\n            ), image AS (\n                INSERT INTO images (id, original_url) SELECT n.id, $12 FROM image_node AS n RETURNING *\n            ), node AS (\n                INSERT INTO nodes (node_type) VALUES ('BATTLE') RETURNING *\n            ), wave AS (\n                SELECT id FROM waves WHERE tcg_id = $11\n            ), card AS (\n                INSERT INTO battle_cards (\n                    id,\n                    category,\n                    wave_id,\n                    icons,\n                    tcg_id,\n                    rarity,\n                    number,\n                    title,\n                    type,\n                    faction,\n                    stars,\n                    attack_modifier,\n                    defense_modifier,\n                    image_id\n                ) SELECT\n                    n.id,\n                    'BATTLE',\n                    w.id,\n                    CAST($1::TEXT[] as BATTLE_ICON[]),\n                    $2,\n                    $3,\n                    $4,\n                    $5,\n                    $6,\n                    $7,\n                    $8,\n                    $9,\n                    $10,\n                    i.id\n                FROM node AS n, wave AS w, image AS i RETURNING *\n            )\n            SELECT\n                n.id,\n                n.node_id,\n                c.tcg_id,\n                c.category AS \"category: CardCategory\",\n                c.title,\n                c.icons::TEXT[],\n                c.type AS \"type: BattleType\",\n                c.rarity AS \"rarity: CardRarity\",\n                c.number,\n                c.faction AS \"faction: Option<Faction>\",\n                c.stars,\n                c.attack_modifier,\n                c.defense_modifier,\n                c.image_id\n            FROM card AS c, node AS n;\n            ",
     "describe": {
-      "params": [
-        "Uuid"
-      ],
       "columns": [
         {
+          "ordinal": 0,
           "name": "id",
           "type_info": "Int4",
-          "not_null": true
+          "relation_id": 19189,
+          "relation_attribute_no": 1
         },
         {
+          "ordinal": 1,
           "name": "node_id",
           "type_info": "Uuid",
-          "not_null": false
+          "relation_id": 19189,
+          "relation_attribute_no": 2
         },
         {
-          "name": "node_type",
-          "type_info": {
-            "Custom": {
-              "oid": 18080,
-              "name": "node_type",
-              "kind": {
-                "Enum": [
-                  "CHARACTER",
-                  "BATTLE",
-                  "STRATAGEM",
-                  "WAVE",
-                  "CHARACTER_MODE",
-                  "IMAGE"
-                ]
-              }
-            }
-          },
-          "not_null": true
-        }
-      ]
-    }
-  },
-  "643a1ee5662887c397a613f655ab025c3b0dde1d30ce9a68aaad714e2b22a206": {
-    "query": "\n            SELECT w.id, n.node_id, w.tcg_id, w.name, w.released\n            FROM stratagem_cards AS s, waves AS w, nodes AS n\n            WHERE w.id = n.id AND w.id = s.wave_id AND s.id = $1;\n            ",
-    "describe": {
-      "params": [
-        "Int4"
-      ],
-      "columns": [
-        {
-          "name": "id",
-          "type_info": "Int4",
-          "not_null": true
-        },
-        {
-          "name": "node_id",
-          "type_info": "Uuid",
-          "not_null": false
-        },
-        {
+          "ordinal": 2,
           "name": "tcg_id",
           "type_info": "Varchar",
-          "not_null": true
+          "relation_id": 19228,
+          "relation_attribute_no": 2
         },
         {
-          "name": "name",
-          "type_info": "Varchar",
-          "not_null": true
-        },
-        {
-          "name": "released",
-          "type_info": "Date",
-          "not_null": true
-        }
-      ]
-    }
-  },
-  "7e52634894999cb3275d7e7fad406591d09806f1ee1ce0cbe5388bd0eeaf81c4": {
-    "query": "\n        SELECT cc.id, n.node_id, cc.tcg_id, cc.rarity, cc.number, cc.category\n        FROM character_cards AS cc, nodes AS n\n        WHERE cc.id = n.id AND n.id = $1;\n        ",
-    "describe": {
-      "params": [
-        "Int4"
-      ],
-      "columns": [
-        {
-          "name": "id",
-          "type_info": "Int4",
-          "not_null": true
-        },
-        {
-          "name": "node_id",
-          "type_info": "Uuid",
-          "not_null": false
-        },
-        {
-          "name": "tcg_id",
-          "type_info": "Varchar",
-          "not_null": true
-        },
-        {
-          "name": "rarity",
+          "ordinal": 3,
+          "name": "category: CardCategory",
           "type_info": {
             "Custom": {
-              "oid": 18094,
-              "name": "card_rarity",
-              "kind": {
-                "Enum": [
-                  "COMMON",
-                  "UNCOMMON",
-                  "RARE",
-                  "SUPER_RARE",
-                  "THEME",
-                  "PROMO"
-                ]
-              }
-            }
-          },
-          "not_null": true
-        },
-        {
-          "name": "number",
-          "type_info": "Varchar",
-          "not_null": true
-        },
-        {
-          "name": "category",
-          "type_info": {
-            "Custom": {
-              "oid": 18108,
+              "oid": 19076,
               "name": "card_category",
               "kind": {
                 "Enum": [
@@ -137,286 +41,29 @@
               }
             }
           },
-          "not_null": true
-        }
-      ]
-    }
-  },
-  "7fcd190398d940c292457feb539e497af51b327b5c19cda8365415dadea20489": {
-    "query": "\n            SELECT i.id, n.node_id, i.original_url\n            FROM images AS i, nodes AS n\n            WHERE i.id = n.id AND n.id = $1\n            ",
-    "describe": {
-      "params": [
-        "Int4"
-      ],
-      "columns": [
-        {
-          "name": "id",
-          "type_info": "Int4",
-          "not_null": true
+          "relation_id": 19228,
+          "relation_attribute_no": 5
         },
         {
-          "name": "node_id",
-          "type_info": "Uuid",
-          "not_null": false
-        },
-        {
-          "name": "original_url",
-          "type_info": "Varchar",
-          "not_null": true
-        }
-      ]
-    }
-  },
-  "9ac38e259db1528af035fe3356eccb4a1e2ad427661bfa8722a56309eb052659": {
-    "query": "\n            SELECT w.id, n.node_id, w.tcg_id, w.name, w.released\n            FROM character_cards AS c, waves AS w, nodes AS n\n            WHERE w.id = n.id AND w.id = c.wave_id AND c.id = $1;\n            ",
-    "describe": {
-      "params": [
-        "Int4"
-      ],
-      "columns": [
-        {
-          "name": "id",
-          "type_info": "Int4",
-          "not_null": true
-        },
-        {
-          "name": "node_id",
-          "type_info": "Uuid",
-          "not_null": false
-        },
-        {
-          "name": "tcg_id",
-          "type_info": "Varchar",
-          "not_null": true
-        },
-        {
-          "name": "name",
-          "type_info": "Varchar",
-          "not_null": true
-        },
-        {
-          "name": "released",
-          "type_info": "Date",
-          "not_null": true
-        }
-      ]
-    }
-  },
-  "9c0e5f1586f40f520456ae9ad8146e37069a0e09ca8fe3d5daae1fafa3422839": {
-    "query": "\n            SELECT w.id, n.node_id, w.tcg_id, w.name, w.released\n            FROM battle_cards AS bc, waves AS w, nodes AS n\n            WHERE w.id = n.id AND w.id = bc.wave_id AND bc.id = $1;\n            ",
-    "describe": {
-      "params": [
-        "Int4"
-      ],
-      "columns": [
-        {
-          "name": "id",
-          "type_info": "Int4",
-          "not_null": true
-        },
-        {
-          "name": "node_id",
-          "type_info": "Uuid",
-          "not_null": false
-        },
-        {
-          "name": "tcg_id",
-          "type_info": "Varchar",
-          "not_null": true
-        },
-        {
-          "name": "name",
-          "type_info": "Varchar",
-          "not_null": true
-        },
-        {
-          "name": "released",
-          "type_info": "Date",
-          "not_null": true
-        }
-      ]
-    }
-  },
-  "a704ee04c52bca2ea971f7816939ae03473ef88eea3e117055b8c065a789e830": {
-    "query": "\n            SELECT w.id, n.node_id, w.tcg_id, w.name, w.released\n            FROM waves AS w, nodes AS n\n            WHERE w.id = n.id AND n.id = $1;\n            ",
-    "describe": {
-      "params": [
-        "Int4"
-      ],
-      "columns": [
-        {
-          "name": "id",
-          "type_info": "Int4",
-          "not_null": true
-        },
-        {
-          "name": "node_id",
-          "type_info": "Uuid",
-          "not_null": false
-        },
-        {
-          "name": "tcg_id",
-          "type_info": "Varchar",
-          "not_null": true
-        },
-        {
-          "name": "name",
-          "type_info": "Varchar",
-          "not_null": true
-        },
-        {
-          "name": "released",
-          "type_info": "Date",
-          "not_null": true
-        }
-      ]
-    }
-  },
-  "a847c26521452c37d6456e16cee407b4bdd0828b66e26752fc2624058f0f6dcf": {
-    "query": "\n        SELECT id, node_id, node_type\n        FROM nodes\n        WHERE node_type IN ('BATTLE', 'CHARACTER', 'STRATAGEM')\n        ORDER BY id;\n        ",
-    "describe": {
-      "params": [],
-      "columns": [
-        {
-          "name": "id",
-          "type_info": "Int4",
-          "not_null": true
-        },
-        {
-          "name": "node_id",
-          "type_info": "Uuid",
-          "not_null": false
-        },
-        {
-          "name": "node_type",
-          "type_info": {
-            "Custom": {
-              "oid": 18080,
-              "name": "node_type",
-              "kind": {
-                "Enum": [
-                  "CHARACTER",
-                  "BATTLE",
-                  "STRATAGEM",
-                  "WAVE",
-                  "CHARACTER_MODE",
-                  "IMAGE"
-                ]
-              }
-            }
-          },
-          "not_null": true
-        }
-      ]
-    }
-  },
-  "c4c2fafd96adab5434d615fbbe506ce7aa2b49862c649ba61d587b8327fe92f0": {
-    "query": "\n            WITH image_node AS (\n                INSERT INTO nodes (node_type) VALUES ('IMAGE') RETURNING *\n            ), image AS (\n                INSERT INTO images (id, original_url) SELECT n.id, $12 FROM image_node AS n RETURNING *\n            ), node AS (\n                INSERT INTO nodes (node_type) VALUES ('BATTLE') RETURNING *\n            ), wave AS (\n                SELECT id FROM waves WHERE tcg_id = $11\n            ), card AS (\n                INSERT INTO battle_cards (\n                    id,\n                    category,\n                    wave_id,\n                    icons,\n                    tcg_id,\n                    rarity,\n                    number,\n                    title,\n                    type,\n                    faction,\n                    stars,\n                    attack_modifier,\n                    defense_modifier,\n                    image_id\n                ) SELECT\n                    n.id,\n                    'BATTLE',\n                    w.id,\n                    CAST($1::TEXT[] as BATTLE_ICON[]),\n                    $2,\n                    $3,\n                    $4,\n                    $5,\n                    $6,\n                    $7,\n                    $8,\n                    $9,\n                    $10,\n                    i.id\n                FROM node AS n, wave AS w, image AS i RETURNING *\n            )\n            SELECT\n                n.id,\n                n.node_id,\n                c.tcg_id,\n                c.category,\n                c.title,\n                c.icons::TEXT[],\n                c.type,\n                c.rarity,\n                c.number,\n                c.faction,\n                c.stars,\n                c.attack_modifier,\n                c.defense_modifier,\n                c.image_id\n            FROM card AS c, node AS n;\n            ",
-    "describe": {
-      "params": [
-        "TextArray",
-        "Varchar",
-        {
-          "Custom": {
-            "oid": 18094,
-            "name": "card_rarity",
-            "kind": {
-              "Enum": [
-                "COMMON",
-                "UNCOMMON",
-                "RARE",
-                "SUPER_RARE",
-                "THEME",
-                "PROMO"
-              ]
-            }
-          }
-        },
-        "Varchar",
-        "Varchar",
-        {
-          "Custom": {
-            "oid": 18140,
-            "name": "battle_type",
-            "kind": {
-              "Enum": [
-                "ACTION",
-                "SECRET_ACTION",
-                "UPGRADE_WEAPON",
-                "UPGRADE_ARMOR",
-                "UPGRADE_UTILITY",
-                "UPGRADE_WEAPON_ARMOR"
-              ]
-            }
-          }
-        },
-        {
-          "Custom": {
-            "oid": 18212,
-            "name": "faction",
-            "kind": {
-              "Enum": [
-                "AUTOBOT",
-                "DECEPTICON",
-                "MERCENARY"
-              ]
-            }
-          }
-        },
-        "Int4",
-        "Int4",
-        "Int4",
-        "Text",
-        "Varchar"
-      ],
-      "columns": [
-        {
-          "name": "id",
-          "type_info": "Int4",
-          "not_null": true
-        },
-        {
-          "name": "node_id",
-          "type_info": "Uuid",
-          "not_null": false
-        },
-        {
-          "name": "tcg_id",
-          "type_info": "Varchar",
-          "not_null": true
-        },
-        {
-          "name": "category",
-          "type_info": {
-            "Custom": {
-              "oid": 18108,
-              "name": "card_category",
-              "kind": {
-                "Enum": [
-                  "CHARACTER",
-                  "BATTLE",
-                  "STRATAGEM"
-                ]
-              }
-            }
-          },
-          "not_null": true
-        },
-        {
+          "ordinal": 4,
           "name": "title",
           "type_info": "Varchar",
-          "not_null": true
+          "relation_id": 19228,
+          "relation_attribute_no": 7
         },
         {
+          "ordinal": 5,
           "name": "icons",
           "type_info": "TextArray",
-          "not_null": null
+          "relation_id": null,
+          "relation_attribute_no": null
         },
         {
-          "name": "type",
+          "ordinal": 6,
+          "name": "type: BattleType",
           "type_info": {
             "Custom": {
-              "oid": 18140,
+              "oid": 19108,
               "name": "battle_type",
               "kind": {
                 "Enum": [
@@ -430,13 +77,15 @@
               }
             }
           },
-          "not_null": true
+          "relation_id": 19228,
+          "relation_attribute_no": 8
         },
         {
-          "name": "rarity",
+          "ordinal": 7,
+          "name": "rarity: CardRarity",
           "type_info": {
             "Custom": {
-              "oid": 18094,
+              "oid": 19062,
               "name": "card_rarity",
               "kind": {
                 "Enum": [
@@ -450,18 +99,22 @@
               }
             }
           },
-          "not_null": true
+          "relation_id": 19228,
+          "relation_attribute_no": 3
         },
         {
+          "ordinal": 8,
           "name": "number",
           "type_info": "Varchar",
-          "not_null": true
+          "relation_id": 19228,
+          "relation_attribute_no": 4
         },
         {
-          "name": "faction",
+          "ordinal": 9,
+          "name": "faction: Option<Faction>",
           "type_info": {
             "Custom": {
-              "oid": 18212,
+              "oid": 19180,
               "name": "faction",
               "kind": {
                 "Enum": [
@@ -472,58 +125,45 @@
               }
             }
           },
-          "not_null": false
+          "relation_id": 19228,
+          "relation_attribute_no": 9
         },
         {
+          "ordinal": 10,
           "name": "stars",
           "type_info": "Int4",
-          "not_null": false
+          "relation_id": 19228,
+          "relation_attribute_no": 10
         },
         {
+          "ordinal": 11,
           "name": "attack_modifier",
           "type_info": "Int4",
-          "not_null": false
+          "relation_id": 19228,
+          "relation_attribute_no": 12
         },
         {
+          "ordinal": 12,
           "name": "defense_modifier",
           "type_info": "Int4",
-          "not_null": false
+          "relation_id": 19228,
+          "relation_attribute_no": 13
         },
         {
+          "ordinal": 13,
           "name": "image_id",
           "type_info": "Int4",
-          "not_null": false
+          "relation_id": 19228,
+          "relation_attribute_no": 14
         }
-      ]
-    }
-  },
-  "c5f02f6156c3cfc52eca7aeca46488fb8f5731e09302f66e18e2312d0642f997": {
-    "query": "\n        SELECT bc.id, n.node_id, bc.tcg_id, bc.rarity, bc.number, bc.category, bc.title, bc.icons::TEXT[], bc.stars, bc.type, bc.attack_modifier, bc.defense_modifier, bc.faction, bc.image_id\n        FROM battle_cards AS bc, nodes AS n\n        WHERE bc.id = n.id AND n.id = $1;\n        ",
-    "describe": {
-      "params": [
-        "Int4"
       ],
-      "columns": [
-        {
-          "name": "id",
-          "type_info": "Int4",
-          "not_null": true
-        },
-        {
-          "name": "node_id",
-          "type_info": "Uuid",
-          "not_null": false
-        },
-        {
-          "name": "tcg_id",
-          "type_info": "Varchar",
-          "not_null": true
-        },
-        {
-          "name": "rarity",
-          "type_info": {
+      "parameters": {
+        "Left": [
+          "TextArray",
+          "Varchar",
+          {
             "Custom": {
-              "oid": 18094,
+              "oid": 19062,
               "name": "card_rarity",
               "kind": {
                 "Enum": [
@@ -537,50 +177,11 @@
               }
             }
           },
-          "not_null": true
-        },
-        {
-          "name": "number",
-          "type_info": "Varchar",
-          "not_null": true
-        },
-        {
-          "name": "category",
-          "type_info": {
+          "Varchar",
+          "Varchar",
+          {
             "Custom": {
-              "oid": 18108,
-              "name": "card_category",
-              "kind": {
-                "Enum": [
-                  "CHARACTER",
-                  "BATTLE",
-                  "STRATAGEM"
-                ]
-              }
-            }
-          },
-          "not_null": true
-        },
-        {
-          "name": "title",
-          "type_info": "Varchar",
-          "not_null": true
-        },
-        {
-          "name": "icons",
-          "type_info": "TextArray",
-          "not_null": null
-        },
-        {
-          "name": "stars",
-          "type_info": "Int4",
-          "not_null": false
-        },
-        {
-          "name": "type",
-          "type_info": {
-            "Custom": {
-              "oid": 18140,
+              "oid": 19108,
               "name": "battle_type",
               "kind": {
                 "Enum": [
@@ -594,23 +195,9 @@
               }
             }
           },
-          "not_null": true
-        },
-        {
-          "name": "attack_modifier",
-          "type_info": "Int4",
-          "not_null": false
-        },
-        {
-          "name": "defense_modifier",
-          "type_info": "Int4",
-          "not_null": false
-        },
-        {
-          "name": "faction",
-          "type_info": {
+          {
             "Custom": {
-              "oid": 18212,
+              "oid": 19180,
               "name": "faction",
               "kind": {
                 "Enum": [
@@ -621,85 +208,69 @@
               }
             }
           },
-          "not_null": false
-        },
-        {
-          "name": "image_id",
-          "type_info": "Int4",
-          "not_null": false
-        }
+          "Int4",
+          "Int4",
+          "Int4",
+          "Text",
+          "Varchar"
+        ]
+      },
+      "nullable": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        null,
+        false,
+        false,
+        false,
+        true,
+        true,
+        true,
+        true,
+        true
       ]
     }
   },
-  "d733ab14b3cce5d013197ec312631b878a471d506a27f0be1da8af2dda27c110": {
-    "query": "\n            WITH node AS (\n                INSERT INTO nodes (node_type) VALUES ('WAVE') RETURNING *\n            ), wave AS (\n                INSERT INTO waves (id, tcg_id, name, released) SELECT id, $1, $2, $3 FROM node RETURNING *\n            )\n            SELECT n.id, n.node_id, w.tcg_id, w.name, w.released FROM node AS n, wave AS w;\n            ",
+  "301841657993349ca9781813b0c7e10ded3c2cf39ad80fade1426dbbf936cc5e": {
+    "query": "\n        SELECT\n            cm.id,\n            n.node_id,\n            cm.title,\n            cm.subtitle,\n            cm.faction AS \"faction: Faction\",\n            cm.traits::TEXT[],\n            cm.type AS \"type: ModeType\",\n            cm.stars,\n            cm.health,\n            cm.attack,\n            cm.defense,\n            cm.attack_modifier,\n            cm.defense_modifier\n        FROM character_modes AS cm, nodes AS n\n        WHERE cm.id = n.id AND character_id = $1\n        ORDER BY n.id;\n        ",
     "describe": {
-      "params": [
-        "Varchar",
-        "Varchar",
-        "Date"
-      ],
       "columns": [
         {
+          "ordinal": 0,
           "name": "id",
           "type_info": "Int4",
-          "not_null": true
+          "relation_id": 19274,
+          "relation_attribute_no": 1
         },
         {
+          "ordinal": 1,
           "name": "node_id",
           "type_info": "Uuid",
-          "not_null": false
+          "relation_id": 19189,
+          "relation_attribute_no": 2
         },
         {
-          "name": "tcg_id",
-          "type_info": "Varchar",
-          "not_null": true
-        },
-        {
-          "name": "name",
-          "type_info": "Varchar",
-          "not_null": true
-        },
-        {
-          "name": "released",
-          "type_info": "Date",
-          "not_null": true
-        }
-      ]
-    }
-  },
-  "e1e6ef8a9272e70dcd4f870fa1fbe96b26f0305b03f8ee7583deed92cdd8bb0b": {
-    "query": "\n        SELECT cm.id, n.node_id, cm.title, cm.subtitle, cm.faction, cm.traits::TEXT[], cm.type,\n        cm.stars, cm.health, cm.attack, cm.defense, cm.attack_modifier, cm.defense_modifier\n        FROM character_modes AS cm, nodes AS n\n        WHERE cm.id = n.id AND character_id = $1\n        ORDER BY n.id;\n        ",
-    "describe": {
-      "params": [
-        "Int4"
-      ],
-      "columns": [
-        {
-          "name": "id",
-          "type_info": "Int4",
-          "not_null": true
-        },
-        {
-          "name": "node_id",
-          "type_info": "Uuid",
-          "not_null": false
-        },
-        {
+          "ordinal": 2,
           "name": "title",
           "type_info": "Varchar",
-          "not_null": true
+          "relation_id": 19274,
+          "relation_attribute_no": 3
         },
         {
+          "ordinal": 3,
           "name": "subtitle",
           "type_info": "Varchar",
-          "not_null": false
+          "relation_id": 19274,
+          "relation_attribute_no": 4
         },
         {
-          "name": "faction",
+          "ordinal": 4,
+          "name": "faction: Faction",
           "type_info": {
             "Custom": {
-              "oid": 18212,
+              "oid": 19180,
               "name": "faction",
               "kind": {
                 "Enum": [
@@ -710,18 +281,22 @@
               }
             }
           },
-          "not_null": true
+          "relation_id": 19274,
+          "relation_attribute_no": 5
         },
         {
+          "ordinal": 5,
           "name": "traits",
           "type_info": "TextArray",
-          "not_null": null
+          "relation_id": null,
+          "relation_attribute_no": null
         },
         {
-          "name": "type",
+          "ordinal": 6,
+          "name": "type: ModeType",
           "type_info": {
             "Custom": {
-              "oid": 18116,
+              "oid": 19084,
               "name": "mode_type",
               "kind": {
                 "Enum": [
@@ -740,68 +315,255 @@
               }
             }
           },
-          "not_null": true
+          "relation_id": 19274,
+          "relation_attribute_no": 7
         },
         {
+          "ordinal": 7,
           "name": "stars",
           "type_info": "Int4",
-          "not_null": true
+          "relation_id": 19274,
+          "relation_attribute_no": 8
         },
         {
+          "ordinal": 8,
           "name": "health",
           "type_info": "Int4",
-          "not_null": false
+          "relation_id": 19274,
+          "relation_attribute_no": 9
         },
         {
+          "ordinal": 9,
           "name": "attack",
           "type_info": "Int4",
-          "not_null": false
+          "relation_id": 19274,
+          "relation_attribute_no": 10
         },
         {
+          "ordinal": 10,
           "name": "defense",
           "type_info": "Int4",
-          "not_null": false
+          "relation_id": 19274,
+          "relation_attribute_no": 11
         },
         {
+          "ordinal": 11,
           "name": "attack_modifier",
           "type_info": "Int4",
-          "not_null": false
+          "relation_id": 19274,
+          "relation_attribute_no": 12
         },
         {
+          "ordinal": 12,
           "name": "defense_modifier",
           "type_info": "Int4",
-          "not_null": false
+          "relation_id": 19274,
+          "relation_attribute_no": 13
         }
+      ],
+      "parameters": {
+        "Left": [
+          "Int4"
+        ]
+      },
+      "nullable": [
+        false,
+        true,
+        false,
+        true,
+        false,
+        null,
+        false,
+        false,
+        true,
+        true,
+        true,
+        true,
+        true
       ]
     }
   },
-  "f6d41278b339464f3b01e5a808eb3541a164f4f06d23bd669159fda6194c601e": {
-    "query": "\n        SELECT sc.id, n.node_id, sc.tcg_id, sc.rarity, sc.number, sc.category, sc.title, sc.faction, sc.requirement, sc.stars\n        FROM stratagem_cards AS sc, nodes AS n\n        WHERE sc.id = n.id AND n.id = $1;\n        ",
+  "38bdddc68a21d8d067545694499b461f1a278af39c643305284a5e7b5a17b4c0": {
+    "query": "\n        SELECT\n            cm.id,\n            n.node_id,\n            cm.title,\n            cm.subtitle,\n            cm.faction AS \"faction: Option<Faction>\",\n            cm.traits::TEXT[],\n            cm.type AS \"type: ModeType\",\n            cm.stars,\n            cm.health,\n            cm.attack,\n            cm.defense,\n            cm.attack_modifier,\n            cm.defense_modifier\n        FROM character_modes AS cm, nodes AS n\n        WHERE cm.id = n.id AND character_id = $1\n        ORDER BY n.id;\n        ",
     "describe": {
-      "params": [
-        "Int4"
-      ],
       "columns": [
         {
+          "ordinal": 0,
           "name": "id",
           "type_info": "Int4",
-          "not_null": true
+          "relation_id": 19274,
+          "relation_attribute_no": 1
         },
         {
+          "ordinal": 1,
           "name": "node_id",
           "type_info": "Uuid",
-          "not_null": false
+          "relation_id": 19189,
+          "relation_attribute_no": 2
         },
         {
-          "name": "tcg_id",
+          "ordinal": 2,
+          "name": "title",
           "type_info": "Varchar",
-          "not_null": true
+          "relation_id": 19274,
+          "relation_attribute_no": 3
         },
         {
-          "name": "rarity",
+          "ordinal": 3,
+          "name": "subtitle",
+          "type_info": "Varchar",
+          "relation_id": 19274,
+          "relation_attribute_no": 4
+        },
+        {
+          "ordinal": 4,
+          "name": "faction: Option<Faction>",
           "type_info": {
             "Custom": {
-              "oid": 18094,
+              "oid": 19180,
+              "name": "faction",
+              "kind": {
+                "Enum": [
+                  "AUTOBOT",
+                  "DECEPTICON",
+                  "MERCENARY"
+                ]
+              }
+            }
+          },
+          "relation_id": 19274,
+          "relation_attribute_no": 5
+        },
+        {
+          "ordinal": 5,
+          "name": "traits",
+          "type_info": "TextArray",
+          "relation_id": null,
+          "relation_attribute_no": null
+        },
+        {
+          "ordinal": 6,
+          "name": "type: ModeType",
+          "type_info": {
+            "Custom": {
+              "oid": 19084,
+              "name": "mode_type",
+              "kind": {
+                "Enum": [
+                  "ALT",
+                  "ALT_1",
+                  "ALT_2",
+                  "BOT",
+                  "COMBINER",
+                  "BODY",
+                  "HEAD",
+                  "UPGRADE_WEAPON",
+                  "UPGRADE_ARMOR",
+                  "UPGRADE_UTILITY",
+                  "COMBINER_BODY"
+                ]
+              }
+            }
+          },
+          "relation_id": 19274,
+          "relation_attribute_no": 7
+        },
+        {
+          "ordinal": 7,
+          "name": "stars",
+          "type_info": "Int4",
+          "relation_id": 19274,
+          "relation_attribute_no": 8
+        },
+        {
+          "ordinal": 8,
+          "name": "health",
+          "type_info": "Int4",
+          "relation_id": 19274,
+          "relation_attribute_no": 9
+        },
+        {
+          "ordinal": 9,
+          "name": "attack",
+          "type_info": "Int4",
+          "relation_id": 19274,
+          "relation_attribute_no": 10
+        },
+        {
+          "ordinal": 10,
+          "name": "defense",
+          "type_info": "Int4",
+          "relation_id": 19274,
+          "relation_attribute_no": 11
+        },
+        {
+          "ordinal": 11,
+          "name": "attack_modifier",
+          "type_info": "Int4",
+          "relation_id": 19274,
+          "relation_attribute_no": 12
+        },
+        {
+          "ordinal": 12,
+          "name": "defense_modifier",
+          "type_info": "Int4",
+          "relation_id": 19274,
+          "relation_attribute_no": 13
+        }
+      ],
+      "parameters": {
+        "Left": [
+          "Int4"
+        ]
+      },
+      "nullable": [
+        false,
+        true,
+        false,
+        true,
+        false,
+        null,
+        false,
+        false,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    }
+  },
+  "3ba2c004fd36b6459446ae3f97a9dda3170925e7fb7786611c4d0c2f05eb734a": {
+    "query": "\n        SELECT\n            sc.id,\n            n.node_id,\n            sc.tcg_id,\n            sc.rarity AS \"rarity: CardRarity\",\n            sc.number,\n            sc.category AS \"category: CardCategory\",\n            sc.title,\n            sc.faction AS \"faction: Option<Faction>\",\n            sc.requirement,\n            sc.stars\n        FROM stratagem_cards AS sc, nodes AS n\n        WHERE sc.id = n.id AND n.id = $1;\n        ",
+    "describe": {
+      "columns": [
+        {
+          "ordinal": 0,
+          "name": "id",
+          "type_info": "Int4",
+          "relation_id": 19299,
+          "relation_attribute_no": 1
+        },
+        {
+          "ordinal": 1,
+          "name": "node_id",
+          "type_info": "Uuid",
+          "relation_id": 19189,
+          "relation_attribute_no": 2
+        },
+        {
+          "ordinal": 2,
+          "name": "tcg_id",
+          "type_info": "Varchar",
+          "relation_id": 19299,
+          "relation_attribute_no": 2
+        },
+        {
+          "ordinal": 3,
+          "name": "rarity: CardRarity",
+          "type_info": {
+            "Custom": {
+              "oid": 19062,
               "name": "card_rarity",
               "kind": {
                 "Enum": [
@@ -815,18 +577,22 @@
               }
             }
           },
-          "not_null": true
+          "relation_id": 19299,
+          "relation_attribute_no": 3
         },
         {
+          "ordinal": 4,
           "name": "number",
           "type_info": "Varchar",
-          "not_null": true
+          "relation_id": 19299,
+          "relation_attribute_no": 4
         },
         {
-          "name": "category",
+          "ordinal": 5,
+          "name": "category: CardCategory",
           "type_info": {
             "Custom": {
-              "oid": 18108,
+              "oid": 19076,
               "name": "card_category",
               "kind": {
                 "Enum": [
@@ -837,18 +603,22 @@
               }
             }
           },
-          "not_null": true
+          "relation_id": 19299,
+          "relation_attribute_no": 5
         },
         {
+          "ordinal": 6,
           "name": "title",
           "type_info": "Varchar",
-          "not_null": true
+          "relation_id": 19299,
+          "relation_attribute_no": 7
         },
         {
-          "name": "faction",
+          "ordinal": 7,
+          "name": "faction: Option<Faction>",
           "type_info": {
             "Custom": {
-              "oid": 18212,
+              "oid": 19180,
               "name": "faction",
               "kind": {
                 "Enum": [
@@ -859,18 +629,1269 @@
               }
             }
           },
-          "not_null": true
+          "relation_id": 19299,
+          "relation_attribute_no": 9
         },
         {
+          "ordinal": 8,
           "name": "requirement",
           "type_info": "Varchar",
-          "not_null": true
+          "relation_id": 19299,
+          "relation_attribute_no": 8
         },
         {
+          "ordinal": 9,
           "name": "stars",
           "type_info": "Int4",
-          "not_null": true
+          "relation_id": 19299,
+          "relation_attribute_no": 10
         }
+      ],
+      "parameters": {
+        "Left": [
+          "Int4"
+        ]
+      },
+      "nullable": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    }
+  },
+  "3c8df64a49f3345c5acd1202e015114cd2a8dd91308b4ac3c41a486a2a800286": {
+    "query": "\n        SELECT\n            bc.id,\n            n.node_id,\n            bc.tcg_id,\n            bc.rarity AS \"rarity: CardRarity\",\n            bc.number,\n            bc.category AS \"category: CardCategory\",\n            bc.title,\n            bc.icons::TEXT[],\n            bc.stars,\n            bc.type AS \"type: BattleType\",\n            bc.attack_modifier,\n            bc.defense_modifier,\n            bc.faction AS \"faction: Option<Faction>\",\n            bc.image_id\n        FROM battle_cards AS bc, nodes AS n\n        WHERE bc.id = n.id AND n.id = $1;\n        ",
+    "describe": {
+      "columns": [
+        {
+          "ordinal": 0,
+          "name": "id",
+          "type_info": "Int4",
+          "relation_id": 19228,
+          "relation_attribute_no": 1
+        },
+        {
+          "ordinal": 1,
+          "name": "node_id",
+          "type_info": "Uuid",
+          "relation_id": 19189,
+          "relation_attribute_no": 2
+        },
+        {
+          "ordinal": 2,
+          "name": "tcg_id",
+          "type_info": "Varchar",
+          "relation_id": 19228,
+          "relation_attribute_no": 2
+        },
+        {
+          "ordinal": 3,
+          "name": "rarity: CardRarity",
+          "type_info": {
+            "Custom": {
+              "oid": 19062,
+              "name": "card_rarity",
+              "kind": {
+                "Enum": [
+                  "COMMON",
+                  "UNCOMMON",
+                  "RARE",
+                  "SUPER_RARE",
+                  "THEME",
+                  "PROMO"
+                ]
+              }
+            }
+          },
+          "relation_id": 19228,
+          "relation_attribute_no": 3
+        },
+        {
+          "ordinal": 4,
+          "name": "number",
+          "type_info": "Varchar",
+          "relation_id": 19228,
+          "relation_attribute_no": 4
+        },
+        {
+          "ordinal": 5,
+          "name": "category: CardCategory",
+          "type_info": {
+            "Custom": {
+              "oid": 19076,
+              "name": "card_category",
+              "kind": {
+                "Enum": [
+                  "CHARACTER",
+                  "BATTLE",
+                  "STRATAGEM"
+                ]
+              }
+            }
+          },
+          "relation_id": 19228,
+          "relation_attribute_no": 5
+        },
+        {
+          "ordinal": 6,
+          "name": "title",
+          "type_info": "Varchar",
+          "relation_id": 19228,
+          "relation_attribute_no": 7
+        },
+        {
+          "ordinal": 7,
+          "name": "icons",
+          "type_info": "TextArray",
+          "relation_id": null,
+          "relation_attribute_no": null
+        },
+        {
+          "ordinal": 8,
+          "name": "stars",
+          "type_info": "Int4",
+          "relation_id": 19228,
+          "relation_attribute_no": 10
+        },
+        {
+          "ordinal": 9,
+          "name": "type: BattleType",
+          "type_info": {
+            "Custom": {
+              "oid": 19108,
+              "name": "battle_type",
+              "kind": {
+                "Enum": [
+                  "ACTION",
+                  "SECRET_ACTION",
+                  "UPGRADE_WEAPON",
+                  "UPGRADE_ARMOR",
+                  "UPGRADE_UTILITY",
+                  "UPGRADE_WEAPON_ARMOR"
+                ]
+              }
+            }
+          },
+          "relation_id": 19228,
+          "relation_attribute_no": 8
+        },
+        {
+          "ordinal": 10,
+          "name": "attack_modifier",
+          "type_info": "Int4",
+          "relation_id": 19228,
+          "relation_attribute_no": 12
+        },
+        {
+          "ordinal": 11,
+          "name": "defense_modifier",
+          "type_info": "Int4",
+          "relation_id": 19228,
+          "relation_attribute_no": 13
+        },
+        {
+          "ordinal": 12,
+          "name": "faction: Option<Faction>",
+          "type_info": {
+            "Custom": {
+              "oid": 19180,
+              "name": "faction",
+              "kind": {
+                "Enum": [
+                  "AUTOBOT",
+                  "DECEPTICON",
+                  "MERCENARY"
+                ]
+              }
+            }
+          },
+          "relation_id": 19228,
+          "relation_attribute_no": 9
+        },
+        {
+          "ordinal": 13,
+          "name": "image_id",
+          "type_info": "Int4",
+          "relation_id": 19228,
+          "relation_attribute_no": 14
+        }
+      ],
+      "parameters": {
+        "Left": [
+          "Int4"
+        ]
+      },
+      "nullable": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        null,
+        true,
+        false,
+        true,
+        true,
+        true,
+        true
+      ]
+    }
+  },
+  "643a1ee5662887c397a613f655ab025c3b0dde1d30ce9a68aaad714e2b22a206": {
+    "query": "\n            SELECT w.id, n.node_id, w.tcg_id, w.name, w.released\n            FROM stratagem_cards AS s, waves AS w, nodes AS n\n            WHERE w.id = n.id AND w.id = s.wave_id AND s.id = $1;\n            ",
+    "describe": {
+      "columns": [
+        {
+          "ordinal": 0,
+          "name": "id",
+          "type_info": "Int4",
+          "relation_id": 19198,
+          "relation_attribute_no": 1
+        },
+        {
+          "ordinal": 1,
+          "name": "node_id",
+          "type_info": "Uuid",
+          "relation_id": 19189,
+          "relation_attribute_no": 2
+        },
+        {
+          "ordinal": 2,
+          "name": "tcg_id",
+          "type_info": "Varchar",
+          "relation_id": 19198,
+          "relation_attribute_no": 2
+        },
+        {
+          "ordinal": 3,
+          "name": "name",
+          "type_info": "Varchar",
+          "relation_id": 19198,
+          "relation_attribute_no": 3
+        },
+        {
+          "ordinal": 4,
+          "name": "released",
+          "type_info": "Date",
+          "relation_id": 19198,
+          "relation_attribute_no": 4
+        }
+      ],
+      "parameters": {
+        "Left": [
+          "Int4"
+        ]
+      },
+      "nullable": [
+        false,
+        true,
+        false,
+        false,
+        false
+      ]
+    }
+  },
+  "709837a0ebba7714b344f23678e04dc29e71dbfe455c0f9de850b83b12b73ff0": {
+    "query": "\n        SELECT\n            bc.id,\n            n.node_id,\n            bc.tcg_id,\n            bc.rarity AS \"rarity: CardRarity\",\n            bc.number,\n            bc.category AS \"category: CardCategory\",\n            bc.title,\n            bc.icons::TEXT[],\n            bc.stars,\n            bc.type AS \"type: BattleType\",\n            bc.attack_modifier,\n            bc.defense_modifier,\n            bc.faction AS \"faction: Faction\",\n            bc.image_id\n        FROM battle_cards AS bc, nodes AS n\n        WHERE bc.id = n.id AND n.id = $1;\n        ",
+    "describe": {
+      "columns": [
+        {
+          "ordinal": 0,
+          "name": "id",
+          "type_info": "Int4",
+          "relation_id": 19228,
+          "relation_attribute_no": 1
+        },
+        {
+          "ordinal": 1,
+          "name": "node_id",
+          "type_info": "Uuid",
+          "relation_id": 19189,
+          "relation_attribute_no": 2
+        },
+        {
+          "ordinal": 2,
+          "name": "tcg_id",
+          "type_info": "Varchar",
+          "relation_id": 19228,
+          "relation_attribute_no": 2
+        },
+        {
+          "ordinal": 3,
+          "name": "rarity: CardRarity",
+          "type_info": {
+            "Custom": {
+              "oid": 19062,
+              "name": "card_rarity",
+              "kind": {
+                "Enum": [
+                  "COMMON",
+                  "UNCOMMON",
+                  "RARE",
+                  "SUPER_RARE",
+                  "THEME",
+                  "PROMO"
+                ]
+              }
+            }
+          },
+          "relation_id": 19228,
+          "relation_attribute_no": 3
+        },
+        {
+          "ordinal": 4,
+          "name": "number",
+          "type_info": "Varchar",
+          "relation_id": 19228,
+          "relation_attribute_no": 4
+        },
+        {
+          "ordinal": 5,
+          "name": "category: CardCategory",
+          "type_info": {
+            "Custom": {
+              "oid": 19076,
+              "name": "card_category",
+              "kind": {
+                "Enum": [
+                  "CHARACTER",
+                  "BATTLE",
+                  "STRATAGEM"
+                ]
+              }
+            }
+          },
+          "relation_id": 19228,
+          "relation_attribute_no": 5
+        },
+        {
+          "ordinal": 6,
+          "name": "title",
+          "type_info": "Varchar",
+          "relation_id": 19228,
+          "relation_attribute_no": 7
+        },
+        {
+          "ordinal": 7,
+          "name": "icons",
+          "type_info": "TextArray",
+          "relation_id": null,
+          "relation_attribute_no": null
+        },
+        {
+          "ordinal": 8,
+          "name": "stars",
+          "type_info": "Int4",
+          "relation_id": 19228,
+          "relation_attribute_no": 10
+        },
+        {
+          "ordinal": 9,
+          "name": "type: BattleType",
+          "type_info": {
+            "Custom": {
+              "oid": 19108,
+              "name": "battle_type",
+              "kind": {
+                "Enum": [
+                  "ACTION",
+                  "SECRET_ACTION",
+                  "UPGRADE_WEAPON",
+                  "UPGRADE_ARMOR",
+                  "UPGRADE_UTILITY",
+                  "UPGRADE_WEAPON_ARMOR"
+                ]
+              }
+            }
+          },
+          "relation_id": 19228,
+          "relation_attribute_no": 8
+        },
+        {
+          "ordinal": 10,
+          "name": "attack_modifier",
+          "type_info": "Int4",
+          "relation_id": 19228,
+          "relation_attribute_no": 12
+        },
+        {
+          "ordinal": 11,
+          "name": "defense_modifier",
+          "type_info": "Int4",
+          "relation_id": 19228,
+          "relation_attribute_no": 13
+        },
+        {
+          "ordinal": 12,
+          "name": "faction: Faction",
+          "type_info": {
+            "Custom": {
+              "oid": 19180,
+              "name": "faction",
+              "kind": {
+                "Enum": [
+                  "AUTOBOT",
+                  "DECEPTICON",
+                  "MERCENARY"
+                ]
+              }
+            }
+          },
+          "relation_id": 19228,
+          "relation_attribute_no": 9
+        },
+        {
+          "ordinal": 13,
+          "name": "image_id",
+          "type_info": "Int4",
+          "relation_id": 19228,
+          "relation_attribute_no": 14
+        }
+      ],
+      "parameters": {
+        "Left": [
+          "Int4"
+        ]
+      },
+      "nullable": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        null,
+        true,
+        false,
+        true,
+        true,
+        true,
+        true
+      ]
+    }
+  },
+  "7da84861fec4c24ff3376963b7437bf9ea2bf5b88875786cc23ed20058a50b43": {
+    "query": "\n            WITH image_node AS (\n                INSERT INTO nodes (node_type) VALUES ('IMAGE') RETURNING *\n            ), image AS (\n                INSERT INTO images (id, original_url) SELECT n.id, $12 FROM image_node AS n RETURNING *\n            ), node AS (\n                INSERT INTO nodes (node_type) VALUES ('BATTLE') RETURNING *\n            ), wave AS (\n                SELECT id FROM waves WHERE tcg_id = $11\n            ), card AS (\n                INSERT INTO battle_cards (\n                    id,\n                    category,\n                    wave_id,\n                    icons,\n                    tcg_id,\n                    rarity,\n                    number,\n                    title,\n                    type,\n                    faction,\n                    stars,\n                    attack_modifier,\n                    defense_modifier,\n                    image_id\n                ) SELECT\n                    n.id,\n                    'BATTLE',\n                    w.id,\n                    CAST($1::TEXT[] as BATTLE_ICON[]),\n                    $2,\n                    $3,\n                    $4,\n                    $5,\n                    $6,\n                    $7,\n                    $8,\n                    $9,\n                    $10,\n                    i.id\n                FROM node AS n, wave AS w, image AS i RETURNING *\n            )\n            SELECT\n                n.id,\n                n.node_id,\n                c.tcg_id,\n                c.category AS \"category: CardCategory\",\n                c.title,\n                c.icons::TEXT[],\n                c.type AS \"type: BattleType\",\n                c.rarity AS \"rarity: CardRarity\",\n                c.number,\n                c.faction AS \"faction: Faction\",\n                c.stars,\n                c.attack_modifier,\n                c.defense_modifier,\n                c.image_id\n            FROM card AS c, node AS n;\n            ",
+    "describe": {
+      "columns": [
+        {
+          "ordinal": 0,
+          "name": "id",
+          "type_info": "Int4",
+          "relation_id": 19189,
+          "relation_attribute_no": 1
+        },
+        {
+          "ordinal": 1,
+          "name": "node_id",
+          "type_info": "Uuid",
+          "relation_id": 19189,
+          "relation_attribute_no": 2
+        },
+        {
+          "ordinal": 2,
+          "name": "tcg_id",
+          "type_info": "Varchar",
+          "relation_id": 19228,
+          "relation_attribute_no": 2
+        },
+        {
+          "ordinal": 3,
+          "name": "category: CardCategory",
+          "type_info": {
+            "Custom": {
+              "oid": 19076,
+              "name": "card_category",
+              "kind": {
+                "Enum": [
+                  "CHARACTER",
+                  "BATTLE",
+                  "STRATAGEM"
+                ]
+              }
+            }
+          },
+          "relation_id": 19228,
+          "relation_attribute_no": 5
+        },
+        {
+          "ordinal": 4,
+          "name": "title",
+          "type_info": "Varchar",
+          "relation_id": 19228,
+          "relation_attribute_no": 7
+        },
+        {
+          "ordinal": 5,
+          "name": "icons",
+          "type_info": "TextArray",
+          "relation_id": null,
+          "relation_attribute_no": null
+        },
+        {
+          "ordinal": 6,
+          "name": "type: BattleType",
+          "type_info": {
+            "Custom": {
+              "oid": 19108,
+              "name": "battle_type",
+              "kind": {
+                "Enum": [
+                  "ACTION",
+                  "SECRET_ACTION",
+                  "UPGRADE_WEAPON",
+                  "UPGRADE_ARMOR",
+                  "UPGRADE_UTILITY",
+                  "UPGRADE_WEAPON_ARMOR"
+                ]
+              }
+            }
+          },
+          "relation_id": 19228,
+          "relation_attribute_no": 8
+        },
+        {
+          "ordinal": 7,
+          "name": "rarity: CardRarity",
+          "type_info": {
+            "Custom": {
+              "oid": 19062,
+              "name": "card_rarity",
+              "kind": {
+                "Enum": [
+                  "COMMON",
+                  "UNCOMMON",
+                  "RARE",
+                  "SUPER_RARE",
+                  "THEME",
+                  "PROMO"
+                ]
+              }
+            }
+          },
+          "relation_id": 19228,
+          "relation_attribute_no": 3
+        },
+        {
+          "ordinal": 8,
+          "name": "number",
+          "type_info": "Varchar",
+          "relation_id": 19228,
+          "relation_attribute_no": 4
+        },
+        {
+          "ordinal": 9,
+          "name": "faction: Faction",
+          "type_info": {
+            "Custom": {
+              "oid": 19180,
+              "name": "faction",
+              "kind": {
+                "Enum": [
+                  "AUTOBOT",
+                  "DECEPTICON",
+                  "MERCENARY"
+                ]
+              }
+            }
+          },
+          "relation_id": 19228,
+          "relation_attribute_no": 9
+        },
+        {
+          "ordinal": 10,
+          "name": "stars",
+          "type_info": "Int4",
+          "relation_id": 19228,
+          "relation_attribute_no": 10
+        },
+        {
+          "ordinal": 11,
+          "name": "attack_modifier",
+          "type_info": "Int4",
+          "relation_id": 19228,
+          "relation_attribute_no": 12
+        },
+        {
+          "ordinal": 12,
+          "name": "defense_modifier",
+          "type_info": "Int4",
+          "relation_id": 19228,
+          "relation_attribute_no": 13
+        },
+        {
+          "ordinal": 13,
+          "name": "image_id",
+          "type_info": "Int4",
+          "relation_id": 19228,
+          "relation_attribute_no": 14
+        }
+      ],
+      "parameters": {
+        "Left": [
+          "TextArray",
+          "Varchar",
+          {
+            "Custom": {
+              "oid": 19062,
+              "name": "card_rarity",
+              "kind": {
+                "Enum": [
+                  "COMMON",
+                  "UNCOMMON",
+                  "RARE",
+                  "SUPER_RARE",
+                  "THEME",
+                  "PROMO"
+                ]
+              }
+            }
+          },
+          "Varchar",
+          "Varchar",
+          {
+            "Custom": {
+              "oid": 19108,
+              "name": "battle_type",
+              "kind": {
+                "Enum": [
+                  "ACTION",
+                  "SECRET_ACTION",
+                  "UPGRADE_WEAPON",
+                  "UPGRADE_ARMOR",
+                  "UPGRADE_UTILITY",
+                  "UPGRADE_WEAPON_ARMOR"
+                ]
+              }
+            }
+          },
+          {
+            "Custom": {
+              "oid": 19180,
+              "name": "faction",
+              "kind": {
+                "Enum": [
+                  "AUTOBOT",
+                  "DECEPTICON",
+                  "MERCENARY"
+                ]
+              }
+            }
+          },
+          "Int4",
+          "Int4",
+          "Int4",
+          "Text",
+          "Varchar"
+        ]
+      },
+      "nullable": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        null,
+        false,
+        false,
+        false,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    }
+  },
+  "7fcd190398d940c292457feb539e497af51b327b5c19cda8365415dadea20489": {
+    "query": "\n            SELECT i.id, n.node_id, i.original_url\n            FROM images AS i, nodes AS n\n            WHERE i.id = n.id AND n.id = $1\n            ",
+    "describe": {
+      "columns": [
+        {
+          "ordinal": 0,
+          "name": "id",
+          "type_info": "Int4",
+          "relation_id": 19215,
+          "relation_attribute_no": 1
+        },
+        {
+          "ordinal": 1,
+          "name": "node_id",
+          "type_info": "Uuid",
+          "relation_id": 19189,
+          "relation_attribute_no": 2
+        },
+        {
+          "ordinal": 2,
+          "name": "original_url",
+          "type_info": "Varchar",
+          "relation_id": 19215,
+          "relation_attribute_no": 2
+        }
+      ],
+      "parameters": {
+        "Left": [
+          "Int4"
+        ]
+      },
+      "nullable": [
+        false,
+        true,
+        false
+      ]
+    }
+  },
+  "8031eb31f08f496f1a65b2f0f49b41340e58b177f65e9dd3a5a453b7bbca444c": {
+    "query": "\n        SELECT id, node_id, node_type AS \"node_type: NodeType\"\n        FROM nodes\n        WHERE node_type IN ('BATTLE', 'CHARACTER', 'STRATAGEM')\n        ORDER BY id;\n        ",
+    "describe": {
+      "columns": [
+        {
+          "ordinal": 0,
+          "name": "id",
+          "type_info": "Int4",
+          "relation_id": 19189,
+          "relation_attribute_no": 1
+        },
+        {
+          "ordinal": 1,
+          "name": "node_id",
+          "type_info": "Uuid",
+          "relation_id": 19189,
+          "relation_attribute_no": 2
+        },
+        {
+          "ordinal": 2,
+          "name": "node_type: NodeType",
+          "type_info": {
+            "Custom": {
+              "oid": 19049,
+              "name": "node_type",
+              "kind": {
+                "Enum": [
+                  "CHARACTER",
+                  "BATTLE",
+                  "STRATAGEM",
+                  "WAVE",
+                  "CHARACTER_MODE",
+                  "IMAGE"
+                ]
+              }
+            }
+          },
+          "relation_id": 19189,
+          "relation_attribute_no": 3
+        }
+      ],
+      "parameters": {
+        "Left": []
+      },
+      "nullable": [
+        false,
+        true,
+        false
+      ]
+    }
+  },
+  "9ac38e259db1528af035fe3356eccb4a1e2ad427661bfa8722a56309eb052659": {
+    "query": "\n            SELECT w.id, n.node_id, w.tcg_id, w.name, w.released\n            FROM character_cards AS c, waves AS w, nodes AS n\n            WHERE w.id = n.id AND w.id = c.wave_id AND c.id = $1;\n            ",
+    "describe": {
+      "columns": [
+        {
+          "ordinal": 0,
+          "name": "id",
+          "type_info": "Int4",
+          "relation_id": 19198,
+          "relation_attribute_no": 1
+        },
+        {
+          "ordinal": 1,
+          "name": "node_id",
+          "type_info": "Uuid",
+          "relation_id": 19189,
+          "relation_attribute_no": 2
+        },
+        {
+          "ordinal": 2,
+          "name": "tcg_id",
+          "type_info": "Varchar",
+          "relation_id": 19198,
+          "relation_attribute_no": 2
+        },
+        {
+          "ordinal": 3,
+          "name": "name",
+          "type_info": "Varchar",
+          "relation_id": 19198,
+          "relation_attribute_no": 3
+        },
+        {
+          "ordinal": 4,
+          "name": "released",
+          "type_info": "Date",
+          "relation_id": 19198,
+          "relation_attribute_no": 4
+        }
+      ],
+      "parameters": {
+        "Left": [
+          "Int4"
+        ]
+      },
+      "nullable": [
+        false,
+        true,
+        false,
+        false,
+        false
+      ]
+    }
+  },
+  "9c0e5f1586f40f520456ae9ad8146e37069a0e09ca8fe3d5daae1fafa3422839": {
+    "query": "\n            SELECT w.id, n.node_id, w.tcg_id, w.name, w.released\n            FROM battle_cards AS bc, waves AS w, nodes AS n\n            WHERE w.id = n.id AND w.id = bc.wave_id AND bc.id = $1;\n            ",
+    "describe": {
+      "columns": [
+        {
+          "ordinal": 0,
+          "name": "id",
+          "type_info": "Int4",
+          "relation_id": 19198,
+          "relation_attribute_no": 1
+        },
+        {
+          "ordinal": 1,
+          "name": "node_id",
+          "type_info": "Uuid",
+          "relation_id": 19189,
+          "relation_attribute_no": 2
+        },
+        {
+          "ordinal": 2,
+          "name": "tcg_id",
+          "type_info": "Varchar",
+          "relation_id": 19198,
+          "relation_attribute_no": 2
+        },
+        {
+          "ordinal": 3,
+          "name": "name",
+          "type_info": "Varchar",
+          "relation_id": 19198,
+          "relation_attribute_no": 3
+        },
+        {
+          "ordinal": 4,
+          "name": "released",
+          "type_info": "Date",
+          "relation_id": 19198,
+          "relation_attribute_no": 4
+        }
+      ],
+      "parameters": {
+        "Left": [
+          "Int4"
+        ]
+      },
+      "nullable": [
+        false,
+        true,
+        false,
+        false,
+        false
+      ]
+    }
+  },
+  "a704ee04c52bca2ea971f7816939ae03473ef88eea3e117055b8c065a789e830": {
+    "query": "\n            SELECT w.id, n.node_id, w.tcg_id, w.name, w.released\n            FROM waves AS w, nodes AS n\n            WHERE w.id = n.id AND n.id = $1;\n            ",
+    "describe": {
+      "columns": [
+        {
+          "ordinal": 0,
+          "name": "id",
+          "type_info": "Int4",
+          "relation_id": 19198,
+          "relation_attribute_no": 1
+        },
+        {
+          "ordinal": 1,
+          "name": "node_id",
+          "type_info": "Uuid",
+          "relation_id": 19189,
+          "relation_attribute_no": 2
+        },
+        {
+          "ordinal": 2,
+          "name": "tcg_id",
+          "type_info": "Varchar",
+          "relation_id": 19198,
+          "relation_attribute_no": 2
+        },
+        {
+          "ordinal": 3,
+          "name": "name",
+          "type_info": "Varchar",
+          "relation_id": 19198,
+          "relation_attribute_no": 3
+        },
+        {
+          "ordinal": 4,
+          "name": "released",
+          "type_info": "Date",
+          "relation_id": 19198,
+          "relation_attribute_no": 4
+        }
+      ],
+      "parameters": {
+        "Left": [
+          "Int4"
+        ]
+      },
+      "nullable": [
+        false,
+        true,
+        false,
+        false,
+        false
+      ]
+    }
+  },
+  "a74f79464b2d26305dc2c87bd93bcb142a9e574057230e83f9cf67f19667029a": {
+    "query": "\n        SELECT\n            sc.id,\n            n.node_id,\n            sc.tcg_id,\n            sc.rarity AS \"rarity: CardRarity\",\n            sc.number,\n            sc.category AS \"category: CardCategory\",\n            sc.title,\n            sc.faction AS \"faction: Faction\",\n            sc.requirement,\n            sc.stars\n        FROM stratagem_cards AS sc, nodes AS n\n        WHERE sc.id = n.id AND n.id = $1;\n        ",
+    "describe": {
+      "columns": [
+        {
+          "ordinal": 0,
+          "name": "id",
+          "type_info": "Int4",
+          "relation_id": 19299,
+          "relation_attribute_no": 1
+        },
+        {
+          "ordinal": 1,
+          "name": "node_id",
+          "type_info": "Uuid",
+          "relation_id": 19189,
+          "relation_attribute_no": 2
+        },
+        {
+          "ordinal": 2,
+          "name": "tcg_id",
+          "type_info": "Varchar",
+          "relation_id": 19299,
+          "relation_attribute_no": 2
+        },
+        {
+          "ordinal": 3,
+          "name": "rarity: CardRarity",
+          "type_info": {
+            "Custom": {
+              "oid": 19062,
+              "name": "card_rarity",
+              "kind": {
+                "Enum": [
+                  "COMMON",
+                  "UNCOMMON",
+                  "RARE",
+                  "SUPER_RARE",
+                  "THEME",
+                  "PROMO"
+                ]
+              }
+            }
+          },
+          "relation_id": 19299,
+          "relation_attribute_no": 3
+        },
+        {
+          "ordinal": 4,
+          "name": "number",
+          "type_info": "Varchar",
+          "relation_id": 19299,
+          "relation_attribute_no": 4
+        },
+        {
+          "ordinal": 5,
+          "name": "category: CardCategory",
+          "type_info": {
+            "Custom": {
+              "oid": 19076,
+              "name": "card_category",
+              "kind": {
+                "Enum": [
+                  "CHARACTER",
+                  "BATTLE",
+                  "STRATAGEM"
+                ]
+              }
+            }
+          },
+          "relation_id": 19299,
+          "relation_attribute_no": 5
+        },
+        {
+          "ordinal": 6,
+          "name": "title",
+          "type_info": "Varchar",
+          "relation_id": 19299,
+          "relation_attribute_no": 7
+        },
+        {
+          "ordinal": 7,
+          "name": "faction: Faction",
+          "type_info": {
+            "Custom": {
+              "oid": 19180,
+              "name": "faction",
+              "kind": {
+                "Enum": [
+                  "AUTOBOT",
+                  "DECEPTICON",
+                  "MERCENARY"
+                ]
+              }
+            }
+          },
+          "relation_id": 19299,
+          "relation_attribute_no": 9
+        },
+        {
+          "ordinal": 8,
+          "name": "requirement",
+          "type_info": "Varchar",
+          "relation_id": 19299,
+          "relation_attribute_no": 8
+        },
+        {
+          "ordinal": 9,
+          "name": "stars",
+          "type_info": "Int4",
+          "relation_id": 19299,
+          "relation_attribute_no": 10
+        }
+      ],
+      "parameters": {
+        "Left": [
+          "Int4"
+        ]
+      },
+      "nullable": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    }
+  },
+  "d733ab14b3cce5d013197ec312631b878a471d506a27f0be1da8af2dda27c110": {
+    "query": "\n            WITH node AS (\n                INSERT INTO nodes (node_type) VALUES ('WAVE') RETURNING *\n            ), wave AS (\n                INSERT INTO waves (id, tcg_id, name, released) SELECT id, $1, $2, $3 FROM node RETURNING *\n            )\n            SELECT n.id, n.node_id, w.tcg_id, w.name, w.released FROM node AS n, wave AS w;\n            ",
+    "describe": {
+      "columns": [
+        {
+          "ordinal": 0,
+          "name": "id",
+          "type_info": "Int4",
+          "relation_id": 19189,
+          "relation_attribute_no": 1
+        },
+        {
+          "ordinal": 1,
+          "name": "node_id",
+          "type_info": "Uuid",
+          "relation_id": 19189,
+          "relation_attribute_no": 2
+        },
+        {
+          "ordinal": 2,
+          "name": "tcg_id",
+          "type_info": "Varchar",
+          "relation_id": 19198,
+          "relation_attribute_no": 2
+        },
+        {
+          "ordinal": 3,
+          "name": "name",
+          "type_info": "Varchar",
+          "relation_id": 19198,
+          "relation_attribute_no": 3
+        },
+        {
+          "ordinal": 4,
+          "name": "released",
+          "type_info": "Date",
+          "relation_id": 19198,
+          "relation_attribute_no": 4
+        }
+      ],
+      "parameters": {
+        "Left": [
+          "Varchar",
+          "Varchar",
+          "Date"
+        ]
+      },
+      "nullable": [
+        false,
+        true,
+        false,
+        false,
+        false
+      ]
+    }
+  },
+  "e2f357d347489c301a172b4594e0bc1f4c210d1f4dcddeaed3eee7ca90ba1260": {
+    "query": "\n        SELECT\n            cc.id,\n            n.node_id,\n            cc.tcg_id,\n            cc.rarity AS \"rarity: CardRarity\",\n            cc.number,\n            cc.category AS \"category: CardCategory\"\n        FROM character_cards AS cc, nodes AS n\n        WHERE cc.id = n.id AND n.id = $1;\n        ",
+    "describe": {
+      "columns": [
+        {
+          "ordinal": 0,
+          "name": "id",
+          "type_info": "Int4",
+          "relation_id": 19254,
+          "relation_attribute_no": 1
+        },
+        {
+          "ordinal": 1,
+          "name": "node_id",
+          "type_info": "Uuid",
+          "relation_id": 19189,
+          "relation_attribute_no": 2
+        },
+        {
+          "ordinal": 2,
+          "name": "tcg_id",
+          "type_info": "Varchar",
+          "relation_id": 19254,
+          "relation_attribute_no": 2
+        },
+        {
+          "ordinal": 3,
+          "name": "rarity: CardRarity",
+          "type_info": {
+            "Custom": {
+              "oid": 19062,
+              "name": "card_rarity",
+              "kind": {
+                "Enum": [
+                  "COMMON",
+                  "UNCOMMON",
+                  "RARE",
+                  "SUPER_RARE",
+                  "THEME",
+                  "PROMO"
+                ]
+              }
+            }
+          },
+          "relation_id": 19254,
+          "relation_attribute_no": 3
+        },
+        {
+          "ordinal": 4,
+          "name": "number",
+          "type_info": "Varchar",
+          "relation_id": 19254,
+          "relation_attribute_no": 4
+        },
+        {
+          "ordinal": 5,
+          "name": "category: CardCategory",
+          "type_info": {
+            "Custom": {
+              "oid": 19076,
+              "name": "card_category",
+              "kind": {
+                "Enum": [
+                  "CHARACTER",
+                  "BATTLE",
+                  "STRATAGEM"
+                ]
+              }
+            }
+          },
+          "relation_id": 19254,
+          "relation_attribute_no": 5
+        }
+      ],
+      "parameters": {
+        "Left": [
+          "Int4"
+        ]
+      },
+      "nullable": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false
+      ]
+    }
+  },
+  "e3e2dc86cde81c53369487bc4b4bd0149def8d35581d7a2d2ad63f3ecc2acb1b": {
+    "query": "\n            SELECT id, node_id, node_type AS \"node_type: NodeType\"\n            FROM nodes\n            WHERE node_id = $1;\n            ",
+    "describe": {
+      "columns": [
+        {
+          "ordinal": 0,
+          "name": "id",
+          "type_info": "Int4",
+          "relation_id": 19189,
+          "relation_attribute_no": 1
+        },
+        {
+          "ordinal": 1,
+          "name": "node_id",
+          "type_info": "Uuid",
+          "relation_id": 19189,
+          "relation_attribute_no": 2
+        },
+        {
+          "ordinal": 2,
+          "name": "node_type: NodeType",
+          "type_info": {
+            "Custom": {
+              "oid": 19049,
+              "name": "node_type",
+              "kind": {
+                "Enum": [
+                  "CHARACTER",
+                  "BATTLE",
+                  "STRATAGEM",
+                  "WAVE",
+                  "CHARACTER_MODE",
+                  "IMAGE"
+                ]
+              }
+            }
+          },
+          "relation_id": 19189,
+          "relation_attribute_no": 3
+        }
+      ],
+      "parameters": {
+        "Left": [
+          "Uuid"
+        ]
+      },
+      "nullable": [
+        false,
+        true,
+        false
       ]
     }
   }

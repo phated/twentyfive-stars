@@ -15,8 +15,8 @@ This list is likely to change as I explore and improve on this project:
 __Server:__
 * [rust](https://www.rust-lang.org)!
 * [async-graphql](https://github.com/async-graphql/async-graphql)
-* [sqlx](https://github.com/launchbadge/sqlx) - custom fork for my user-defined types right now
-* [tide](https://github.com/launchbadge/sqlx)
+* [sqlx](https://github.com/launchbadge/sqlx)
+* [tide](https://github.com/http-rs/tide)
 * [postgres](https://www.postgresql.org)
 
 __Client:__
@@ -35,7 +35,7 @@ Please follow our [Setting up Auth0](./docs/setting-up-auth0.md) guide before tr
 You'll need the Rust toolchain and Postgres installed on your computer.
 
 1. Make sure you have Postgres running and copy the `.env.example` to `.env` with the `DATABASE_URL` pointing to your local database.
-1. Install the `cargo sqlx` command using `cargo install --git git://github.com/phated/sqlx --branch custom-types-040 sqlx-cli`
+1. Install the `cargo sqlx` command using `cargo install --git git://github.com/launchbadge/sqlx sqlx-cli`
 1. Create the database using `cargo sqlx database create`
 1. Migrate the new database using `cargo sqlx migrate run`
 1. Build and start the server with `cargo run`

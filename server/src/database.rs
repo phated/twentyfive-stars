@@ -35,7 +35,7 @@ impl Database {
         let card_nodes = sqlx::query_as!(
             Node,
             r#"
-        SELECT id, node_id, node_type
+        SELECT id, node_id, node_type AS "node_type: NodeType"
         FROM nodes
         WHERE node_type IN ('BATTLE', 'CHARACTER', 'STRATAGEM')
         ORDER BY id;
@@ -51,7 +51,7 @@ impl Database {
         let node = sqlx::query_as!(
             Node,
             r#"
-            SELECT id, node_id, node_type
+            SELECT id, node_id, node_type AS "node_type: NodeType"
             FROM nodes
             WHERE node_id = $1;
             "#,
@@ -136,13 +136,13 @@ impl Database {
                 n.id,
                 n.node_id,
                 c.tcg_id,
-                c.category,
+                c.category AS "category: CardCategory",
                 c.title,
                 c.icons::TEXT[],
-                c.type,
-                c.rarity,
+                c.type AS "type: BattleType",
+                c.rarity AS "rarity: CardRarity",
                 c.number,
-                c.faction,
+                c.faction AS "faction: Option<Faction>",
                 c.stars,
                 c.attack_modifier,
                 c.defense_modifier,
@@ -151,11 +151,11 @@ impl Database {
             "#,
             &input.icons,
             input.tcg_id,
-            input.rarity,
+            input.rarity as CardRarity,
             input.number,
             input.title,
-            input.type_,
-            input.faction,
+            input.type_ as BattleType,
+            input.faction as Option<Faction>,
             input.stars,
             input.attack_modifier,
             input.defense_modifier,
@@ -182,7 +182,21 @@ impl Database {
         let battle_card = sqlx::query_as!(
             BattleCard,
             r#"
-        SELECT bc.id, n.node_id, bc.tcg_id, bc.rarity, bc.number, bc.category, bc.title, bc.icons::TEXT[], bc.stars, bc.type, bc.attack_modifier, bc.defense_modifier, bc.faction, bc.image_id
+        SELECT
+            bc.id,
+            n.node_id,
+            bc.tcg_id,
+            bc.rarity AS "rarity: CardRarity",
+            bc.number,
+            bc.category AS "category: CardCategory",
+            bc.title,
+            bc.icons::TEXT[],
+            bc.stars,
+            bc.type AS "type: BattleType",
+            bc.attack_modifier,
+            bc.defense_modifier,
+            bc.faction AS "faction: Option<Faction>",
+            bc.image_id
         FROM battle_cards AS bc, nodes AS n
         WHERE bc.id = n.id AND n.id = $1;
         "#,
@@ -198,7 +212,13 @@ impl Database {
         let character_card = sqlx::query_as!(
             CharacterCard,
             r#"
-        SELECT cc.id, n.node_id, cc.tcg_id, cc.rarity, cc.number, cc.category
+        SELECT
+            cc.id,
+            n.node_id,
+            cc.tcg_id,
+            cc.rarity AS "rarity: CardRarity",
+            cc.number,
+            cc.category AS "category: CardCategory"
         FROM character_cards AS cc, nodes AS n
         WHERE cc.id = n.id AND n.id = $1;
         "#,
@@ -214,7 +234,17 @@ impl Database {
         let stratagem_card = sqlx::query_as!(
             StratagemCard,
             r#"
-        SELECT sc.id, n.node_id, sc.tcg_id, sc.rarity, sc.number, sc.category, sc.title, sc.faction, sc.requirement, sc.stars
+        SELECT
+            sc.id,
+            n.node_id,
+            sc.tcg_id,
+            sc.rarity AS "rarity: CardRarity",
+            sc.number,
+            sc.category AS "category: CardCategory",
+            sc.title,
+            sc.faction AS "faction: Faction",
+            sc.requirement,
+            sc.stars
         FROM stratagem_cards AS sc, nodes AS n
         WHERE sc.id = n.id AND n.id = $1;
         "#,
@@ -235,8 +265,20 @@ impl Database {
     ) -> Result<Vec<CharacterMode>, Error> {
         let rows = sqlx::query!(
             r#"
-        SELECT cm.id, n.node_id, cm.title, cm.subtitle, cm.faction, cm.traits::TEXT[], cm.type,
-        cm.stars, cm.health, cm.attack, cm.defense, cm.attack_modifier, cm.defense_modifier
+        SELECT
+            cm.id,
+            n.node_id,
+            cm.title,
+            cm.subtitle,
+            cm.faction AS "faction: Faction",
+            cm.traits::TEXT[],
+            cm.type AS "type: ModeType",
+            cm.stars,
+            cm.health,
+            cm.attack,
+            cm.defense,
+            cm.attack_modifier,
+            cm.defense_modifier
         FROM character_modes AS cm, nodes AS n
         WHERE cm.id = n.id AND character_id = $1
         ORDER BY n.id;
