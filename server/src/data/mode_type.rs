@@ -1,6 +1,6 @@
-use async_graphql::GQLEnum;
+use async_graphql::Enum;
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, sqlx::Type, GQLEnum)]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, sqlx::Type, Enum)]
 #[sqlx(rename = "MODE_TYPE", rename_all = "uppercase")]
 pub enum ModeType {
     Alt,

@@ -1,7 +1,7 @@
-use async_graphql::{GQLInputObject, ID};
+use async_graphql::{InputObject, ID};
 use uuid::Uuid;
 
-#[derive(Debug, Clone, GQLInputObject)]
+#[derive(Debug, Clone, InputObject)]
 pub struct ImageInput {
     pub original_url: String,
 }

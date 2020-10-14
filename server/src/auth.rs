@@ -17,11 +17,12 @@ pub use client::AuthClient;
 pub use oauth_querystring::OAuthQuerystring;
 pub use permission::{Permission, PermissionGuard};
 pub use state_cookie::StateCookie;
+use std::sync::Arc;
 
 pub type JWKS = JWKSet<Empty>;
 
 #[async_trait::async_trait]
-impl Storage<User, BearerAuthRequest> for State {
+impl Storage<User, BearerAuthRequest> for Arc<State> {
     async fn get_user(&self, request: BearerAuthRequest) -> tide::Result<Option<User>> {
         let jwt: JWT<User, Empty> = JWT::new_encoded(&request.token);
 

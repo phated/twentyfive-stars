@@ -1,5 +1,5 @@
 use crate::data::{CharacterTrait, Faction, ModeType};
-use async_graphql::ID;
+use async_graphql::{Interface, ID};
 use uuid::Uuid;
 
 pub mod alt_mode;
@@ -18,14 +18,14 @@ pub use combiner_mode::CombinerMode;
 pub use head_mode::HeadMode;
 pub use upgrade_mode::UpgradeMode;
 
-#[async_graphql::Interface(
+#[derive(Interface, Clone, Debug)]
+#[graphql(
     field(name = "id", type = "ID"),
     field(name = "title", type = "&str"),
     field(name = "stars", type = "i32"),
     field(name = "type_", type = "ModeType"),
     field(name = "faction", type = "Faction")
 )]
-#[derive(Clone, Debug)]
 pub enum CharacterMode {
     AltMode(AltMode),
     BotMode(BotMode),

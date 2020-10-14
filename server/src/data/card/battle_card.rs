@@ -1,9 +1,9 @@
 use crate::data::{BattleType, CardCategory, CardRarity, Faction, Image, ImageInput, Wave};
 use crate::graphql_schema::ContextData;
-use async_graphql::{Context, FieldResult, GQLInputObject, ID};
+use async_graphql::{Context, FieldResult, InputObject, ID};
 use uuid::Uuid;
 
-#[derive(Debug, Clone, GQLInputObject)]
+#[derive(Debug, Clone, InputObject)]
 pub struct BattleCardInput {
     pub tcg_id: String,
     pub rarity: CardRarity,

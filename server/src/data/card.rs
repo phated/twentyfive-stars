@@ -1,7 +1,7 @@
 use crate::data::NodeType;
 use crate::graphql_schema::ContextData;
 use async_graphql::connection::{query, Connection, Edge, EmptyFields};
-use async_graphql::{Context, FieldResult, GQLUnion};
+use async_graphql::{Context, FieldResult, Union};
 
 pub mod battle_card;
 pub mod character_card;
@@ -11,7 +11,7 @@ pub use battle_card::*;
 pub use character_card::*;
 pub use stratagem_card::*;
 
-#[derive(Debug, Clone, GQLUnion)]
+#[derive(Debug, Clone, Union)]
 pub enum Cards {
     Battle(BattleCard),
     Character(CharacterCard),

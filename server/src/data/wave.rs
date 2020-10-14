@@ -1,8 +1,8 @@
-use async_graphql::{GQLInputObject, ID};
+use async_graphql::{InputObject, ID};
 use chrono::NaiveDate;
 use uuid::Uuid;
 
-#[derive(Debug, Clone, GQLInputObject)]
+#[derive(Debug, Clone, InputObject)]
 pub struct WaveInput {
     pub tcg_id: String,
     pub name: String,

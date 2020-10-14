@@ -1,8 +1,9 @@
 pub mod interfaces {
     use crate::data::{BattleCard, CardCategory, CardRarity, CharacterCard, StratagemCard, Wave};
-    use async_graphql::ID;
+    use async_graphql::{Interface, ID};
 
-    #[async_graphql::Interface(field(name = "id", type = "ID"))]
+    #[derive(Interface)]
+    #[graphql(field(name = "id", type = "ID"))]
     pub enum Node {
         BattleCard(BattleCard),
         CharacterCard(CharacterCard),
@@ -12,7 +13,8 @@ pub mod interfaces {
         Wave(Wave),
     }
 
-    #[async_graphql::Interface(
+    #[derive(Clone, Debug, Interface)]
+    #[graphql(
         field(name = "id", type = "ID"),
         field(name = "tcg_id", type = "&str"),
         field(name = "rarity", type = "CardRarity"),
@@ -20,7 +22,6 @@ pub mod interfaces {
         field(name = "category", type = "CardCategory"),
         field(name = "wave", type = "Wave")
     )]
-    #[derive(Clone, Debug)]
     pub enum Card {
         BattleCard(BattleCard),
         CharacterCard(CharacterCard),

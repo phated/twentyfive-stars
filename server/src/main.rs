@@ -19,6 +19,7 @@ use async_graphql::{EmptySubscription, Schema};
 use dotenv::dotenv;
 
 use std::env;
+use std::sync::Arc;
 use tide::{
     http::{headers, mime},
     Redirect, Request, Response, Server, StatusCode,
@@ -26,7 +27,7 @@ use tide::{
 
 type Result<T> = std::result::Result<T, Box<dyn std::error::Error + Send + Sync>>;
 
-async fn handle_graphql(req: Request<State>) -> tide::Result {
+async fn handle_graphql(req: Request<Arc<State>>) -> tide::Result {
     let schema = req.state().schema.clone();
     let maybe_user = if let Some(user) = req.ext::<User>() {
         Some(user.clone())
@@ -34,17 +35,15 @@ async fn handle_graphql(req: Request<State>) -> tide::Result {
         None
     };
 
-    async_graphql_tide::graphql(req, schema, |query_builder| {
-        if let Some(user) = maybe_user.clone() {
-            query_builder.data(user)
-        } else {
-            query_builder
-        }
-    })
-    .await
+    let mut request = async_graphql_tide::receive_request(req).await?;
+    if let Some(maybe_user) = maybe_user {
+        request = request.data(maybe_user);
+    }
+
+    async_graphql_tide::respond(schema.execute(request).await)
 }
 
-async fn handle_graphiql(req: Request<State>) -> tide::Result {
+async fn handle_graphiql(req: Request<Arc<State>>) -> tide::Result {
     let bearer_token = if let Some(bearer_cookie) = req.cookie("bearer") {
         bearer_cookie.into()
     } else {
@@ -68,9 +67,8 @@ async fn handle_graphiql(req: Request<State>) -> tide::Result {
     Ok(resp)
 }
 
-async fn handle_login(req: Request<State>) -> tide::Result {
-    let State { ref auth, .. } = req.state();
-
+async fn handle_login(req: Request<Arc<State>>) -> tide::Result {
+    let auth = &req.state().auth;
     let (auth_url, state_cookie) = auth.get_login_redirect();
 
     let mut resp: Response = Redirect::new(auth_url.to_string()).into();
@@ -81,8 +79,8 @@ async fn handle_login(req: Request<State>) -> tide::Result {
     Ok(resp)
 }
 
-async fn handle_logout(req: Request<State>) -> tide::Result {
-    let State { ref auth, .. } = req.state();
+async fn handle_logout(req: Request<Arc<State>>) -> tide::Result {
+    let auth = &req.state().auth;
 
     let logout_url = auth.get_logout_redirect();
 
@@ -96,7 +94,7 @@ async fn handle_logout(req: Request<State>) -> tide::Result {
     Ok(resp)
 }
 
-async fn handle_login_success(req: Request<State>) -> tide::Result {
+async fn handle_login_success(req: Request<Arc<State>>) -> tide::Result {
     if let Some(bearer) = req.ext::<BearerToken>() {
         let bearer_token = bearer.clone();
 
@@ -139,19 +137,19 @@ fn main() -> Result<()> {
         // TODO: fix ? unwrapping
         let jwks = request::jwks(auth.get_jwks_url()).await.unwrap();
 
-        let app_state = State { schema, auth, jwks };
+        let app_state = Arc::new(State { schema, auth, jwks });
 
         let mut app = Server::with_state(app_state);
 
-        app.middleware(middleware::cors());
+        app.with(middleware::cors());
 
         app.at("/")
-            .middleware(middleware::authenticate_bearer())
+            .with(middleware::authenticate_bearer())
             .post(handle_graphql);
         app.at("/").get(handle_graphiql);
         app.at("/login").get(handle_login);
         app.at("/login_success")
-            .middleware(middleware::obtain_bearer())
+            .with(middleware::obtain_bearer())
             .get(handle_login_success);
         app.at("/logout").get(handle_logout);
 
